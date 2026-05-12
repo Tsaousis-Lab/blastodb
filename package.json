@@ -1,0 +1,23 @@
+{
+  "name": "blastodb",
+  "version": "1.0.0",
+  "description": "BlastoDB - The open hub for Blastocystis research",
+  "main": "index.js",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "watch": "eleventy --watch"
+  },
+  "keywords": [
+    "blastocystis",
+    "database",
+    "microbiome",
+    "static-site-generator"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.0",
+    "markdown-it": "^13.0.0"
+  }
+}
