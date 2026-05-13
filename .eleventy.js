@@ -1,5 +1,8 @@
 const markdownIt = require("markdown-it");
 const { parseBlocks } = require("./lib/parser");
+const fs = require("fs");
+const path = require("path");
+const yaml = require("js-yaml");
 
 module.exports = function (eleventyConfig) {
   // ─── Library Setup ──────────────────────────────────────────────────────
@@ -26,6 +29,50 @@ module.exports = function (eleventyConfig) {
   });
 
   // ─── Collections ────────────────────────────────────────────────────────
+  // Lab Protocols Collection - reads from content/lab-protocols
+  eleventyConfig.addCollection("labProtocols", (collectionApi) => {
+    const protocolsDir = path.join(__dirname, "content", "lab-protocols");
+    const protocols = [];
+
+    if (fs.existsSync(protocolsDir)) {
+      const files = fs
+        .readdirSync(protocolsDir)
+        .filter((file) => file.endsWith(".md"));
+
+      files.forEach((file) => {
+        const filePath = path.join(protocolsDir, file);
+        const content = fs.readFileSync(filePath, "utf-8");
+        const match = content.match(/^---\n([\s\S]*?)\n---/);
+
+        if (match) {
+          try {
+            const frontmatter = yaml.load(match[1]);
+            const body = content.replace(/^---\n[\s\S]*?\n---\n/, "").trim();
+            const slug = file.replace(".md", "");
+
+            protocols.push({
+              title: frontmatter.title || "Untitled",
+              description: frontmatter.description || "",
+              tags: frontmatter.tags || [],
+              date: frontmatter.date || new Date().toISOString(),
+              shortDescription:
+                frontmatter["short-description"] ||
+                frontmatter.description ||
+                "",
+              slug: slug,
+              content: body,
+              url: `/lab-protocols/${slug}/`,
+            });
+          } catch (e) {
+            console.warn(`Failed to parse protocol ${file}:`, e.message);
+          }
+        }
+      });
+    }
+
+    return protocols.sort((a, b) => new Date(b.date) - new Date(a.date));
+  });
+
   eleventyConfig.addCollection("nav", (collectionApi) => {
     const nav = require("./nav.json");
     const siteTitle = nav.site_title || "BlastoDB";
@@ -56,6 +103,49 @@ module.exports = function (eleventyConfig) {
         }),
       siteTitle: siteTitle,
     };
+  });
+
+  // ─── Global Data ────────────────────────────────────────────────────────
+  // Make lab protocols available as global data
+  eleventyConfig.addGlobalData("labProtocols", () => {
+    const protocolsDir = path.join(__dirname, "content", "lab-protocols");
+    const protocols = [];
+
+    if (fs.existsSync(protocolsDir)) {
+      const files = fs
+        .readdirSync(protocolsDir)
+        .filter((file) => file.endsWith(".md"));
+
+      files.forEach((file) => {
+        const filePath = path.join(protocolsDir, file);
+        const content = fs.readFileSync(filePath, "utf-8");
+        const match = content.match(/^---\n([\s\S]*?)\n---/);
+
+        if (match) {
+          try {
+            const frontmatter = yaml.load(match[1]);
+            const slug = file.replace(".md", "");
+
+            protocols.push({
+              title: frontmatter.title || "Untitled",
+              description: frontmatter.description || "",
+              tags: frontmatter.tags || [],
+              date: frontmatter.date || new Date().toISOString(),
+              shortDescription:
+                frontmatter["short-description"] ||
+                frontmatter.description ||
+                "",
+              slug: slug,
+              url: `/lab-protocols/${slug}/`,
+            });
+          } catch (e) {
+            console.warn(`Failed to parse protocol ${file}:`, e.message);
+          }
+        }
+      });
+    }
+
+    return protocols.sort((a, b) => new Date(b.date) - new Date(a.date));
   });
 
   // ─── Pass-through Copy ──────────────────────────────────────────────────
