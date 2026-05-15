@@ -10,3 +10,7 @@ description: Contact the people behind BlastoDB.
 Please contact us!
 [end:box center]
 [end:hero]
+
+Contact Dr. Tasos [mail](mailto:)
+
+
