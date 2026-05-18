@@ -3,6 +3,63 @@ const fs = require("fs");
 const path = require("path");
 const yaml = require("js-yaml");
 
+function getItemsFromPath(requestPath) {
+  const baseDir = path.join(__dirname, "content");
+  const fullPath = path.join(baseDir, requestPath);
+
+  if (!fullPath.startsWith(baseDir)) {
+    return [];
+  }
+
+  if (!fs.existsSync(fullPath)) {
+    console.warn(`[Collector] Path does not exist: ${requestPath}`);
+    return [];
+  }
+
+  const items = [];
+  const files = fs
+    .readdirSync(fullPath)
+    .filter((file) => file.endsWith(".md"))
+    .sort();
+
+  files.forEach((file) => {
+    const filePath = path.join(fullPath, file);
+    const content = fs.readFileSync(filePath, "utf-8");
+    const match = content.match(/^---\n([\s\S]*?)\n---/);
+
+    if (match) {
+      try {
+        const frontmatter = yaml.load(match[1]);
+        const slug = file.replace(".md", "");
+        const url = `/${requestPath}/${slug}/`;
+
+        items.push({
+          title: frontmatter.title || "Untitled",
+          description:
+            frontmatter["short-description"] || frontmatter.description || "",
+          tags: frontmatter.tags || [],
+          date: frontmatter.date || new Date().toISOString(),
+          slug: slug,
+          url: url,
+        });
+      } catch (e) {
+        console.warn(`Failed to parse ${file}:`, e.message);
+      }
+    }
+  });
+
+  return items.sort((a, b) => new Date(b.date) - new Date(a.date));
+}
+
+function getCollectorPaths() {
+  const contentDir = path.join(__dirname, "content");
+  const entries = fs.readdirSync(contentDir, { withFileTypes: true });
+
+  return entries
+    .filter((entry) => entry.isDirectory() && !entry.name.startsWith("."))
+    .map((entry) => entry.name);
+}
+
 module.exports = function (eleventyConfig) {
   // ─── Markdown Setup with Custom Plugins ──────────────────────────────────
   const md = markdownIt({
@@ -298,6 +355,15 @@ module.exports = function (eleventyConfig) {
     }
 
     return protocols.sort((a, b) => new Date(b.date) - new Date(a.date));
+  });
+
+  eleventyConfig.addGlobalData("collectorData", () => {
+    const collectorPaths = getCollectorPaths();
+    const data = {};
+    collectorPaths.forEach((collectorPath) => {
+      data[collectorPath] = getItemsFromPath(collectorPath);
+    });
+    return data;
   });
 
   // ─── Pass-through Copy ──────────────────────────────────────────────────

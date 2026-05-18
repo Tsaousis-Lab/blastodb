@@ -374,10 +374,11 @@ footer a:hover {
 
 .collector-controls {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 1rem;
     margin-bottom: 1.5rem;
     align-items: center;
+    min-width: 0;
 }
 
 .collector-search {
@@ -409,6 +410,7 @@ footer a:hover {
     position: relative;
     display: flex;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .collector-filters-btn {
@@ -443,7 +445,7 @@ footer a:hover {
     margin-top: 0.5rem;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 0.5rem;
     min-width: 250px;
     max-height: 300px;
@@ -480,7 +482,20 @@ footer a:hover {
 }
 
 .collector-items.arrange-cols {
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    overflow-x: auto;
+    gap: 1.25rem;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 1rem;
+    min-width: 100%;
+}
+
+.collector-items.arrange-cols .collector-item {
+    flex-shrink: 0;
+    min-width: clamp(280px, 100%, 400px);
+    width: clamp(280px, 100%, 400px);
+    scroll-snap-align: start;
 }
 
 .collector-items.arrange-grid {
@@ -508,32 +523,36 @@ footer a:hover {
 }
 
 .collector-items.arrange-rows .collector-item {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 1.4rem;
-    gap: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 1.4rem;
+    gap: 0.5rem;
 }
 
 .collector-items.arrange-rows .collector-item h3 {
-    margin: 0;
+    margin: 0.2rem 0 0.3rem 0;
     flex-shrink: 0;
-    min-width: 200px;
+    min-width: auto;
+    width: 100%;
 }
 
 .collector-items.arrange-rows .collector-item-description {
     flex-grow: 1;
-    margin: 0;
+    margin: 0 0 0.5rem 0;
+    width: 100%;
 }
 
 .collector-items.arrange-rows .collector-item-meta {
-    margin: 0;
-    padding: 0;
-    border: none;
+    margin: 1rem 0 0 0;
+    padding: 0.8rem 0 0 0;
+    border-top: 1px solid var(--border);
     flex-shrink: 0;
     display: flex;
     gap: 1rem;
     align-items: center;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .collector-item {
@@ -587,43 +606,7 @@ footer a:hover {
     font-style: italic;
 }
 
-/* ── Mobile ──────────────── */
-@media (max-width: 720px) {
-    .collector-controls {
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-
-    .collector-search {
-        width: 100%;
-    }
-
-    .collector-items.arrange-cols {
-        grid-template-columns: 1fr;
-    }
-
-    .collector-items.arrange-rows .collector-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-    }
-
-    .collector-items.arrange-rows .collector-item h3 {
-        min-width: auto;
-    }
-
-    .collector-items.arrange-rows .collector-item-meta {
-        width: 100%;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .collector-tags {
-        width: 100%;
-        justify-content: flex-start;
-    }
-}
-/* ── Mobile ───────────────────────────────────────────────────── */
+/* ── Mobile ──────────────────────────────────────────────────── */
 @media (max-width: 720px) {
     .header-inner {
         gap: 1rem;
@@ -689,5 +672,46 @@ footer a:hover {
         margin-left: calc(-50vw + 50%);
         width: 100vw;
         padding: 2rem 1.5rem;
+    }
+
+    .collector-controls {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .collector-search {
+        width: 100%;
+    }
+
+    .collector-items.arrange-cols {
+        flex-direction: column;
+        overflow-x: visible;
+        min-width: auto;
+    }
+
+    .collector-items.arrange-cols .collector-item {
+        min-width: auto;
+        width: 100%;
+    }
+
+    .collector-items.arrange-rows .collector-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .collector-items.arrange-rows .collector-item h3 {
+        min-width: auto;
+    }
+
+    .collector-items.arrange-rows .collector-item-meta {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .collector-tags {
+        width: 100%;
+        justify-content: flex-start;
     }
 }

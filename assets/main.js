@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
       nav.classList.toggle("open");
     });
 
-    // Close menu when a link is clicked
     nav.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", function () {
         nav.classList.remove("open");
@@ -19,8 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // ── Collector Component ────────────────
-  // Initialize collectors
   const collectors = document.querySelectorAll(".collector");
   console.log("[Collector] Found " + collectors.length + " collector(s)");
   collectors.forEach((collectorEl) => {
@@ -33,100 +30,116 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function initializeCollector(container, path, opts) {
   console.log("[Collector] initializeCollector called for:", path);
-  // Build the collector HTML structure
   let html = "";
 
-  // Controls section
   const hasSearch = opts.search !== false;
   const hasTags = opts.tags !== false;
   const hasDate = opts.date !== false;
 
-  if (hasSearch) {
+  if (hasSearch || hasTags) {
     html += `<div class="collector-controls">`;
-    html += `  <div class="collector-search"><input type="text" placeholder="Search items..."></div>`;
-    html += `  <div class="collector-filters-dropdown">`;
-    html += `    <button class="collector-filters-btn">Filters ▼</button>`;
-    html += `    <div class="collector-filters-menu" style="display:none;" id="tag-filter-${Math.random().toString(36).substr(2, 9)}"></div>`;
-    html += `  </div>`;
+    if (hasSearch) {
+      html += `  <div class="collector-search"><input type="text" placeholder="Search items..."></div>`;
+    }
+    if (hasTags) {
+      html += `  <div class="collector-filters-dropdown">`;
+      html += `    <button class="collector-filters-btn">Filters ▼</button>`;
+      html += `    <div class="collector-filters-menu" style="display:none;" id="tag-filter-${Math.random().toString(36).substr(2, 9)}"></div>`;
+      html += `  </div>`;
+    }
     html += `</div>`;
   }
 
   html += `<div class="collector-items arrange-${opts.arrange || "cols"}"></div>`;
   container.innerHTML = html;
 
-  // Get items data (hardcoded for now, would come from filesystem in real implementation)
   const items = getCollectorItems(path);
   console.log("[Collector] Got " + items.length + " items for path:", path);
   console.log("[Collector] Items:", items);
 
-  // Render items
   console.log("[Collector] Rendering items, opts:", opts);
   renderCollectorItems(container, items, opts);
 
-  // Setup event listeners
-  if (hasSearch) {
-    const searchInput = container.querySelector(".collector-search input");
-    const filterBtn = container.querySelector(".collector-filters-btn");
-    const filterMenu = container.querySelector(".collector-filters-menu");
+  if (hasSearch || hasTags) {
+    const searchInput = hasSearch
+      ? container.querySelector(".collector-search input")
+      : null;
+    const filterBtn = hasTags
+      ? container.querySelector(".collector-filters-btn")
+      : null;
+    const filterMenu = hasTags
+      ? container.querySelector(".collector-filters-menu")
+      : null;
 
-    // Build tag filter
-    const allTags = new Set();
-    items.forEach((item) => {
-      if (item.tags && Array.isArray(item.tags)) {
-        item.tags.forEach((tag) => allTags.add(tag));
-      }
-    });
-
-    if (allTags.size > 0) {
-      let tagHtml = "";
-      allTags.forEach((tag) => {
-        const tagId = `tag-${tag.replace(/\s+/g, "-").toLowerCase()}-${Math.random()}`;
-        tagHtml += `<label><input type="checkbox" data-tag="${tag}" id="${tagId}"> ${tag}</label>`;
+    if (hasTags && filterMenu) {
+      const allTags = new Set();
+      items.forEach((item) => {
+        if (item.tags && Array.isArray(item.tags)) {
+          item.tags.forEach((tag) => allTags.add(tag));
+        }
       });
-      filterMenu.innerHTML = tagHtml;
 
-      // Add tag filter listeners
-      filterMenu
-        .querySelectorAll('input[type="checkbox"]')
-        .forEach((checkbox) => {
-          checkbox.addEventListener("change", () =>
-            filterItems(container, items, opts),
-          );
+      if (allTags.size > 0) {
+        let tagHtml = `<label><input type="checkbox" class="filter-all" checked> All</label>`;
+        allTags.forEach((tag) => {
+          const tagId = `tag-${tag.replace(/\s+/g, "-").toLowerCase()}-${Math.random()}`;
+          tagHtml += `<label><input type="checkbox" data-tag="${tag}" id="${tagId}" checked> ${tag}</label>`;
         });
+        filterMenu.innerHTML = tagHtml;
+
+        const allCheckbox = filterMenu.querySelector(".filter-all");
+        const tagCheckboxes = filterMenu.querySelectorAll(
+          'input[type="checkbox"]:not(.filter-all)',
+        );
+
+        allCheckbox.addEventListener("change", function () {
+          tagCheckboxes.forEach((checkbox) => {
+            checkbox.checked = this.checked;
+          });
+          filterItems(container, items, opts);
+        });
+
+        tagCheckboxes.forEach((checkbox) => {
+          checkbox.addEventListener("change", () => {
+            const allChecked = Array.from(tagCheckboxes).every(
+              (cb) => cb.checked,
+            );
+            allCheckbox.checked = allChecked;
+            filterItems(container, items, opts);
+          });
+        });
+      }
+
+      filterBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        const isOpen = filterMenu.style.display !== "none";
+        filterMenu.style.display = isOpen ? "none" : "flex";
+      });
+
+      document.addEventListener("click", function (e) {
+        const dropdown = container.querySelector(".collector-filters-dropdown");
+        if (!dropdown.contains(e.target)) {
+          filterMenu.style.display = "none";
+        }
+      });
     }
 
-    // Add dropdown toggle listener
-    filterBtn.addEventListener("click", function (e) {
-      e.stopPropagation();
-      const isOpen = filterMenu.style.display !== "none";
-      filterMenu.style.display = isOpen ? "none" : "flex";
-    });
-
-    // Close dropdown when clicking outside
-    document.addEventListener("click", function (e) {
-      const dropdown = container.querySelector(".collector-filters-dropdown");
-      if (!dropdown.contains(e.target)) {
-        filterMenu.style.display = "none";
-      }
-    });
-
-    // Add search listener
-    searchInput.addEventListener("input", () =>
-      filterItems(container, items, opts),
-    );
+    if (hasSearch && searchInput) {
+      searchInput.addEventListener("input", () =>
+        filterItems(container, items, opts),
+      );
+    }
   }
 }
 
 function renderCollectorItems(container, items, opts) {
   const itemsContainer = container.querySelector(".collector-items");
 
-  // Parse display_items option
   let displayLimit =
     opts.display_items === "all"
       ? items.length
       : parseInt(opts.display_items) || items.length;
 
-  // Filter and limit items
   let visibleItems = items.slice(0, displayLimit);
 
   if (visibleItems.length === 0) {
@@ -165,7 +178,6 @@ function renderCollectorItems(container, items, opts) {
 
   itemsContainer.innerHTML = html;
 
-  // Add click event listeners to items
   itemsContainer.querySelectorAll(".collector-item").forEach((itemEl) => {
     itemEl.addEventListener("click", function () {
       const url = this.dataset.url;
@@ -178,31 +190,32 @@ function renderCollectorItems(container, items, opts) {
 
 function filterItems(container, items, opts) {
   const searchInput = container.querySelector(".collector-search input");
-  const searchTerm = searchInput.value.toLowerCase();
+  const searchTerm = searchInput ? searchInput.value.toLowerCase() : "";
 
-  // Get selected tags
   const filterMenu = container.querySelector(".collector-filters-menu");
-  const selectedTags = Array.from(
-    filterMenu.querySelectorAll('input[type="checkbox"]:checked'),
-  ).map((checkbox) => checkbox.dataset.tag);
+  const selectedTags = filterMenu
+    ? Array.from(
+        filterMenu.querySelectorAll(
+          'input[type="checkbox"]:not(.filter-all):checked',
+        ),
+      ).map((checkbox) => checkbox.dataset.tag)
+    : [];
 
   const itemsContainer = container.querySelector(".collector-items");
   let visibleItems = items.filter((item) => {
-    // Search filter
     const matchesSearch =
       !searchTerm ||
       item.title.toLowerCase().includes(searchTerm) ||
       (item.description && item.description.toLowerCase().includes(searchTerm));
 
-    // Tag filter
     const matchesTags =
-      selectedTags.length === 0 ||
-      (item.tags && item.tags.some((tag) => selectedTags.includes(tag)));
+      selectedTags.length > 0 &&
+      item.tags &&
+      item.tags.some((tag) => selectedTags.includes(tag));
 
     return matchesSearch && matchesTags;
   });
 
-  // Limit display items
   let displayLimit =
     opts.display_items === "all"
       ? items.length
@@ -245,7 +258,6 @@ function filterItems(container, items, opts) {
 
   itemsContainer.innerHTML = html;
 
-  // Add click event listeners to filtered items
   itemsContainer.querySelectorAll(".collector-item").forEach((itemEl) => {
     itemEl.addEventListener("click", function () {
       const url = this.dataset.url;
@@ -266,25 +278,13 @@ function formatDate(dateString) {
 }
 
 function getCollectorItems(path) {
-  // Fetch items from the global labProtocols data that's injected into the page
-  // This is populated at build time from the content/lab-protocols folder
-
-  if (path === "lab-protocols") {
-    // Get protocols from global variable (injected by 11ty)
-    if (typeof window.labProtocols !== "undefined") {
-      return window.labProtocols.map((protocol) => ({
-        title: protocol.title,
-        description: protocol.shortDescription || protocol.description,
-        tags: protocol.tags,
-        date: protocol.date,
-        url: protocol.url,
-      }));
-    }
-
-    // Fallback if not injected - return empty array
-    console.warn("[Collector] Lab protocols not found in global data");
-    return [];
+  if (
+    typeof window.collectorData !== "undefined" &&
+    window.collectorData[path]
+  ) {
+    return window.collectorData[path];
   }
 
+  console.warn("[Collector] Data not found for path:", path);
   return [];
 }

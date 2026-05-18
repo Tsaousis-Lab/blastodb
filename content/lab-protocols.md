@@ -14,4 +14,4 @@ Browse our collection of standardized laboratory protocols for various molecular
 
 ---
 
-**Missing anything, or wand to contribute?** [Contact us](contact.html) with your suggestions or if you'd like to share a protocol from your research group.
+**Missing anything, or wand to contribute?** [Contact us](/contact/) with your suggestions or if you'd like to share a protocol from your research group.

@@ -7,8 +7,8 @@
   <title>{{ title }}</title>
   <link rel="stylesheet" href="/assets/style.css">
   <script>
-    // Inject data into global scope for main.js to access
-    window.collectorData = {{ collectorData | dump | safe }};
+    // Inject news data into global scope for main.js to access
+    window.news = {{ news | dump | safe }};
   </script>
   <script src="/assets/main.js" defer></script>
 </head>
@@ -32,6 +32,10 @@
 
   <main>
     {{ content | safe }}
+
+    <div class="protocol-footer">
+      <a href="/lab-protocols/" class="btn btn-secondary">← Back to Homepage</a>
+    </div>
   </main>
 
   <footer>
