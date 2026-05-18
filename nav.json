@@ -4,11 +4,10 @@
     { "label": "Home", "file": "content/index.md" },
     { "label": "About", "file": "content/about.md" },
     { "label": "Subtypes", "file": "content/subtypes.md" },
-    { "label": "Genomes", "file": "content/genomes.md" },
-    { "label": "Lab Protocols", "file": "content/lab-protocols.md" },
     { "label": "Publications", "file": "content/publications.md" },
+    { "label": "Lab Protocols", "file": "content/lab-protocols.md" },
     { "label": "Research Labs", "file": "content/labs.md" },
-    { "label": "Gallery", "file": "content/gallery.md" },
+    { "label": "Biobank", "file": "content/biobank.md" },
     { "label": "Contact", "file": "content/contact.md" }
   ]
 }
