@@ -11,19 +11,37 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
       - name: Install dependencies
         run: npm install
-      - name: Build site
+      - name: Build main
         run: npm run build
+      - name: Save main output
+        run: mv ./output ./site
+
+      - name: Checkout dev
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+          clean: false
+      - name: Install dependencies (dev)
+        run: npm install
+      - name: Build dev
+        run: npm run build
+      - name: Merge dev into site/test
+        run: mv ./output ./site/test
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./output
+          path: ./site
 
   deploy:
     needs: build
