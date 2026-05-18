@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build main
-        run: npm run build
+        run: PATH_PREFIX=/blastodb npm run build
       - name: Save main output
         run: mv ./output ./site
 
@@ -34,7 +34,7 @@ jobs:
       - name: Install dependencies (dev)
         run: npm install
       - name: Build dev
-        run: npm run build
+        run: PATH_PREFIX=/blastodb/test npm run build
       - name: Merge dev into site/test
         run: mv ./output ./site/test
 

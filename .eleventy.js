@@ -61,6 +61,8 @@ function getCollectorPaths() {
 }
 
 module.exports = function (eleventyConfig) {
+  const pathPrefix = process.env.PATH_PREFIX || "/";
+
   // ─── Markdown Setup with Custom Plugins ──────────────────────────────────
   const md = markdownIt({
     html: true,
@@ -376,6 +378,7 @@ module.exports = function (eleventyConfig) {
       output: "output",
       includes: "../_includes",
     },
+    pathPrefix: pathPrefix,
     templateFormats: ["md"],
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
