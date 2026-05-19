@@ -13,22 +13,7 @@
   <script src="{{ '/assets/main.js' | url }}" defer></script>
 </head>
 <body>
-  <header>
-    <div class="header-inner">
-      <a href="{{ '/' | url }}" class="site-logo">BlastoDB</a>
-      <nav>
-        {% set currentFileName = page.filePathStem | replace('/index', '') %}
-        {% set navItems = collections.nav.items %}
-        {% for item in navItems %}
-          {% set itemPath = '/' + item.file.replace('content/', '').replace('.md', '') %}
-          <a href="{{ item.url | url }}" {% if itemPath == currentFileName %}class="active"{% endif %}>
-            {{ item.label }}
-          </a>
-        {% endfor %}
-      </nav>
-      <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
-    </div>
-  </header>
+  {% include "layouts/header.njk" %}
 
   <main>
     {{ content | safe }}
@@ -38,8 +23,6 @@
     </div>
   </main>
 
-  <footer>
-    <p>&copy; 2024 BlastoDB. Built with <a href="https://www.11ty.dev/">Eleventy</a>.</p>
-  </footer>
+  {% include "layouts/footer.njk" %}
 </body>
 </html>

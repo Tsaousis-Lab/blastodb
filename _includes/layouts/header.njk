@@ -1,0 +1,16 @@
+<header>
+  <div class="header-inner">
+    <a href="{{ '/' | url }}" class="site-logo">BlastoDB</a>
+    <nav>
+      {% set currentFileName = page.filePathStem | replace('/index', '') %}
+      {% set navItems = collections.nav.items %}
+      {% for item in navItems %}
+        {% set itemPath = '/' + item.file.replace('content/', '').replace('.md', '') %}
+        <a href="{{ item.url | url }}" {% if itemPath == currentFileName %}class="active"{% endif %}>
+          {{ item.label }}
+        </a>
+      {% endfor %}
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+  </div>
+</header>
