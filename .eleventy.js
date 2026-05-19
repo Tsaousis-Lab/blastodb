@@ -169,23 +169,26 @@ module.exports = function (eleventyConfig) {
       ];
 
       for (const blockType of blockTypes) {
+        // Pattern to match [type: CSS] or [type:] (with optional CSS)
         const pattern = new RegExp(
-          `^\\[${blockType}:\\]$\\n([\\s\\S]*?)^\\[:${blockType}\\]$`,
+          `^\\[${blockType}:([^\\]]*)\\]$\\n([\\s\\S]*?)^\\[:${blockType}\\]$`,
           "gm",
         );
 
         if (blockType === "hero") {
-          result = result.replace(
-            pattern,
-            (match, content) =>
-              `<div class="hero"><div class="hero-inner">\n\n${content}\n\n</div></div>`,
-          );
+          result = result.replace(pattern, (match, cssString, content) => {
+            const styles = cssString.trim()
+              ? ` style="${escapeHtml(cssString.trim())}"`
+              : "";
+            return `<div class="hero"${styles}><div class="hero-inner">\n\n${content}\n\n</div></div>`;
+          });
         } else {
-          result = result.replace(
-            pattern,
-            (match, content) =>
-              `<div class="${blockType}">\n\n${content}\n\n</div>`,
-          );
+          result = result.replace(pattern, (match, cssString, content) => {
+            const styles = cssString.trim()
+              ? ` style="${escapeHtml(cssString.trim())}"`
+              : "";
+            return `<div class="${blockType}"${styles}>\n\n${content}\n\n</div>`;
+          });
         }
       }
 
