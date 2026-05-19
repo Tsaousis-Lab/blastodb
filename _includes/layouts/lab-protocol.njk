@@ -16,7 +16,7 @@
   {% include "layouts/header.njk" %}
 
   <main>
-    {{ content | safe }}
+    {{ content | processSpans | safe }}
 
     <div class="protocol-footer">
       <a href="{{ '/lab-protocols/' | url }}" class="btn btn-secondary">← Back to Lab Protocols</a>

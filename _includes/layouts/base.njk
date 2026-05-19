@@ -16,7 +16,7 @@
   {% include "layouts/header.njk" %}
 
   <main>
-    {{ content | safe }}
+    {{ content | processSpans | safe }}
   </main>
 
   {% include "layouts/footer.njk" %}

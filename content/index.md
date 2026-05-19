@@ -8,7 +8,7 @@ description: BlastoDB is the comprehensive open database for Blastocystis subtyp
 [start:cols]
 [start:box]
 
-# The open hub for<br>*Blastocystis* research
+# The open hub for<br>[s: color:#0d5a53]*Blastocystis*[:s] research
 
 BlastoDB provides researchers with a comprehensive, community-driven database of *Blastocystis* subtypes, genomes, transcriptomes, culturing techniques, and more.
 
@@ -47,4 +47,4 @@ Jump directly to a resource area
 
 Keeping you updated on the latest in *Blastocystis* research!
 
-[collector -> news; search:false; arrange:cols]
+[collector -> news; search:false, arrange:columns]

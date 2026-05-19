@@ -244,6 +244,23 @@ module.exports = function (eleventyConfig) {
     return count > 0 ? count : 0;
   });
 
+  // ─── Post-process filter to handle styled spans
+  eleventyConfig.addFilter("processSpans", (content) => {
+    if (!content) return content;
+
+    const spanPattern = /\[s:([^\]]*?)\]([\s\S]*?)\[:s\]/g;
+
+    return content.replace(spanPattern, (match, cssString, innerContent) => {
+      const finalCss =
+        cssString.trim() || "background-color: var(--dark-highlight)";
+      const cleanContent = innerContent
+        .replace(/^<p>/, "")
+        .replace(/<\/p>$/, "")
+        .trim();
+      return `<span style="${escapeHtml(finalCss)}">${cleanContent}</span>`;
+    });
+  });
+
   // ─── Collections ────────────────────────────────────────────────────────
   // Lab Protocols Collection
   eleventyConfig.addCollection("labProtocols", (collectionApi) => {
