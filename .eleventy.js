@@ -210,7 +210,7 @@ module.exports = function (eleventyConfig) {
           tags: true,
           date: true,
           search: true,
-          arrange: "cols",
+          arrange: "rows",
           display_items: "all",
         };
 
@@ -370,6 +370,7 @@ module.exports = function (eleventyConfig) {
 
   // ─── Pass-through Copy ──────────────────────────────────────────────────
   eleventyConfig.addPassthroughCopy("assets");
+  eleventyConfig.addPassthroughCopy("images");
 
   // ─── Config ─────────────────────────────────────────────────────────────
   return {

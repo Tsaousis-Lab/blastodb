@@ -1,6 +1,9 @@
 <header>
   <div class="header-inner">
-    <a href="{{ '/' | url }}" class="site-logo">BlastoDB</a>
+    <a href="{{ '/' | url }}" class="site-logo">
+      <img src="{{ '/images/blastie.webp' | url }}" alt="Blastie mascot" class="logo-image">
+      <span>BlastoDB</span>
+    </a>
     <nav>
       {% set currentFileName = page.filePathStem | replace('/index', '') %}
       {% set navItems = collections.nav.items %}
