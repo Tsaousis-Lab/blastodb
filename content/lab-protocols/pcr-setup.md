@@ -7,9 +7,9 @@ date: 2024-01-20
 short-description: Complete guide for PCR setup and optimization
 ---
 
-[start:hero]
+[hero:]
 # {{ title }}
-[end:hero]
+[:hero]
 
 
 ## Overview

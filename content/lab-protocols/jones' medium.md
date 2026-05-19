@@ -7,9 +7,9 @@ date: 2024-01-15
 short-description: Phenol-chloroform extraction method for genomic DNA
 ---
 
-[start:hero]
+[hero:]
 # {{ title }}
-[end:hero]
+[:hero]
 
 
 ## Modified Jones’ Medium for in-vitro culture of Blastocystis

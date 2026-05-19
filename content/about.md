@@ -4,11 +4,11 @@ title: BlastoDB — About
 description: About BlastoDB.
 ---
 
-[start:hero]
+[hero:]
 
 # The Mission of BlastoDB
 
-[end:hero]
+[:hero]
 
 
 BlastocystisDB is dedicated to advancing global knowledge and collaboration on Blastocystis, one of the most prevalent yet underexplored microorganisms in the human and animal gut. Our mission is to provide a comprehensive, accessible, and sustainable database that:

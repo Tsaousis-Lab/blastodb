@@ -151,42 +151,42 @@ module.exports = function (eleventyConfig) {
     };
   });
 
-  // Plugin: Block containers [start:X]...[end:X]
+  // Plugin: Block containers [hero:] / [:hero]
   md.use((mdInstance) => {
     const originalRender = mdInstance.render;
 
     mdInstance.render = function (src, env) {
       let result = src;
 
-      const validTypes = [
-        "hero",
-        "card",
-        "box",
-        "cards",
-        "grid",
-        "cols",
+      const blockTypes = [
         "item",
+        "box",
+        "card",
+        "cards",
+        "cols",
+        "grid",
+        "hero",
       ];
 
-      const heroPattern = /^\[start:hero\]$\n([\s\S]*?)^\[end:hero\]$/gm;
-      result = result.replace(
-        heroPattern,
-        (match, content) =>
-          `<div class="hero"><div class="hero-inner">\n\n${content}\n\n</div></div>`,
-      );
-
-      const otherTypes = ["card", "box", "cards", "grid", "cols", "item"];
-
-      for (const blockType of otherTypes) {
+      for (const blockType of blockTypes) {
         const pattern = new RegExp(
-          `^\\[start:${blockType}\\]$\\n([\\s\\S]*?)^\\[end:${blockType}\\]$`,
+          `^\\[${blockType}:\\]$\\n([\\s\\S]*?)^\\[:${blockType}\\]$`,
           "gm",
         );
-        result = result.replace(
-          pattern,
-          (match, content) =>
-            `<div class="${blockType}">\n\n${content}\n\n</div>`,
-        );
+
+        if (blockType === "hero") {
+          result = result.replace(
+            pattern,
+            (match, content) =>
+              `<div class="hero"><div class="hero-inner">\n\n${content}\n\n</div></div>`,
+          );
+        } else {
+          result = result.replace(
+            pattern,
+            (match, content) =>
+              `<div class="${blockType}">\n\n${content}\n\n</div>`,
+          );
+        }
       }
 
       return originalRender.call(mdInstance, result, env);
