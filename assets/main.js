@@ -26,6 +26,9 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("[Collector] Initializing collector:", path, opts);
     initializeCollector(collectorEl, path, opts);
   });
+
+  // Initialize Selection Buttons
+  initializeSelectionButtons();
 });
 
 function initializeCollector(container, path, opts) {
@@ -398,4 +401,47 @@ function getCollectorItems(path) {
 
   console.warn("[Collector] Data not found for path:", path);
   return [];
+}
+
+/**
+ * Selection Button Toggle Functionality
+ */
+function initializeSelectionButtons() {
+  const sbtnButtons = document.querySelectorAll(".sbtn");
+  sbtnButtons.forEach((button) => {
+    button.addEventListener("click", function (e) {
+      e.stopPropagation();
+      const targetId = this.dataset.target;
+      const menu = document.getElementById(targetId);
+      if (menu) {
+        const isOpen = menu.style.display === "flex";
+
+        // Close all other menus first
+        closeAllSbtnMenus();
+
+        // Toggle this menu
+        if (!isOpen) {
+          menu.style.display = "flex";
+          this.classList.add("open");
+        }
+      }
+    });
+  });
+
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest(".sbtn-container")) {
+      closeAllSbtnMenus();
+    }
+  });
+}
+
+function closeAllSbtnMenus() {
+  const menus = document.querySelectorAll(".sbtn-menu");
+  const buttons = document.querySelectorAll(".sbtn");
+  menus.forEach((menu) => {
+    menu.style.display = "none";
+  });
+  buttons.forEach((button) => {
+    button.classList.remove("open");
+  });
 }

@@ -82,7 +82,7 @@ module.exports = function (eleventyConfig) {
     return str.replace(/[&<>"']/g, (c) => map[c]);
   }
 
-  // Plugin: Inline custom elements [btn], [tag], [nav-box]
+  // Plugin: Inline custom elements [btn], [tag], [nav-box], [sbtn]
   md.use((mdInstance) => {
     mdInstance.inline.ruler.push("custom_inline", function (state, silent) {
       const pos = state.pos;
@@ -131,6 +131,27 @@ module.exports = function (eleventyConfig) {
         return true;
       }
 
+      // [sbtn: Label -> [url1, url2, ...]]
+      const selBtnMatch = state.src
+        .slice(pos)
+        .match(/^\[sbtn:\s*([^\]]+?)\s*->\s*\[([^\]]+?)\]\]/);
+      if (selBtnMatch) {
+        if (!silent) {
+          const token = state.push("sbtn_token", "", 0);
+          const urlsStr = selBtnMatch[2].trim();
+          const urls = urlsStr
+            .split(",")
+            .map((u) => u.trim())
+            .filter((u) => u.length > 0);
+          token.meta = {
+            label: selBtnMatch[1].trim(),
+            urls: urls,
+          };
+        }
+        state.pos += selBtnMatch[0].length;
+        return true;
+      }
+
       return false;
     });
 
@@ -148,6 +169,19 @@ module.exports = function (eleventyConfig) {
     mdInstance.renderer.rules.nav_box_token = (tokens, idx) => {
       const meta = tokens[idx].meta;
       return `<a href="${escapeHtml(meta.url)}" class="nav-box">${escapeHtml(meta.label)}</a>`;
+    };
+
+    mdInstance.renderer.rules.sbtn_token = (tokens, idx) => {
+      const meta = tokens[idx].meta;
+      const uniqueId = `sbtn-${Math.random().toString(36).substr(2, 9)}`;
+      const menuItems = meta.urls
+        .map(
+          (url) =>
+            `<a href="${escapeHtml(url)}" class="sbtn-menu-item">${escapeHtml(url)}</a>`,
+        )
+        .join("");
+      const arrow = '<span class="sbtn-arrow">▷</span>';
+      return `<div class="sbtn-container"><button class="sbtn" data-target="${uniqueId}">${escapeHtml(meta.label)}${arrow}</button><div class="sbtn-menu" id="${uniqueId}">${menuItems}</div></div>`;
     };
   });
 
