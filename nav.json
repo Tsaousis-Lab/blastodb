@@ -1,11 +1,17 @@
 {
   "site_title": "BlastoDB",
+  "site_logo": "/images/blastie.webp",
   "nav": [
     { "label": "Home", "file": "content/index.md" },
     { "label": "About", "file": "content/about.md" },
-    { "label": "Subtypes", "file": "content/subtypes.md" },
-    { "label": "Publications", "file": "content/publications.md" },
-    { "label": "Lab Protocols", "file": "content/lab-protocols.md" },
+    {
+      "label": "Resources",
+      "items": [
+        { "label": "Subtypes", "file": "content/subtypes.md" },
+        { "label": "Publications", "file": "content/publications.md" },
+        { "label": "Lab Protocols", "file": "content/lab-protocols.md" }
+      ]
+    },
     { "label": "Research Labs", "file": "content/labs.md" },
     { "label": "Biobank", "file": "content/biobank.md" },
     { "label": "Contact", "file": "content/contact.md" }

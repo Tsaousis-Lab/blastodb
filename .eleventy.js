@@ -351,27 +351,67 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addCollection("nav", (collectionApi) => {
     const nav = require("./nav.json");
     const siteTitle = nav.site_title || "BlastoDB";
+    const siteLogo = nav.site_logo || "/images/blastie.webp";
     const allPages = collectionApi.getFilteredByGlob("content/**/*.md");
     const pageFiles = allPages.map((p) => p.filePathStem);
 
+    const processNavItem = (item) => {
+      // If item has a file property, it's a direct link
+      if (item.file) {
+        const fileExists = pageFiles.some((f) =>
+          f.includes(item.file.replace("content/", "").replace(".md", "")),
+        );
+        if (!fileExists) return null;
+
+        const urlPath = item.file.replace("content/", "").replace(".md", "");
+        const url = urlPath === "index" ? "/" : "/" + urlPath + "/";
+        return {
+          label: item.label,
+          file: item.file,
+          url: url,
+          type: "link",
+        };
+      }
+      // If item has items property, it's a dropdown
+      else if (item.items && Array.isArray(item.items)) {
+        const processedItems = item.items
+          .map((subItem) => {
+            const fileExists = pageFiles.some((f) =>
+              f.includes(
+                subItem.file.replace("content/", "").replace(".md", ""),
+              ),
+            );
+            if (!fileExists) return null;
+
+            const urlPath = subItem.file
+              .replace("content/", "")
+              .replace(".md", "");
+            const url = urlPath === "index" ? "/" : "/" + urlPath + "/";
+            return {
+              label: subItem.label,
+              file: subItem.file,
+              url: url,
+            };
+          })
+          .filter((item) => item !== null);
+
+        if (processedItems.length === 0) return null;
+
+        return {
+          label: item.label,
+          items: processedItems,
+          type: "dropdown",
+        };
+      }
+      return null;
+    };
+
     return {
       items: nav.nav
-        .filter((item) => {
-          const fileExists = pageFiles.some((f) =>
-            f.includes(item.file.replace("content/", "").replace(".md", "")),
-          );
-          return fileExists;
-        })
-        .map((item) => {
-          const urlPath = item.file.replace("content/", "").replace(".md", "");
-          const url = urlPath === "index" ? "/" : `/${urlPath}/`;
-          return {
-            label: item.label,
-            file: item.file,
-            url: url,
-          };
-        }),
+        .map((item) => processNavItem(item))
+        .filter((item) => item !== null),
       siteTitle: siteTitle,
+      siteLogo: siteLogo,
     };
   });
 

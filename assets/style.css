@@ -114,6 +114,86 @@ nav a.active {
     background: var(--accent-pale);
 }
 
+.nav-dropdown-container {
+    position: relative;
+    display: inline-block;
+}
+
+.nav-dropdown-btn {
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    padding: 0.35rem 0.65rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition:
+        color 0.15s,
+        background 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.nav-dropdown-btn:hover {
+    color: var(--accent-dark);
+    background: var(--accent-pale);
+}
+
+.nav-dropdown-arrow {
+    display: inline-block;
+    font-size: 0.7rem;
+    transition: transform 0.2s;
+}
+
+.nav-dropdown-btn[aria-expanded="true"] .nav-dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.nav-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+    display: none;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 200px;
+    z-index: 1000;
+}
+
+.nav-dropdown-menu.open {
+    display: flex;
+}
+
+.nav-dropdown-item {
+    display: block;
+    padding: 0.5rem 0.8rem;
+    color: var(--text);
+    text-decoration: none;
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+    border-radius: 4px;
+    transition: background 0.15s;
+    text-align: left;
+    user-select: none;
+}
+
+.nav-dropdown-item:hover {
+    background: var(--accent-pale);
+    color: var(--accent-dark);
+}
+
+.nav-dropdown-item[data-active="true"] {
+    color: var(--accent-dark);
+    background: var(--accent-pale);
+}
+
 .nav-toggle {
     display: none;
 }
@@ -733,6 +813,36 @@ footer a:hover {
         padding: 0.5rem 0.75rem;
     }
 
+    nav .nav-dropdown-container {
+        width: 100%;
+    }
+
+    nav .nav-dropdown-btn {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+    }
+
+    nav .nav-dropdown-menu {
+        position: static;
+        display: none;
+        border: none;
+        border-left: 2px solid var(--border);
+        background: var(--surface-light);
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0.25rem 0;
+        margin-left: 0.75rem;
+    }
+
+    nav .nav-dropdown-menu.open {
+        display: flex;
+    }
+
+    nav .nav-dropdown-item {
+        padding: 0.35rem 0.75rem;
+        font-size: 0.8rem;
+    }
+
     .columns {
         grid-template-columns: 1fr;
     }
@@ -819,74 +929,6 @@ footer a:hover {
     }
 }
 
-/* ── Selection Button Component ──────────────────────────────── */
-.selection-button {
-    font-family: var(--font-ui);
-    font-size: 0.9rem;
-    font-weight: 500;
-    background: var(--accent-dark);
-    color: var(--surface);
-    border: none;
-    padding: 0.55rem 1.2rem;
-    border-radius: var(--radius);
-    cursor: pointer;
-    transition:
-        background 0.15s,
-        transform 0.1s;
-}
-
-.selection-button:hover {
-    background: var(--accent-darker);
-    transform: translateY(-1px);
-}
-
-.selection-button:active {
-    transform: translateY(0);
-}
-
-.selection-menu {
-    position: absolute;
-    top: calc(100% + 0.5rem);
-    left: 0;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    min-width: 200px;
-    max-height: 400px;
-    overflow-y: auto;
-    z-index: 1000;
-}
-
-.selection-menu a {
-    display: block;
-    padding: 0.75rem 1rem;
-    color: var(--text) !important;
-    text-decoration: none !important;
-    font-family: var(--font-ui);
-    font-size: 0.9rem;
-    border-bottom: 1px solid var(--border);
-    transition:
-        background 0.15s,
-        color 0.15s;
-}
-
-.selection-menu a:last-child {
-    border-bottom: none;
-}
-
-.selection-menu a:hover {
-    background: var(--accent-pale);
-    color: var(--accent-dark) !important;
-}
-
-.selection-button-wrapper {
-    position: relative;
-    display: inline-block;
-}
-
 /* Selection Button Component (sbtn) */
 .sbtn-container {
     position: relative;
@@ -918,7 +960,6 @@ footer a:hover {
 
 .sbtn:active {
     background: var(--accent-dark);
-    //transform: translateY(0);
 }
 
 .sbtn-arrow {
@@ -941,7 +982,7 @@ footer a:hover {
     border-radius: var(--radius);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 0.5rem;
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 0.25rem;
     min-width: 200px;
