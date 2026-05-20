@@ -215,6 +215,7 @@ module.exports = function (eleventyConfig) {
           search: true,
           arrange: "rows",
           display_items: "all",
+          sort: true,
         };
 
         const tagMatch = paramStr.match(/tags:\s*(true|false)/i);
@@ -231,6 +232,9 @@ module.exports = function (eleventyConfig) {
 
         const displayMatch = paramStr.match(/display_items:\s*(all|\d+)/i);
         if (displayMatch) opts.display_items = displayMatch[1];
+
+        const sortMatch = paramStr.match(/sort:\s*(true|false)/i);
+        if (sortMatch) opts.sort = sortMatch[1].toLowerCase() === "true";
 
         return `<div class="collector" data-path="${escapeHtml(collectorPath)}" data-opts='${JSON.stringify(opts)}'></div>`;
       });

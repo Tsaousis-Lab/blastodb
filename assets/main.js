@@ -35,8 +35,9 @@ function initializeCollector(container, path, opts) {
   const hasSearch = opts.search !== false;
   const hasTags = opts.tags !== false;
   const hasDate = opts.date !== false;
+  const hasSort = opts.sort === true;
 
-  if (hasSearch || hasTags) {
+  if (hasSearch || hasTags || hasSort) {
     html += `<div class="collector-controls">`;
     if (hasSearch) {
       html += `  <div class="collector-search"><input type="text" placeholder="Search items..."></div>`;
@@ -45,6 +46,18 @@ function initializeCollector(container, path, opts) {
       html += `  <div class="collector-filters-dropdown">`;
       html += `    <button class="collector-filters-btn">Filters ▼</button>`;
       html += `    <div class="collector-filters-menu" style="display:none;" id="tag-filter-${Math.random().toString(36).substr(2, 9)}"></div>`;
+      html += `  </div>`;
+    }
+    if (hasSort) {
+      html += `  <div class="collector-sort-dropdown">`;
+      html += `    <button class="collector-sort-btn">Sort</button>`;
+      html += `    <div class="collector-sort-menu" style="display:none;" id="sort-menu-${Math.random().toString(36).substr(2, 9)}">`;
+      html += `      <button class="sort-option" data-sort="none">None</button>`;
+      html += `      <button class="sort-option" data-sort="title">Title</button>`;
+      if (hasDate) {
+        html += `      <button class="sort-option" data-sort="date">Date</button>`;
+      }
+      html += `    </div>`;
       html += `  </div>`;
     }
     html += `</div>`;
@@ -58,7 +71,14 @@ function initializeCollector(container, path, opts) {
   console.log("[Collector] Items:", items);
 
   console.log("[Collector] Rendering items, opts:", opts);
-  renderCollectorItems(container, items, opts);
+
+  // Initialize sort state
+  const sortState = {
+    field: "none",
+    reverse: false,
+  };
+
+  renderCollectorItems(container, items, opts, sortState);
 
   if (hasSearch || hasTags) {
     const searchInput = hasSearch
@@ -96,7 +116,7 @@ function initializeCollector(container, path, opts) {
           tagCheckboxes.forEach((checkbox) => {
             checkbox.checked = this.checked;
           });
-          filterItems(container, items, opts);
+          filterItems(container, items, opts, sortState);
         });
 
         tagCheckboxes.forEach((checkbox) => {
@@ -105,7 +125,7 @@ function initializeCollector(container, path, opts) {
               (cb) => cb.checked,
             );
             allCheckbox.checked = allChecked;
-            filterItems(container, items, opts);
+            filterItems(container, items, opts, sortState);
           });
         });
       }
@@ -118,7 +138,7 @@ function initializeCollector(container, path, opts) {
 
       document.addEventListener("click", function (e) {
         const dropdown = container.querySelector(".collector-filters-dropdown");
-        if (!dropdown.contains(e.target)) {
+        if (dropdown && !dropdown.contains(e.target)) {
           filterMenu.style.display = "none";
         }
       });
@@ -126,13 +146,66 @@ function initializeCollector(container, path, opts) {
 
     if (hasSearch && searchInput) {
       searchInput.addEventListener("input", () =>
-        filterItems(container, items, opts),
+        filterItems(container, items, opts, sortState),
       );
     }
   }
+
+  // Setup sort functionality
+  if (hasSort) {
+    const sortBtn = container.querySelector(".collector-sort-btn");
+    const sortMenu = container.querySelector(".collector-sort-menu");
+    const sortOptions = sortMenu.querySelectorAll(".sort-option");
+
+    sortOptions.forEach((option) => {
+      option.addEventListener("click", function (e) {
+        e.stopPropagation();
+        const sortField = this.dataset.sort;
+
+        // Toggle reverse if same field clicked
+        if (sortState.field === sortField && sortField !== "none") {
+          sortState.reverse = !sortState.reverse;
+        } else {
+          sortState.field = sortField;
+          sortState.reverse = false;
+        }
+
+        // Update button text
+        let btnText = "Sort";
+        if (sortState.field !== "none") {
+          const capitalize = (str) =>
+            str.charAt(0).toUpperCase() + str.slice(1);
+          btnText = capitalize(sortState.field);
+          if (sortState.reverse) {
+            btnText += " ↓";
+          } else {
+            btnText += " ↑";
+          }
+        }
+        sortBtn.textContent = btnText;
+
+        // Re-render items with new sort
+        filterItems(container, items, opts, sortState);
+        sortMenu.style.display = "none";
+      });
+    });
+
+    sortBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      const isOpen = sortMenu.style.display !== "none";
+      sortMenu.style.display = isOpen ? "none" : "flex";
+    });
+
+    document.addEventListener("click", function (e) {
+      const dropdown = container.querySelector(".collector-sort-dropdown");
+      if (dropdown && !dropdown.contains(e.target)) {
+        sortMenu.style.display = "none";
+      }
+    });
+  }
 }
 
-function renderCollectorItems(container, items, opts) {
+function renderCollectorItems(container, items, opts, sortState) {
   const itemsContainer = container.querySelector(".collector-items");
 
   let displayLimit =
@@ -141,6 +214,11 @@ function renderCollectorItems(container, items, opts) {
       : parseInt(opts.display_items) || items.length;
 
   let visibleItems = items.slice(0, displayLimit);
+
+  // Apply sorting
+  if (sortState && sortState.field !== "none") {
+    visibleItems = sortItems(visibleItems, sortState);
+  }
 
   if (visibleItems.length === 0) {
     itemsContainer.innerHTML =
@@ -188,7 +266,35 @@ function renderCollectorItems(container, items, opts) {
   });
 }
 
-function filterItems(container, items, opts) {
+function sortItems(items, sortState) {
+  const sorted = [...items]; // Create a copy to avoid mutating original
+
+  if (sortState.field === "title") {
+    sorted.sort((a, b) => {
+      const titleA = (a.title || "").toLowerCase();
+      const titleB = (b.title || "").toLowerCase();
+      if (sortState.reverse) {
+        return titleB.localeCompare(titleA);
+      } else {
+        return titleA.localeCompare(titleB);
+      }
+    });
+  } else if (sortState.field === "date") {
+    sorted.sort((a, b) => {
+      const dateA = new Date(a.date || 0).getTime();
+      const dateB = new Date(b.date || 0).getTime();
+      if (sortState.reverse) {
+        return dateA - dateB; // oldest first
+      } else {
+        return dateB - dateA; // newest first
+      }
+    });
+  }
+
+  return sorted;
+}
+
+function filterItems(container, items, opts, sortState) {
   const searchInput = container.querySelector(".collector-search input");
   const searchTerm = searchInput ? searchInput.value.toLowerCase() : "";
 
@@ -221,6 +327,11 @@ function filterItems(container, items, opts) {
       ? items.length
       : parseInt(opts.display_items) || items.length;
   visibleItems = visibleItems.slice(0, displayLimit);
+
+  // Apply sorting to filtered items
+  if (sortState && sortState.field !== "none") {
+    visibleItems = sortItems(visibleItems, sortState);
+  }
 
   if (visibleItems.length === 0) {
     itemsContainer.innerHTML =
