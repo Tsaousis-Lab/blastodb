@@ -1,6 +1,6 @@
 # Grid Component
 
-The Grid component creates a responsive multi-column grid layout. It automatically adjusts the number of columns based on screen size, making it perfect for creating responsive card layouts. Grids support optional inline CSS styling.
+The Grid component creates a responsive multi-column grid layout. It automatically adjusts the number of columns based on screen size, making it perfect for creating responsive card layouts.
 
 ## Syntax
 
@@ -10,7 +10,7 @@ The Grid component creates a responsive multi-column grid layout. It automatical
 [:grid]
 ```
 
-- **Opening tag**: `[grid: CSS_STYLES]` - optional CSS styles (leave blank for default styling)
+- **Opening tag**: `[grid: CSS_STYLES]` - optional CSS styles
 - **Content**: Usually contains [box:] or [card:] elements
 - **Closing tag**: `[:grid]`
 
@@ -30,26 +30,6 @@ The default minimum column width is 280px, so it will show:
 - 1 column on small screens
 - 2 columns on medium screens
 - 3+ columns on large screens
-
-## Custom Styling
-
-You can add inline CSS styles to customize the grid's appearance:
-
-```
-[grid: gap: 2rem; text-align: center]
-[box:] Item 1 [:box]
-[box:] Item 2 [:box]
-[box:] Item 3 [:box]
-[:grid]
-```
-
-### Common CSS Properties
-
-- **Gap**: `gap: 1.5rem` - space between items
-- **Text Alignment**: `text-align: center` - center content in each cell
-- **Padding**: `padding: 2rem` - internal padding
-- **Column Configuration**: `grid-template-columns: repeat(4, 1fr)` - custom column count
-- **Min Width**: `grid-auto-flow: dense` - optimize item placement
 
 ## Common Use Cases
 
@@ -93,7 +73,7 @@ Card content here
 [:grid]
 ```
 
-### Feature Grid with Centered Content
+### Feature Grid
 
 ```
 [grid: text-align: center]
@@ -112,35 +92,14 @@ Description of genome features
 [:grid]
 ```
 
-### Four-Column Grid with Custom Spacing
+## CSS Style Options
 
-```
-[grid: grid-template-columns: repeat(4, 1fr); gap: 1rem]
-[box:] Item 1 [:box]
-[box:] Item 2 [:box]
-[box:] Item 3 [:box]
-[box:] Item 4 [:box]
-[:grid]
-```
+Common CSS properties for grids:
 
-### Styled Card Grid
-
-```
-[grid: gap: 1.5rem]
-[card: background-color: var(--accent-pale); padding: 1.5rem; border-radius: 8px]
-### Featured Item
-Description here
-[:card]
-[card: background-color: var(--accent-pale); padding: 1.5rem; border-radius: 8px]
-### Another Item
-Description here
-[:card]
-[card: background-color: var(--accent-pale); padding: 1.5rem; border-radius: 8px]
-### Third Item
-Description here
-[:card]
-[:grid]
-```
+- **Gap**: `gap: 1.5rem` - space between items
+- **Text Alignment**: `text-align: center` - center content in each cell
+- **Padding**: `padding: 2rem` - internal padding
+- **Column Configuration**: `grid-template-columns: repeat(4, 1fr)` - custom column count
 
 ## Structure
 
@@ -167,7 +126,5 @@ The grid automatically responds to screen size:
 2. Use [box:] or [card:] elements inside grids for consistent sizing
 3. The default gap between items is already set - override with CSS if needed
 4. Grids are responsive by default - content will flow naturally on all devices
-5. Combine with `text-align: center` for centered content in each cell
-6. You can use custom `grid-template-columns` for fixed column counts
-7. Use CSS variables for consistent theming across grids
-8. Test your grids on different screen sizes to ensure responsive behavior
+5. Combine with text-align: center for centered content in each cell
+6. You can use custom grid-template-columns for fixed column counts

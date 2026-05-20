@@ -1,6 +1,6 @@
 # Columns Component
 
-The Columns component creates a two-column side-by-side layout. It's useful for pairing content, creating split layouts, or organizing related information. Columns support optional inline CSS styling.
+The Columns component creates a two-column side-by-side layout. It's useful for pairing content, creating split layouts, or organizing related information.
 
 ## Syntax
 
@@ -10,7 +10,7 @@ The Columns component creates a two-column side-by-side layout. It's useful for 
 [:cols]
 ```
 
-- **Opening tag**: `[cols: CSS_STYLES]` - optional CSS styles (leave blank for default styling)
+- **Opening tag**: `[cols: CSS_STYLES]` - optional CSS styles
 - **Content**: Usually contains [box:] elements for each column
 - **Closing tag**: `[:cols]`
 
@@ -32,28 +32,6 @@ Content for the right side
 ```
 
 On small screens (mobile), the columns automatically stack vertically for readability.
-
-## Custom Styling
-
-You can add inline CSS styles to customize the columns layout:
-
-```
-[cols: gap: 2rem; align-items: center]
-[box:]
-Left column content
-[:box]
-[box:]
-Right column content
-[:box]
-[:cols]
-```
-
-### Common CSS Properties
-
-- **Gap**: `gap: 2rem` - space between columns
-- **Alignment**: `align-items: center` - vertical alignment of columns
-- **Text Alignment**: `text-align: center`
-- **Padding**: `padding: 1.5rem`
 
 ## Common Use Cases
 
@@ -104,21 +82,6 @@ Description of the product or service
 [:cols]
 ```
 
-### Columns with Centered Alignment
-
-```
-[cols: align-items: center; gap: 2rem]
-[box:]
-### Left Content
-Text aligned with right content
-[:box]
-[box:]
-### Right Content
-Vertically centered
-[:box]
-[:cols]
-```
-
 ### Three-Item Layout (Nested)
 
 ```
@@ -139,6 +102,15 @@ Content
 [:cols]
 [:cols]
 ```
+
+## CSS Style Options
+
+Common CSS properties for columns:
+
+- **Gap**: `gap: 2rem` - space between columns
+- **Alignment**: `align-items: center` - vertical alignment
+- **Text Alignment**: `text-align: center`
+- **Padding**: `padding: 1.5rem`
 
 ## Structure
 
@@ -167,5 +139,3 @@ The columns layout automatically adapts:
 5. You can nest [cols:] inside other layout components for complex layouts
 6. Combine with [hero:] at the top for full-width layouts
 7. Works great for creating intro sections with image + text combinations
-8. Use `align-items: center` to vertically center column content
-9. Multiple CSS properties should be separated by semicolons
