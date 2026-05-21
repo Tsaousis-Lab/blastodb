@@ -7,6 +7,7 @@ description: Contact the people behind BlastoDB.
 # Contact
 
 Please contact us!
+
 [:hero]
 
 
@@ -17,3 +18,4 @@ Write us an email:
 Head of BlastoDB
 
 [a.tsaousis@kent.ac.uk](mailto:a.tsaousis@kent.ac.uk)
+
