@@ -1,16 +1,51 @@
 # Quick Reference Guide for BlastoDB Content Editors
 
-## 📝 Basic File Structure
+BlastoDB is written in markdown. The files creating the website are stored in the **content** folder. Each file in the folder creates one web-page.
 
-Every markdown file needs this at the top:
+## Markdown and File Structure
 
+### Header
+Each file needs to start with a so-called YAML-header. This header contains information about the webpage:
 ```markdown
 ---
 layout: layouts/base.njk
-title: Your Page Title
+title: BlastoDB
 description: A short description for search engines.
 ---
 
+- *layout* defines the look of the page. For normal webpages, this is always `layout: layouts/base.njk`.
+- *title* is the title of the webpage, displayed in the tab of your browser.
+- *description* is a short description of the webpage, relevant for search engines.
+
+### Markdown Syntax
+Normal text can be written 
+#### Headings
+```markdown
+# Heading 1
+## Heading 2
+### Heading 3
+```
+
+#### Bold & Italic
+```markdown
+**Bold text** and *italic text*
+```
+
+#### Lists
+```markdown
+- Item 1
+- Item 2
+- Item 3
+```
+
+### Custom Markdown Elements
+On top of that, we have defined additional elements needed to style the website, and interact with it.
+
+#### Styling Components
+
+
+---
+TODO: from here.
 # Page Heading
 
 Your content here...
@@ -55,24 +90,7 @@ npm run watch
 ![Image alt text](image.jpg)
 ```
 
-### Headings
-```markdown
-# Heading 1
-## Heading 2
-### Heading 3
-```
 
-### Bold & Italic
-```markdown
-**Bold text** and *italic text*
-```
-
-### Lists
-```markdown
-- Item 1
-- Item 2
-- Item 3
-```
 
 ---
 

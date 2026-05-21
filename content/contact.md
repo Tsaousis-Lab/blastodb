@@ -3,14 +3,19 @@ layout: layouts/base.njk
 title: BlastoDB - Contact
 description: Contact the people behind BlastoDB.
 ---
-[start:hero]
-[start:box center]
+[hero:]
 # Contact
 
 Please contact us!
-[end:box center]
-[end:hero]
 
-Contact Dr. Tasos [mail](mailto:)
+[:hero]
 
+
+Write us an email:
+
+**Dr Anastasios Tsaousis**
+
+Head of BlastoDB
+
+[a.tsaousis@kent.ac.uk](mailto:a.tsaousis@kent.ac.uk)
 

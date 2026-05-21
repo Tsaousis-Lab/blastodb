@@ -1,0 +1,37 @@
+<header>
+  <div class="header-inner">
+    <a href="{{ '/' | url }}" class="site-logo">
+      <img src="{{ collections.nav.siteLogo | url }}" alt="Blastie mascot" class="logo-image">
+      <span>BlastoDB</span>
+    </a>
+    <nav>
+      {% set currentFileName = page.filePathStem | replace('/index', '') %}
+      {% set navItems = collections.nav.items %}
+      {% for item in navItems %}
+        {% if item.type == 'link' %}
+          {% set itemPath = '/' + item.file.replace('content/', '').replace('.md', '') %}
+          <a href="{{ item.url | url }}" {% if itemPath == currentFileName %}class="active"{% endif %}>
+            {{ item.label }}
+          </a>
+        {% elif item.type == 'dropdown' %}
+          {% set uniqueId = 'nav-dropdown-' + loop.index %}
+          <div class="nav-dropdown-container">
+            <button class="nav-dropdown-btn" data-target="{{ uniqueId }}" aria-expanded="false">
+              {{ item.label }}
+              <span class="nav-dropdown-arrow">▼</span>
+            </button>
+            <div class="nav-dropdown-menu" id="{{ uniqueId }}">
+              {% for subItem in item.items %}
+                {% set subItemPath = '/' + subItem.file.replace('content/', '').replace('.md', '') %}
+                <a href="{{ subItem.url | url }}" class="nav-dropdown-item" {% if subItemPath == currentFileName %}data-active="true"{% endif %}>
+                  {{ subItem.label }}
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+  </div>
+</header>

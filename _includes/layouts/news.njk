@@ -7,8 +7,8 @@
   <title>{{ title }}</title>
   <link rel="stylesheet" href="{{ '/assets/style.css' | url }}">
   <script>
-    // Inject data into global scope for main.js to access
-    window.collectorData = {{ collectorData | dump | safe }};
+    // Inject news data into global scope for main.js to access
+    window.news = {{ news | dump | safe }};
   </script>
   <script src="{{ '/assets/main.js' | url }}" defer></script>
 </head>
@@ -17,6 +17,10 @@
 
   <main>
     {{ content | processSpans | safe }}
+
+    <div class="protocol-footer">
+      <a href="{{ '/lab-protocols/' | url }}" class="btn btn-secondary">← Back to Homepage</a>
+    </div>
   </main>
 
   {% include "layouts/footer.njk" %}
