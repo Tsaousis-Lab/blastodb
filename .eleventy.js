@@ -469,6 +469,7 @@ module.exports = function (eleventyConfig) {
   // ─── Pass-through Copy ──────────────────────────────────────────────────
   eleventyConfig.addPassthroughCopy("assets");
   eleventyConfig.addPassthroughCopy("images");
+  eleventyConfig.addPassthroughCopy("content/admin"); //for the SveltiaCMS
 
   // ─── Config ─────────────────────────────────────────────────────────────
   return {

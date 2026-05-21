@@ -6,7 +6,8 @@
   "scripts": {
     "build": "eleventy",
     "serve": "eleventy --serve",
-    "watch": "eleventy --watch"
+    "watch": "eleventy --watch",
+    "cms": "npx @sveltia/sveltia-cms"
   },
   "keywords": [
     "blastocystis",
@@ -18,6 +19,7 @@
   "license": "MIT",
   "devDependencies": {
     "@11ty/eleventy": "^2.0.0",
+    "@sveltia/cms": "^0.162.3",
     "js-yaml": "^4.1.1",
     "markdown-it": "^13.0.0"
   }
