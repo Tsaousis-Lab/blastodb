@@ -40,7 +40,8 @@ Read the articles about each element for more information.
 | Element | Syntax | Description |
 |---|---|---|
 | Tag  | [tag:*tag_name*]   | Visual element to display tags.   |
-| Button  | [btn:displayed_text* -> *page.html*]   | Needs a *name* (displayed text) and link to another *page.html*.   |
+| Button  | [btn:*displayed_text* -> *page.html*]   | Needs a *name* (displayed text) and link to another *page.html*.   |
+| Box  | [start:box]<br> Content in the Box. <br>[end:box]   | Groups content inside of it. Can be used for styling.   |
 | Card  | [start:card]<br> Content in the Card. <br>[end:card]   | Displays the *content* inside of it in a colored box.   |
 | Hero  | [start:hero]<br> Content in the Hero. <br> [end:hero]   | A box spanning the range of the page.<br> Displays the content inside, like the *Card*.   |
 | Cols  | [start:cols]<br>Content<br>[end:cols]   | Arranges the content inside in columns.<br>Automatically resizes for mobile view.|
