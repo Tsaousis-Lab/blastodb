@@ -9,4 +9,4 @@ description: Scientific publications around Blastocystis.
 [:hero]
 
 
-Content comming soon!
+[collector -> bibliography; search:[authors,date,journal,title]; sort:[date,title]; filter:[journal], clickable:false]

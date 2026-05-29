@@ -1,13 +1,40 @@
+publish_mode: editorial_workflow
+
 backend:
   name: github
   repo: Tsaousis-Lab/blastodb
   branch: main # CMS always writes to main
+  squash_merges: true
 
 media_folder: assets/uploads
 public_folder: /assets/uploads
 pages_folder: content
 
 collections:
+  # ─── Data Types ──────────────────────────────────────────────────────────────
+  - name: taxonomies
+    label: Taxonomies
+    files:
+      - name: data_types
+        label: Data Types
+        file: content/taxonomies/data-types.md
+        fields:
+          - name: items
+            label: Items
+            widget: list
+            hint: "One item per line.<br><p style='color:red'>***DANGER!***</p> Never delete any existing data-types, otherwise you will break relationships within the dataset!"
+
+      - name: sub_types
+        label: Sub Types
+        file: content/taxonomies/sub-types.md
+        fields:
+          - name: items
+            label: Items
+            widget: list
+            hint: "One item per line.<br><p style='color:red'>***DANGER!***</p> Never delete any existing blastocystis sub-types, otherwise you will break relationships within the dataset!"
+
+  # ─── Data Types ──────────────────────────────────────────────────────────────
+
   # ─── Datasets ──────────────────────────────────────────────────────────────
   - name: datasets
     label: Datasets
@@ -22,19 +49,25 @@ collections:
 
       - name: data_types
         label: Data Type(s)
-        widget: select
+        widget: relation
+        collection: taxonomies
+        file: data_types
+        search_fields: [items]
+        value_field: "items.*"
+        display_fields: ["items.*"]
         multiple: true
-        options:
-          - genome sequence
-          - multi-omics
-          - lab protocol
-          - epidemiological
-          - microbiome information
+        required: false
 
-      - name: subtypes
-        label: Subtype(s)
-        widget: list
-        hint: "e.g. ST1, ST3, ST7"
+      - name: sub_types
+        label: Sub Type(s)
+        widget: relation
+        collection: taxonomies
+        file: sub_types
+        search_fields: [items]
+        value_field: "items.*"
+        display_fields: ["items.*"]
+        multiple: true
+        required: false
 
       - name: strains
         label: Strain(s)
@@ -63,12 +96,6 @@ collections:
         required: false
         hint: "IDs of related datasets or protocols"
 
-      - name: date
-        label: Publication Date
-        widget: datetime
-        date_format: YYYY-MM-DD
-        time_format: false
-
       - name: country
         label: Country / Geographical Origin
         widget: string
@@ -79,6 +106,70 @@ collections:
         widget: markdown
         required: false
         hint: "Optional long-form description or protocol. Supports your custom BlastoDB markdown syntax."
+
+  # ─── News ──────────────────────────────────────────────────────────────
+  - name: news
+    label: News
+    label_singular: News Item
+    folder: content/news
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - {
+          name: layout,
+          label: Layout,
+          widget: hidden,
+          default: layouts/news.njk,
+        }
+      - { name: title, label: Title, widget: string }
+      - { name: description, label: Description, widget: text, required: false }
+      - {
+          name: short-description,
+          label: Short Description,
+          widget: text,
+          required: false,
+        }
+      - { name: tags, label: Tags, widget: list, required: false }
+      - name: date
+        label: Date
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+      - { name: body, label: Body, widget: markdown }
+
+  # ─── Lab Protocols ─────────────────────────────────────────────────────
+  - name: lab-protocols
+    label: Lab Protocols
+    label_singular: Protocol
+    folder: content/lab-protocols
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - {
+          name: layout,
+          label: Layout,
+          widget: hidden,
+          default: layouts/lab-protocol.njk,
+        }
+      - { name: title, label: Title, widget: string }
+      - { name: description, label: Description, widget: text, required: false }
+      - {
+          name: short-description,
+          label: Short Description,
+          widget: text,
+          required: false,
+        }
+      - { name: tags, label: Tags, widget: list, required: false }
+      - name: date
+        label: Date
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+      - { name: body, label: Body, widget: markdown }
 
   # ─── Bibliography ───────────────────────────────────────────────────────────
   - name: bibliography

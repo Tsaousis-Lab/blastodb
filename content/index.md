@@ -30,8 +30,6 @@ _Art by Sam Falconer_
 
 ## Explore the database
 
-This is a test edit!
-
 Jump directly to a resource area
 
 [grid:]
@@ -53,4 +51,4 @@ Jump directly to a resource area
 
 Keeping you updated on the latest in _Blastocystis_ research!
 
-[collector -> news; search:true; arrange:columns; sort:true; date:false ]
+[collector -> news; search:[title,description,shortDescription,tags]; sort:[date,title]; filter:[tags]; arrange:cols]

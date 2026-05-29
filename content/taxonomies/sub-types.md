@@ -1,0 +1,12 @@
+---
+items:
+  - ST1
+  - ST2
+  - ST3
+  - ST4
+  - ST5
+  - ST6
+  - ST7
+  - ST8
+  - ST9
+---

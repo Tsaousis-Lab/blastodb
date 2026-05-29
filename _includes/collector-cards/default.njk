@@ -1,0 +1,27 @@
+<div class="collector-card">
+  <h3>
+    <a href="{{ pageUrl }}">{{ title }}</a>
+  </h3>
+
+  {% if shortDescription or description %}
+    <p class="collector-item-description">
+      {{ shortDescription or description }} And a test text.
+    </p>
+  {% endif %}
+
+  {% if formattedDate or (tags and tags.length) %}
+    <div class="collector-item-meta">
+      {% if formattedDate %}
+        <span class="collector-item-date">{{ formattedDate }}</span>
+      {% endif %}
+
+      {% if tags and tags.length %}
+        <div class="collector-item-tags">
+          {% for tag in tags %}
+            <span class="tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
