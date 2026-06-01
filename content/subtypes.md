@@ -1,18 +1,21 @@
 ---
-layout: layouts/base.njk
 title: BlastoDB — Subtypes
 description: Explore Blastocystis subtypes ST1–7 with images and downloadable FASTA reference sequences.
+layout: layouts/base.njk
 ---
 
 [hero:]
+
 # Subtypes
+
+This is validated. [btn: -> broken]
 
 Below you'll find descriptions for known subtypes, with downloadable resources. [Contact us](contact.html) if we missed any.
 [:hero]
 
 **Note on interpretation:** subtype naming reflects genetic clustering and is usually determined from sequence data. Morphology alone is generally not sufficient to subtype isolates reliably.
 
----
+***
 
 [card:]
 [tag: ST1] [tag: Human] [tag: Animal]
