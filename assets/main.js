@@ -43,14 +43,12 @@ function initializeCollector(container, collectionName, opts) {
     ? opts.search_fields
     : [];
 
-  const filterFields = Array.isArray(opts.filter_fields)
-    ? opts.filter_fields
-    : [];
+  const filterGroups = normalizeFilterGroups(opts.filters);
 
   const sortFields = Array.isArray(opts.sort_fields) ? opts.sort_fields : [];
 
   const hasSearch = searchFields.length > 0;
-  const hasFilters = filterFields.length > 0;
+  const hasFilters = filterGroups.length > 0;
   const hasSort = sortFields.length > 0;
 
   const isClickable = opts.clickable !== false;
@@ -62,9 +60,13 @@ function initializeCollector(container, collectionName, opts) {
       html += `  <div class="collector-search"><input type="text" placeholder="Search items..."></div>`;
     }
     if (hasFilters) {
-      html += `  <div class="collector-filters-dropdown">`;
-      html += `    <button class="collector-filters-btn">Filters ▼</button>`;
-      html += `    <div class="collector-filters-menu" style="display:none;" id="filter-menu-${Math.random().toString(36).substr(2, 9)}"></div>`;
+      html += `  <div class="collector-filters-group">`;
+      filterGroups.forEach((group, index) => {
+        html += `    <div class="collector-filters-dropdown" data-filter-index="${index}">`;
+        html += `      <button class="collector-filters-btn">${escapeHtml(group.label)} <span class="collector-filters-arrow">▼</span></button>`;
+        html += `      <div class="collector-filters-menu" style="display:none;" data-filter-index="${index}"></div>`;
+        html += `    </div>`;
+      });
       html += `  </div>`;
     }
     if (hasSort) {
@@ -110,46 +112,17 @@ function initializeCollector(container, collectionName, opts) {
     const searchInput = hasSearch
       ? container.querySelector(".collector-search input")
       : null;
-    const filterBtn = hasFilters
-      ? container.querySelector(".collector-filters-btn")
-      : null;
-    const filterMenu = hasFilters
-      ? container.querySelector(".collector-filters-menu")
-      : null;
 
-    if (hasFilters && filterMenu) {
-      const filterHtml = buildFilterMenu(items, filterFields);
-      filterMenu.innerHTML =
-        filterHtml ||
-        '<div class="collector-filter-empty">No filters available.</div>';
-
-      filterMenu
-        .querySelectorAll('input[type="checkbox"]')
-        .forEach((checkbox) => {
-          checkbox.addEventListener("change", () => {
-            filterItems(
-              container,
-              items,
-              opts,
-              sortState,
-              searchFields,
-              filterFields,
-            );
-          });
-        });
-
-      filterBtn.addEventListener("click", function (e) {
-        e.stopPropagation();
-        const isOpen = filterMenu.style.display !== "none";
-        filterMenu.style.display = isOpen ? "none" : "flex";
-      });
-
-      document.addEventListener("click", function (e) {
-        const dropdown = container.querySelector(".collector-filters-dropdown");
-        if (dropdown && !dropdown.contains(e.target)) {
-          filterMenu.style.display = "none";
-        }
-      });
+    if (hasFilters) {
+      renderFilterMenus(container, items, filterGroups, searchFields, "");
+      attachFilterMenuHandlers(
+        container,
+        items,
+        opts,
+        sortState,
+        searchFields,
+        filterGroups,
+      );
     }
 
     if (hasSearch && searchInput) {
@@ -160,7 +133,7 @@ function initializeCollector(container, collectionName, opts) {
           opts,
           sortState,
           searchFields,
-          filterFields,
+          filterGroups,
         ),
       );
     }
@@ -206,7 +179,7 @@ function initializeCollector(container, collectionName, opts) {
           opts,
           sortState,
           searchFields,
-          filterFields,
+          filterGroups,
         );
         sortMenu.style.display = "none";
       });
@@ -300,28 +273,13 @@ function filterItems(
   opts,
   sortState,
   searchFields,
-  filterFields,
+  filterGroups,
 ) {
   const searchInput = container.querySelector(".collector-search input");
   const searchTerm = searchInput ? searchInput.value.toLowerCase() : "";
 
-  const filterMenu = container.querySelector(".collector-filters-menu");
-
-  const selectedFilters = {};
-  if (filterFields && filterFields.length > 0 && filterMenu) {
-    filterMenu
-      .querySelectorAll('input[type="checkbox"][data-field]:checked')
-      .forEach((checkbox) => {
-        const field = checkbox.dataset.field;
-        const value = checkbox.dataset.value;
-        if (!selectedFilters[field]) {
-          selectedFilters[field] = new Set();
-        }
-        selectedFilters[field].add(value.toLowerCase());
-      });
-  }
-
   const itemsContainer = container.querySelector(".collector-items");
+  const selections = getFilterSelections(container, filterGroups);
 
   let visibleItems = items.filter((item) => {
     const searchableText =
@@ -330,17 +288,7 @@ function filterItems(
       `${item.title || ""} ${item.description || ""}`.toLowerCase();
     const matchesSearch = !searchTerm || searchableText.includes(searchTerm);
 
-    const matchesFilters =
-      filterFields && filterFields.length > 0
-        ? filterFields.every((field) => {
-            const selectedSet = selectedFilters[field];
-            if (!selectedSet || selectedSet.size === 0) return true;
-            const values = getFieldValues(item, field).map((v) =>
-              v.toLowerCase(),
-            );
-            return values.some((value) => selectedSet.has(value));
-          })
-        : true;
+    const matchesFilters = matchesFilterGroups(item, filterGroups, selections);
 
     return matchesSearch && matchesFilters;
   });
@@ -359,34 +307,45 @@ function filterItems(
   if (visibleItems.length === 0) {
     itemsContainer.innerHTML =
       '<div class="collector-empty">No items match your filters.</div>';
-    return;
+  } else {
+    let html = "";
+    visibleItems.forEach((item) => {
+      const searchable =
+        item._searchText ||
+        `${item.title || ""} ${item.description || ""}`.toLowerCase();
+      const tagsJson = JSON.stringify(item.tags || []);
+      const url = item.pageUrl || item.url || "#";
+
+      html += `<div class="collector-item" data-searchable="${escapeAttr(searchable)}" data-tags='${escapeAttr(tagsJson)}' data-url="${escapeAttr(url)}">`;
+      html += item.cardHtml || renderFallbackCard(item, opts);
+      html += `</div>`;
+    });
+
+    itemsContainer.innerHTML = html;
+
+    itemsContainer.querySelectorAll(".collector-item").forEach((itemEl) => {
+      itemEl.addEventListener("click", function (e) {
+        if (container.classList.contains("collector-not-clickable")) return;
+        if (e.target.closest("a, button, input, textarea, select")) return;
+        const url = this.dataset.url;
+        if (url && url !== "#") {
+          window.location.href = url;
+        }
+      });
+    });
   }
 
-  let html = "";
-  visibleItems.forEach((item) => {
-    const searchable =
-      item._searchText ||
-      `${item.title || ""} ${item.description || ""}`.toLowerCase();
-    const tagsJson = JSON.stringify(item.tags || []);
-    const url = item.pageUrl || item.url || "#";
-
-    html += `<div class="collector-item" data-searchable="${escapeAttr(searchable)}" data-tags='${escapeAttr(tagsJson)}' data-url="${escapeAttr(url)}">`;
-    html += item.cardHtml || renderFallbackCard(item, opts);
-    html += `</div>`;
-  });
-
-  itemsContainer.innerHTML = html;
-
-  itemsContainer.querySelectorAll(".collector-item").forEach((itemEl) => {
-    itemEl.addEventListener("click", function (e) {
-      if (container.classList.contains("collector-not-clickable")) return;
-      if (e.target.closest("a, button, input, textarea, select")) return;
-      const url = this.dataset.url;
-      if (url && url !== "#") {
-        window.location.href = url;
-      }
-    });
-  });
+  if (filterGroups && filterGroups.length > 0) {
+    renderFilterMenus(container, items, filterGroups, searchFields, searchTerm);
+    attachFilterMenuHandlers(
+      container,
+      items,
+      opts,
+      sortState,
+      searchFields,
+      filterGroups,
+    );
+  }
 }
 
 function buildSearchText(item, searchFields) {
@@ -405,42 +364,242 @@ function buildSearchText(item, searchFields) {
   return parts.join(" ").toLowerCase();
 }
 
-function buildFilterMenu(items, filterFields) {
-  const fieldValues = {};
+function normalizeFilterGroups(filters) {
+  if (!Array.isArray(filters)) return [];
+  return filters
+    .map((group) => {
+      const label =
+        group && typeof group.label === "string" ? group.label : "Filters";
+      const fields = Array.isArray(group && group.fields) ? group.fields : [];
+      return { label, fields };
+    })
+    .filter((group) => group.fields.length > 0);
+}
 
-  filterFields.forEach((field) => {
-    fieldValues[field] = new Set();
-  });
+function renderFilterMenus(
+  container,
+  items,
+  filterGroups,
+  searchFields,
+  searchTerm,
+) {
+  const selections = getFilterSelections(container, filterGroups);
 
-  items.forEach((item) => {
-    filterFields.forEach((field) => {
-      const values = getFieldValues(item, field);
-      values.forEach((value) => {
-        if (value && value.trim().length > 0) {
-          fieldValues[field].add(value.trim());
-        }
-      });
-    });
-  });
+  filterGroups.forEach((group, index) => {
+    const menu = container.querySelector(
+      `.collector-filters-menu[data-filter-index="${index}"]`,
+    );
+    if (!menu) return;
 
-  let html = "";
-  filterFields.forEach((field) => {
-    const values = Array.from(fieldValues[field]).sort((a, b) =>
-      a.localeCompare(b, undefined, { sensitivity: "base" }),
+    const availableMap = getAvailableValuesForGroup(
+      items,
+      group,
+      filterGroups,
+      selections,
+      index,
+      searchFields,
+      searchTerm,
     );
 
-    if (values.length === 0) return;
-
-    html += `<div class="collector-filter-group">`;
-    html += `  <div class="collector-filter-title">${escapeHtml(labelizeField(field))}</div>`;
-    values.forEach((value) => {
-      const inputId = `filter-${field.replace(/\s+/g, "-")}-${value.replace(/\s+/g, "-")}-${Math.random()}`;
-      html += `  <label class="collector-filter-option"><input type="checkbox" data-field="${escapeAttr(field)}" data-value="${escapeAttr(value)}" id="${escapeAttr(inputId)}"> ${escapeHtml(value)}</label>`;
+    const selected = selections[index] || { raw: [], keys: new Set() };
+    selected.raw.forEach((value) => {
+      const key = value.toLowerCase();
+      if (!availableMap.has(key)) {
+        availableMap.set(key, value);
+      }
     });
-    html += `</div>`;
+
+    const sorted = Array.from(availableMap.entries()).sort((a, b) =>
+      a[1].localeCompare(b[1], undefined, { sensitivity: "base" }),
+    );
+
+    if (sorted.length === 0) {
+      menu.innerHTML =
+        '<div class="collector-filter-empty">No filters available.</div>';
+      return;
+    }
+
+    let html = "";
+    sorted.forEach(([key, label]) => {
+      const inputId = `filter-${index}-${label.replace(/\s+/g, "-")}-${Math.random()}`;
+      const checked = selected.keys && selected.keys.has(key);
+      html += `  <label class="collector-filter-option"><input type="checkbox" data-filter-index="${index}" data-value="${escapeAttr(label)}" id="${escapeAttr(inputId)}" ${checked ? "checked" : ""}> ${escapeHtml(label)}</label>`;
+    });
+
+    menu.innerHTML = html;
+  });
+}
+
+function attachFilterMenuHandlers(
+  container,
+  items,
+  opts,
+  sortState,
+  searchFields,
+  filterGroups,
+) {
+  const dropdowns = container.querySelectorAll(".collector-filters-dropdown");
+
+  dropdowns.forEach((dropdown) => {
+    const btn = dropdown.querySelector(".collector-filters-btn");
+    const menu = dropdown.querySelector(".collector-filters-menu");
+    if (!btn || !menu) return;
+
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      const isOpen = menu.style.display !== "none";
+      closeAllFilterMenus(container);
+      if (isOpen) {
+        menu.style.display = "none";
+        dropdown.classList.remove("is-open");
+        return;
+      }
+
+      menu.style.display = "flex";
+      dropdown.classList.add("is-open");
+      adjustFilterMenuPosition(menu);
+    };
+
+    menu.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+      checkbox.onchange = () => {
+        filterItems(
+          container,
+          items,
+          opts,
+          sortState,
+          searchFields,
+          filterGroups,
+        );
+      };
+    });
   });
 
-  return html;
+  if (!container.dataset.filtersOutsideHandler) {
+    document.addEventListener("click", (event) => {
+      if (!container.contains(event.target)) {
+        closeAllFilterMenus(container);
+      }
+    });
+    container.dataset.filtersOutsideHandler = "true";
+  }
+}
+
+function closeAllFilterMenus(container) {
+  container.querySelectorAll(".collector-filters-menu").forEach((menu) => {
+    menu.style.display = "none";
+  });
+  container
+    .querySelectorAll(".collector-filters-dropdown.is-open")
+    .forEach((dropdown) => dropdown.classList.remove("is-open"));
+}
+
+function adjustFilterMenuPosition(menu) {
+  if (!menu) return;
+
+  menu.style.left = "";
+  menu.style.right = "";
+
+  const rect = menu.getBoundingClientRect();
+  const viewportWidth = document.documentElement.clientWidth;
+
+  const overflowsRight = rect.right > viewportWidth;
+  const overflowsLeft = rect.left < 0;
+
+  if (overflowsRight && !overflowsLeft) {
+    menu.style.right = "0";
+    menu.style.left = "auto";
+    return;
+  }
+
+  if (overflowsLeft && !overflowsRight) {
+    menu.style.left = "0";
+    menu.style.right = "auto";
+    return;
+  }
+
+  if (overflowsLeft && overflowsRight) {
+    menu.style.left = "0";
+    menu.style.right = "0";
+  }
+}
+
+function getFilterSelections(container, filterGroups) {
+  const selections = {};
+
+  filterGroups.forEach((group, index) => {
+    const menu = container.querySelector(
+      `.collector-filters-menu[data-filter-index="${index}"]`,
+    );
+    if (!menu) {
+      selections[index] = { raw: [], keys: new Set() };
+      return;
+    }
+
+    const values = Array.from(
+      menu.querySelectorAll('input[type="checkbox"]:checked'),
+    ).map((checkbox) => checkbox.dataset.value);
+
+    selections[index] = {
+      raw: values,
+      keys: new Set(values.map((value) => value.toLowerCase())),
+    };
+  });
+
+  return selections;
+}
+
+function matchesFilterGroups(item, filterGroups, selections, excludeIndex) {
+  if (!filterGroups || filterGroups.length === 0) return true;
+
+  return filterGroups.every((group, index) => {
+    if (index === excludeIndex) return true;
+
+    const selected = selections[index];
+    if (!selected || selected.keys.size === 0) return true;
+
+    return group.fields.some((field) => {
+      const values = getFieldValues(item, field).map((v) => v.toLowerCase());
+      return values.some((value) => selected.keys.has(value));
+    });
+  });
+}
+
+function getAvailableValuesForGroup(
+  items,
+  group,
+  filterGroups,
+  selections,
+  index,
+  searchFields,
+  searchTerm,
+) {
+  const available = new Map();
+
+  items
+    .filter((item) => {
+      const searchableText =
+        item._searchText ||
+        buildSearchText(item, searchFields) ||
+        `${item.title || ""} ${item.description || ""}`.toLowerCase();
+      const matchesSearch = !searchTerm || searchableText.includes(searchTerm);
+      if (!matchesSearch) return false;
+      return matchesFilterGroups(item, filterGroups, selections, index);
+    })
+    .forEach((item) => {
+      group.fields.forEach((field) => {
+        const values = getFieldValues(item, field);
+        values.forEach((value) => {
+          const label = value && value.trim();
+          if (!label) return;
+          const key = label.toLowerCase();
+          if (!available.has(key)) {
+            available.set(key, label);
+          }
+        });
+      });
+    });
+
+  return available;
 }
 
 function getFieldValues(item, field) {

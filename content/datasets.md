@@ -5,12 +5,13 @@ description: Collection of laboratory protocols for sample preparation, DNA extr
 ---
 
 [hero:]
-# Laboratory Protocols
+# Datasets
 
-Browse our collection of standardized laboratory protocols for various molecular biology techniques. Use the search and filters below to find the protocol you need.
+Here you find a selection of relevant and trustworthy datasets for Blastocysts.
+If you are interested in contributing to this repository, contact us!
 [:hero]
 
-[collector -> lab-protocols; search:[title,description,shortDescription,tags]; sort:[date,title]; filters:[Tags->[tags]]; arrange:rows; display_items:all]
+[collector -> datasets; search:[title,description,shortDescription,sub_types]; sort:[date,title]; filters:[Subtypes->[sub_types],Countries->[country]]; arrange:rows]
 
 ---
 

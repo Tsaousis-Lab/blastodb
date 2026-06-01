@@ -524,6 +524,12 @@ footer a:hover {
     box-shadow: 0 0 0 2px rgba(45, 106, 79, 0.1);
 }
 
+.collector-filters-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
 .collector-filters-dropdown {
     position: relative;
     display: flex;
@@ -543,7 +549,20 @@ footer a:hover {
     cursor: pointer;
     transition:
         background 0.15s,
-        transform 0.1s;
+        transform 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    white-space: nowrap;
+}
+
+.collector-filters-arrow {
+    display: inline-block;
+    transition: transform 0.15s ease;
+}
+
+.collector-filters-dropdown.is-open .collector-filters-arrow {
+    transform: rotate(180deg);
 }
 
 .collector-filters-btn:hover {
@@ -928,6 +947,30 @@ footer a:hover {
 @media (max-width: 720px) {
     .header-inner {
         gap: 1rem;
+    }
+
+    .collector-controls {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    .collector-filters-group {
+        width: 100%;
+    }
+
+    .collector-filters-dropdown {
+        flex: 1 1 140px;
+    }
+
+    .collector-filters-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .collector-filters-menu {
+        left: 0;
+        right: auto;
+        max-width: calc(100vw - 2rem);
     }
 
     .nav-toggle {

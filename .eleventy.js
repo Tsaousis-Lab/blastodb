@@ -94,6 +94,66 @@ function parseListParam(paramStr, key) {
     .filter((item) => item.length > 0);
 }
 
+function parseFiltersParam(paramStr) {
+  const match = paramStr.match(/filters\s*:\s*\[/i);
+  if (!match) return null;
+
+  const startIndex = paramStr.indexOf("[", match.index);
+  if (startIndex === -1) return null;
+
+  let depth = 0;
+  let endIndex = -1;
+  for (let i = startIndex; i < paramStr.length; i += 1) {
+    const char = paramStr[i];
+    if (char === "[") depth += 1;
+    if (char === "]") {
+      depth -= 1;
+      if (depth === 0) {
+        endIndex = i;
+        break;
+      }
+    }
+  }
+
+  if (endIndex === -1) return null;
+
+  const content = paramStr.slice(startIndex + 1, endIndex).trim();
+  if (!content) return [];
+
+  const parts = [];
+  let current = "";
+  let innerDepth = 0;
+  for (let i = 0; i < content.length; i += 1) {
+    const char = content[i];
+    if (char === "[") innerDepth += 1;
+    if (char === "]") innerDepth -= 1;
+
+    if (char === "," && innerDepth === 0) {
+      parts.push(current.trim());
+      current = "";
+    } else {
+      current += char;
+    }
+  }
+  if (current.trim()) parts.push(current.trim());
+
+  const groups = parts
+    .map((part) => {
+      const groupMatch = part.match(/^(.+?)\s*->\s*\[([^\]]*)\]\s*$/);
+      if (!groupMatch) return null;
+      const label = groupMatch[1].trim();
+      const fields = groupMatch[2]
+        .split(",")
+        .map((field) => field.trim())
+        .filter((field) => field.length > 0);
+      if (!label || fields.length === 0) return null;
+      return { label, fields };
+    })
+    .filter(Boolean);
+
+  return groups;
+}
+
 function renderCollectorCard(templateName, data) {
   const safeName = templateName || "default";
   const templateFile = `${safeName}.njk`;
@@ -423,7 +483,7 @@ module.exports = function (eleventyConfig) {
           display_items: "all",
           search_fields: [],
           sort_fields: [],
-          filter_fields: [],
+          filters: [],
           clickable: true,
         };
 
@@ -437,9 +497,9 @@ module.exports = function (eleventyConfig) {
           opts.sort_fields = sortList;
         }
 
-        const filterList = parseListParam(paramStr, "filter");
-        if (filterList) {
-          opts.filter_fields = filterList;
+        const filtersGroups = parseFiltersParam(paramStr);
+        if (filtersGroups) {
+          opts.filters = filtersGroups;
         }
 
         const clickableMatch = paramStr.match(/clickable:\s*(true|false)/i);

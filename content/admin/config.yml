@@ -23,17 +23,33 @@ collections:
             label: Items
             widget: list
             hint: "One item per line.<br><p style='color:red'>***DANGER!***</p> Never delete any existing data-types, otherwise you will break relationships within the dataset!"
-
-      - name: sub_types
-        label: Sub Types
-        file: content/taxonomies/sub-types.md
+      - name: hosts
+        label: Hosts
+        file: content/taxonomies/mosts.md
         fields:
           - name: items
             label: Items
             widget: list
-            hint: "One item per line.<br><p style='color:red'>***DANGER!***</p> Never delete any existing blastocystis sub-types, otherwise you will break relationships within the dataset!"
+            hint: "One item per line.<br><p style='color:red'>***DANGER!***</p> Never delete any existing data-types, otherwise you will break relationships within the dataset!"
 
-  # ─── Data Types ──────────────────────────────────────────────────────────────
+  # ─── Subtypes ──────────────────────────────────────────────────────────────
+  - name: subtypes
+    label: Subtypes
+    folder: subtypes
+    fields:
+      - { name: name, label: Name, widget: string } #TODO: this should never be changed!
+
+      - name: short_description
+        label: Short-Description
+        widget: markdown
+        required: false
+        hint: "Short description (1-3 sentences), which will be displayed in the selection card."
+
+      - name: description
+        label: Description
+        widget: markdown
+        required: false
+        hint: "Long-form description, which is displayed when opening the respective page of the subtype.<br>Supports the extended markdown syntax."
 
   # ─── Datasets ──────────────────────────────────────────────────────────────
   - name: datasets

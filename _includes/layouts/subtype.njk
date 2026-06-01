@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ description or 'BlastoDB - The open hub for Blastocystis research' }}">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="{{ '/assets/style.css' | url }}">
+  <script>
+    // Inject data into global scope for main.js to access
+    window.collectorData = {{ collectorData | dump | safe }};
+  </script>
+  <script src="{{ '/assets/main.js' | url }}" defer></script>
+</head>
+<body>
+  {% include "layouts/header.njk" %}
+
+  <main>
+    {{ content | processSpans | safe }}
+  </main>
+
+  {% include "layouts/footer.njk" %}
+</body>
+</html>

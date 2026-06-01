@@ -7,6 +7,7 @@
     {
       "label": "Resources",
       "items": [
+        { "label": "Datasets", "file": "content/datasets.md" },
         { "label": "Subtypes", "file": "content/subtypes.md" },
         { "label": "Publications", "file": "content/publications.md" },
         { "label": "Lab Protocols", "file": "content/lab-protocols.md" }

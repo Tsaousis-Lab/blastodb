@@ -51,4 +51,4 @@ Jump directly to a resource area
 
 Keeping you updated on the latest in _Blastocystis_ research!
 
-[collector -> news; search:[title,description,shortDescription,tags]; sort:[date,title]; filter:[tags]; arrange:cols]
+[collector -> news; search:[title,description,shortDescription,tags]; sort:[date,title]; filters:[Tags->[tags]]; arrange:cols]

@@ -102,7 +102,7 @@ If no template exists, the collector falls back to `default.njk`.
 ## 4) Use the collector on a page
 
 ```markdown
-[collector -> research-labs; search:[title,description,contacts.name,country]; sort:[title]; filter:[country]]
+[collector -> research-labs; search:[title,description,contacts.name,country]; sort:[title]; filters:[Country->[country]]]
 ```
 
 ---
