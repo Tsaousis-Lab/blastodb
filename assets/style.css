@@ -842,6 +842,12 @@ footer a:hover {
 
 /* ── Collector Card: Research Labs ─────────────────────────── */
 .collector-card-lab {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.collector-card-lab-content {
     display: grid;
     grid-template-columns: 120px 1fr;
     gap: 1rem;
@@ -873,7 +879,7 @@ footer a:hover {
 }
 
 @media (max-width: 720px) {
-    .collector-card-lab {
+    .collector-card-lab-content {
         grid-template-columns: 1fr;
     }
 

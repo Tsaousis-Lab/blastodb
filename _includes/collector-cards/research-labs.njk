@@ -1,26 +1,28 @@
 <div class="collector-card collector-card-lab">
-  {% if image %}
-    <div class="collector-card-lab-image">
-      <img src="{{ image }}" alt="{{ title }}" loading="lazy" />
-    </div>
-  {% endif %}
+  <h3 class="collector-card-title">
+    {% if pageUrl %}<a href="{{ pageUrl }}">{{ title }}</a>{% else %}{{ title }}{% endif %}
+  </h3>
 
-  <div class="collector-card-lab-body">
-    <h3 class="collector-card-title">
-      {% if pageUrl %}<a href="{{ pageUrl }}">{{ title }}</a>{% else %}{{ title }}{% endif %}
-    </h3>
-
-    {% if address %}
-      <div class="collector-card-lab-uni">{{ address }}</div>
-    {% endif %}
-
-    {% if contacts and contacts.length %}
-      <div class="collector-card-lab-contact">
-        Contact: {{ contacts[0].name }}
-        {% if contacts[0].email %}
-          — <a href="mailto:{{ contacts[0].email }}">{{ contacts[0].email }}</a>
-        {% endif %}
+  <div class="collector-card-lab-content">
+    {% if image %}
+      <div class="collector-card-lab-image">
+        <img src="{{ image }}" alt="{{ title }}" loading="lazy" />
       </div>
     {% endif %}
+
+    <div class="collector-card-lab-body">
+      {% if address %}
+        <div class="collector-card-lab-uni">{{ address }}</div>
+      {% endif %}
+
+      {% if contacts and contacts.length %}
+        <div class="collector-card-lab-contact">
+          Contact: {{ contacts[0].name }}
+          {% if contacts[0].email %}
+            — <a href="mailto:{{ contacts[0].email }}">{{ contacts[0].email }}</a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
   </div>
 </div>

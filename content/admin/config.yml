@@ -171,6 +171,41 @@ collections:
         time_format: false
       - { name: body, label: Body, widget: markdown }
 
+  # ─── Research Labs ─────────────────────────────────────────────────────
+  - name: research-labs
+    label: Research Labs
+    label_singular: Research Lab
+    folder: content/research-labs
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - {
+          name: layout,
+          label: Layout,
+          widget: hidden,
+          default: layouts/base.njk,
+        }
+      - { name: title, label: Lab Name, widget: string }
+      - {
+          name: description,
+          label: Short Description,
+          widget: text,
+          required: false,
+        }
+      - name: contacts
+        label: Contact Persons
+        widget: list
+        fields:
+          - { name: name, label: Name, widget: string }
+          - { name: email, label: Email, widget: string }
+          - { name: image, label: Image, widget: image, required: false }
+      - { name: address, label: University / Address, widget: string }
+      - { name: country, label: Country, widget: string }
+      - { name: image, label: Image, widget: string, required: false }
+      - { name: body, label: Body, widget: markdown, required: false }
+
   # ─── Bibliography ───────────────────────────────────────────────────────────
   - name: bibliography
     label: Bibliography
