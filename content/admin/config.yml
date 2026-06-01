@@ -1,0 +1,172 @@
+backend:
+  name: github
+  repo: Tsaousis-Lab/blastodb
+  branch: main # CMS always writes to main
+
+media_folder: assets/uploads
+public_folder: /assets/uploads
+pages_folder: content
+
+collections:
+  # ─── Datasets ──────────────────────────────────────────────────────────────
+  - name: datasets
+    label: Datasets
+    label_singular: Dataset
+    folder: content/datasets
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { name: title, label: Title, widget: string }
+
+      - name: data_types
+        label: Data Type(s)
+        widget: select
+        multiple: true
+        options:
+          - genome sequence
+          - multi-omics
+          - lab protocol
+          - epidemiological
+          - microbiome information
+
+      - name: subtypes
+        label: Subtype(s)
+        widget: list
+        hint: "e.g. ST1, ST3, ST7"
+
+      - name: strains
+        label: Strain(s)
+        widget: list
+        hint: "e.g. ATCC 50338"
+
+      - name: source_url
+        label: Link to Data Source
+        widget: string
+        hint: "Zenodo, NCBI, etc."
+
+      - name: script_url
+        label: Link to Evaluation Script
+        widget: string
+        required: false
+        hint: "Optional — GitHub link, etc."
+
+      - name: publication_ref
+        label: Publication Reference ID
+        widget: string
+        hint: "Must match the ID of an entry in the Bibliography collection"
+
+      - name: related_entries
+        label: Related Entries
+        widget: list
+        required: false
+        hint: "IDs of related datasets or protocols"
+
+      - name: date
+        label: Publication Date
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+
+      - name: country
+        label: Country / Geographical Origin
+        widget: string
+        required: false
+
+      - name: body
+        label: Description
+        widget: markdown
+        required: false
+        hint: "Optional long-form description or protocol. Supports your custom BlastoDB markdown syntax."
+
+  # ─── Bibliography ───────────────────────────────────────────────────────────
+  - name: bibliography
+    label: Bibliography
+    label_singular: Publication
+    folder: content/bibliography
+    create: true
+    slug: "{{fields.ref_id}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - name: ref_id
+        label: Reference ID / Citation Key
+        widget: string
+        hint: "Short unique ID, e.g. smith2023"
+
+      - { name: title, label: Paper Title, widget: string }
+
+      - name: authors
+        label: Authors
+        widget: list
+        hint: "One author per line"
+
+      - name: date
+        label: Publication Date
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+
+      - name: journal
+        label: Journal / Conference Name
+        widget: string
+
+      - name: doi
+        label: DOI
+        widget: string
+        required: false
+
+      - name: url
+        label: Link to Publication
+        widget: string
+        required: false
+
+  # ─── Pages ───────────────────────────────────────────────────────────────────
+  - name: pages
+    label: Pages
+    label_singular: Page
+    folder: content
+    create: true
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+
+      - {
+          label: "Description",
+          name: "description",
+          widget: "text",
+          required: false,
+        }
+
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  # ─── Navigation Bar ───────────────────────────────────────────────────────────
+  - name: "nav"
+    label: "Navigation"
+    files:
+      - label: "Navigation Configuration"
+        name: "nav"
+        file: "nav.json"
+        fields:
+          - { label: "Site Title", name: "site_title", widget: "string" }
+          - { label: "Site Logo", name: "site_logo", widget: "string" }
+          - label: "Navigation Items"
+            name: "nav"
+            widget: "list"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - {
+                  label: "File",
+                  name: "file",
+                  widget: "string",
+                  required: false,
+                }
+              - label: "Items"
+                name: "items"
+                widget: "list"
+                required: false
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "File", name: "file", widget: "string" }
