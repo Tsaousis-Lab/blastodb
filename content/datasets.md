@@ -11,7 +11,7 @@ Here you find a selection of relevant and trustworthy datasets for Blastocysts.
 If you are interested in contributing to this repository, contact us!
 [:hero]
 
-[collector -> datasets; search:[title,description,shortDescription,sub_types]; sort:[date,title]; filters:[Subtypes->[sub_types],Countries->[country]]; arrange:rows]
+[collector -> datasets; search:[title,description,shortDescription,sub_types]; sort:[date,title]; filters:[Subtypes->[sub_types],Countries->[country]]; arrange:rows; prefilter:[sub_types=ST1]]
 
 ---
 

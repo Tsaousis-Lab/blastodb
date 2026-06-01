@@ -86,12 +86,26 @@ function initializeCollector(container, collectionName, opts) {
   html += `<div class="collector-items arrange-${opts.arrange || "cols"}"></div>`;
   container.innerHTML = html;
 
-  const items = getCollectorItems(collectionName);
+  const allItems = getCollectorItems(collectionName);
   console.log(
-    "[Collector] Got " + items.length + " items for collection:",
+    "[Collector] Got " + allItems.length + " items for collection:",
     collectionName,
   );
-  console.log("[Collector] Items:", items);
+
+  // Apply pre-filter to narrow the base item set before search/filters/sort
+  const prefilter = opts.prefilter || null;
+  const items = prefilter
+    ? allItems.filter((item) => matchesPrefilter(item, prefilter))
+    : allItems;
+
+  if (prefilter) {
+    console.log(
+      "[Collector] Pre-filter reduced items from " +
+        allItems.length +
+        " to " +
+        items.length,
+    );
+  }
 
   console.log("[Collector] Rendering items, opts:", opts);
 
@@ -546,6 +560,29 @@ function getFilterSelections(container, filterGroups) {
   });
 
   return selections;
+}
+
+/**
+ * Evaluates a pre-filter (parsed from the prefilter:[...] shortcode parameter)
+ * against a single item.  The structure is Disjunctive Normal Form:
+ *   orGroups: [ andGroup1, andGroup2, ... ]
+ * where each andGroup is an array of { field, value } conditions.
+ * An item passes when ANY orGroup matches, and an orGroup matches when ALL
+ * of its conditions match (AND-semantics).
+ */
+function matchesPrefilter(item, prefilter) {
+  if (!prefilter || !prefilter.orGroups || prefilter.orGroups.length === 0) {
+    return true;
+  }
+
+  return prefilter.orGroups.some((andGroup) =>
+    andGroup.every((condition) => {
+      const fieldValues = getFieldValues(item, condition.field).map((v) =>
+        typeof v === "string" ? v.toLowerCase() : String(v).toLowerCase(),
+      );
+      return fieldValues.includes(condition.value.toLowerCase());
+    }),
+  );
 }
 
 function matchesFilterGroups(item, filterGroups, selections, excludeIndex) {

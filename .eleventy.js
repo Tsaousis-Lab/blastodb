@@ -154,6 +154,50 @@ function parseFiltersParam(paramStr) {
   return groups;
 }
 
+function parsePrefilterParam(paramStr) {
+  const match = paramStr.match(/prefilter\s*:\s*\[/i);
+  if (!match) return null;
+
+  const startIndex = paramStr.indexOf("[", match.index);
+  if (startIndex === -1) return null;
+
+  const endIndex = paramStr.indexOf("]", startIndex);
+  if (endIndex === -1) return null;
+
+  const content = paramStr.slice(startIndex + 1, endIndex).trim();
+  if (!content) return null;
+
+  // Split by OR (case-insensitive, surrounded by whitespace) to get OR-groups.
+  // AND binds tighter than OR — each OR-group is itself AND-ed conditions.
+  const orParts = content.split(/\s+OR\s+/i);
+
+  const orGroups = orParts
+    .map((orPart) => {
+      const andParts = orPart.trim().split(/\s+AND\s+/i);
+      return andParts
+        .map((part) => {
+          part = part.trim();
+          // Support field="value with spaces" and field=simplevalue
+          const quotedMatch = part.match(/^([^=\s]+)\s*=\s*"([^"]*)"\s*$/);
+          if (quotedMatch) {
+            return { field: quotedMatch[1].trim(), value: quotedMatch[2] };
+          }
+          const simpleMatch = part.match(/^([^=\s]+)\s*=\s*(.+)\s*$/);
+          if (simpleMatch) {
+            return {
+              field: simpleMatch[1].trim(),
+              value: simpleMatch[2].trim(),
+            };
+          }
+          return null;
+        })
+        .filter(Boolean);
+    })
+    .filter((group) => group.length > 0);
+
+  return orGroups.length > 0 ? { orGroups } : null;
+}
+
 function renderCollectorCard(templateName, data) {
   const safeName = templateName || "default";
   const templateFile = `${safeName}.njk`;
@@ -484,6 +528,7 @@ module.exports = function (eleventyConfig) {
           search_fields: [],
           sort_fields: [],
           filters: [],
+          prefilter: null,
           clickable: true,
         };
 
@@ -500,6 +545,11 @@ module.exports = function (eleventyConfig) {
         const filtersGroups = parseFiltersParam(paramStr);
         if (filtersGroups) {
           opts.filters = filtersGroups;
+        }
+
+        const prefilter = parsePrefilterParam(paramStr);
+        if (prefilter) {
+          opts.prefilter = prefilter;
         }
 
         const clickableMatch = paramStr.match(/clickable:\s*(true|false)/i);
