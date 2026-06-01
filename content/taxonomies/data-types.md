@@ -1,0 +1,11 @@
+---
+items:
+  - genome sequence
+  - meta-genome
+  - transcriptome
+  - protenome
+  - metabolome
+  - lab protocol
+  - epidemiological info
+  - microbiome info
+---

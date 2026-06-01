@@ -2,45 +2,218 @@ const markdownIt = require("markdown-it");
 const fs = require("fs");
 const path = require("path");
 const yaml = require("js-yaml");
+const nunjucks = require("nunjucks");
 
-function getItemsFromPath(requestPath) {
-  const baseDir = path.join(__dirname, "content");
-  const fullPath = path.join(baseDir, requestPath);
+const CMS_CONFIG_PATH = path.join(__dirname, "content", "admin", "config.yml");
+const COLLECTOR_TEMPLATES_DIR = path.join(
+  __dirname,
+  "_includes",
+  "collector-cards",
+);
 
-  if (!fullPath.startsWith(baseDir)) {
-    return [];
+let cmsConfigCache = null;
+
+function loadCmsConfig() {
+  if (cmsConfigCache) return cmsConfigCache;
+  if (!fs.existsSync(CMS_CONFIG_PATH)) {
+    console.warn(
+      `[Collector] CMS config.yml not found at ${CMS_CONFIG_PATH}. Collector data will be empty.`,
+    );
+    cmsConfigCache = null;
+    return null;
+  }
+  cmsConfigCache = yaml.load(fs.readFileSync(CMS_CONFIG_PATH, "utf8"));
+  return cmsConfigCache;
+}
+
+function getCmsCollections() {
+  const config = loadCmsConfig();
+  if (!config || !Array.isArray(config.collections)) return [];
+  return config.collections.filter((c) => c && typeof c.name === "string");
+}
+
+function getCollectionByName(name) {
+  return getCmsCollections().find((c) => c.name === name);
+}
+
+const nunjucksEnv = new nunjucks.Environment(
+  new nunjucks.FileSystemLoader([
+    COLLECTOR_TEMPLATES_DIR,
+    path.join(__dirname, "_includes"),
+  ]),
+);
+
+function formatDateString(dateValue) {
+  const date = new Date(dateValue || 0);
+  if (Number.isNaN(date.getTime())) return "";
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+
+function resolveFieldPath(obj, fieldPath) {
+  if (!fieldPath) return undefined;
+  return fieldPath.split(".").reduce((acc, key) => {
+    if (acc && typeof acc === "object" && key in acc) return acc[key];
+    return undefined;
+  }, obj);
+}
+
+function flattenValue(value) {
+  if (value === null || value === undefined) return "";
+  if (Array.isArray(value)) return value.map(flattenValue).join(" ");
+  if (typeof value === "object") return JSON.stringify(value);
+  return String(value);
+}
+
+function buildSearchableText(itemData, searchFields) {
+  const fields =
+    Array.isArray(searchFields) && searchFields.length > 0
+      ? searchFields
+      : ["title", "description", "shortDescription", "tags"];
+
+  const parts = fields
+    .map((field) => flattenValue(resolveFieldPath(itemData, field)))
+    .filter((part) => part && part.trim().length > 0);
+
+  return parts.join(" ").toLowerCase();
+}
+
+function parseListParam(paramStr, key) {
+  const listMatch = paramStr.match(
+    new RegExp(`${key}\\s*:\\s*\\[([^\\]]*)\\]`, "i"),
+  );
+
+  if (!listMatch) return null;
+
+  return listMatch[1]
+    .split(",")
+    .map((item) => item.trim())
+    .filter((item) => item.length > 0);
+}
+
+function renderCollectorCard(templateName, data) {
+  const safeName = templateName || "default";
+  const templateFile = `${safeName}.njk`;
+  const templatePath = path.join(COLLECTOR_TEMPLATES_DIR, templateFile);
+
+  const fileToRender = fs.existsSync(templatePath)
+    ? templateFile
+    : "default.njk";
+
+  try {
+    return nunjucksEnv.render(fileToRender, data);
+  } catch (error) {
+    console.warn(
+      `[Collector] Failed to render card template "${fileToRender}": ${error.message}`,
+    );
+    return "";
+  }
+}
+
+function normalizeCollectionFolder(folder) {
+  const contentDir = path.join(__dirname, "content");
+  const fullFolderPath = path.isAbsolute(folder)
+    ? folder
+    : path.join(__dirname, folder);
+
+  if (!fullFolderPath.startsWith(contentDir)) {
+    console.warn(
+      `[Collector] Collection folder is outside content/: ${folder}`,
+    );
+    return null;
   }
 
-  if (!fs.existsSync(fullPath)) {
-    console.warn(`[Collector] Path does not exist: ${requestPath}`);
+  const requestPath = path
+    .relative(contentDir, fullFolderPath)
+    .replace(/\\/g, "/");
+
+  return {
+    fullFolderPath,
+    requestPath,
+  };
+}
+
+function getItemsFromCollection(collection) {
+  if (!collection || !collection.folder) return [];
+
+  const normalized = normalizeCollectionFolder(collection.folder);
+  if (!normalized) return [];
+
+  const { fullFolderPath, requestPath } = normalized;
+
+  if (!fs.existsSync(fullFolderPath)) {
+    console.warn(
+      `[Collector] Collection folder does not exist: ${collection.folder}`,
+    );
     return [];
   }
 
   const items = [];
   const files = fs
-    .readdirSync(fullPath)
+    .readdirSync(fullFolderPath)
     .filter((file) => file.endsWith(".md"))
     .sort();
 
+  const templateName =
+    (collection.collector && collection.collector.template) ||
+    collection.name ||
+    "default";
+  const searchFields =
+    collection.collector && Array.isArray(collection.collector.search_fields)
+      ? collection.collector.search_fields
+      : null;
+
   files.forEach((file) => {
-    const filePath = path.join(fullPath, file);
+    const filePath = path.join(fullFolderPath, file);
     const content = fs.readFileSync(filePath, "utf-8");
     const match = content.match(/^---\n([\s\S]*?)\n---/);
 
     if (match) {
       try {
-        const frontmatter = yaml.load(match[1]);
+        const frontmatter = yaml.load(match[1]) || {};
+        const body = content.replace(/^---\n[\s\S]*?\n---\n?/, "").trim();
         const slug = file.replace(".md", "");
-        const url = `/${requestPath}/${slug}/`;
+        const urlBase = requestPath ? `/${requestPath}` : "";
+        const pageUrl = `${urlBase}/${slug}/`;
+
+        const title = frontmatter.title || "Untitled";
+        const description =
+          frontmatter["short-description"] || frontmatter.description || "";
+        const tags = frontmatter.tags || [];
+        const date = frontmatter.date || null;
+        const formattedDate = date ? formatDateString(date) : "";
+
+        const itemData = {
+          ...frontmatter,
+          title,
+          description,
+          shortDescription: description,
+          tags,
+          date,
+          formattedDate,
+          slug,
+          pageUrl,
+          collection: collection.name,
+          body,
+        };
+
+        const cardHtml = renderCollectorCard(templateName, itemData);
+        const searchable = buildSearchableText(itemData, searchFields);
 
         items.push({
-          title: frontmatter.title || "Untitled",
-          description:
-            frontmatter["short-description"] || frontmatter.description || "",
-          tags: frontmatter.tags || [],
-          date: frontmatter.date || new Date().toISOString(),
-          slug: slug,
-          url: url,
+          title,
+          description,
+          tags,
+          date,
+          formattedDate,
+          slug,
+          pageUrl,
+          searchable,
+          cardHtml,
+          data: itemData,
         });
       } catch (e) {
         console.warn(`Failed to parse ${file}:`, e.message);
@@ -48,16 +221,11 @@ function getItemsFromPath(requestPath) {
     }
   });
 
-  return items.sort((a, b) => new Date(b.date) - new Date(a.date));
-}
-
-function getCollectorPaths() {
-  const contentDir = path.join(__dirname, "content");
-  const entries = fs.readdirSync(contentDir, { withFileTypes: true });
-
-  return entries
-    .filter((entry) => entry.isDirectory() && !entry.name.startsWith("."))
-    .map((entry) => entry.name);
+  return items.sort((a, b) => {
+    const dateA = new Date(a.date || 0).getTime();
+    const dateB = new Date(b.date || 0).getTime();
+    return dateB - dateA;
+  });
 }
 
 module.exports = function (eleventyConfig) {
@@ -239,27 +407,45 @@ module.exports = function (eleventyConfig) {
 
       const collectorPattern = /^\[collector\s*->\s*([^;\]]+)(.*?)\]$/gm;
 
-      result = result.replace(collectorPattern, (match, path, params) => {
-        const collectorPath = path.trim();
+      result = result.replace(collectorPattern, (match, name, params) => {
+        const collectionName = name.trim();
         const paramStr = params || "";
 
+        const collection = getCollectionByName(collectionName);
+        if (!collection) {
+          console.warn(
+            `[Collector] Unknown collection "${collectionName}" in collector block. Check content/admin/config.yml.`,
+          );
+        }
+
         let opts = {
-          tags: true,
-          date: true,
-          search: true,
           arrange: "rows",
           display_items: "all",
-          sort: true,
+          search_fields: [],
+          sort_fields: [],
+          filter_fields: [],
+          clickable: true,
         };
 
-        const tagMatch = paramStr.match(/tags:\s*(true|false)/i);
-        if (tagMatch) opts.tags = tagMatch[1].toLowerCase() === "true";
+        const searchList = parseListParam(paramStr, "search");
+        if (searchList) {
+          opts.search_fields = searchList;
+        }
 
-        const dateMatch = paramStr.match(/date:\s*(true|false)/i);
-        if (dateMatch) opts.date = dateMatch[1].toLowerCase() === "true";
+        const sortList = parseListParam(paramStr, "sort");
+        if (sortList) {
+          opts.sort_fields = sortList;
+        }
 
-        const searchMatch = paramStr.match(/search:\s*(true|false)/i);
-        if (searchMatch) opts.search = searchMatch[1].toLowerCase() === "true";
+        const filterList = parseListParam(paramStr, "filter");
+        if (filterList) {
+          opts.filter_fields = filterList;
+        }
+
+        const clickableMatch = paramStr.match(/clickable:\s*(true|false)/i);
+        if (clickableMatch) {
+          opts.clickable = clickableMatch[1].toLowerCase() === "true";
+        }
 
         const arrangeMatch = paramStr.match(/arrange:\s*(cols|grid|rows)/i);
         if (arrangeMatch) opts.arrange = arrangeMatch[1].toLowerCase();
@@ -267,10 +453,7 @@ module.exports = function (eleventyConfig) {
         const displayMatch = paramStr.match(/display_items:\s*(all|\d+)/i);
         if (displayMatch) opts.display_items = displayMatch[1];
 
-        const sortMatch = paramStr.match(/sort:\s*(true|false)/i);
-        if (sortMatch) opts.sort = sortMatch[1].toLowerCase() === "true";
-
-        return `<div class="collector" data-path="${escapeHtml(collectorPath)}" data-opts='${JSON.stringify(opts)}'></div>`;
+        return `<div class="collector" data-collection="${escapeHtml(collectionName)}" data-path="${escapeHtml(collectionName)}" data-opts='${JSON.stringify(opts)}'></div>`;
       });
 
       return originalRender.call(mdInstance, result, env);
@@ -458,11 +641,13 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addGlobalData("collectorData", () => {
-    const collectorPaths = getCollectorPaths();
+    const collections = getCmsCollections().filter((c) => c.folder);
     const data = {};
-    collectorPaths.forEach((collectorPath) => {
-      data[collectorPath] = getItemsFromPath(collectorPath);
+
+    collections.forEach((collection) => {
+      data[collection.name] = getItemsFromCollection(collection);
     });
+
     return data;
   });
 

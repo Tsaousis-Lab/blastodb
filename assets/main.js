@@ -24,34 +24,47 @@ document.addEventListener("DOMContentLoaded", function () {
   const collectors = document.querySelectorAll(".collector");
   console.log("[Collector] Found " + collectors.length + " collector(s)");
   collectors.forEach((collectorEl) => {
-    const path = collectorEl.dataset.path;
+    const collectionName =
+      collectorEl.dataset.collection || collectorEl.dataset.path;
     const opts = JSON.parse(collectorEl.dataset.opts || "{}");
-    console.log("[Collector] Initializing collector:", path, opts);
-    initializeCollector(collectorEl, path, opts);
+    console.log("[Collector] Initializing collector:", collectionName, opts);
+    initializeCollector(collectorEl, collectionName, opts);
   });
 
   // Initialize Selection Buttons
   initializeSelectionButtons();
 });
 
-function initializeCollector(container, path, opts) {
-  console.log("[Collector] initializeCollector called for:", path);
+function initializeCollector(container, collectionName, opts) {
+  console.log("[Collector] initializeCollector called for:", collectionName);
   let html = "";
 
-  const hasSearch = opts.search !== false;
-  const hasTags = opts.tags !== false;
-  const hasDate = opts.date !== false;
-  const hasSort = opts.sort === true;
+  const searchFields = Array.isArray(opts.search_fields)
+    ? opts.search_fields
+    : [];
 
-  if (hasSearch || hasTags || hasSort) {
+  const filterFields = Array.isArray(opts.filter_fields)
+    ? opts.filter_fields
+    : [];
+
+  const sortFields = Array.isArray(opts.sort_fields) ? opts.sort_fields : [];
+
+  const hasSearch = searchFields.length > 0;
+  const hasFilters = filterFields.length > 0;
+  const hasSort = sortFields.length > 0;
+
+  const isClickable = opts.clickable !== false;
+  container.classList.toggle("collector-not-clickable", !isClickable);
+
+  if (hasSearch || hasFilters || hasSort) {
     html += `<div class="collector-controls">`;
     if (hasSearch) {
       html += `  <div class="collector-search"><input type="text" placeholder="Search items..."></div>`;
     }
-    if (hasTags) {
+    if (hasFilters) {
       html += `  <div class="collector-filters-dropdown">`;
       html += `    <button class="collector-filters-btn">Filters ▼</button>`;
-      html += `    <div class="collector-filters-menu" style="display:none;" id="tag-filter-${Math.random().toString(36).substr(2, 9)}"></div>`;
+      html += `    <div class="collector-filters-menu" style="display:none;" id="filter-menu-${Math.random().toString(36).substr(2, 9)}"></div>`;
       html += `  </div>`;
     }
     if (hasSort) {
@@ -59,10 +72,9 @@ function initializeCollector(container, path, opts) {
       html += `    <button class="collector-sort-btn">Sort</button>`;
       html += `    <div class="collector-sort-menu" style="display:none;" id="sort-menu-${Math.random().toString(36).substr(2, 9)}">`;
       html += `      <button class="sort-option" data-sort="none">None</button>`;
-      html += `      <button class="sort-option" data-sort="title">Title</button>`;
-      if (hasDate) {
-        html += `      <button class="sort-option" data-sort="date">Date</button>`;
-      }
+      sortFields.forEach((field) => {
+        html += `      <button class="sort-option" data-sort="${escapeHtml(field)}">${escapeHtml(labelizeField(field))}</button>`;
+      });
       html += `    </div>`;
       html += `  </div>`;
     }
@@ -72,11 +84,19 @@ function initializeCollector(container, path, opts) {
   html += `<div class="collector-items arrange-${opts.arrange || "cols"}"></div>`;
   container.innerHTML = html;
 
-  const items = getCollectorItems(path);
-  console.log("[Collector] Got " + items.length + " items for path:", path);
+  const items = getCollectorItems(collectionName);
+  console.log(
+    "[Collector] Got " + items.length + " items for collection:",
+    collectionName,
+  );
   console.log("[Collector] Items:", items);
 
   console.log("[Collector] Rendering items, opts:", opts);
+
+  // Precompute search text for this collector
+  items.forEach((item) => {
+    item._searchText = buildSearchText(item, searchFields);
+  });
 
   // Initialize sort state
   const sortState = {
@@ -86,55 +106,37 @@ function initializeCollector(container, path, opts) {
 
   renderCollectorItems(container, items, opts, sortState);
 
-  if (hasSearch || hasTags) {
+  if (hasSearch || hasFilters) {
     const searchInput = hasSearch
       ? container.querySelector(".collector-search input")
       : null;
-    const filterBtn = hasTags
+    const filterBtn = hasFilters
       ? container.querySelector(".collector-filters-btn")
       : null;
-    const filterMenu = hasTags
+    const filterMenu = hasFilters
       ? container.querySelector(".collector-filters-menu")
       : null;
 
-    if (hasTags && filterMenu) {
-      const allTags = new Set();
-      items.forEach((item) => {
-        if (item.tags && Array.isArray(item.tags)) {
-          item.tags.forEach((tag) => allTags.add(tag));
-        }
-      });
+    if (hasFilters && filterMenu) {
+      const filterHtml = buildFilterMenu(items, filterFields);
+      filterMenu.innerHTML =
+        filterHtml ||
+        '<div class="collector-filter-empty">No filters available.</div>';
 
-      if (allTags.size > 0) {
-        let tagHtml = `<label><input type="checkbox" class="filter-all" checked> All</label>`;
-        allTags.forEach((tag) => {
-          const tagId = `tag-${tag.replace(/\s+/g, "-").toLowerCase()}-${Math.random()}`;
-          tagHtml += `<label><input type="checkbox" data-tag="${tag}" id="${tagId}" checked> ${tag}</label>`;
-        });
-        filterMenu.innerHTML = tagHtml;
-
-        const allCheckbox = filterMenu.querySelector(".filter-all");
-        const tagCheckboxes = filterMenu.querySelectorAll(
-          'input[type="checkbox"]:not(.filter-all)',
-        );
-
-        allCheckbox.addEventListener("change", function () {
-          tagCheckboxes.forEach((checkbox) => {
-            checkbox.checked = this.checked;
-          });
-          filterItems(container, items, opts, sortState);
-        });
-
-        tagCheckboxes.forEach((checkbox) => {
+      filterMenu
+        .querySelectorAll('input[type="checkbox"]')
+        .forEach((checkbox) => {
           checkbox.addEventListener("change", () => {
-            const allChecked = Array.from(tagCheckboxes).every(
-              (cb) => cb.checked,
+            filterItems(
+              container,
+              items,
+              opts,
+              sortState,
+              searchFields,
+              filterFields,
             );
-            allCheckbox.checked = allChecked;
-            filterItems(container, items, opts, sortState);
           });
         });
-      }
 
       filterBtn.addEventListener("click", function (e) {
         e.stopPropagation();
@@ -152,7 +154,14 @@ function initializeCollector(container, path, opts) {
 
     if (hasSearch && searchInput) {
       searchInput.addEventListener("input", () =>
-        filterItems(container, items, opts, sortState),
+        filterItems(
+          container,
+          items,
+          opts,
+          sortState,
+          searchFields,
+          filterFields,
+        ),
       );
     }
   }
@@ -191,7 +200,14 @@ function initializeCollector(container, path, opts) {
         sortBtn.textContent = btnText;
 
         // Re-render items with new sort
-        filterItems(container, items, opts, sortState);
+        filterItems(
+          container,
+          items,
+          opts,
+          sortState,
+          searchFields,
+          filterFields,
+        );
         sortMenu.style.display = "none";
       });
     });
@@ -234,36 +250,24 @@ function renderCollectorItems(container, items, opts, sortState) {
 
   let html = "";
   visibleItems.forEach((item) => {
-    html += `<div class="collector-item" data-searchable="${(item.title + " " + (item.description || "")).toLowerCase()}" data-tags='${JSON.stringify(item.tags || [])}' data-url="${item.url || "#"}">`;
-    html += `  <h3>${item.title}</h3>`;
-    if (item.description) {
-      html += `  <p class="collector-item-description">${item.description}</p>`;
-    }
+    const searchable =
+      item._searchText ||
+      item.searchable ||
+      `${item.title || ""} ${item.description || ""}`.toLowerCase();
+    const tagsJson = JSON.stringify(item.tags || []);
+    const url = item.pageUrl || item.url || "#";
 
-    const hasMeta =
-      (opts.date && item.date) ||
-      (opts.tags && item.tags && item.tags.length > 0);
-    if (hasMeta) {
-      html += `  <div class="collector-item-meta">`;
-      if (opts.date && item.date) {
-        html += `    <span class="collector-item-date">${formatDate(item.date)}</span>`;
-      }
-      if (opts.tags && item.tags && item.tags.length > 0) {
-        html += `    <div class="collector-item-tags">`;
-        item.tags.forEach((tag) => {
-          html += `      <span class="tag">${tag}</span>`;
-        });
-        html += `    </div>`;
-      }
-      html += `  </div>`;
-    }
+    html += `<div class="collector-item" data-searchable="${escapeAttr(searchable)}" data-tags='${escapeAttr(tagsJson)}' data-url="${escapeAttr(url)}">`;
+    html += item.cardHtml || renderFallbackCard(item, opts);
     html += `</div>`;
   });
 
   itemsContainer.innerHTML = html;
 
   itemsContainer.querySelectorAll(".collector-item").forEach((itemEl) => {
-    itemEl.addEventListener("click", function () {
+    itemEl.addEventListener("click", function (e) {
+      if (container.classList.contains("collector-not-clickable")) return;
+      if (e.target.closest("a, button, input, textarea, select")) return;
       const url = this.dataset.url;
       if (url && url !== "#") {
         window.location.href = url;
@@ -275,57 +279,70 @@ function renderCollectorItems(container, items, opts, sortState) {
 function sortItems(items, sortState) {
   const sorted = [...items]; // Create a copy to avoid mutating original
 
-  if (sortState.field === "title") {
-    sorted.sort((a, b) => {
-      const titleA = (a.title || "").toLowerCase();
-      const titleB = (b.title || "").toLowerCase();
-      if (sortState.reverse) {
-        return titleB.localeCompare(titleA);
-      } else {
-        return titleA.localeCompare(titleB);
-      }
-    });
-  } else if (sortState.field === "date") {
-    sorted.sort((a, b) => {
-      const dateA = new Date(a.date || 0).getTime();
-      const dateB = new Date(b.date || 0).getTime();
-      if (sortState.reverse) {
-        return dateA - dateB; // oldest first
-      } else {
-        return dateB - dateA; // newest first
-      }
-    });
-  }
+  if (!sortState || sortState.field === "none") return sorted;
+
+  const field = sortState.field;
+
+  sorted.sort((a, b) => {
+    const valueA = getSortValue(a, field);
+    const valueB = getSortValue(b, field);
+
+    const compareResult = compareValues(valueA, valueB);
+    return sortState.reverse ? -compareResult : compareResult;
+  });
 
   return sorted;
 }
 
-function filterItems(container, items, opts, sortState) {
+function filterItems(
+  container,
+  items,
+  opts,
+  sortState,
+  searchFields,
+  filterFields,
+) {
   const searchInput = container.querySelector(".collector-search input");
   const searchTerm = searchInput ? searchInput.value.toLowerCase() : "";
 
   const filterMenu = container.querySelector(".collector-filters-menu");
-  const selectedTags = filterMenu
-    ? Array.from(
-        filterMenu.querySelectorAll(
-          'input[type="checkbox"]:not(.filter-all):checked',
-        ),
-      ).map((checkbox) => checkbox.dataset.tag)
-    : [];
+
+  const selectedFilters = {};
+  if (filterFields && filterFields.length > 0 && filterMenu) {
+    filterMenu
+      .querySelectorAll('input[type="checkbox"][data-field]:checked')
+      .forEach((checkbox) => {
+        const field = checkbox.dataset.field;
+        const value = checkbox.dataset.value;
+        if (!selectedFilters[field]) {
+          selectedFilters[field] = new Set();
+        }
+        selectedFilters[field].add(value.toLowerCase());
+      });
+  }
 
   const itemsContainer = container.querySelector(".collector-items");
+
   let visibleItems = items.filter((item) => {
-    const matchesSearch =
-      !searchTerm ||
-      item.title.toLowerCase().includes(searchTerm) ||
-      (item.description && item.description.toLowerCase().includes(searchTerm));
+    const searchableText =
+      item._searchText ||
+      buildSearchText(item, searchFields) ||
+      `${item.title || ""} ${item.description || ""}`.toLowerCase();
+    const matchesSearch = !searchTerm || searchableText.includes(searchTerm);
 
-    const matchesTags =
-      selectedTags.length > 0 &&
-      item.tags &&
-      item.tags.some((tag) => selectedTags.includes(tag));
+    const matchesFilters =
+      filterFields && filterFields.length > 0
+        ? filterFields.every((field) => {
+            const selectedSet = selectedFilters[field];
+            if (!selectedSet || selectedSet.size === 0) return true;
+            const values = getFieldValues(item, field).map((v) =>
+              v.toLowerCase(),
+            );
+            return values.some((value) => selectedSet.has(value));
+          })
+        : true;
 
-    return matchesSearch && matchesTags;
+    return matchesSearch && matchesFilters;
   });
 
   let displayLimit =
@@ -347,42 +364,197 @@ function filterItems(container, items, opts, sortState) {
 
   let html = "";
   visibleItems.forEach((item) => {
-    html += `<div class="collector-item" data-url="${item.url || "#"}">`;
-    html += `  <h3>${item.title}</h3>`;
-    if (item.description) {
-      html += `  <p class="collector-item-description">${item.description}</p>`;
-    }
+    const searchable =
+      item._searchText ||
+      `${item.title || ""} ${item.description || ""}`.toLowerCase();
+    const tagsJson = JSON.stringify(item.tags || []);
+    const url = item.pageUrl || item.url || "#";
 
-    const hasMeta =
-      (opts.date && item.date) ||
-      (opts.tags && item.tags && item.tags.length > 0);
-    if (hasMeta) {
-      html += `  <div class="collector-item-meta">`;
-      if (opts.date && item.date) {
-        html += `    <span class="collector-item-date">${formatDate(item.date)}</span>`;
-      }
-      if (opts.tags && item.tags && item.tags.length > 0) {
-        html += `    <div class="collector-item-tags">`;
-        item.tags.forEach((tag) => {
-          html += `      <span class="tag">${tag}</span>`;
-        });
-        html += `    </div>`;
-      }
-      html += `  </div>`;
-    }
+    html += `<div class="collector-item" data-searchable="${escapeAttr(searchable)}" data-tags='${escapeAttr(tagsJson)}' data-url="${escapeAttr(url)}">`;
+    html += item.cardHtml || renderFallbackCard(item, opts);
     html += `</div>`;
   });
 
   itemsContainer.innerHTML = html;
 
   itemsContainer.querySelectorAll(".collector-item").forEach((itemEl) => {
-    itemEl.addEventListener("click", function () {
+    itemEl.addEventListener("click", function (e) {
+      if (container.classList.contains("collector-not-clickable")) return;
+      if (e.target.closest("a, button, input, textarea, select")) return;
       const url = this.dataset.url;
       if (url && url !== "#") {
         window.location.href = url;
       }
     });
   });
+}
+
+function buildSearchText(item, searchFields) {
+  if (!Array.isArray(searchFields) || searchFields.length === 0) return "";
+
+  const parts = [];
+  searchFields.forEach((field) => {
+    const values = getFieldValues(item, field);
+    values.forEach((value) => {
+      if (value && value.trim().length > 0) {
+        parts.push(value.trim());
+      }
+    });
+  });
+
+  return parts.join(" ").toLowerCase();
+}
+
+function buildFilterMenu(items, filterFields) {
+  const fieldValues = {};
+
+  filterFields.forEach((field) => {
+    fieldValues[field] = new Set();
+  });
+
+  items.forEach((item) => {
+    filterFields.forEach((field) => {
+      const values = getFieldValues(item, field);
+      values.forEach((value) => {
+        if (value && value.trim().length > 0) {
+          fieldValues[field].add(value.trim());
+        }
+      });
+    });
+  });
+
+  let html = "";
+  filterFields.forEach((field) => {
+    const values = Array.from(fieldValues[field]).sort((a, b) =>
+      a.localeCompare(b, undefined, { sensitivity: "base" }),
+    );
+
+    if (values.length === 0) return;
+
+    html += `<div class="collector-filter-group">`;
+    html += `  <div class="collector-filter-title">${escapeHtml(labelizeField(field))}</div>`;
+    values.forEach((value) => {
+      const inputId = `filter-${field.replace(/\s+/g, "-")}-${value.replace(/\s+/g, "-")}-${Math.random()}`;
+      html += `  <label class="collector-filter-option"><input type="checkbox" data-field="${escapeAttr(field)}" data-value="${escapeAttr(value)}" id="${escapeAttr(inputId)}"> ${escapeHtml(value)}</label>`;
+    });
+    html += `</div>`;
+  });
+
+  return html;
+}
+
+function getFieldValues(item, field) {
+  const source = item && item.data ? item.data : item;
+  const rawValue = getFieldValue(source, field);
+
+  if (rawValue !== undefined && rawValue !== null) {
+    return normalizeValue(rawValue);
+  }
+
+  return normalizeValue(getFieldValue(item, field));
+}
+
+function getFieldValue(obj, fieldPath) {
+  if (!obj || !fieldPath) return undefined;
+  return fieldPath.split(".").reduce((acc, key) => {
+    if (acc && typeof acc === "object" && key in acc) {
+      return acc[key];
+    }
+    return undefined;
+  }, obj);
+}
+
+function normalizeValue(value) {
+  if (value === null || value === undefined) return [];
+  if (Array.isArray(value)) {
+    return value.flatMap(normalizeValue);
+  }
+  if (typeof value === "object") {
+    if ("name" in value) return [String(value.name)];
+    if ("title" in value) return [String(value.title)];
+    return [JSON.stringify(value)];
+  }
+  return [String(value)];
+}
+
+function labelizeField(field) {
+  return field
+    .replace(/[_-]+/g, " ")
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
+function getSortValue(item, field) {
+  const values = getFieldValues(item, field);
+  const rawValue = values.length > 0 ? values[0] : "";
+
+  const fieldLower = String(field || "").toLowerCase();
+  const dateCandidate = new Date(rawValue);
+  if (fieldLower.includes("date") && !Number.isNaN(dateCandidate.getTime())) {
+    return { type: "date", value: dateCandidate.getTime() };
+  }
+
+  const numericValue = Number(rawValue);
+  if (!Number.isNaN(numericValue) && String(rawValue).trim() !== "") {
+    return { type: "number", value: numericValue };
+  }
+
+  return { type: "string", value: String(rawValue).toLowerCase() };
+}
+
+function compareValues(a, b) {
+  if (!a || !b) return 0;
+  if (a.type === "date" && b.type === "date") {
+    return a.value - b.value;
+  }
+  if (a.type === "number" && b.type === "number") {
+    return a.value - b.value;
+  }
+  return String(a.value).localeCompare(String(b.value), undefined, {
+    sensitivity: "base",
+  });
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function escapeAttr(value) {
+  return escapeHtml(value);
+}
+
+function renderFallbackCard(item, opts) {
+  let html = "";
+  html += `<h3>${escapeHtml(item.title || "Untitled")}</h3>`;
+  if (item.description) {
+    html += `  <p class="collector-item-description">${escapeHtml(item.description)}</p>`;
+  }
+
+  const hasMeta =
+    (opts.date && item.date) ||
+    (opts.tags && item.tags && item.tags.length > 0);
+  if (hasMeta) {
+    html += `  <div class="collector-item-meta">`;
+    if (opts.date && item.date) {
+      html += `    <span class="collector-item-date">${formatDate(item.date)}</span>`;
+    }
+    if (opts.tags && item.tags && item.tags.length > 0) {
+      html += `    <div class="collector-item-tags">`;
+      item.tags.forEach((tag) => {
+        html += `      <span class="tag">${escapeHtml(tag)}</span>`;
+      });
+      html += `    </div>`;
+    }
+    html += `  </div>`;
+  }
+
+  return html;
 }
 
 function formatDate(dateString) {
@@ -394,15 +566,15 @@ function formatDate(dateString) {
   });
 }
 
-function getCollectorItems(path) {
+function getCollectorItems(collectionName) {
   if (
     typeof window.collectorData !== "undefined" &&
-    window.collectorData[path]
+    window.collectorData[collectionName]
   ) {
-    return window.collectorData[path];
+    return window.collectorData[collectionName];
   }
 
-  console.warn("[Collector] Data not found for path:", path);
+  console.warn("[Collector] Data not found for collection:", collectionName);
   return [];
 }
 

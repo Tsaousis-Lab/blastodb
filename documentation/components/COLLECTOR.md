@@ -1,114 +1,97 @@
 # Collector Component
 
-The *collector* is a complex component displaying collections of data.
+The **collector** component renders cards from a CMS collection (defined in Sveltia CMS). It reads all entries in the collection folder and displays them with search, filters, and sorting.
 
-This is done by reading all files in a directory, and 
+## How it works (high level)
+- Collections are defined in `content/admin/config.yml`.
+- The collector uses the **collection name** from that config.
+- Cards are rendered via Nunjucks templates in `_includes/collector-cards/`.
 
+---
 
-
-
-## Basic Syntax and Parameters
-
-A collector component can be created with this command:
+## Basic Syntax
 ```markdown
-[collector -> path; tags:bool; date:bool; search:bool; arrange:cols|grid; display_items:int|all; sort:bool]
+[collector -> collection-name; search:[field1,field2]; sort:[fieldA,fieldB]; filter:[fieldX,fieldY]; arrange:cols|grid|rows; display_items:all|NUMBER; clickable:true|false]
 ```
 
-It has several parameters:
+### Required
+- `collection-name` → Must match the `name:` in `content/admin/config.yml`.
+
+### Optional Parameters
 | Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `path` | string | required | The data path (e.g., `lab-protocols`, `subtypes`) |
-| `tags` | boolean | `true` | Show/hide tag filter checkboxes |
-| `date` | boolean | `true` | Show/hide date information |
-| `search` | boolean | `true` | Show/hide search input |
-| `arrange` | string | `cols` | Layout style: `cols` (2-column), `grid` (responsive grid), or `rows` (list view) |
-| `display_items` | int or "all" | `all` | Number of items to display, or `all` for all items |
-| `sort` | boolean | `false` | Enable/disable sorting functionality |
+|---|---|---|---|
+| `search` | list | none | Fields included in the search index. If omitted, search is disabled. |
+| `sort` | list | none | Fields shown in the sort menu. If omitted, sorting is disabled. |
+| `filter` | list | none | Fields used to build filter checkboxes. If omitted, filters are disabled. |
+| `arrange` | string | `rows` | Layout: `cols`, `grid`, or `rows`. |
+| `display_items` | number or `all` | `all` | Limit how many items render. |
+| `clickable` | boolean | `true` | If `false`, cards are not clickable and do not show hover effects. |
 
-At minimum, the collector needs the "path" in which the data to be read is stored. The other parameters are there style and adjust the component:
+### Field Notes
+- Field names must match frontmatter keys in the collection entries.
+- Nested fields are supported with dot notation (e.g. `contacts.name`).
+- Sorting treats fields containing `date` as dates automatically.
 
-- *tags* (optional) -> If enabled, the tags of each item are shown, and a filter for tags appears before the content. By default, tags are enabled.
-- *date* (optional) -> If enabled, a date is read from the frontmatter.
-- *search* (optional) -> Enables the search bar. By default it is true.
-- *arrange* (optional) -> Determines if the content is displayed in columns(*cols*), rows (*rows*), or in a grid (*grid*)
-- *display_items* (optional) -> Limits the number of items displayed
-- *sort* (optional) -> Enables sorting functionality. When enabled, users can sort by Title (alphabetically) or Date (newest to oldest). By default it is true.
-
-### Sort Behavior
-
-When `sort:true` is enabled, a "Sort" button appears in the controls:
-
-- **None**: Items are displayed in their original order (default)
-- **Title**: Items are sorted alphabetically by title
-  - Click again to reverse the order (Z → A)
-  - Visual indicator (↑ ↓) shows current direction
-- **Date**: Items are sorted by date
-  - First click: Newest items first
-  - Click again: Oldest items first
-  - Visual indicator (↑ ↓) shows current direction
+---
 
 ## Examples
 
-EXAMPLES:
-
-  [collector -> lab-protocols]
-  → Shows all items, 2-column layout, with search, tags, and dates
-
-  [collector -> lab-protocols; arrange:grid]
-  → Same, but in responsive grid layout
-
-  [collector -> lab-protocols; search:false; tags:false; date:false]
-  → Just shows items, no controls or metadata
-
-  [collector -> lab-protocols; display_items:5]
-  → Shows only first 5 items
-
-  [collector -> lab-protocols; arrange:grid; display_items:10]
-  → Grid layout, limited to 10 items
-
-  [collector -> lab-protocols; sort:true]
-  → Shows all items with sort functionality enabled
-
-  [collector -> lab-protocols; sort:true; tags:false]
-  → Items with sorting, but without tag filters
-
-
-
-
-## Adding Your Own Collections
-
-1. **Add data to `assets/main.js`** in the `itemsByPath` object:
-```javascript
-"my-collection": [
-  {
-    title: "First Item",
-    description: "Description",
-    tags: ["tag1"],
-    date: "2024-01-01"
-  }
-]
-```
-
-2. **Create a page** using the collector:
+### Publications (Bibliography)
 ```markdown
-[collector -> my-collection; tags:true; date:true; search:true]
+[collector -> bibliography; search:[authors,date,journal,title]; sort:[date,title]; filter:[journal]]
 ```
 
-3. **That's it!** The component handles the rest.
+### Datasets
+```markdown
+[collector -> datasets; search:[title,data_types,sub_types,country,publication_ref]; sort:[date,title]; filter:[data_types,sub_types,country]]
+```
 
-## Live Example
+### Lab Protocols (with tags filter)
+```markdown
+[collector -> lab-protocols; search:[title,description,shortDescription,tags]; sort:[date,title]; filter:[tags]; arrange:rows; display_items:all]
+```
 
-Check out the **Lab Protocols** page to see the collector in action:
-- Visit `/lab-protocols/` to see the live example
-- Try the search functionality
-- Click tags to filter items
-- Try different combinations
+### Minimal (no search/sort/filter)
+```markdown
+[collector -> news; arrange:cols]
+```
+
+### Non-clickable cards
+```markdown
+[collector -> bibliography; search:[authors,title]; sort:[date]; filter:[journal]; clickable:false]
+```
+
+---
+
+## Card Templates
+Cards are rendered with Nunjucks templates in:
+```
+_includes/collector-cards/
+```
+
+### Template resolution order
+1. `collection.collector.template` (if you add it to config.yml later)
+2. `{collection-name}.njk`
+3. `default.njk`
+
+### Example card template
+```njk
+<div class="collector-card">
+  <h3><a href="{{ pageUrl }}">{{ title }}</a></h3>
+  {% if shortDescription %}<p>{{ shortDescription }}</p>{% endif %}
+  {% if tags and tags.length %}
+    <div class="collector-item-tags">
+      {% for tag in tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+    </div>
+  {% endif %}
+</div>
+```
+
+---
 
 ## Styling
-
-All component styling uses the existing design system colors:
-- Primary color: `--accent` (#2d6a4f)
-- Backgrounds: `--tag-bg` (#eaf4ee)
-- Borders: `--border` (#e2e0da)
-
-You can customize appearance by editing `assets/style.css`.
+Collector styles live in:
+```
+assets/style.css
+```
+Look for the **Collector Component** section (`.collector`, `.collector-item`, `.collector-item-meta`, etc.).

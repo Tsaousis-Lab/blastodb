@@ -1,21 +1,15 @@
-module.exports = {
-  backend: {
-    name: "git-gateway",
-    branch: "main", // or your default branch
-  },
-  media_folder: "images/uploads",
-  public_folder: "/images/uploads",
-  collections: [
-    {
-      name: "pages",
-      label: "Pages",
-      folder: "content",
-      create: true,
-      fields: [
-        { label: "Title", name: "title", widget: "string" },
-        { label: "Body", name: "body", widget: "markdown" },
-      ],
-    },
-    // Add more collections as needed
-  ],
-};
+const fs = require("fs");
+const path = require("path");
+const yaml = require("js-yaml");
+
+const configPath = path.join(__dirname, "content", "admin", "config.yml");
+
+if (!fs.existsSync(configPath)) {
+  throw new Error(
+    `[Sveltia] Missing config.yml at ${configPath}. Please add it under content/admin/config.yml.`,
+  );
+}
+
+const config = yaml.load(fs.readFileSync(configPath, "utf8"));
+
+module.exports = config;
