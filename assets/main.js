@@ -86,7 +86,10 @@ function initializeCollector(container, collectionName, opts) {
   html += `<div class="collector-items arrange-${opts.arrange || "cols"}"></div>`;
   container.innerHTML = html;
 
-  const allItems = getCollectorItems(collectionName);
+  const allItems = getCollectorItems(
+    collectionName,
+    opts.card_template || null,
+  );
   console.log(
     "[Collector] Got " + allItems.length + " items for collection:",
     collectionName,
@@ -762,12 +765,19 @@ function formatDate(dateString) {
   });
 }
 
-function getCollectorItems(collectionName) {
-  if (
-    typeof window.collectorData !== "undefined" &&
-    window.collectorData[collectionName]
-  ) {
-    return window.collectorData[collectionName];
+function getCollectorItems(collectionName, templateName) {
+  if (typeof window.collectorData !== "undefined") {
+    // Prefer the template-specific variant when a card-template: override is set.
+    if (templateName) {
+      const key = `${collectionName}::${templateName}`;
+      if (window.collectorData[key]) return window.collectorData[key];
+      console.warn(
+        `[Collector] No pre-rendered data for "${key}", falling back to default.`,
+      );
+    }
+    if (window.collectorData[collectionName]) {
+      return window.collectorData[collectionName];
+    }
   }
 
   console.warn("[Collector] Data not found for collection:", collectionName);

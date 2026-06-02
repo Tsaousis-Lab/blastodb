@@ -240,7 +240,7 @@ function normalizeCollectionFolder(folder) {
   };
 }
 
-function getItemsFromCollection(collection) {
+function getItemsFromCollection(collection, templateOverride) {
   if (!collection || !collection.folder) return [];
 
   const normalized = normalizeCollectionFolder(collection.folder);
@@ -262,6 +262,7 @@ function getItemsFromCollection(collection) {
     .sort();
 
   const templateName =
+    templateOverride ||
     (collection.collector && collection.collector.template) ||
     collection.name ||
     "default";
@@ -529,6 +530,7 @@ module.exports = function (eleventyConfig) {
           sort_fields: [],
           filters: [],
           prefilter: null,
+          card_template: null,
           clickable: true,
         };
 
@@ -550,6 +552,16 @@ module.exports = function (eleventyConfig) {
         const prefilter = parsePrefilterParam(paramStr);
         if (prefilter) {
           opts.prefilter = prefilter;
+        }
+
+        const cardTemplateMatch = paramStr.match(
+          /card-template:\s*([^\s;\]]+)/i,
+        );
+        if (cardTemplateMatch) {
+          // Strip .njk extension so the key matches what addGlobalData stores.
+          opts.card_template = cardTemplateMatch[1]
+            .trim()
+            .replace(/\.njk$/i, "");
         }
 
         const clickableMatch = paramStr.match(/clickable:\s*(true|false)/i);
@@ -754,8 +766,26 @@ module.exports = function (eleventyConfig) {
     const collections = getCmsCollections().filter((c) => c.folder);
     const data = {};
 
+    // Discover all card templates so per-shortcode overrides can be served.
+    const availableTemplates = fs.existsSync(COLLECTOR_TEMPLATES_DIR)
+      ? fs
+          .readdirSync(COLLECTOR_TEMPLATES_DIR)
+          .filter((f) => f.endsWith(".njk"))
+          .map((f) => f.replace(/\.njk$/i, ""))
+      : [];
+
     collections.forEach((collection) => {
+      // Default render (uses the collection's own configured template).
       data[collection.name] = getItemsFromCollection(collection);
+
+      // Pre-render one variant per available template so that
+      // card-template: overrides in shortcodes work without extra I/O.
+      availableTemplates.forEach((templateName) => {
+        data[`${collection.name}::${templateName}`] = getItemsFromCollection(
+          collection,
+          templateName,
+        );
+      });
     });
 
     return data;

@@ -11,7 +11,7 @@ The **collector** component renders cards from a CMS collection (defined in Svel
 
 ## Basic Syntax
 ```markdown
-[collector -> collection-name; search:[field1,field2]; sort:[fieldA,fieldB]; filters:[Label->[fieldX],Other->[fieldY,fieldZ]]; prefilter:[field=value]; arrange:cols|grid|rows; display_items:all|NUMBER; clickable:true|false]
+[collector -> collection-name; search:[field1,field2]; sort:[fieldA,fieldB]; filters:[Label->[fieldX],Other->[fieldY,fieldZ]]; prefilter:[field=value]; card-template:my-card.njk; arrange:cols|grid|rows; display_items:all|NUMBER; clickable:true|false]
 ```
 
 ### Required
@@ -24,6 +24,7 @@ The **collector** component renders cards from a CMS collection (defined in Svel
 | `sort` | list | none | Fields shown in the sort menu. If omitted, sorting is disabled. |
 | `filters` | list | none | Define one or more filter groups. Each group creates its own filter button. |
 | `prefilter` | expression | none | Statically narrow the item set before search/sort/filters are applied. See below. |
+| `card-template` | filename | none | Override the card template for this collector instance. E.g. `card-template:my-card.njk`. The file must exist in `_includes/collector-cards/`. |
 | `arrange` | string | `rows` | Layout: `cols`, `grid`, or `rows`. |
 | `display_items` | number or `all` | `all` | Limit how many items render. |
 | `clickable` | boolean | `true` | If `false`, cards are not clickable and do not show hover effects. |
@@ -124,9 +125,21 @@ _includes/collector-cards/
 ```
 
 ### Template resolution order
-1. `collection.collector.template` (if you add it to config.yml later)
-2. `{collection-name}.njk`
-3. `default.njk`
+1. `card-template:` parameter in the shortcode — highest priority
+2. `collector.template` in `content/admin/config.yml` for the collection
+3. `{collection-name}.njk` — auto-resolved by collection name
+4. `default.njk` — fallback
+
+### Specifying a template inline
+```markdown
+[collector -> datasets; card-template:compact-card.njk]
+```
+The `.njk` extension is optional — both of the following are equivalent:
+```markdown
+[collector -> datasets; card-template:compact-card.njk]
+[collector -> datasets; card-template:compact-card]
+```
+The template file must exist in `_includes/collector-cards/` at build time. All templates in that directory are pre-rendered at build time, so there is no runtime cost to using overrides.
 
 ### Example card template
 ```njk
