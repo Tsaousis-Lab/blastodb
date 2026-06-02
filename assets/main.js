@@ -121,6 +121,7 @@ function initializeCollector(container, collectionName, opts) {
   const sortState = {
     field: "none",
     reverse: false,
+    numeric: true,
   };
 
   renderCollectorItems(container, items, opts, sortState);
@@ -427,7 +428,10 @@ function renderFilterMenus(
     });
 
     const sorted = Array.from(availableMap.entries()).sort((a, b) =>
-      a[1].localeCompare(b[1], undefined, { sensitivity: "base" }),
+      a[1].localeCompare(b[1], undefined, {
+        sensitivity: "base",
+        numeric: true,
+      }),
     );
 
     if (sorted.length === 0) {
@@ -712,6 +716,7 @@ function compareValues(a, b) {
   }
   return String(a.value).localeCompare(String(b.value), undefined, {
     sensitivity: "base",
+    numeric: true,
   });
 }
 

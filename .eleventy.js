@@ -259,7 +259,7 @@ function getItemsFromCollection(collection, templateOverride) {
   const files = fs
     .readdirSync(fullFolderPath)
     .filter((file) => file.endsWith(".md"))
-    .sort();
+    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
 
   const templateName =
     templateOverride ||
@@ -329,7 +329,10 @@ function getItemsFromCollection(collection, templateOverride) {
   return items.sort((a, b) => {
     const dateA = new Date(a.date || 0).getTime();
     const dateB = new Date(b.date || 0).getTime();
-    return dateB - dateA;
+    if (dateB !== dateA) return dateB - dateA;
+    // Natural (numeric-aware) sort on slug as tiebreaker so subtype-2
+    // comes before subtype-10 when dates are identical or absent.
+    return a.slug.localeCompare(b.slug, undefined, { numeric: true });
   });
 }
 
