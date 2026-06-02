@@ -1,0 +1,9 @@
+datatypes:
+  - Amplicon
+  - Shotgun
+  - Transcriptome
+  - Metabolome
+  - Proteome
+  - Epidemiological Data
+  - Isolate genome
+  - 16S rRNA
