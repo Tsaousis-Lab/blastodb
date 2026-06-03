@@ -4,9 +4,12 @@ title: BlastoDB — Publications
 description: Scientific publications around Blastocystis.
 ---
 
-[hero:]
+[hero: text-align:center]
 # Publications
+Browse the peer-reviewed publications related to the data in this repository.
+
+
 [:hero]
 
 
-[collector -> bibliography; search:[authors,date,journal,title]; sort:[date,title]; filters:[Journal->[journal]]; clickable:false]
+[collector -> publications; search:[authors,date,journal,title]; sort:[date,title]; filters:[Journal->[journal]]; clickable:false]

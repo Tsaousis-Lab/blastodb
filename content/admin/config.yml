@@ -135,7 +135,7 @@ collections:
   # -----------------------------------------------------------------------
   - name: publications
     label: Publications
-    folder: content/publications
+    folder: content/data/publications
     create: true
     slug: "{{ref_id}}"
     fields:
