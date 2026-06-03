@@ -17,7 +17,7 @@ collections:
   # -----------------------------------------------------------------------
   - name: datasets
     label: Datasets
-    folder: content/datasets
+    folder: content/data/datasets
     create: true
     slug: "{{slug}}"
     fields:
@@ -86,17 +86,20 @@ collections:
         collection: subtypes
         multiple: true
         required: false
-        value_field: "{{slug}}"
-        search_fields: [name]
+        value_field: name
+        display_fields: [name]
+        search_fields: [name, id]
 
-      - label: Hosts
-        name: hosts
+      - label: Sources
+        name: sources
         widget: relation
-        collection: hosts
+        collection: sources
+        file: sources
         multiple: true
         required: false
-        value_field: "{{slug}}"
-        search_fields: [name]
+        value_field: sources.*
+        display_fields: [sources.*]
+        search_fields: [sources.*]
 
       - label: Publications
         name: publications
@@ -123,7 +126,7 @@ collections:
         file: countries
         multiple: true
         required: false
-        value_field: countries.*.iso
+        value_field: countries.*.name
         display_fields: [countries.*.name]
         search_fields: [countries.*.name, countries.*.iso]
 
@@ -206,6 +209,13 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
+      - {
+          name: layout,
+          label: Layout,
+          widget: hidden,
+          default: layouts/subtype.njk,
+        }
+
       - label: ID
         name: id
         widget: string
@@ -216,12 +226,31 @@ collections:
         widget: string
         hint: "e.g. Subtype 1, Subtype 2"
 
-      - label: Short description
-        name: short_description
+      - label: Sources
+        name: sources
+        widget: relation
+        collection: sources
+        file: sources
+        multiple: true
+        required: false
+        value_field: sources.*
+        display_fields: [sources.*]
+        search_fields: [sources.*]
+
+      - label: Download Link to Reference Genomes
+        name: reference_genome_link
         widget: string
         required: false
 
-      - { label: "Body", name: "body", widget: "markdown" }
+      - label: Download Link to SSU rRNA Sequence
+        name: ssu_rrna_link
+        widget: string
+        required: false
+
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        default: "## Short Description\n\nAdd your description here.\n\nPlease do not change the code below this line.\n\n---\n\n## Explore Datasets Containing {{ name }}\n\n[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset.njk; pre-filter:[subtype={{ name }}]]"
 
   # -----------------------------------------------------------------------
   # RESEARCH LAB
@@ -297,7 +326,7 @@ collections:
           - label: Datatypes
             name: datatypes
             widget: list
-            hint: "One datatype per line"
+            hint: "One datatype per line.<br>**DANGER:** Removing existing datatypes might break dependencies in the dataset. Be careful!"
 
   - name: data_sources
     label: Data sources
@@ -332,16 +361,17 @@ collections:
         widget: string
         hint: "e.g. Microscopy, PCR, Culturing"
 
-  - name: hosts
-    label: Hosts
-    folder: content/hosts
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - label: Name
-        name: name
-        widget: string
-        hint: "e.g. Homo sapiens, Rattus norvegicus"
+  - name: sources
+    label: Sources
+    files:
+      - label: Sources
+        name: sources
+        file: content/data/sources.yaml
+        fields:
+          - label: Sources
+            name: sources
+            widget: list
+            hint: "One host per line.<br>**DANGER:** Removing existing sources might break dependencies in the dataset. Be careful!"
 
   # ─── Pages ───────────────────────────────────────────────────────────────────
   - name: pages

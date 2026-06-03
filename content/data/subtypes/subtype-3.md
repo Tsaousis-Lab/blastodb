@@ -1,7 +1,23 @@
 ---
+layout: layouts/subtype.njk
 id: ST3
 name: Subtype 3
-short_description: ''
+sources:
+  - Human
+  - Non-Human Primate
+  - Mammal
+  - Water
+  - Soil
+reference_genome_link: ''
+ssu_rrna_link: ''
 ---
 
-This is a description of Subtype 3.
+## Short Description
+
+The subtype most frequently reported in humans worldwide and largely human-adapted (predominantly transmitted human-to-human). It is also found in non-human primates and occasionally in other mammals, and is commonly detected in water-contamination studies.
+
+---
+
+## Explore Datasets Containing {{ name }}
+
+[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset.njk; pre-filter:[subtype={{ name }}]]

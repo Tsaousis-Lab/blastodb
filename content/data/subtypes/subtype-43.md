@@ -1,7 +1,19 @@
 ---
+layout: layouts/subtype.njk
 id: ST43
 name: Subtype 43
-short_description: ''
+sources:
+  - Mammal
+reference_genome_link: ''
+ssu_rrna_link: ''
 ---
 
-This is a description of Subtype 43.
+## Short Description
+
+Separated from ST10 in 2024. Found in ruminants (cattle, sheep, goats).
+
+---
+
+## Explore Datasets Containing {{ name }}
+
+[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset.njk; pre-filter:[subtype={{ name }}]]

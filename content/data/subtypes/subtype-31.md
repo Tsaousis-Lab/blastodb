@@ -1,7 +1,19 @@
 ---
+layout: layouts/subtype.njk
 id: ST31
 name: Subtype 31
-short_description: ''
+sources:
+  - Mammal
+reference_genome_link: ''
+ssu_rrna_link: ''
 ---
 
-This is a description of Subtype 31.
+## Short Description
+
+First characterised in white-tailed deer (Odocoileus virginianus).
+
+---
+
+## Explore Datasets Containing {{ name }}
+
+[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset.njk; pre-filter:[subtype={{ name }}]]

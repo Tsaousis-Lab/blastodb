@@ -1,7 +1,19 @@
 ---
+layout: layouts/subtype.njk
 id: ST11
 name: Subtype 11
-short_description: ''
+sources:
+  - Mammal
+reference_genome_link: ''
+ssu_rrna_link: ''
 ---
 
-This is a description of Subtype 11.
+## Short Description
+
+Reported from elephants and other large herbivorous mammals.
+
+---
+
+## Explore Datasets Containing {{ name }}
+
+[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset.njk; pre-filter:[subtype={{ name }}]]

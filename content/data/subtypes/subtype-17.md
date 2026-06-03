@@ -1,7 +1,19 @@
 ---
+layout: layouts/subtype.njk
 id: ST17
 name: Subtype 17
-short_description: ''
+sources:
+  - Mammal
+reference_genome_link: ''
+ssu_rrna_link: ''
 ---
 
-This is a description of Subtype 17.
+## Short Description
+
+Originally described from gundis (Ctenodactylus), North African rodents. An animal-restricted subtype.
+
+---
+
+## Explore Datasets Containing {{ name }}
+
+[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset.njk; pre-filter:[subtype={{ name }}]]

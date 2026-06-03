@@ -1,0 +1,52 @@
+<div class="collector-card">
+  <div class="collector-card-header">
+    <div class="collector-card-title">
+      <h2>{{ name }}</h2>
+      {% if sources and sources.length %}
+        <div class="collector-item-tags">
+          {% for source in sources %}
+            <span class="tag">{{ source }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="collector-card-buttons">
+      <button
+        class="btn {% if not reference_genome_link %}btn-disabled{% endif %}"
+        {% if reference_genome_link %}onclick="window.open('{{ reference_genome_link }}', '_blank')"{% else %}disabled{% endif %}
+      >
+        Reference Genome
+      </button>
+
+      <button
+        class="btn {% if not ssu_rrna_link %}btn-disabled{% endif %}"
+        {% if ssu_rrna_link %}onclick="window.open('{{ ssu_rrna_link }}', '_blank')"{% else %}disabled{% endif %}
+      >
+        18s SSU rRNA
+      </button>
+    </div>
+  </div>
+
+  {% if shortDescription or description %}
+    <p class="collector-item-description">
+      {{ shortDescription or description }}
+    </p>
+  {% endif %}
+
+  {% if formattedDate or (tags and tags.length) %}
+    <div class="collector-item-meta">
+      {% if formattedDate %}
+        <span class="collector-item-date">{{ formattedDate }}</span>
+      {% endif %}
+
+      {% if tags and tags.length %}
+        <div class="collector-item-tags">
+          {% for tag in tags %}
+            <span class="tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>

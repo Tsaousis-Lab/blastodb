@@ -1,7 +1,19 @@
 ---
+layout: layouts/subtype.njk
 id: ST33
 name: Subtype 33
-short_description: ''
+sources:
+  - Mammal
+reference_genome_link: ''
+ssu_rrna_link: ''
 ---
 
-This is a description of Subtype 33.
+## Short Description
+
+First described in horses (Colombia).
+
+---
+
+## Explore Datasets Containing {{ name }}
+
+[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset.njk; pre-filter:[subtype={{ name }}]]

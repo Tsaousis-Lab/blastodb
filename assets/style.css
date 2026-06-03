@@ -859,6 +859,59 @@ footer a:hover {
     font-size: 0.85rem;
 }
 
+/* ── Collector Card: Subtype ──────────────────────────────── */
+.collector-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    vertical-align: middle;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.collector-card-title {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex: 1;
+}
+
+.collector-card-title h2 {
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.collector-card-title .collector-item-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.collector-card-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    align-items: center;
+}
+
+.collector-card-buttons .btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.btn-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: #a0a0a0 !important;
+}
+
+.btn-disabled:hover {
+    background: #a0a0a0 !important;
+    transform: none;
+}
+
 /* ── Collector Card: Research Labs ─────────────────────────── */
 .collector-card-lab {
     display: flex;
