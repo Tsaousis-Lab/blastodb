@@ -15,6 +15,13 @@
     },
     { "label": "Research Labs", "file": "content/labs.md" },
     { "label": "Biobank", "file": "content/biobank.md" },
-    { "label": "Contact", "file": "content/contact.md" }
+    {
+      "label": "About",
+      "items": [
+        { "label": "Mission", "file": "content/mission.md" },
+        { "label": "Contribute", "file": "content/contribute.md" },
+        { "label": "Contact", "file": "content/contact.md" }
+      ]
+    }
   ]
 }
