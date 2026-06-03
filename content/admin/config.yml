@@ -178,7 +178,7 @@ collections:
   # -----------------------------------------------------------------------
   - name: lab_protocols
     label: Lab protocols
-    folder: content/lab_protocols
+    folder: content/data/lab_protocols
     create: true
     slug: "{{slug}}"
     fields:
