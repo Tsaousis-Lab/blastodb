@@ -12,9 +12,7 @@ layout: layouts/base.njk
 [box:]
 <h1 style="text-align: center">The open hub for<br>[s: color:#0d5a53, ]Blastocystis[:s] research</h1>
 
-BlastoDB provides researchers with a comprehensive, community-driven database of _Blastocystis_ subtypes, genomes, transcriptomes, culturing techniques, and more.
-
-[btn: About BlastoDB -> about.html] [btn: Explore subtypes -> subtypes.html]
+We are dedicated to advance global knowledge and collaboration on Blastocystis, one of the most prevalent yet underexplored microorganisms in the human and animal gut. Our mission is to provide a comprehensive, trustworthy and accessible resource for Blastocystis research.
 
 [:box]
 
@@ -28,27 +26,35 @@ _Art by Sam Falconer_
 [:cols]
 [:hero]
 
-## Explore the database
+## Explore BlastoDB
 
-Jump directly to a resource area
+[grid: cols:3]
 
-[grid:]
-[nav-box: About BlastoDB -> about.html]
-[nav-box: Subtypes -> subtypes.html]
-[nav-box: Genomes / Transcriptomes -> genomes.html]
-[nav-box: Lab Protocols -> protocols.html]
-[nav-box: Publications -> publications.html]
-[nav-box: Research Labs -> labs.html]
-[nav-box: Gallery -> gallery.html]
-[nav-box: Contact -> contact.html]
+[card: text-align:center]
+## Digital Resources
+
+Our Dataset-Repository contains reviewed datasets, which can be explored and filtered. Explore the whole dataset, or each subtype separately.
+
+[btn: Explore the Datasets -> /datasets/] [btn: Explore the Subtypes -> /subtypes/]
+
+[:card]
+
+[card: text-align:center]
+## Physical Resources
+
+Explore our Biobank, a community-network of research laboratories offering physical resources for Blastocystis research.
+
+[btn: Explore the Datasets -> /biobank/]
+
+[:card]
+
+[card: text-align:center]
+## Community
+
+Interested to start researching Blastocystis? Explore our network of research labs!
+
+[btn: Explore Research Labs -> /labs/]
+
+[:card]
+
 [:grid]
-
-[sbtn: View Protocols -> [about.html, subtypes, protocols.html]]
-
-***
-
-## 📰 Blastocystis News
-
-Keeping you updated on the latest in _Blastocystis_ research!
-
-[collector -> news; search:[title,description,shortDescription,tags]; sort:[date,title]; filters:[Tags->[tags]]; arrange:cols]
