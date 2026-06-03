@@ -492,6 +492,30 @@ module.exports = function (eleventyConfig) {
               : "";
             return `<div class="hero"${styles}><div class="hero-inner">\n\n${content}\n\n</div></div>`;
           });
+        } else if (blockType === "grid") {
+          result = result.replace(pattern, (match, paramString, content) => {
+            let cssString = paramString.trim();
+            let classes = "grid";
+
+            // Parse cols: parameter
+            const colsMatch = cssString.match(/cols:\s*(\d+)/);
+            if (colsMatch) {
+              const colCount = colsMatch[1];
+              classes += ` grid-cols-${colCount}`;
+              console.log(
+                `[Grid Parser] Found cols:${colCount} - Applied class: ${classes}`,
+              );
+              // Remove cols: parameter from cssString so it doesn't appear in style attribute
+              cssString = cssString.replace(/cols:\s*\d+\s*/g, "").trim();
+            } else {
+              console.log(
+                `[Grid Parser] No cols parameter found in: "${paramString}"`,
+              );
+            }
+
+            const styles = cssString ? ` style="${escapeHtml(cssString)}"` : "";
+            return `<div class="${classes}"${styles}>\n\n${content}\n\n</div>`;
+          });
         } else {
           result = result.replace(pattern, (match, cssString, content) => {
             const styles = cssString.trim()
