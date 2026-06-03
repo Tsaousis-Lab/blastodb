@@ -14,6 +14,6 @@ You also find genome sequences and 18s SSU rRNA sequences for avainalbe subtypes
 
 [:hero]
 
-## Explore the Subtypes
+## Explore Blastocystis Subtypes
 
 [collector -> subtypes; search:[name,id]; filters:[Sources->[sources]]; arrange:rows; card-template:subtype.njk]
