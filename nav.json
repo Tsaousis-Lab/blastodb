@@ -3,7 +3,6 @@
   "site_logo": "/images/blastie.webp",
   "nav": [
     { "label": "Home", "file": "content/index.md" },
-    { "label": "About", "file": "content/about.md" },
     {
       "label": "Resources",
       "items": [
