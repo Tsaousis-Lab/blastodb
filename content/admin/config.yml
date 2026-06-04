@@ -11,9 +11,9 @@ public_folder: /assets/uploads
 pages_folder: content
 
 collections:
+  - { divider: true, label: "Database" }
   # -----------------------------------------------------------------------
-  # DATASET
-  # Central collection. Links to most other collections.
+  # DATASETS
   # -----------------------------------------------------------------------
   - name: datasets
     label: Datasets
@@ -44,7 +44,7 @@ collections:
       - label: Datatypes
         name: datatypes
         widget: relation
-        collection: datatype_data
+        collection: vocabularies
         file: datatypes
         multiple: true
         min: 1
@@ -56,29 +56,35 @@ collections:
       - label: Data origins
         name: data_origins
         widget: relation
-        collection: data_origins
+        collection: vocabularies
+        file: data_origins
         multiple: true
         required: false
-        value_field: "{{slug}}"
-        search_fields: [name]
+        value_field: data_origins.*
+        display_fields: [data_origins.*]
+        search_fields: [data_origins.*]
 
       - label: Data sources
         name: data_sources
         widget: relation
-        collection: data_sources
+        collection: vocabularies
+        file: data_sources
         multiple: true
         required: false
-        value_field: "{{slug}}"
-        search_fields: [name]
+        value_field: data_sources.*
+        display_fields: [data_sources.*]
+        search_fields: [data_sources.*]
 
       - label: Detection methods
         name: detection_methods
         widget: relation
-        collection: detection_methods
+        collection: vocabularies
+        file: detection_methods
         multiple: true
         required: false
-        value_field: "{{slug}}"
-        search_fields: [name]
+        value_field: detection_methods.*
+        display_fields: [detection_methods.*]
+        search_fields: [detection_methods.*]
 
       - label: Subtypes
         name: subtypes
@@ -93,7 +99,7 @@ collections:
       - label: Sources
         name: sources
         widget: relation
-        collection: sources
+        collection: vocabularies
         file: sources
         multiple: true
         required: false
@@ -122,7 +128,7 @@ collections:
       - label: Countries
         name: countries
         widget: relation
-        collection: country_data
+        collection: vocabularies
         file: countries
         multiple: true
         required: false
@@ -156,8 +162,9 @@ collections:
 
       - label: Date
         name: date
-        widget: string
-        hint: "DD.MM.YYYY, MM.YYYY, or YYYY"
+        widget: datetime
+        type: date
+        required: false
 
       - label: Journal name
         name: journal_name
@@ -229,7 +236,7 @@ collections:
       - label: Sources
         name: sources
         widget: relation
-        collection: sources
+        collection: vocabularies
         file: sources
         multiple: true
         required: false
@@ -292,32 +299,14 @@ collections:
         name: img_path
         widget: image
 
-  # -----------------------------------------------------------------------
-  # COUNTRYS
-  # Single YAML file containing all continents from the ISO3166 standart
-  # of country codes.
-  # -----------------------------------------------------------------------
-  - name: country_data
-    label: Countries
-    files:
-      - label: Countries
-        name: countries
-        file: content/data/countries.yaml
-        fields:
-          - label: Countries
-            name: countries
-            widget: list
-            hint: "All countries from the ISO 3166 standart of country codes.<br>Please only change if this standart changes!"
-            fields:
-              - { label: ISO code, name: iso, widget: string }
-              - { label: Name, name: name, widget: string }
+  - { divider: true, label: "Vocabularies" }
 
   # -----------------------------------------------------------------------
-  # LOOKUP TABLES
-  # Simple name-only collections used as controlled vocabularies.
+  # VOCABULARIES
   # -----------------------------------------------------------------------
-  - name: datatype_data
-    label: Datatypes
+  - name: vocabularies
+    label: Vocabularies
+    icon: label
     files:
       - label: Datatypes
         name: datatypes
@@ -326,44 +315,7 @@ collections:
           - label: Datatypes
             name: datatypes
             widget: list
-            hint: "One datatype per line.<br>**DANGER:** Removing existing datatypes might break dependencies in the dataset. Be careful!"
 
-  - name: data_sources
-    label: Data sources
-    folder: content/data_sources
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - label: Name
-        name: name
-        widget: string
-        hint: "e.g. Human, Mammal, Bird"
-
-  - name: data_origins
-    label: Data origins
-    folder: content/data_origins
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - label: Name
-        name: name
-        widget: string
-        hint: "e.g. in-vivo, ex-vivo, in-vitro"
-
-  - name: detection_methods
-    label: Detection methods
-    folder: content/detection_methods
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - label: Name
-        name: name
-        widget: string
-        hint: "e.g. Microscopy, PCR, Culturing"
-
-  - name: sources
-    label: Sources
-    files:
       - label: Sources
         name: sources
         file: content/data/sources.yaml
@@ -371,8 +323,43 @@ collections:
           - label: Sources
             name: sources
             widget: list
-            hint: "One host per line.<br>**DANGER:** Removing existing sources might break dependencies in the dataset. Be careful!"
 
+      - label: Data origins
+        name: data_origins
+        file: content/data/data_origins.yaml
+        fields:
+          - label: Data origins
+            name: data_origins
+            widget: list
+
+      - label: Data sources
+        name: data_sources
+        file: content/data/data_sources.yaml
+        fields:
+          - label: Data sources
+            name: data_sources
+            widget: list
+
+      - label: Detection methods
+        name: detection_methods
+        file: content/data/detection_methods.yaml
+        fields:
+          - label: Detection methods
+            name: detection_methods
+            widget: list
+
+      - label: Countries
+        name: countries
+        file: content/data/countries.yaml
+        fields:
+          - label: Countries
+            name: countries
+            widget: list
+            fields:
+              - { label: ISO code, name: iso, widget: string }
+              - { label: Name, name: name, widget: string }
+
+  - { divider: true, label: "Website" }
   # ─── Pages ───────────────────────────────────────────────────────────────────
   - name: pages
     label: Pages
