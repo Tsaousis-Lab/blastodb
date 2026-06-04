@@ -358,7 +358,7 @@ module.exports = function (eleventyConfig) {
     return str.replace(/[&<>"']/g, (c) => map[c]);
   }
 
-  // Plugin: Inline custom elements [btn], [tag], [nav-box], [sbtn]
+  // Plugin: Inline custom elements [btn], [tag], [header-box], [sbtn]
   md.use((mdInstance) => {
     mdInstance.inline.ruler.push("custom_inline", function (state, silent) {
       const pos = state.pos;
@@ -391,10 +391,10 @@ module.exports = function (eleventyConfig) {
         return true;
       }
 
-      // [nav-box: Label -> url]
+      // [header-box: Label -> url]
       const navBoxMatch = state.src
         .slice(pos)
-        .match(/^\[nav-box:\s*([^\]]+?)\s*->\s*([^\]]+?)\]/);
+        .match(/^\[header-box:\s*([^\]]+?)\s*->\s*([^\]]+?)\]/);
       if (navBoxMatch) {
         if (!silent) {
           const token = state.push("nav_box_token", "", 0);
@@ -444,7 +444,7 @@ module.exports = function (eleventyConfig) {
 
     mdInstance.renderer.rules.nav_box_token = (tokens, idx) => {
       const meta = tokens[idx].meta;
-      return `<a href="${escapeHtml(meta.url)}" class="nav-box">${escapeHtml(meta.label)}</a>`;
+      return `<a href="${escapeHtml(meta.url)}" class="header-box">${escapeHtml(meta.label)}</a>`;
     };
 
     mdInstance.renderer.rules.sbtn_token = (tokens, idx) => {
@@ -679,121 +679,54 @@ module.exports = function (eleventyConfig) {
     return protocols.sort((a, b) => new Date(b.date) - new Date(a.date));
   });
 
-  // Navigation Collection
-  eleventyConfig.addCollection("nav", (collectionApi) => {
-    const nav = require("./nav.json");
-    const siteTitle = nav.site_title || "BlastoDB";
-    const siteLogo = nav.site_logo || "/images/blastie.webp";
-    const allPages = collectionApi.getFilteredByGlob("content/**/*.md");
-    const pageFiles = allPages.map((p) => p.filePathStem);
+  // Header Collection
+  eleventyConfig.addCollection("header", (collectionApi) => {
+    const header = require("./content/data/header.json");
 
     const processNavItem = (item) => {
-      // If item has a file property, it's a direct link
+      const processed = { ...item };
+
+      // Determine type: 'link' for items with file, 'dropdown' for items with items array
       if (item.file) {
-        const fileExists = pageFiles.some((f) =>
-          f.includes(item.file.replace("content/", "").replace(".md", "")),
-        );
-        if (!fileExists) return null;
-
-        const urlPath = item.file.replace("content/", "").replace(".md", "");
-        const url = urlPath === "index" ? "/" : "/" + urlPath + "/";
-        return {
-          label: item.label,
-          file: item.file,
-          url: url,
-          type: "link",
-        };
+        processed.type = "link";
+        // Convert file path like "content/path.md" to "/path/"
+        const urlPath = item.file
+          .replace(/^content\/?/, "") // Remove 'content/' prefix
+          .replace(/\.md$/, "") // Remove '.md' extension
+          .replace(/\/index$/, ""); // Remove '/index' from index files
+        processed.url = "/" + (urlPath ? urlPath + "/" : "");
+      } else if (item.items && Array.isArray(item.items)) {
+        processed.type = "dropdown";
+        // Process dropdown items recursively
+        processed.items = item.items
+          .map(processNavItem)
+          .filter((subItem) => subItem.url || subItem.type === "dropdown");
       }
-      // If item has items property, it's a dropdown
-      else if (item.items && Array.isArray(item.items)) {
-        const processedItems = item.items
-          .map((subItem) => {
-            const fileExists = pageFiles.some((f) =>
-              f.includes(
-                subItem.file.replace("content/", "").replace(".md", ""),
-              ),
-            );
-            if (!fileExists) return null;
 
-            const urlPath = subItem.file
-              .replace("content/", "")
-              .replace(".md", "");
-            const url = urlPath === "index" ? "/" : "/" + urlPath + "/";
-            return {
-              label: subItem.label,
-              file: subItem.file,
-              url: url,
-            };
-          })
-          .filter((item) => item !== null);
-
-        if (processedItems.length === 0) return null;
-
-        return {
-          label: item.label,
-          items: processedItems,
-          type: "dropdown",
-        };
-      }
-      return null;
+      return processed;
     };
 
     return {
-      items: nav.items
-        .map((item) => processNavItem(item))
-        .filter((item) => item !== null),
-      siteTitle: siteTitle,
-      siteLogo: siteLogo,
+      items: (header.items || [])
+        .map(processNavItem)
+        .filter((item) => item.url || item.type === "dropdown"),
     };
+  });
+  // Branding Collection
+  eleventyConfig.addCollection("branding", () => {
+    const branding = require("./content/data/branding.json");
+    const siteTitle = branding.site_title || "BlastoDB";
+    const siteLogo = branding.site_logo || "/images/blastie.webp";
+    return branding;
   });
 
   // Footer Collection
   eleventyConfig.addCollection("footer", () => {
-    const footer = require("./footer.json");
+    const footer = require("./content/data/footer.json");
     return footer;
   });
 
   // ─── Global Data ────────────────────────────────────────────────────────
-  eleventyConfig.addGlobalData("labProtocols", () => {
-    const protocolsDir = path.join(__dirname, "content", "lab-protocols");
-    const protocols = [];
-
-    if (fs.existsSync(protocolsDir)) {
-      const files = fs
-        .readdirSync(protocolsDir)
-        .filter((file) => file.endsWith(".md"));
-
-      files.forEach((file) => {
-        const filePath = path.join(protocolsDir, file);
-        const content = fs.readFileSync(filePath, "utf-8");
-        const match = content.match(/^---\n([\s\S]*?)\n---/);
-
-        if (match) {
-          try {
-            const frontmatter = yaml.load(match[1]);
-            const slug = file.replace(".md", "");
-
-            protocols.push({
-              title: frontmatter.title || "Untitled",
-              description: frontmatter.description || "",
-              tags: frontmatter.tags || [],
-              date: frontmatter.date || new Date().toISOString(),
-              shortDescription:
-                frontmatter["short-description"] ||
-                frontmatter.description ||
-                "",
-              slug: slug,
-              url: `/lab-protocols/${slug}/`,
-            });
-          } catch (e) {
-            console.warn(`Failed to parse protocol ${file}:`, e.message);
-          }
-        }
-      });
-    }
-
-    return protocols.sort((a, b) => new Date(b.date) - new Date(a.date));
-  });
 
   eleventyConfig.addGlobalData("collectorData", () => {
     const collections = getCmsCollections().filter((c) => c.folder);

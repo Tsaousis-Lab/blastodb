@@ -16,6 +16,7 @@ collections:
   # DATASETS
   # -----------------------------------------------------------------------
   - name: datasets
+    icon: database
     label: Datasets
     folder: content/data/datasets
     create: true
@@ -140,6 +141,7 @@ collections:
   # PUBLICATION
   # -----------------------------------------------------------------------
   - name: publications
+    icon: database
     label: Publications
     folder: content/data/publications
     create: true
@@ -184,6 +186,7 @@ collections:
   # LAB PROTOCOL
   # -----------------------------------------------------------------------
   - name: lab_protocols
+    icon: database
     label: Lab protocols
     folder: content/data/lab_protocols
     create: true
@@ -211,6 +214,7 @@ collections:
   # SUBTYPE
   # -----------------------------------------------------------------------
   - name: subtypes
+    icon: database
     label: Subtypes
     folder: content/data/subtypes
     create: true
@@ -263,8 +267,9 @@ collections:
   # RESEARCH LAB
   # -----------------------------------------------------------------------
   - name: research_labs
+    icon: database
     label: Research labs
-    folder: content/research_labs
+    folder: content/data/research_labs
     create: true
     slug: "{{slug}}"
     fields:
@@ -306,7 +311,7 @@ collections:
   # -----------------------------------------------------------------------
   - name: vocabularies
     label: Vocabularies
-    icon: label
+    icon: database
     files:
       - label: Datatypes
         name: datatypes
@@ -368,6 +373,7 @@ collections:
     create: true
     extension: md
     format: frontmatter
+    icon: select_window
     fields:
       - { label: "Title", name: "title", widget: "string" }
 
@@ -380,17 +386,16 @@ collections:
 
       - { label: "Body", name: "body", widget: "markdown" }
 
-  # ─── Navigation ────────────────────────────────────────────────────────────────
-  - name: "nav"
-    label: "Navigation"
+  # ─── Header and Footer ───────────────────────────────────────────────────────────────────
+  - name: navigation
+    label: Navigation
+    icon: select_window
     files:
-      - label: "Navigation Configuration"
-        name: "nav"
-        file: "nav.json"
+      - label: Header Configuration
+        name: header
+        file: content/data/header.json
         fields:
-          - { label: "Site Title", name: "site_title", widget: "string" }
-          - { label: "Site Logo", name: "site_logo", widget: "string" }
-          - label: "Navigation Items"
+          - label: "Header Items"
             name: "items"
             widget: "list"
             fields:
@@ -409,16 +414,10 @@ collections:
                   - { label: "Label", name: "label", widget: "string" }
                   - { label: "File", name: "file", widget: "string" }
 
-  # ─── Footer ────────────────────────────────────────────────────────────────────
-  - name: "footer"
-    label: "Footer"
-    files:
-      - label: "Footer Configuration"
-        name: "footer"
-        file: "footer.json"
+      - label: Footer Configuration
+        name: footer
+        file: content/data/footer.json
         fields:
-          - { label: "Site Title", name: "site_title", widget: "string" }
-          - { label: "Site Logo", name: "site_logo", widget: "string" }
           - {
               label: "Description",
               name: "description",
@@ -443,3 +442,15 @@ collections:
                 fields:
                   - { label: "Link Label", name: "label", widget: "string" }
                   - { label: "URL", name: "url", widget: "string" }
+
+      - label: Title and Logo
+        name: branding
+        file: content/data/branding.json
+        fields:
+          - { label: "Site Title", name: "site_title", widget: "string" }
+          - {
+              label: "Logo",
+              name: "site_logo",
+              widget: "string",
+              hint: "URL or path to the logo image",
+            }

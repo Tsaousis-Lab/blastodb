@@ -1,12 +1,12 @@
 <header>
   <div class="header-inner">
     <a href="{{ '/' | url }}" class="site-logo">
-      <img src="{{ collections.nav.siteLogo | url }}" alt="Blastie mascot" class="logo-image">
-      <span>BlastoDB</span>
+      <img src="{{ collections.branding.site_logo | url }}" alt="Blastie mascot" class="logo-image">
+      <span>{{ collections.branding.site_title }}</span>
     </a>
-    <nav>
+    <header>
       {% set currentFileName = page.filePathStem | replace('/index', '') %}
-      {% set navItems = collections.nav.items %}
+      {% set navItems = collections.header.items %}
       {% for item in navItems %}
         {% if item.type == 'link' %}
           {% set itemPath = '/' + item.file.replace('content/', '').replace('.md', '') %}
@@ -14,16 +14,16 @@
             {{ item.label }}
           </a>
         {% elif item.type == 'dropdown' %}
-          {% set uniqueId = 'nav-dropdown-' + loop.index %}
-          <div class="nav-dropdown-container">
-            <button class="nav-dropdown-btn" data-target="{{ uniqueId }}" aria-expanded="false">
+          {% set uniqueId = 'header-dropdown-' + loop.index %}
+          <div class="header-dropdown-container">
+            <button class="header-dropdown-btn" data-target="{{ uniqueId }}" aria-expanded="false">
               {{ item.label }}
-              <span class="nav-dropdown-arrow">▼</span>
+              <span class="header-dropdown-arrow">▼</span>
             </button>
-            <div class="nav-dropdown-menu" id="{{ uniqueId }}">
+            <div class="header-dropdown-menu" id="{{ uniqueId }}">
               {% for subItem in item.items %}
                 {% set subItemPath = '/' + subItem.file.replace('content/', '').replace('.md', '') %}
-                <a href="{{ subItem.url | url }}" class="nav-dropdown-item" {% if subItemPath == currentFileName %}data-active="true"{% endif %}>
+                <a href="{{ subItem.url | url }}" class="header-dropdown-item" {% if subItemPath == currentFileName %}data-active="true"{% endif %}>
                   {{ subItem.label }}
                 </a>
               {% endfor %}
@@ -31,7 +31,7 @@
           </div>
         {% endif %}
       {% endfor %}
-    </nav>
-    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    </header>
+    <button class="header-toggle" aria-label="Toggle navigation">☰</button>
   </div>
 </header>
