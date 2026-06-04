@@ -483,18 +483,115 @@ footer {
     background: var(--ink);
     color: rgba(255, 255, 255, 0.55);
     border-top: 1px solid var(--border);
-    padding: 1.5rem;
     font-family: var(--font-ui);
     font-size: 0.82rem;
-    text-align: center;
+}
+
+.footer-inner {
+    display: flex;
+    gap: 3rem;
+    padding: 2rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--border);
+}
+
+.footer-left {
+    flex: 0 0 auto;
+    min-width: 280px;
+}
+
+.footer-branding {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.footer-branding-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.footer-logo {
+    font-family: "Crimson Pro", serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: rgba(255, 255, 255, 0.95);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.footer-logo-image {
+    height: 50px;
+    width: auto;
+    display: block;
+    margin: 0;
+    border-radius: 0;
+}
+
+.footer-branding p {
+    margin: 0;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.4;
+}
+
+.footer-columns {
+    display: flex;
+    gap: 3rem;
+    flex: 1;
+}
+
+.footer-column {
+    flex: 1;
+}
+
+.footer-column h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.footer-column ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.footer-column li {
+    margin: 0;
 }
 
 footer a {
     color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    transition: color 0.2s ease;
 }
 
 footer a:hover {
     color: rgba(255, 255, 255, 0.95);
+}
+
+.footer-bottom {
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 0.75rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-bottom p {
+    margin: 0;
 }
 
 /* ── Collector Component ──────────────── */
@@ -1201,6 +1298,20 @@ footer a:hover {
     .collector-tags {
         width: 100%;
         justify-content: flex-start;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .footer-columns {
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .footer-column {
+        flex: 1 1 150px;
     }
 }
 

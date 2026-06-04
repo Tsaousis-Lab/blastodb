@@ -739,12 +739,18 @@ module.exports = function (eleventyConfig) {
     };
 
     return {
-      items: nav.nav
+      items: nav.items
         .map((item) => processNavItem(item))
         .filter((item) => item !== null),
       siteTitle: siteTitle,
       siteLogo: siteLogo,
     };
+  });
+
+  // Footer Collection
+  eleventyConfig.addCollection("footer", () => {
+    const footer = require("./footer.json");
+    return footer;
   });
 
   // ─── Global Data ────────────────────────────────────────────────────────

@@ -393,7 +393,7 @@ collections:
 
       - { label: "Body", name: "body", widget: "markdown" }
 
-  # ─── Navigation Bar ───────────────────────────────────────────────────────────
+  # ─── Navigation ────────────────────────────────────────────────────────────────
   - name: "nav"
     label: "Navigation"
     files:
@@ -404,7 +404,7 @@ collections:
           - { label: "Site Title", name: "site_title", widget: "string" }
           - { label: "Site Logo", name: "site_logo", widget: "string" }
           - label: "Navigation Items"
-            name: "nav"
+            name: "items"
             widget: "list"
             fields:
               - { label: "Label", name: "label", widget: "string" }
@@ -421,3 +421,38 @@ collections:
                 fields:
                   - { label: "Label", name: "label", widget: "string" }
                   - { label: "File", name: "file", widget: "string" }
+
+  # ─── Footer ────────────────────────────────────────────────────────────────────
+  - name: "footer"
+    label: "Footer"
+    files:
+      - label: "Footer Configuration"
+        name: "footer"
+        file: "footer.json"
+        fields:
+          - { label: "Site Title", name: "site_title", widget: "string" }
+          - { label: "Site Logo", name: "site_logo", widget: "string" }
+          - {
+              label: "Description",
+              name: "description",
+              widget: "string",
+              hint: "Short description displayed next to the logo",
+            }
+          - {
+              label: "Funding",
+              name: "funding",
+              widget: "string",
+              hint: "Funding acknowledgment text",
+            }
+          - label: "Footer Columns"
+            name: "columns"
+            widget: "list"
+            hint: "Configure footer column sections"
+            fields:
+              - { label: "Column Title", name: "title", widget: "string" }
+              - label: "Links"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Link Label", name: "label", widget: "string" }
+                  - { label: "URL", name: "url", widget: "string" }

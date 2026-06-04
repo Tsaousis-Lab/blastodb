@@ -1,7 +1,7 @@
 {
   "site_title": "BlastoDB",
   "site_logo": "/images/blastie.webp",
-  "nav": [
+  "items": [
     { "label": "Home", "file": "content/index.md" },
     {
       "label": "Resources",
