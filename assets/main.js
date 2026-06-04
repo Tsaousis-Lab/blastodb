@@ -836,7 +836,7 @@ function closeAllSbtnMenus() {
  * Navigation Dropdown Toggle Functionality
  */
 function initializeNavDropdowns() {
-  const dropdownBtns = document.querySelectorAll(".header-dropdown-btn");
+  const dropdownBtns = document.querySelectorAll(".nav-dropdown-btn");
 
   dropdownBtns.forEach((btn) => {
     // Add mouseenter event for hover behavior
@@ -931,7 +931,7 @@ function initializeNavDropdowns() {
   });
 
   // Close dropdowns when clicking menu items
-  const dropdownItems = document.querySelectorAll(".header-dropdown-item");
+  const dropdownItems = document.querySelectorAll(".nav-dropdown-item");
   dropdownItems.forEach((item) => {
     // Add hover effect
     item.addEventListener("mouseenter", function () {
@@ -956,15 +956,15 @@ function initializeNavDropdowns() {
 
   // Close dropdowns when clicking outside
   document.addEventListener("click", function (e) {
-    if (!e.target.closest(".header-dropdown-container")) {
+    if (!e.target.closest(".nav-dropdown-container")) {
       closeAllNavDropdowns();
     }
   });
 }
 
 function closeAllNavDropdowns() {
-  const menus = document.querySelectorAll(".header-dropdown-menu");
-  const btns = document.querySelectorAll(".header-dropdown-btn");
+  const menus = document.querySelectorAll(".nav-dropdown-menu");
+  const btns = document.querySelectorAll(".nav-dropdown-btn");
   menus.forEach((menu) => {
     menu.classList.remove("open");
   });

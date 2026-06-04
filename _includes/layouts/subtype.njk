@@ -20,7 +20,7 @@
       <h1>{{ name }}</h1>
 
       {% if sources and sources.length %}
-        <div class="collector-item-tags" style="justify-content: center; margin: 0.3rem 0;">
+        <div class="collector-item-tags" style="justify-content: center; margin: rem 0;">
           {% for source in sources %}
             <span class="tag">{{ source }}</span>
           {% endfor %}
@@ -43,9 +43,7 @@
     </div>
 
     {{ content | processSpans | safe }}
-    <div style="text-align:center">
-        <a href="/subtypes/" class="btn btn-secondary">← Back to all Subtypes</a>
-    </div>
+    {{ subtype_collector }}
   </main>
 
   {% include "layouts/footer.njk" %}

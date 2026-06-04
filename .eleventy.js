@@ -682,34 +682,64 @@ module.exports = function (eleventyConfig) {
   // Header Collection
   eleventyConfig.addCollection("header", (collectionApi) => {
     const header = require("./content/data/header.json");
+    const allPages = collectionApi.getFilteredByGlob("content/**/*.md");
+    const pageFiles = allPages.map((p) => p.filePathStem);
 
     const processNavItem = (item) => {
-      const processed = { ...item };
-
-      // Determine type: 'link' for items with file, 'dropdown' for items with items array
+      // If item has a file property, it's a direct link
       if (item.file) {
-        processed.type = "link";
-        // Convert file path like "content/path.md" to "/path/"
-        const urlPath = item.file
-          .replace(/^content\/?/, "") // Remove 'content/' prefix
-          .replace(/\.md$/, "") // Remove '.md' extension
-          .replace(/\/index$/, ""); // Remove '/index' from index files
-        processed.url = "/" + (urlPath ? urlPath + "/" : "");
-      } else if (item.items && Array.isArray(item.items)) {
-        processed.type = "dropdown";
-        // Process dropdown items recursively
-        processed.items = item.items
-          .map(processNavItem)
-          .filter((subItem) => subItem.url || subItem.type === "dropdown");
-      }
+        const fileExists = pageFiles.some((f) =>
+          f.includes(item.file.replace("content/", "").replace(".md", "")),
+        );
+        if (!fileExists) return null;
 
-      return processed;
+        const urlPath = item.file.replace("content/", "").replace(".md", "");
+        const url = urlPath === "index" ? "/" : "/" + urlPath + "/";
+        return {
+          label: item.label,
+          file: item.file,
+          url: url,
+          type: "link",
+        };
+      }
+      // If item has items property, it's a dropdown
+      else if (item.items && Array.isArray(item.items)) {
+        const processedItems = item.items
+          .map((subItem) => {
+            const fileExists = pageFiles.some((f) =>
+              f.includes(
+                subItem.file.replace("content/", "").replace(".md", ""),
+              ),
+            );
+            if (!fileExists) return null;
+
+            const urlPath = subItem.file
+              .replace("content/", "")
+              .replace(".md", "");
+            const url = urlPath === "index" ? "/" : "/" + urlPath + "/";
+            return {
+              label: subItem.label,
+              file: subItem.file,
+              url: url,
+            };
+          })
+          .filter((item) => item !== null);
+
+        if (processedItems.length === 0) return null;
+
+        return {
+          label: item.label,
+          items: processedItems,
+          type: "dropdown",
+        };
+      }
+      return null;
     };
 
     return {
-      items: (header.items || [])
-        .map(processNavItem)
-        .filter((item) => item.url || item.type === "dropdown"),
+      items: header.items
+        .map((item) => processNavItem(item))
+        .filter((item) => item !== null),
     };
   });
   // Branding Collection

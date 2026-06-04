@@ -52,6 +52,7 @@ body {
 }
 
 /* ── Header ───────────────────────────────────────────────────── */
+/* ── Header ───────────────────────────────────────────────────── */
 header {
     position: sticky;
     top: 0;
@@ -93,7 +94,7 @@ header {
     border-radius: 0;
 }
 
-.header-inner > header {
+nav {
     display: flex;
     align-items: center;
     gap: 0.25rem;
@@ -101,7 +102,7 @@ header {
     margin-left: auto;
 }
 
-header a {
+nav a {
     font-family: var(--font-ui);
     font-size: 0.85rem;
     color: var(--text-muted);
@@ -113,12 +114,18 @@ header a {
         background 0.15s;
 }
 
-.header-dropdown-container {
+nav a:hover,
+nav a.active {
+    color: var(--accent-dark);
+    background: var(--accent-pale);
+}
+
+.nav-dropdown-container {
     position: relative;
     display: inline-block;
 }
 
-.header-dropdown-btn {
+.nav-dropdown-btn {
     font-family: var(--font-ui);
     font-size: 0.85rem;
     color: var(--text-muted);
@@ -135,22 +142,22 @@ header a {
     gap: 0.4rem;
 }
 
-.header-dropdown-btn:hover {
+.nav-dropdown-btn:hover {
     color: var(--accent-dark);
     background: var(--accent-pale);
 }
 
-.header-dropdown-arrow {
+.nav-dropdown-arrow {
     display: inline-block;
     font-size: 0.7rem;
     transition: transform 0.2s;
 }
 
-.header-dropdown-btn[aria-expanded="true"] .header-dropdown-arrow {
+.nav-dropdown-btn[aria-expanded="true"] .nav-dropdown-arrow {
     transform: rotate(180deg);
 }
 
-.header-dropdown-menu {
+.nav-dropdown-menu {
     position: absolute;
     top: calc(100% + 0.5rem);
     left: 0;
@@ -166,11 +173,11 @@ header a {
     z-index: 1000;
 }
 
-.header-dropdown-menu.open {
+.nav-dropdown-menu.open {
     display: flex;
 }
 
-.header-dropdown-item {
+.nav-dropdown-item {
     display: block;
     padding: 0.5rem 0.8rem;
     color: var(--text);
@@ -183,17 +190,17 @@ header a {
     user-select: none;
 }
 
-.header-dropdown-item:hover {
+.nav-dropdown-item:hover {
     background: var(--accent-pale);
     color: var(--accent-dark);
 }
 
-.header-dropdown-item[data-active="true"] {
+.nav-dropdown-item[data-active="true"] {
     color: var(--accent-dark);
     background: var(--accent-pale);
 }
 
-.header-toggle {
+.nav-toggle {
     display: none;
 }
 
@@ -264,6 +271,11 @@ a {
 }
 a:hover {
     color: var(--accent-dark);
+}
+
+.site-logo:hover {
+    color: var(--accent-dark) !important;
+    text-decoration: none !important;
 }
 
 hr {
@@ -1111,6 +1123,10 @@ footer a:hover {
 
 /* ── Mobile ──────────────────────────────────────────────────── */
 @media (max-width: 720px) {
+    header:not(.header-inner > header-btn) {
+        display: block !important;
+    }
+
     .header-inner {
         gap: 1rem;
     }
@@ -1139,7 +1155,7 @@ footer a:hover {
         max-width: calc(100vw - 2rem);
     }
 
-    .header-toggle {
+    .nav-toggle {
         display: block;
         margin-left: auto;
         background: none;
@@ -1151,7 +1167,7 @@ footer a:hover {
         color: var(--text-muted);
     }
 
-    header {
+    nav {
         display: none;
         position: absolute;
         top: var(--header-h);
@@ -1166,25 +1182,25 @@ footer a:hover {
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
-    header.open {
+    nav.open {
         display: flex;
     }
 
-    header a {
+    nav a {
         width: 100%;
         padding: 0.5rem 0.75rem;
     }
 
-    header .header-dropdown-container {
+    nav .nav-dropdown-container {
         width: 100%;
     }
 
-    header .header-dropdown-btn {
+    nav .nav-dropdown-btn {
         width: 100%;
         padding: 0.5rem 0.75rem;
     }
 
-    header .header-dropdown-menu {
+    nav .nav-dropdown-menu {
         position: static;
         display: none;
         border: none;
@@ -1196,11 +1212,11 @@ footer a:hover {
         margin-left: 0.75rem;
     }
 
-    header .header-dropdown-menu.open {
+    nav .nav-dropdown-menu.open {
         display: flex;
     }
 
-    header .header-dropdown-item {
+    nav .nav-dropdown-item {
         padding: 0.35rem 0.75rem;
         font-size: 0.8rem;
     }
@@ -1225,7 +1241,7 @@ footer a:hover {
         grid-template-columns: 1fr;
     }
 
-    .header-box {
+    .nav-box {
         width: 100%;
     }
 
