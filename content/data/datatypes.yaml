@@ -1,5 +1,6 @@
 datatypes:
-  - Amplicon
+  - 16s
+  - 18s
   - Shotgun
   - Transcriptome
   - Metabolome
