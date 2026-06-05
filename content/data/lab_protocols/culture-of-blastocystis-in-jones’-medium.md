@@ -1,8 +1,7 @@
 ---
 layout: layouts/lab-protocol.njk
 title: Culture of Blastocystis in Jones’ Medium
-related_publications: 
-  - test
+related_publications: []
 ---
 
 For xenic (i.e. non-sterile) in-vitro cultivation of _Blastocystis,_ Jones’ Medium is required:

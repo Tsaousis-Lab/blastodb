@@ -4,7 +4,7 @@ title: BlastoDB — Lab Protocols
 description: Collection of laboratory protocols for sample preparation, DNA extraction, and analysis techniques.
 ---
 
-[hero:]
+[hero: text-align:center]
 # Datasets
 
 Here you find a selection of relevant and trustworthy datasets for Blastocysts.

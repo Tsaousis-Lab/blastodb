@@ -1,6 +1,6 @@
 ---
+layout: layouts/dataset-page.njk
 title: TEST DATASET
-description: ''
 link_to_source: test.com
 strains: []
 datatypes:
@@ -15,9 +15,32 @@ subtypes:
   - Subtype 6
 hosts:
   - human
-publications: []
+related_publications: []
 lab_protocols: []
 countries:
   - DE
   - GB
 ---
+
+
+GenBank Access No.:AF408426
+
+{% if related_publications.length %}
+
+---
+
+## References
+
+[collector -> publications; clickable:false; card-template:references.njk; prefilter:[citation_key={{ related_publications | join(" OR citation_key=") }}]]
+
+{% endif %}
+
+{% if lab_protocols.length %}
+
+---
+
+## Related Lab Protocols
+
+[collector -> lab_protocols; clickable:false; card-template:references.njk; prefilter:[citation_key={{ related_publications | join(" OR citation_key=") }}]]
+
+{% endif %}
