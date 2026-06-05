@@ -336,6 +336,157 @@ function getItemsFromCollection(collection, templateOverride) {
   });
 }
 
+/**
+ * Get items from a JSON file collection
+ */
+function getItemsFromJsonFile(
+  jsonFilePath,
+  collectionName,
+  collectorConfig,
+  templateOverride,
+) {
+  if (!fs.existsSync(jsonFilePath)) {
+    console.warn(`[Collector] JSON file does not exist: ${jsonFilePath}`);
+    return [];
+  }
+
+  try {
+    const fileContent = fs.readFileSync(jsonFilePath, "utf-8");
+    const jsonData = JSON.parse(fileContent);
+
+    // Try to find the data array - could be at root or nested under collection name
+    let dataArray = Array.isArray(jsonData)
+      ? jsonData
+      : jsonData[collectionName];
+    if (!Array.isArray(dataArray)) {
+      // If not found, try the first array property
+      const firstArrayKey = Object.keys(jsonData).find((key) =>
+        Array.isArray(jsonData[key]),
+      );
+      dataArray = firstArrayKey ? jsonData[firstArrayKey] : [];
+    }
+
+    if (!Array.isArray(dataArray) || dataArray.length === 0) return [];
+
+    const templateName =
+      templateOverride ||
+      (collectorConfig && collectorConfig.template) ||
+      collectionName ||
+      "default";
+
+    const searchFields =
+      collectorConfig && Array.isArray(collectorConfig.search_fields)
+        ? collectorConfig.search_fields
+        : ["title", "description", "name"];
+
+    const items = dataArray.map((item) => {
+      const title = item.title || item.name || "Untitled";
+      const date = item.date || null;
+      const formattedDate = date ? formatDateString(date) : "";
+
+      // Handle array fields (like authors) - keep as array for template, join for search
+      const processedItem = { ...item };
+      Object.keys(item).forEach((key) => {
+        if (Array.isArray(item[key]) && typeof item[key][0] === "string") {
+          // Keep arrays as-is in the item data for template use
+          processedItem[key] = item[key];
+        }
+      });
+
+      const itemData = {
+        ...processedItem,
+        title,
+        date,
+        formattedDate,
+        collection: collectionName,
+      };
+
+      const cardHtml = renderCollectorCard(templateName, itemData);
+      const searchable = buildSearchableText(itemData, searchFields);
+
+      return {
+        title,
+        date,
+        formattedDate,
+        searchable,
+        cardHtml,
+        data: itemData,
+      };
+    });
+
+    // Sort by date (newest first), then by title
+    return items.sort((a, b) => {
+      const dateA = new Date(a.date || 0).getTime();
+      const dateB = new Date(b.date || 0).getTime();
+      if (dateB !== dateA) return dateB - dateA;
+      return (a.title || "").localeCompare(b.title || "");
+    });
+  } catch (e) {
+    console.warn(
+      `[Collector] Failed to parse JSON file ${jsonFilePath}:`,
+      e.message,
+    );
+    return [];
+  }
+}
+
+/**
+ * Get items from a file-based collection (CMS config with files property)
+ */
+function getItemsFromFileCollection(collection, templateOverride) {
+  if (!collection || !collection.files || !Array.isArray(collection.files)) {
+    return [];
+  }
+
+  const fileEntry = collection.files[0];
+  if (!fileEntry || !fileEntry.file) return [];
+
+  const filePath = path.join(__dirname, fileEntry.file);
+
+  // Only process JSON files - skip YAML and other formats
+  if (!filePath.endsWith(".json")) {
+    return [];
+  }
+
+  return getItemsFromJsonFile(
+    filePath,
+    collection.name,
+    collection.collector,
+    templateOverride,
+  );
+}
+
+/**
+ * Discover and load all JSON files from content/data directory
+ */
+function discoverJsonCollections() {
+  const dataDir = path.join(__dirname, "content", "data");
+  if (!fs.existsSync(dataDir)) return [];
+
+  const jsonCollections = [];
+  const files = fs.readdirSync(dataDir);
+
+  files.forEach((file) => {
+    if (file.endsWith(".json")) {
+      const filePath = path.join(dataDir, file);
+      const collectionName = file.replace(/\.json$/, "");
+
+      // Check if this collection is already defined in CMS config
+      const cmsCollection = getCollectionByName(collectionName);
+      if (!cmsCollection || !cmsCollection.files) {
+        // Not defined in CMS or not a file collection, so auto-discover it
+        jsonCollections.push({
+          name: collectionName,
+          filePath: filePath,
+          collector: null, // No specific config, will use defaults
+        });
+      }
+    }
+  });
+
+  return jsonCollections;
+}
+
 module.exports = function (eleventyConfig) {
   const pathPrefix = process.env.PATH_PREFIX || "/";
 
@@ -756,10 +907,28 @@ module.exports = function (eleventyConfig) {
     return footer;
   });
 
+  // Publications Collection
+  eleventyConfig.addCollection("publications", () => {
+    const publications = require("./content/data/publications.json");
+    return publications.publications.map((pub) => ({
+      data: {
+        ...pub,
+        authors: pub.authors.join(" & "),
+        formattedDate: new Date(pub.date).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+        }),
+      },
+    }));
+  });
+
   // ─── Global Data ────────────────────────────────────────────────────────
 
   eleventyConfig.addGlobalData("collectorData", () => {
-    const collections = getCmsCollections().filter((c) => c.folder);
+    const allCollections = getCmsCollections();
+    const folderCollections = allCollections.filter((c) => c.folder);
+    const fileCollections = allCollections.filter((c) => c.files);
+    const autoJsonCollections = discoverJsonCollections();
     const data = {};
 
     // Discover all card templates so per-shortcode overrides can be served.
@@ -770,7 +939,8 @@ module.exports = function (eleventyConfig) {
           .map((f) => f.replace(/\.njk$/i, ""))
       : [];
 
-    collections.forEach((collection) => {
+    // Process folder-based collections
+    folderCollections.forEach((collection) => {
       // Default render (uses the collection's own configured template).
       data[collection.name] = getItemsFromCollection(collection);
 
@@ -779,6 +949,39 @@ module.exports = function (eleventyConfig) {
       availableTemplates.forEach((templateName) => {
         data[`${collection.name}::${templateName}`] = getItemsFromCollection(
           collection,
+          templateName,
+        );
+      });
+    });
+
+    // Process file-based collections (defined in CMS config)
+    fileCollections.forEach((collection) => {
+      // Default render
+      data[collection.name] = getItemsFromFileCollection(collection);
+
+      // Pre-render one variant per available template
+      availableTemplates.forEach((templateName) => {
+        data[`${collection.name}::${templateName}`] =
+          getItemsFromFileCollection(collection, templateName);
+      });
+    });
+
+    // Process auto-discovered JSON collections
+    autoJsonCollections.forEach((jsonCollection) => {
+      // Default render
+      data[jsonCollection.name] = getItemsFromJsonFile(
+        jsonCollection.filePath,
+        jsonCollection.name,
+        jsonCollection.collector,
+        null,
+      );
+
+      // Pre-render one variant per available template
+      availableTemplates.forEach((templateName) => {
+        data[`${jsonCollection.name}::${templateName}`] = getItemsFromJsonFile(
+          jsonCollection.filePath,
+          jsonCollection.name,
+          jsonCollection.collector,
           templateName,
         );
       });

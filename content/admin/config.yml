@@ -108,14 +108,15 @@ collections:
         display_fields: [sources.*]
         search_fields: [sources.*]
 
-      - label: Publications
-        name: publications
+      - label: Related Publications
+        name: related_publications
         widget: relation
         collection: publications
+        file: publications
+        value_field: "publications.*.citation_key"
+        search_fields: ["publications.*.citation_key", "publications.*.title"]
+        display_fields: ["publications.*.citation_key", "publications.*.title"]
         multiple: true
-        required: false
-        value_field: "{{slug}}"
-        search_fields: [title, ref_id]
 
       - label: Lab protocols
         name: lab_protocols
@@ -138,49 +139,48 @@ collections:
         search_fields: [countries.*.name, countries.*.iso]
 
   # -----------------------------------------------------------------------
-  # PUBLICATION
+  # PUBLICATIONS
   # -----------------------------------------------------------------------
   - name: publications
     icon: database
     label: Publications
-    folder: content/data/publications
-    create: true
-    slug: "{{citation_key}}"
-    fields:
-      - label: Citation Key
-        name: citation_key
-        widget: string
-        hint: "Format: LastnameYear, e.g. Smith2023"
-
-      - label: Title
-        name: title
-        widget: string
-
-      - label: Authors
-        name: authors
-        widget: list
-        label_singular: Author
-        hint: "One author per entry"
-
-      - label: Date
-        name: date
-        widget: datetime
-        type: date
-        required: false
-
-      - label: Name of Publication
-        name: publication_name
-        widget: string
-
-      - label: DOI
-        name: doi
-        widget: string
-        required: false
-
-      - label: URL
-        name: url
-        widget: string
-        required: false
+    files:
+      - name: publications
+        label: Publications
+        file: content/data/publications.yaml
+        fields:
+          - label: Publications
+            name: publications
+            widget: list
+            label_singular: Publication
+            fields:
+              - label: Citation Key
+                name: citation_key
+                widget: string
+                hint: "Format: LastnameYear, e.g. Smith2023"
+              - label: Title
+                name: title
+                widget: string
+              - label: Authors
+                name: authors
+                widget: list
+                label_singular: Author
+                hint: "One author per entry"
+              - label: Date
+                name: date
+                widget: string
+                required: false
+              - label: Name of Publication
+                name: publication_name
+                widget: string
+              - label: DOI
+                name: doi
+                widget: string
+                required: false
+              - label: URL
+                name: url
+                widget: string
+                required: false
 
   # -----------------------------------------------------------------------
   # LAB PROTOCOL
@@ -201,14 +201,15 @@ collections:
         name: title
         widget: string
 
-      - label: Related publications
+      - label: Related Publications
         name: related_publications
         widget: relation
         collection: publications
+        file: publications
+        value_field: "publications.*.citation_key"
+        search_fields: ["publications.*.citation_key", "publications.*.title"]
+        display_fields: ["publications.*.citation_key", "publications.*.title"]
         multiple: true
-        required: false
-        value_field: "{{slug}}"
-        search_fields: [title, ref_id]
 
       - label: Protocol
         name: body
