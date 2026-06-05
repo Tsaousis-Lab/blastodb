@@ -7,12 +7,11 @@ description: Collection of laboratory protocols for sample preparation, DNA extr
 [hero: text-align:center]
 # Datasets
 
-Here you find a selection of relevant and trustworthy datasets for Blastocysts.
-If you are interested in contributing to this repository, contact us!
+Here you find a curated selection of trustworthy datasets for Blasticystis. You can search and filter for different subtypes and countries of origin.
 [:hero]
 
 [collector -> datasets; search:[title,subtypes]; sort:[date,title]; filters:[Subtypes->[subtypes],Countries->[countries]]; arrange:rows]
 
 ---
 
-**Missing anything, or wand to contribute?** [Contact us](/contact/) with your suggestions or if you'd like to share a protocol from your research group.
+**Missing anything, or wand to contribute?** [Contact us](/contact/) with your suggestions or if you'd like to add a dataset.
