@@ -1,0 +1,12 @@
+<div class="collector-card collector-card-reference">
+    <p>
+        {% for author in authors %}
+            {{ author }}{% if not loop.last %} & {% endif %}
+        {% endfor %}
+        <span style="display: inline; font-weight: bold;"> {{ title }} </span>
+        in {{ publication_name }} ({{ date }}).
+        {% if doi %}
+            doi: <a href="https://doi.org/{{ doi }}"> {{ doi }} </a>
+        {% endif %}
+    </p>
+</div>

@@ -1,11 +1,11 @@
 ---
+layout: layouts/lab-protocol.njk
 title: Culture of Blastocystis in Jones’ Medium
-related_publications: []
+related_publications: 
+  - test
 ---
 
 For xenic (i.e. non-sterile) in-vitro cultivation of _Blastocystis,_ Jones’ Medium is required:
-
-# Modified Jones’ Medium for in-vitro culture of Blastocystis
 
 **Stock Solution**
 
@@ -13,7 +13,7 @@ For xenic (i.e. non-sterile) in-vitro cultivation of _Blastocystis,_ Jones’ Me
 - KH2PO4                 9.08 g in 1 L distilled water
 - NaCl                     9.00 g in 1 L distilled water
 
-To prepare Jones' Medium:
+**To prepare Jones' Medium:**
 
 1. Mix 93.8 mL Na2HPO4 with 31.3 mL KH2HPO4 and 562.5 mL NaCl.
 2. To the buffered solution, add yeast extract (Oxoid) to 0.1%.
@@ -23,3 +23,9 @@ To prepare Jones' Medium:
 **Examination**
 
 Cultures are examined with or without iodine at x 200 and x400 LM magnification and evaluated for the presence of especially vacuolar (the main stage seen) but also other stages of Blastocystis.
+
+---
+
+## References
+
+[collector -> publications; clickable:false; card-template:references.njk; pre-filter:[citation_key={{ related_publications | join(" OR citation_key= ") }}]]

@@ -7,8 +7,8 @@
   <title>{{ title }}</title>
   <link rel="stylesheet" href="{{ '/assets/style.css' | url }}">
   <script>
-    // Inject lab protocols data into global scope for main.js to access
-    window.labProtocols = {{ labProtocols | dump | safe }};
+    // Inject collector data into global scope for main.js to access
+    window.collectorData = {{ collectorData | dump | safe }};
   </script>
   <script src="{{ '/assets/main.js' | url }}" defer></script>
 </head>
@@ -16,9 +16,12 @@
   {% include "layouts/header.njk" %}
 
   <main>
+    <div class="hero" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+        <h1>{{ title }}</h1>
+    </div>
     {{ content | processSpans | safe }}
 
-    <div class="protocol-footer">
+    <div class="protocol-footer" style="text-align:center">
       <a href="{{ '/lab-protocols/' | url }}" class="btn btn-secondary">← Back to Lab Protocols</a>
     </div>
   </main>

@@ -192,6 +192,11 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
+      - name: layout
+        label: Layout
+        widget: hidden
+        default: layouts/lab-protocol.njk
+
       - label: Title
         name: title
         widget: string
@@ -209,7 +214,7 @@ collections:
         name: body
         widget: markdown
         hint: "Add the Protocol here."
-        default: "todo"
+        default: "Add your description here.\n\nPlease do not change the code below this line.\n\n---\n\n## References\n\n[collector -> publications; clickable:false; card-template:references.njk; pre-filter:[citation_key={{ related_publications | join(' OR citation_key= ') }}]]"
 
   # -----------------------------------------------------------------------
   # SUBTYPE
@@ -221,12 +226,10 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - {
-          name: layout,
-          label: Layout,
-          widget: hidden,
-          default: layouts/subtype.njk,
-        }
+      - name: layout
+        label: Layout
+        widget: hidden
+        default: layouts/subtype.njk
 
       - label: ID
         name: id
