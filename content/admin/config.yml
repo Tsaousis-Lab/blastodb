@@ -214,7 +214,7 @@ collections:
         name: body
         widget: markdown
         hint: "Add the Protocol here."
-        default: "Add your description here.\n\nPlease do not change the code below this line.\n\n---\n\n## References\n\n[collector -> publications; clickable:false; card-template:references.njk; pre-filter:[citation_key={{ related_publications | join(' OR citation_key= ') }}]]"
+        default: "Add your description here.\n\nPlease do not change the code below this line.\n\n{% if related_publications.length %}\n\n \n\n---\n\n## References\n\n[collector -> publications; clickable:false; card-template:references.njk; prefilter:[citation_key={{ related_publications | join(' OR citation_key= ') }}]]\n\n{% endif %}"
 
   # -----------------------------------------------------------------------
   # SUBTYPE
@@ -265,7 +265,7 @@ collections:
       - label: Description
         name: body
         widget: markdown
-        default: "## Short Description\n\nAdd your description here.\n\nPlease do not change the code below this line.\n\n---\n\n## Explore Datasets Containing {{ name }}\n\n[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset.njk; pre-filter:[subtype={{ name }}]]"
+        default: "## Short Description\n\nAdd your description here.\n\nPlease do not change the code below this line.\n\n---\n\n## Explore Datasets Containing {{ name }}\n\n[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset.njk; prefilter:[subtype={{ name }}]]"
 
   # -----------------------------------------------------------------------
   # RESEARCH LAB

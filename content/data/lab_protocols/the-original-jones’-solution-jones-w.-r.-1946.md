@@ -14,8 +14,13 @@ related_publications:
 
 \*\* Marmite is autolysed yeast extract made by Marmite Limited, London
 
+
+{% if related_publications.length %}
+
 ---
 
 ## References
 
-[collector -> publications; clickable:false; card-template:references.njk; pre-filter:[citation_key={{ related_publications | join(" OR citation_key= ") }}]]
+[collector -> publications; clickable:false; card-template:references.njk; prefilter:[citation_key={{ related_publications | join(" OR citation_key=") }}]]
+
+{% endif %}

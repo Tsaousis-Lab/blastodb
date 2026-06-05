@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ description or 'BlastoDB - The open hub for Blastocystis research' }}">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="{{ '/assets/style.css' | url }}">
+  <script>
+    // Inject data into global scope for main.js to access
+    window.collectorData = {{ collectorData | dump | safe }};
+  </script>
+  <script src="{{ '/assets/main.js' | url }}" defer></script>
+</head>
+<body>
+  {% include "layouts/header.njk" %}
+
+  <main>
+    <div class="hero" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+      <h1>{{ name }}</h1>
+
+      {% if sources and sources.length %}
+        <div class="collector-item-tags" style="justify-content: center; margin: rem 0;">
+          {% for source in sources %}
+            <span class="tag">{{ source }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        {% if reference_genome_link %}
+          <button class="btn" onclick="window.open('{{ reference_genome_link }}', '_blank')">Download Reference Genome</button>
+        {% endif %}
+
+        {% if ssu_rrna_link %}
+          <button class="btn" onclick="window.open('{{ ssu_rrna_link }}', '_blank')">Download 18s SSU rRNA Sequence</button>
+        {% endif %}
+      </div>
+
+      <div>
+        <a href="/subtypes/" class="btn btn-secondary">← Back to all Subtypes</a>
+      </div>
+    </div>
+
+    {{ content | processSpans | safe }}
+    {{ subtype_collector }}
+  </main>
+
+  {% include "layouts/footer.njk" %}
+</body>
+</html>
