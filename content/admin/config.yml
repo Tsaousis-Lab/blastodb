@@ -145,10 +145,10 @@ collections:
     label: Publications
     folder: content/data/publications
     create: true
-    slug: "{{ref_id}}"
+    slug: "{{citation_key}}"
     fields:
-      - label: Reference ID
-        name: ref_id
+      - label: Citation Key
+        name: citation_key
         widget: string
         hint: "Format: LastnameYear, e.g. Smith2023"
 
@@ -168,8 +168,8 @@ collections:
         type: date
         required: false
 
-      - label: Journal name
-        name: journal_name
+      - label: Name of Publication
+        name: publication_name
         widget: string
 
       - label: DOI
@@ -196,11 +196,6 @@ collections:
         name: title
         widget: string
 
-      - label: Protocol
-        name: protocol
-        widget: markdown
-        hint: "Full long-form protocol text"
-
       - label: Related publications
         name: related_publications
         widget: relation
@@ -209,6 +204,12 @@ collections:
         required: false
         value_field: "{{slug}}"
         search_fields: [title, ref_id]
+
+      - label: Protocol
+        name: body
+        widget: markdown
+        hint: "Add the Protocol here."
+        default: "todo"
 
   # -----------------------------------------------------------------------
   # SUBTYPE
@@ -258,9 +259,9 @@ collections:
         widget: string
         required: false
 
-      - label: "Body"
-        name: "body"
-        widget: "markdown"
+      - label: Description
+        name: body
+        widget: markdown
         default: "## Short Description\n\nAdd your description here.\n\nPlease do not change the code below this line.\n\n---\n\n## Explore Datasets Containing {{ name }}\n\n[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset.njk; pre-filter:[subtype={{ name }}]]"
 
   # -----------------------------------------------------------------------

@@ -1,12 +1,17 @@
 ---
 title: The original "Jones’ solution" (Jones, W. R. 1946)
-protocol: |-
-  - Sterile horse serum                                        0,5 mL
-  - 1 % marmite solution\*\*                                 1,0 mL
-  - Buffer saline solution (pH 7,2)                        8,5 mL
-  - Rice starch                                                     30 mg
-
-  \*\* Marmite is autolysed yeast extract made by Marmite Limited, London
 related_publications:
   - jones1946
 ---
+
+- Sterile horse serum                                        0,5 mL
+- 1 % marmite solution\*\*                                 1,0 mL
+- Buffer saline solution (pH 7,2)                        8,5 mL
+- Rice starch                                                     30 mg
+
+\*\* Marmite is autolysed yeast extract made by Marmite Limited, London
+
+---
+
+## References
+[collector -> publications; clickable:false; pre-filter:[citation_key=Jones1946] card-template:publication.njk ]
