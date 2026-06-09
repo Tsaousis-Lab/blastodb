@@ -228,10 +228,10 @@ header {
 .site-logo {
     font-family: var(--font-headline);
     font-style: italic;
-    font-weight: 200;
+    font-weight: 400;
     font-size: 2.2rem;
     letter-spacing: -0.05em;
-    color: var(--accent-darker);
+    color: var(--accent-dark);
     text-decoration: none;
     flex-shrink: 0;
     display: flex;
@@ -569,15 +569,15 @@ footer {
 .footer-logo {
     font-family: var(--font-headline);
     font-style: italic;
-    font-weight: 700;
-    font-size: 1.8rem;
+    font-weight: 400;
+    font-size: 2.2rem;
     letter-spacing: -0.02em;
     color: rgba(255, 255, 255, 0.95);
     text-decoration: none;
     flex-shrink: 0;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.2rem;
 }
 
 .footer-logo-image {
@@ -1048,44 +1048,52 @@ footer a:hover {
     text-decoration: underline;
 }
 
-/* Publication */
 .collector-card-publication {
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
-}
-
-.collector-card-publication .collector-card-title {
-    margin: 0;
-    font-size: 1.05rem;
-    color: var(--text);
-}
-
-.collector-card-publication .collector-card-date {
-    font-size: 0.85rem;
-    color: var(--text-muted);
+    gap: 0.15rem;
 }
 
 .collector-card-publication .collector-card-authors {
+    font-family: var(--font-body);
     font-size: 0.9rem;
+    line-height: 1.35;
     color: var(--text);
 }
 
-.collector-card-publication .collector-card-journal {
+.collector-card-publication .collector-card-title {
+    font-family: var(--font-headline);
+    font-weight: 500;
+    font-size: 1.15rem;
+    line-height: 1.2;
+    margin: 0;
+    color: var(--text);
+}
+
+/* Source line: "Journal name, Year" — one line, one size. */
+.collector-card-publication .collector-card-journal,
+.collector-card-publication .collector-card-date {
+    font-family: var(--font-body);
     font-size: 0.9rem;
-    font-style: italic;
+    line-height: 1.4;
     color: var(--text-muted);
+}
+
+.collector-card-publication .collector-card-journal {
+    font-style: italic;
 }
 
 .collector-card-publication .collector-card-links {
     display: flex;
     flex-wrap: wrap;
     gap: 0.6rem;
-    margin-top: 0.3rem;
+    margin-top: 0.2rem;
 }
 
 .collector-card-publication .collector-card-links a {
-    font-size: 0.85rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    line-height: 1.4;
     color: var(--accent);
     text-decoration: underline;
 }
