@@ -6,14 +6,14 @@ layout: layouts/base.njk
 
 [hero: text-align:center]
 
-# Subtypes
+<h-hero>Subtypes</h-hero>
 
 Explore information around each subtype.<br>
 You also find genome sequences and 18s SSU rRNA sequences for avainalbe subtypes.
 
 [:hero]
 
-## Explore Blastocystis Subtypes
+# Explore Blastocystis Subtypes
 
 [collector -> subtypes; search:[name,id]; filters:[Sources->[sources]]; arrange:rows; card-template:subtype.njk]
 

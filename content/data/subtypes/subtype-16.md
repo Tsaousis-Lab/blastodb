@@ -15,6 +15,6 @@ Mainly associated with marsupials (kangaroos and other macropods). Occasionally 
 
 ---
 
-## Explore Datasets Containing {{ name }}
+# Explore Datasets Containing {{ name }}
 
 [collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset.njk; prefilter:[subtypes={{ name }}]]

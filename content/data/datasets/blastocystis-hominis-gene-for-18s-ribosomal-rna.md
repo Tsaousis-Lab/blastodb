@@ -27,7 +27,7 @@ GenBank Access No.: AB023499
 
 ---
 
-## References
+# References
 
 [collector -> publications; clickable:false; card-template:references.njk; prefilter:[citation_key={{ related_publications | join(" OR citation_key=") }}]]
 
@@ -37,9 +37,8 @@ GenBank Access No.: AB023499
 
 ---
 
-## Related Lab Protocols
+# Related Lab Protocols
 
 [collector -> lab_protocols; clickable:false; card-template:related_lab_protocol.njk; prefilter:[title={{ lab_protocols | join(" OR title=") }}]]
 
 {% endif %}
-

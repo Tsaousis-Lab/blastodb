@@ -1,6 +1,6 @@
 ---
 layout: layouts/lab-protocol.njk
-title: The original "Jones’ solution" (Jones, W. R. 1946)
+title: The original "Jones’ Solution"
 related_publications:
   - jones1946
 ---
@@ -19,7 +19,7 @@ related_publications:
 
 ---
 
-## References
+# References
 
 [collector -> publications; clickable:false; card-template:references.njk; prefilter:[citation_key={{ related_publications | join(" OR citation_key=") }}]]
 

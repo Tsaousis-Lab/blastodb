@@ -24,7 +24,7 @@ GenBank Access No.:AF408426
 
 ---
 
-## References
+# References
 
 [collector -> publications; clickable:false; card-template:references.njk; prefilter:[citation_key={{ related_publications | join(" OR citation_key=") }}]]
 
@@ -34,9 +34,8 @@ GenBank Access No.:AF408426
 
 ---
 
-## Related Lab Protocols
+# Lab Protocols
 
 [collector -> lab_protocols; clickable:false; card-template:related_lab_protocol.njk; prefilter:[title={{ lab_protocols | join(" OR title=") }}]]
 
 {% endif %}
-

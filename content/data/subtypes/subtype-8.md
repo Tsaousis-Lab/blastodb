@@ -16,6 +16,6 @@ Mainly associated with non-human primates (especially New World monkeys) and wit
 
 ---
 
-## Explore Datasets Containing {{ name }}
+# Explore Datasets Containing {{ name }}
 
 [collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset.njk; prefilter:[subtypes={{ name }}]]

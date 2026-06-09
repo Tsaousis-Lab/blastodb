@@ -27,7 +27,7 @@ Cultures are examined with or without iodine at x 200 and x400 LM magnification 
 
 ---
 
-## References
+# References
 
 [collector -> publications; clickable:false; card-template:references.njk; prefilter:[citation_key={{ related_publications | join(" OR citation_key=") }}]]
 

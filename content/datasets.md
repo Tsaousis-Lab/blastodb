@@ -5,7 +5,8 @@ description: Collection of laboratory protocols for sample preparation, DNA extr
 ---
 
 [hero: text-align:center]
-# Datasets
+
+<h-hero>Datasets</h-hero>
 
 Here you find a curated selection of trustworthy datasets for Blasticystis. You can search and filter for different subtypes and countries of origin.
 [:hero]

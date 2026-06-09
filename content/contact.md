@@ -3,8 +3,9 @@ layout: layouts/base.njk
 title: BlastoDB - Contact
 description: Contact the people behind BlastoDB.
 ---
-[hero:]
-# Contact
+[hero: text-align:center]
+
+<h-hero>Contact</h-hero>
 
 Please contact us!
 

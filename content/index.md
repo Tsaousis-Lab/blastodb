@@ -9,8 +9,8 @@ layout: layouts/base.njk
 [hero:]
 [cols:]
 
-[box: text-align:justify]
-# The open hub for<br>[s: color:#0d5a53]Blastocystis[:s] research
+[box: text-align:left]
+<h-hero>The open hub for<br>[s: color:var(--accent-darker)]*Blastocystis*[:s]</h-hero>
 
 We are dedicated to advance global knowledge and collaboration on Blastocystis, one of the most prevalent yet underexplored microorganisms in the human and animal gut. Our mission is to provide a comprehensive, trustworthy and accessible resource for Blastocystis research.
 
@@ -26,12 +26,12 @@ _Art by Sam Falconer_
 [:cols]
 [:hero]
 
-## Explore BlastoDB
+# Explore BlastoDB
 
 [grid: cols:3]
 
-[card: text-align:center; hyphens: auto]
-## Digital Resources
+[card: text-align:center]
+### Digital Resources
 
 Our Dataset-Repository contains reviewed datasets, which can be explored and filtered. Explore the whole dataset, or each subtype separately.
 [box: text-align:center]
@@ -40,7 +40,7 @@ Our Dataset-Repository contains reviewed datasets, which can be explored and fil
 [:card]
 
 [card: text-align:center]
-## Physical Resources
+### Physical Resources
 
 Explore our Biobank, a community-network of research laboratories offering physical resources for Blastocystis research.
 
@@ -49,7 +49,7 @@ Explore our Biobank, a community-network of research laboratories offering physi
 [:card]
 
 [card: text-align:center]
-## Community
+### Community
 
 Interested to start researching Blastocystis? Explore our network of research labs!
 

@@ -3,8 +3,9 @@ layout: layouts/base.njk
 title: BlastoDB - Biobank
 description: Biobank for physical resources around Blastocystis.
 ---
-[hero:]
-# Biobank
+[hero: text-align:center]
+
+<h-hero>Biobank</h-hero>
 
 Here you can find physical resources around Blastocystis.
 [:hero]

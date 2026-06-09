@@ -5,7 +5,8 @@ description: Collection of laboratory protocols for sample preparation, DNA extr
 ---
 
 [hero: text-align:center]
-# Laboratory Protocols
+
+<h-hero>Laboratory Protocols</h-hero>
 
 Browse our collection of standardized laboratory protocols.
 

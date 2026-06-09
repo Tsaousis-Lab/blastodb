@@ -6,7 +6,7 @@ description: The mission of BlastoDB.
 
 [hero: text-align:center]
 
-# The Mission of BlastoDB
+<h-hero>The Mission of BlastoDB</h-hero>
 
 [:hero]
 

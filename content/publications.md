@@ -5,9 +5,10 @@ description: Scientific publications around Blastocystis.
 ---
 
 [hero: text-align:center]
-# Publications
-Browse the peer-reviewed publications related to the data in this repository.
 
+<h-hero>Publications</h-hero>
+
+Browse the publications related to the data on this website.
 
 [:hero]
 

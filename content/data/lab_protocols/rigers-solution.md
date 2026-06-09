@@ -10,7 +10,7 @@ related_publications: []
 
 ---
 
-## References
+# References
 
 [collector -> publications; clickable:false; card-template:references.njk; prefilter:[citation_key={{ related_publications | join(" OR citation_key=") }}]]
 

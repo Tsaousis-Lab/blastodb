@@ -14,6 +14,6 @@ Reported from ruminants (cattle, sheep, goats) and from llamas. An animal-associ
 
 ---
 
-## Explore Datasets Containing {{ name }}
+# Explore Datasets Containing {{ name }}
 
 [collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset.njk; prefilter:[subtypes={{ name }}]]

@@ -14,6 +14,6 @@ Separated from ST10 in 2024. Found in ruminants (cattle, sheep, goats).
 
 ---
 
-## Explore Datasets Containing {{ name }}
+# Explore Datasets Containing {{ name }}
 
 [collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset.njk; prefilter:[subtypes={{ name }}]]
