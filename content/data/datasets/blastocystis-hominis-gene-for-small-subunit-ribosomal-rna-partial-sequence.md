@@ -1,6 +1,7 @@
 ---
 layout: layouts/dataset-page.njk
 title: Blastocystis hominis gene for small subunit ribosomal RNA, partial sequence
+publicaiton_date: "2003"
 link_to_source: https://www.ncbi.nlm.nih.gov/nuccore/AB070989
 strains:
   - HE87-1

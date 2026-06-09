@@ -1,6 +1,7 @@
 ---
 layout: layouts/dataset-page.njk
 title: TEST DATASET
+publicaiton_date: "2026"
 link_to_source: test.com
 strains: []
 datatypes:

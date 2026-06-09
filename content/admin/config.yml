@@ -35,6 +35,11 @@ collections:
         widget: string
         hint: "URL or DOI pointing to the raw data"
 
+      - label: Publication Date
+        name: publicaiton_date
+        widget: string
+        hint: "Date of publication for the dataset."
+
       - label: Strains
         name: strains
         widget: list
