@@ -345,6 +345,8 @@ function filterItems(
       itemEl.addEventListener("click", function (e) {
         if (container.classList.contains("collector-not-clickable")) return;
         if (e.target.closest("a, button, input, textarea, select")) return;
+        if (e.target.closest("a, button, input, textarea, select, summary"))
+          return;
         const url = this.dataset.url;
         if (url && url !== "#") {
           window.location.href = url;

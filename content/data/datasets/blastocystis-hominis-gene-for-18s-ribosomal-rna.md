@@ -1,7 +1,7 @@
 ---
 layout: layouts/dataset-page.njk
 title: Blastocystis hominis gene for 18S ribosomal RNA
-publicaiton_date: "2002"
+publication_date: "2002"
 link_to_source: https://www.ncbi.nlm.nih.gov/nuccore/AB023499
 strains:
   - HE87-1

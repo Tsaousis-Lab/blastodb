@@ -1,0 +1,54 @@
+
+{%- macro joinList(val, sep=", ") -%}
+  {%- if val is iterable and val is not string -%}{{ val | join(sep) }}{%- else -%}{{ val }}{%- endif -%}
+{%- endmacro -%}
+
+{%- macro row(label, val) -%}
+  {%- if val and (val is string or val.length) -%}
+  <tr><th>{{ label }}</th><td>{{ joinList(val) }}</td></tr>
+  {%- endif -%}
+{%- endmacro -%}
+
+<div class="collector-card collector-card-dataset">
+  <div class="dataset-head">
+    <div class="dataset-titlerow">
+      <h3 class="dataset-title">{{ title }}</h3>
+      {% if publication_date %}<span class="dataset-date">{{ publication_date }}</span>{% endif %}
+    </div>
+
+    <div class="dataset-meta">
+      {% if subtypes or countries %}
+      <div class="dataset-chips">
+        {% if subtypes %}
+          {% if subtypes is iterable and subtypes is not string %}
+            {% for st in subtypes %}<span class="dataset-chip">{{ st }}</span>{% endfor %}
+          {% else %}
+            <span class="dataset-chip">{{ subtypes }}</span>
+          {% endif %}
+        {% endif %}
+        {% if countries %}
+          {% for c in countries %}<span class="dataset-chip dataset-chip-countries">{{ c }}</span>{% endfor %}
+        {% endif %}
+      </div>
+      {% endif %}
+      <div class="dataset-links">
+        <a href="/data/datasets/{{ slug }}/">Open Subtype Page &#8599;</a>
+        <a href="{{ link_to_source }}" target="_blank" rel="noopener">Open Dataset &#8599;</a>
+      </div>
+    </div>
+  </div>
+
+  <details class="dataset-details">
+    <summary class="dataset-summary" onclick="event.stopPropagation()">Details</summary>
+    <table class="dataset-table">
+      {{ row("Subtype(s)", subtypes) }}
+      {{ row("Strain(s)", strains) }}
+      {{ row("Datatype(s)", data_types) }}
+      {{ row("Data origin(s)", data_origins) }}
+      {{ row("Data source(s)", data_sources) }}
+      {{ row("Detection method(s)", detection_methods) }}
+      {{ row("Source(s)", sources) }}
+      {{ row("Countries", countries) }}
+    </table>
+  </details>
+</div>

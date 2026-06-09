@@ -22,6 +22,7 @@
 /* ── 1. Fonts ──────────────────────────────────────────────── */
 /* Both families loaded in one request, full variable ranges.    */
 @import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 
 /* ── 2. Design tokens ──────────────────────────────────────── */
 :root {
@@ -45,6 +46,7 @@
     --font-body: "Public Sans", sans-serif;
     --font-ui: "Public Sans", sans-serif;
     --font-headline: "Crimson Pro", serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
     /* Layout */
     --header-h: 64px;
@@ -1175,6 +1177,178 @@ footer a:hover {
 .collector-card-lab-contact {
     font-size: 0.85rem;
     color: var(--text);
+}
+/* ── Dataset cards ── */
+.collector-card-dataset {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+/* Head — two tight rows */
+.dataset-head {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+.dataset-titlerow {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.dataset-title {
+    font-family: var(--font-headline);
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.2;
+    margin: 0;
+    color: var(--text);
+    min-width: 0; /* allow it to shrink so the date keeps its space */
+    overflow-wrap: break-word;
+}
+.dataset-date {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.dataset-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    flex-wrap: wrap;
+}
+
+.dataset-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    align-items: center;
+}
+.dataset-chip {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.03em;
+    padding: 0.18rem 0.5rem;
+    border-radius: 100px;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    white-space: nowrap;
+}
+.dataset-chip-countries {
+    background: #ece9e2;
+    color: var(--text-muted);
+}
+
+.dataset-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    flex-shrink: 0;
+}
+.dataset-links a {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+}
+.dataset-links a:hover {
+    border-bottom-color: var(--accent);
+}
+
+/* Expandable panel */
+.dataset-details {
+    border-top: 1px solid var(--border);
+    padding-top: 0.5rem;
+}
+.dataset-summary {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    cursor: pointer;
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    user-select: none;
+}
+.dataset-summary::-webkit-details-marker {
+    display: none;
+}
+.dataset-summary::after {
+    content: "\25BE";
+    font-size: 0.8rem;
+    transition: transform 0.2s ease;
+}
+.dataset-details[open] .dataset-summary::after {
+    transform: rotate(180deg);
+}
+.dataset-summary:hover {
+    color: var(--accent-dark);
+}
+
+/* Table — mono labels, mono data values */
+.dataset-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.75rem;
+}
+.dataset-table th,
+.dataset-table td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.45rem 0;
+    border-top: 1px solid var(--border);
+}
+.dataset-table tr:first-child th,
+.dataset-table tr:first-child td {
+    border-top: none;
+}
+.dataset-table th {
+    width: 34%;
+    padding-right: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+.dataset-table td {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text);
+    line-height: 1.45;
+}
+.dataset-table td a {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+@media (max-width: 520px) {
+    .dataset-table th,
+    .dataset-table td {
+        display: block;
+        width: 100%;
+    }
+    .dataset-table td {
+        padding-top: 0;
+        padding-bottom: 0.6rem;
+    }
+    .dataset-table th {
+        border-top: 1px solid var(--border);
+        padding-bottom: 0.1rem;
+    }
+    .dataset-table tr:first-child th {
+        border-top: none;
+    }
 }
 
 /* ── 15. Selection button (sbtn) ───────────────────────────── */
