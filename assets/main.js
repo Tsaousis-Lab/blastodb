@@ -935,17 +935,6 @@ function initializeNavDropdowns() {
   // Close dropdowns when clicking menu items
   const dropdownItems = document.querySelectorAll(".nav-dropdown-item");
   dropdownItems.forEach((item) => {
-    // Add hover effect
-    item.addEventListener("mouseenter", function () {
-      this.style.backgroundColor = "var(--accent-pale)";
-      this.style.color = "var(--accent-dark)";
-    });
-
-    item.addEventListener("mouseleave", function () {
-      this.style.backgroundColor = "";
-      this.style.color = "";
-    });
-
     item.addEventListener("click", function () {
       closeAllNavDropdowns();
       // Close mobile nav if open

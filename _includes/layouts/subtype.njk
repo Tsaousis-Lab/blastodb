@@ -6,6 +6,7 @@
   <meta name="description" content="{{ description or 'BlastoDB - The open hub for Blastocystis research' }}">
   <title>{{ title }}</title>
   <link rel="stylesheet" href="{{ '/assets/style.css' | url }}">
+  <link rel="stylesheet" href="{{ '/assets/collector.css' | url }}">
   <script>
     // Inject data into global scope for main.js to access
     window.collectorData = {{ collectorData | dump | safe }};
@@ -16,29 +17,33 @@
   {% include "layouts/header.njk" %}
 
   <main>
-    <div class="hero" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+    <div class="hero hero-content-center">
       <h-hero>{{ name }}</h-hero>
 
       {% if sources and sources.length %}
-        <div class="collector-item-tags" style="justify-content: center; margin: rem 0;">
+        <div class="collector-item-tags tags-centered">
           {% for source in sources %}
             <span class="tag">{{ source }}</span>
           {% endfor %}
         </div>
       {% endif %}
 
-      <div style="display: flex; flex-direction: column; align-items: center;">
-        {% if reference_genome_link %}
-          <button class="btn" onclick="window.open('{{ reference_genome_link }}', '_blank')">Download Reference Genome</button>
-        {% endif %}
-
-        {% if ssu_rrna_link %}
-          <button class="btn" onclick="window.open('{{ ssu_rrna_link }}', '_blank')">Download 18s SSU rRNA Sequence</button>
-        {% endif %}
+      <div class="btn-group-center">
+        <div style="align-items: center">
+            {% if reference_genome_link %}
+            <a href="{{ reference_genome_link }}" target="_blank" rel="noopener">Download Reference Genome &#8599;</a>
+            {% endif %}
+            {% if reference_genome_link and ssu_rrna_link %}
+            &nbsp;
+            {% endif %}
+            {% if ssu_rrna_link %}
+            <a href="{{ ssu_rrna_link }}" target="_blank" rel="noopener">Download 18s SSU rRNA Sequence &#8599;</a>
+            {% endif %}
+        </div>
       </div>
 
       <div>
-        <a href="/subtypes/" class="btn btn-secondary">← Back to all Subtypes</a>
+        <a href="/subtypes/" class="btn">← Back to all Subtypes</a>
       </div>
     </div>
 

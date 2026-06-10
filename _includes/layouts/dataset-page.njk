@@ -6,6 +6,7 @@
   <meta name="description" content="{{ description or 'BlastoDB - The open hub for Blastocystis research' }}">
   <title>{{ title }}</title>
   <link rel="stylesheet" href="{{ '/assets/style.css' | url }}">
+  <link rel="stylesheet" href="{{ '/assets/collector.css' | url }}">
   <script>
     // Inject data into global scope for main.js to access
     window.collectorData = {{ collectorData | dump | safe }};
@@ -15,11 +16,11 @@
 <body>
   {% include "layouts/header.njk" %}
   <main>
-    <div class="hero" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+    <div class="hero hero-content-center">
       <h-hero>{{ title }}</h-hero>
 
       {% if subtypes and subtypes.length %}
-        <div class="collector-item-tags" style="justify-content: center; margin: rem 0;">
+        <div class="collector-item-tags tags-centered">
           {% for subtype in subtypes %}
             <span class="tag">{{ subtype }}</span>
           {% endfor %}
@@ -27,7 +28,7 @@
       {% endif %}
 
     {% if strains and strains.length %}
-        <div class="collector-item-tags" style="justify-content: center; margin: rem 0;">
+        <div class="collector-item-tags tags-centered">
           {% for strain in strains %}
             <span class="tag">{{ strain }}</span>
           {% endfor %}
@@ -35,7 +36,7 @@
     {% endif %}
 
     {% if datatypes and datatypes.length %}
-        <div class="collector-item-tags" style="justify-content: center; margin: rem 0;">
+        <div class="collector-item-tags tags-centered">
           {% for datatype in datatypes %}
             <span class="tag">{{ datatype }}</span>
           {% endfor %}
@@ -43,7 +44,7 @@
     {% endif %}
 
     {% if detection_methods and detection_methods.length %}
-        <div class="collector-item-tags" style="justify-content: center; margin: rem 0;">
+        <div class="collector-item-tags tags-centered">
           {% for detection_method in detection_methods %}
             <span class="tag">{{ detection_method }}</span>
           {% endfor %}
@@ -51,7 +52,7 @@
     {% endif %}
 
     {% if sources and sources.length %}
-        <div class="collector-item-tags" style="justify-content: center; margin: rem 0;">
+        <div class="collector-item-tags tags-centered">
           {% for source in sources %}
             <span class="tag">{{ source }}</span>
           {% endfor %}
@@ -59,7 +60,7 @@
     {% endif %}
 
     {% if data_origins and data_origins.length %}
-        <div class="collector-item-tags" style="justify-content: center; margin: rem 0;">
+        <div class="collector-item-tags tags-centered">
           {% for data_origin in data_origins %}
             <span class="tag">{{ data_origin }}</span>
           {% endfor %}
@@ -67,7 +68,7 @@
     {% endif %}
 
     {% if countries and countries.length %}
-        <div class="collector-item-tags" style="justify-content: center; margin: rem 0;">
+        <div class="collector-item-tags tags-centered">
           {% for countrie in countries %}
             <span class="tag">{{ countrie }}</span>
           {% endfor %}
@@ -75,7 +76,7 @@
     {% endif %}
 
     {% if data_sources and data_sources.length %}
-        <div class="collector-item-tags" style="justify-content: center; margin: rem 0;">
+        <div class="collector-item-tags tags-centered">
           {% for data_source in data_sources %}
             <span class="tag">{{ data_source }}</span>
           {% endfor %}
@@ -88,7 +89,7 @@
 
     {{ content | processSpans | safe }}
 
-    <div class="protocol-footer" style="text-align:center">
+    <div class="protocol-footer">
       <a href="{{ '/datasets/' | url }}" class="btn btn-secondary">← Back to Datasets</a>
     </div>
   </main>

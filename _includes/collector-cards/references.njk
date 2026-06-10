@@ -3,7 +3,7 @@
         {% for author in authors %}
             {{ author }}{% if not loop.last %} & {% endif %}
         {% endfor %}
-        <span style="display: inline; font-weight: bold;"> {{ title }} </span>
+        <strong>{{ title }}</strong>
         in {{ publication_name }} ({{ date }}).
         {% if doi %}
             doi: <a href="https://doi.org/{{ doi }}"> {{ doi }} </a>

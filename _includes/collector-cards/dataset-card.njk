@@ -12,7 +12,7 @@
 <div class="collector-card collector-card-dataset">
   <div class="dataset-head">
     <div class="dataset-titlerow">
-      <h3 class="dataset-title">{{ title }}</h3>
+      <h3 class="card-title">{{ title }}</h3>
       {% if publication_date %}<span class="dataset-date">{{ publication_date }}</span>{% endif %}
     </div>
 
@@ -21,13 +21,13 @@
       <div class="dataset-chips">
         {% if subtypes %}
           {% if subtypes is iterable and subtypes is not string %}
-            {% for st in subtypes %}<span class="dataset-chip">{{ st }}</span>{% endfor %}
+            {% for st in subtypes %}<span class="tag">{{ st }}</span>{% endfor %}
           {% else %}
-            <span class="dataset-chip">{{ subtypes }}</span>
+            <span class="tag">{{ subtypes }}</span>
           {% endif %}
         {% endif %}
         {% if countries %}
-          {% for c in countries %}<span class="dataset-chip dataset-chip-countries">{{ c }}</span>{% endfor %}
+          {% for c in countries %}<span class="tag tag-muted">{{ c }}</span>{% endfor %}
         {% endif %}
       </div>
       {% endif %}
