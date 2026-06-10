@@ -539,6 +539,15 @@
     color: var(--text);
 }
 
+/* Download link group in subtype hero */
+.subtype-download-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin: 0.5rem 0;
+}
+
 /* ── Dataset ── */
 .collector-card-dataset {
     display: flex;
@@ -592,14 +601,6 @@
 .dataset-links a {
     font-family: var(--font-body);
     font-size: 0.85rem;
-    color: var(--accent);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.15s;
-}
-
-.dataset-links a:hover {
-    border-bottom-color: var(--accent);
 }
 
 /* Expandable details panel */

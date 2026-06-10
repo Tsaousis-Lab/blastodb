@@ -371,7 +371,21 @@ nav a.active {
     display: none;
 }
 
-/* ── 7. Buttons ────────────────────────────────────────────── */
+/* ── 7. Buttons & links ────────────────────────────────────── */
+/* Animated underline — sits invisible until hover, then slides in. */
+.link-underline {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+}
+
+.link-underline:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
+
+
 .btn {
     display: inline-block;
     font-family: var(--font-ui);

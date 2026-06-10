@@ -28,19 +28,16 @@
         </div>
       {% endif %}
 
-      <div class="btn-group-center">
-        <div style="align-items: center">
-            {% if reference_genome_link %}
-            <a href="{{ reference_genome_link }}" target="_blank" rel="noopener">Download Reference Genome &#8599;</a>
-            {% endif %}
-            {% if reference_genome_link and ssu_rrna_link %}
-            &nbsp;
-            {% endif %}
-            {% if ssu_rrna_link %}
-            <a href="{{ ssu_rrna_link }}" target="_blank" rel="noopener">Download 18s SSU rRNA Sequence &#8599;</a>
-            {% endif %}
-        </div>
+      {% if reference_genome_link or ssu_rrna_link %}
+      <div class="subtype-download-links">
+        {% if reference_genome_link %}
+          <a href="{{ reference_genome_link }}" target="_blank" rel="noopener" class="link-underline">Download Reference Genome &#8599;</a>
+        {% endif %}
+        {% if ssu_rrna_link %}
+          <a href="{{ ssu_rrna_link }}" target="_blank" rel="noopener" class="link-underline">Download 18s SSU rRNA Sequence &#8599;</a>
+        {% endif %}
       </div>
+      {% endif %}
 
       <div>
         <a href="/subtypes/" class="btn">← Back to all Subtypes</a>
