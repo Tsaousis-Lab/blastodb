@@ -1204,12 +1204,17 @@ footer a:hover {
     line-height: 1.2;
     margin: 0;
     color: var(--text);
-    min-width: 0; /* allow it to shrink so the date keeps its space */
     overflow-wrap: break-word;
+}
+/* Shrink it to fit the date. */
+.collector-items.arrange-rows .collector-item h3.dataset-title {
+    flex-shrink: 1;
+    min-width: 0;
+    width: auto;
 }
 .dataset-date {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     color: var(--text-muted);
     white-space: nowrap;
     flex-shrink: 0;
