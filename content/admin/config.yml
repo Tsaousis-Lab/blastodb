@@ -287,42 +287,69 @@ collections:
   - name: research_labs
     icon: database
     label: Research labs
-    folder: content/data/research_labs
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - label: Name
-        name: name
-        widget: string
+    collector:
+      template: research-labs-card.njk
+    files:
+      - name: research_labs
+        label: Research labs
+        file: content/data/research_labs.json
+        fields:
+          - label: Research labs
+            name: research_labs
+            widget: list
+            label_singular: Research lab
+            fields:
+              - label: Lab Name
+                name: lab_name
+                widget: string
 
-      - label: Short description
-        name: short_description
-        widget: text
-        required: false
-        hint: "A few sentences"
+              - label: Institution Logo (upload)
+                name: institution_logo_upload
+                widget: image
+                required: false
+                hint: "Upload the institution logo. Provide either this OR a logo URL below — at least one is expected. SVG, PNG or WebP on a transparent background works best.<br>Alteratively, provide a link to a logo below.<br>Landscape photo, recommended 1200×600 px (2:1 ratio). JPG or WebP. Will be cropped as a banner at the top of the card."
 
-      - label: Contact name
-        name: contact_name
-        widget: string
+              - label: Institution Logo (URL)
+                name: institution_logo_url
+                widget: string
+                required: false
+                hint: "Link to the institution logo (e.g. from the university website). Used when you have no file to upload. At least one of the two logo fields should be filled in.<br>Landscape photo, recommended 1200×600 px (2:1 ratio). JPG or WebP. Will be cropped as a banner at the top of the card"
 
-      - label: Contact email
-        name: contact_mail
-        widget: string
+              - label: Short description
+                name: short_description
+                widget: text
+                required: false
+                hint: "A few sentences"
 
-      - label: Contact image
-        name: contact_img_path
-        widget: image
-        required: false
+              - label: Contact name
+                name: contact_name
+                widget: string
 
-      - label: Address
-        name: address
-        widget: text
+              - label: Contact email
+                name: contact_mail
+                widget: string
 
-      - label: Lab image
-        name: img_path
-        widget: image
+              - label: Contact webpage
+                name: contact_url
+                widget: string
+                required: false
+                hint: "URL to the contact person's personal or lab webpage."
 
-  - { divider: true, label: "Vocabularies" }
+              - label: Contact image
+                name: contact_img_path
+                widget: image
+                required: false
+                hint: "Square portrait photo, minimum 200×200 px. JPG or WebP. Displayed as a small circle next to the contact name."
+
+              - label: Name of Institution
+                name: institution_name
+                widget: text
+
+              - label: Address of Institution
+                name: institution_address
+                widget: text
+
+  - divider: true
 
   # -----------------------------------------------------------------------
   # VOCABULARIES

@@ -12,4 +12,4 @@ Browse labs working on _Blastocystis_ research and related microbiome topics.
 
 [:hero]
 
-[collector -> research-labs; search:[title,description,contacts.name,address,country]; sort:[title]; filters:[Country->[country]]; arrange:grid; clickable:false]
+[collector -> research_labs; search:[lab_name,short_description,contact_name,institution_name,institution_address]; sort:[lab_name]; arrange:grid; clickable:false, card-template:research-labs-card.njk]

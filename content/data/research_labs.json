@@ -1,0 +1,28 @@
+{
+  "research_labs": [
+    {
+      "lab_name": "Tsaousis Lab",
+      "institution_logo_upload": "/assets/uploads/kent-logo-3941592245.jpg",
+      "institution_logo_url": "",
+      "short_description": "The Lab of Anastasios (Tasos) Tsaousis at the University of Kent investigates the cell biology and evolution of microbial eukaryotes, with a focus on the human gut parasite Blastocystis.",
+      "contact_name": "Dr Anastasios (Tasos) Tsaousis",
+      "contact_mail": "a.tsaousis@kent.ac.uk",
+      "contact_url": "https://www.kent.ac.uk/biosciences/people/653/tsaousis-anastasios",
+      "contact_img_path": "/assets/uploads/pasted-image-1781094468326.png",
+      "institution_name": "University of Kent",
+      "institution_address": "School of Biosciences\nCanterbury, Kent CT2 7NJ\nUnited Kingdom"
+    },
+    {
+      "lab_name": "Eleni Gentekaki's Lab",
+      "institution_logo_upload": "",
+      "institution_logo_url": "https://www.unic.ac.cy/brand/wp-content/uploads/sites/27/2019/11/Long-Logo2-500x375.png",
+      "short_description": "Eleni Gentekaki's Lab at Mae Fah Luang University leads research on the diversity, evolution, and epidemiology of Blastocystis.",
+      "contact_name": "Dr Eleni Gentekaki",
+      "contact_mail": "eleni.gentekaki@mfu.ac.th",
+      "contact_url": "https://www.unic.ac.cy/vet/faculty-staff/eleni-gentekaki/",
+      "contact_img_path": "/assets/uploads/pasted-image-1781094520964.png",
+      "institution_name": "Mae Fah Luang University",
+      "institution_address": "School of Science\nChiang Rai 57100\nThailand"
+    }
+  ]
+}
