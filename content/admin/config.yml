@@ -1,4 +1,4 @@
-publish_mode: editorial_workflow
+publish_mode: simple
 
 backend:
   name: github
@@ -29,24 +29,35 @@ collections:
       - label: Title
         name: title
         widget: string
+        hint: "The name of the Dataset."
 
-      - label: Link to source
+      - label: Link to Source
         name: link_to_source
         widget: string
-        hint: "URL or DOI pointing to the raw data"
+        hint: "URL to the raw data."
+
+      - label: Related Publication(s)
+        name: related_publications
+        widget: relation
+        collection: publications
+        file: publications
+        value_field: "publications.*.citation_key"
+        search_fields: ["publications.*.citation_key", "publications.*.title"]
+        display_fields: ["publications.*.citation_key", "publications.*.title"]
+        multiple: true
+        hint: "Publications must be added before you can link to them here."
 
       - label: Publication Date
         name: publication_date
         widget: string
-        hint: "Date of publication for the dataset."
+        hint: "The date the dataset was published.<br>Enter a year (2024), month and year (06.2024), or full date (11.06.2024)"
+        pattern:
+          [
+            '^(((0[1-9]|[12]\d|3[01])\.)?(0[1-9]|1[0-2])\.)?\d{4}$',
+            "Use dd.mm.yyyy, mm.yyyy, or yyyy",
+          ]
 
-      - label: Strains
-        name: strains
-        widget: list
-        required: false
-        hint: "Free-text list of strain identifiers"
-
-      - label: Datatypes
+      - label: Datatype(s)
         name: datatypes
         widget: relation
         collection: vocabularies
@@ -56,9 +67,15 @@ collections:
         value_field: datatypes.*
         display_fields: [datatypes.*]
         search_fields: [datatypes.*]
-        hint: "At least one required"
+        hint: "At least one required.<br>If a desired datatype is missing, you can add it under ''Vocabularies'' -> Datatypes."
 
-      - label: Data origins
+      - label: Strain(s)
+        name: strains
+        widget: list
+        required: false
+        hint: "Free-text list of strain identifiers. One item per line."
+
+      - label: Data Origin(s)
         name: data_origins
         widget: relation
         collection: vocabularies
@@ -68,19 +85,9 @@ collections:
         value_field: data_origins.*
         display_fields: [data_origins.*]
         search_fields: [data_origins.*]
+        hint: "If a desired datatype is missing, you can add it under ''Vocabularies'' -> Data Origins."
 
-      - label: Data sources
-        name: data_sources
-        widget: relation
-        collection: vocabularies
-        file: data_sources
-        multiple: true
-        required: false
-        value_field: data_sources.*
-        display_fields: [data_sources.*]
-        search_fields: [data_sources.*]
-
-      - label: Detection methods
+      - label: Detection Method(s)
         name: detection_methods
         widget: relation
         collection: vocabularies
@@ -111,25 +118,7 @@ collections:
         value_field: sources.*
         display_fields: [sources.*]
         search_fields: [sources.*]
-
-      - label: Related Publications
-        name: related_publications
-        widget: relation
-        collection: publications
-        file: publications
-        value_field: "publications.*.citation_key"
-        search_fields: ["publications.*.citation_key", "publications.*.title"]
-        display_fields: ["publications.*.citation_key", "publications.*.title"]
-        multiple: true
-
-      - label: Lab protocols
-        name: lab_protocols
-        widget: relation
-        collection: lab_protocols
-        multiple: true
-        required: false
-        value_field: title
-        search_fields: [title]
+        hint: "The source where blastocystis was sampled from.<br>If a desired source is missing, you can add it under ''Vocabularies'' -> Sources."
 
       - label: Countries
         name: countries
@@ -141,12 +130,24 @@ collections:
         value_field: countries.*.name
         display_fields: [countries.*.name]
         search_fields: [countries.*.name, countries.*.iso]
+        hint: "All countries from the ISO 3166 coutry code.<br>If a desired datatype is missing, you can add it under ''Lab Protocols''."
+
+      - label: Lab protocols
+        name: lab_protocols
+        widget: relation
+        collection: lab_protocols
+        multiple: true
+        required: false
+        value_field: title
+        search_fields: [title]
+        hint: "If a desired datatype is missing, you can add it under ''Lab Protocols''."
 
       - label: Description
         name: body
         widget: text
         required: false
         default: "Add your description here.\n\nPlease do not change the code below this line.\n\n{% if related_publications.length %}\n\n \n\n---\n\n# References\n\n[collector -> publications; clickable:false; card-template:references.njk; prefilter:[citation_key={{ related_publications | join(' OR citation_key= ') }}]]\n\n{% endif %}\n\n{% if lab_protocols.length %}\n\n \n\n---\n\n# Lab Protocols\n\n[collector -> lab_protocols; clickable:false; card-template:related_lab_protocol.njk; prefilter:[title={{ lab_protocols | join(' OR title=') }}]]\n\n{% endif %}"
+        hint: "Add a description of the sutypes.<br>**Please do not delete the template for loading the related lab protocols and publications!**<br>**Be careful, you can break things here!** This field supports the extendet markdown syntax. Please make shure your syntax is correct, otherwise the website might fail. Please **test it offline** if you use the extendet markdown syntax!"
 
   # -----------------------------------------------------------------------
   # PUBLICATIONS
@@ -170,7 +171,7 @@ collections:
               - label: Citation Key
                 name: citation_key
                 widget: string
-                hint: "Format: LastnameYear, e.g. Smith2023"
+                hint: "Format: LastnameYear, e.g. Smith2023<br>**Please do not rename this!**"
               - label: Title
                 name: title
                 widget: string
@@ -179,10 +180,15 @@ collections:
                 widget: list
                 label_singular: Author
                 hint: "One author per entry"
-              - label: Date
-                name: date
+              - label: Publication Date
+                name: Date
                 widget: string
-                required: false
+                hint: "Enter a year (2024), month and year (06.2024), or full date (11.06.2024)"
+                pattern:
+                  [
+                    '^(((0[1-9]|[12]\d|3[01])\.)?(0[1-9]|1[0-2])\.)?\d{4}$',
+                    "Use dd.mm.yyyy, mm.yyyy, or yyyy",
+                  ]
               - label: Name of Publication
                 name: publication_name
                 widget: string
@@ -190,10 +196,12 @@ collections:
                 name: doi
                 widget: string
                 required: false
+                hint: "Enter without the prefix of`https://doi.org/` prefix, e.g. `10.1038/s41564-019-0622-3`."
               - label: URL
                 name: url
                 widget: string
                 required: false
+                hint: "Only really needed of DOI is not available."
 
   # -----------------------------------------------------------------------
   # LAB PROTOCOL
@@ -253,9 +261,9 @@ collections:
       - label: Name
         name: name
         widget: string
-        hint: "e.g. Subtype 1, Subtype 2"
+        hint: "e.g. Subtype 1, Subtype 2<br>**Be carefil when renaming!** Datasets link to the subtypes via their name. If you rename them, this link will break."
 
-      - label: Sources
+      - label: Sources / Hosts
         name: sources
         widget: relation
         collection: vocabularies
@@ -265,6 +273,7 @@ collections:
         value_field: sources.*
         display_fields: [sources.*]
         search_fields: [sources.*]
+        hint: "If a desired source / host is missing, you can add it under ''Vocabularies'' -> Sources."
 
       - label: Download Link to Reference Genomes
         name: reference_genome_link
@@ -280,7 +289,7 @@ collections:
         name: body
         widget: markdown
         default: "# Short Description\n\nAdd your description here.\n\nPlease do not change the code below this line.\n\n---\n\n# Explore Datasets Containing {{ name }}\n\n[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset.njk; prefilter:[subtype={{ name }}]]"
-
+        hint: "Add a description of the dataset.<br>**Please do not delete the template for loading the related publications!**<br>**Be careful, you can break things here!** This field supports the extendet markdown syntax. Please make shure your syntax is correct, otherwise the website might fail. Please **test it offline** if you use the extendet markdown syntax!"
   # -----------------------------------------------------------------------
   # RESEARCH LAB
   # -----------------------------------------------------------------------
@@ -328,6 +337,7 @@ collections:
               - label: Contact email
                 name: contact_mail
                 widget: string
+                type: email
 
               - label: Contact webpage
                 name: contact_url
@@ -343,7 +353,7 @@ collections:
 
               - label: Name of Institution
                 name: institution_name
-                widget: text
+                widget: string
 
               - label: Address of Institution
                 name: institution_address
@@ -380,14 +390,6 @@ collections:
         fields:
           - label: Data origins
             name: data_origins
-            widget: list
-
-      - label: Data sources
-        name: data_sources
-        file: content/data/data_sources.yaml
-        fields:
-          - label: Data sources
-            name: data_sources
             widget: list
 
       - label: Detection methods
@@ -493,9 +495,13 @@ collections:
         file: content/data/branding.json
         fields:
           - { label: "Site Title", name: "site_title", widget: "string" }
-          - {
-              label: "Logo",
-              name: "site_logo",
-              widget: "string",
-              hint: "URL or path to the logo image",
-            }
+          - label: "Logo (upload)"
+            name: "site_logo_upload"
+            widget: image
+            required: false
+            hint: "Upload the site logo. If both this and a URL are provided, the uploaded file takes priority. SVG, PNG or WebP on a transparent background recommended."
+          - label: "Logo (URL)"
+            name: "site_logo_url"
+            widget: string
+            required: false
+            hint: "Link to the logo image (e.g. from your server or CDN). Used when no file is uploaded."

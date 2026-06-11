@@ -1,0 +1,21 @@
+[
+  { "divider": "Editor Guide" },
+  { "label": "Welcome",               "url": "/guide/" },
+  { "label": "GitHub Setup",          "url": "/guide/github-setup/" },
+  { "label": "Logging into the CMS",  "url": "/guide/getting-started/" },
+  { "label": "Datasets",              "url": "/guide/datasets/" },
+  { "label": "Publications",          "url": "/guide/publications/" },
+  { "label": "Research Labs",         "url": "/guide/labs/" },
+  { "label": "Subtypes",              "url": "/guide/subtypes/" },
+  { "label": "Lab Protocols",         "url": "/guide/lab-protocols/" },
+  { "label": "Vocabularies",          "url": "/guide/vocabularies/" },
+  { "label": "Pages",                 "url": "/guide/pages/" },
+  { "label": "Navigation",            "url": "/guide/navigation/" },
+  { "label": "Rolling Back a Change", "url": "/guide/rollback/" },
+
+  { "divider": "Style Guide" },
+  { "label": "Overview",    "url": "/styleguide/" },
+  { "label": "Typography",  "url": "/styleguide/typography/" },
+  { "label": "Colors",      "url": "/styleguide/colors/" },
+  { "label": "Components",  "url": "/styleguide/components/" }
+]

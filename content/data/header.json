@@ -19,6 +19,7 @@
         { "label": "Contribute", "file": "content/contribute.md" },
         { "label": "Contact", "file": "content/contact.md" }
       ]
-    }
+    },
+    { "label": "Guide", "file": "content/guide/index.md" }
   ]
 }

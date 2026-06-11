@@ -8,7 +8,7 @@ description: Research labs working on Blastocystis around the world.
 
 <h-hero>Research Labs</h-hero>
 
-Browse labs working on _Blastocystis_ research and related microbiome topics.
+Browse research labs working on Blastocystis.
 
 [:hero]
 

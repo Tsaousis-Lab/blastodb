@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ description or 'BlastoDB Editor Guide' }}">
+  <title>{{ title }} — BlastoDB Guide</title>
+  <link rel="stylesheet" href="{{ '/assets/style.css' | url }}">
+  <link rel="stylesheet" href="{{ '/assets/collector.css' | url }}">
+  <script>
+    window.collectorData = {{ collectorData | dump | safe }};
+  </script>
+  <script src="{{ '/assets/main.js' | url }}" defer></script>
+</head>
+<body>
+  {% include "layouts/header.njk" %}
+
+  <div class="guide-outer">
+    <aside class="guide-sidebar">
+      <nav class="guide-sidebar-nav">
+        {% for item in guide_nav %}
+          {% if item.divider %}
+          <p class="guide-sidebar-title">{{ item.divider }}</p>
+          {% else %}
+          <a href="{{ item.url | url }}" class="guide-sidebar-link{% if page.url == item.url %} is-active{% endif %}">
+            {{ item.label }}
+          </a>
+          {% endif %}
+        {% endfor %}
+      </nav>
+    </aside>
+
+    <main class="guide-content">
+      {{ content | processSpans | safe }}
+    </main>
+  </div>
+
+  {% include "layouts/footer.njk" %}
+</body>
+</html>
