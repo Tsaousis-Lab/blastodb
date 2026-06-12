@@ -3,27 +3,81 @@
     {
       "label": "Editor Guide",
       "items": [
-        { "label": "Welcome",              "url": "/documentation/editors_guide/" },
-        { "label": "GitHub Setup",         "url": "/documentation/editors_guide/github-setup/" },
-        { "label": "Logging into the CMS", "url": "/documentation/editors_guide/getting-started/" },
-        { "label": "Datasets",             "url": "/documentation/editors_guide/datasets/" },
-        { "label": "Publications",         "url": "/documentation/editors_guide/publications/" },
-        { "label": "Research Labs",        "url": "/documentation/editors_guide/labs/" },
-        { "label": "Subtypes",             "url": "/documentation/editors_guide/subtypes/" },
-        { "label": "Lab Protocols",        "url": "/documentation/editors_guide/lab-protocols/" },
-        { "label": "Vocabularies",         "url": "/documentation/editors_guide/vocabularies/" },
-        { "label": "Pages",                "url": "/documentation/editors_guide/pages/" },
-        { "label": "Navigation",           "url": "/documentation/editors_guide/navigation/" },
-        { "label": "Rolling Back",         "url": "/documentation/editors_guide/rollback/" }
+        { "label": "Welcome", "url": "/documentation/editors_guide/" },
+        {
+          "label": "GitHub Setup",
+          "url": "/documentation/editors_guide/github-setup/"
+        },
+        {
+          "label": "Logging into the CMS",
+          "url": "/documentation/editors_guide/getting-started/"
+        },
+        {
+          "label": "Datasets",
+          "url": "/documentation/editors_guide/datasets/"
+        },
+        {
+          "label": "Publications",
+          "url": "/documentation/editors_guide/publications/"
+        },
+        {
+          "label": "Research Labs",
+          "url": "/documentation/editors_guide/labs/"
+        },
+        {
+          "label": "Subtypes",
+          "url": "/documentation/editors_guide/subtypes/"
+        },
+        {
+          "label": "Lab Protocols",
+          "url": "/documentation/editors_guide/lab-protocols/"
+        },
+        {
+          "label": "Vocabularies",
+          "url": "/documentation/editors_guide/vocabularies/"
+        },
+        { "label": "Pages", "url": "/documentation/editors_guide/pages/" },
+        {
+          "label": "Navigation",
+          "url": "/documentation/editors_guide/navigation/"
+        },
+        {
+          "label": "Rolling Back",
+          "url": "/documentation/editors_guide/rollback/"
+        }
+      ]
+    },
+    {
+      "label": "Markdown",
+      "items": [
+        { "label": "Overview", "url": "/documentation/markdown/" },
+        {
+          "label": "Markdown Syntax",
+          "url": "/documentation/markdown/markdown_syntax/"
+        },
+        {
+          "label": "Markdown Cheat Sheet",
+          "url": "/documentation/markdown/markdown_cheat_sheet/"
+        },
+        {
+          "label": "Custom Components",
+          "url": "/documentation/markdown/custom_components/"
+        }
       ]
     },
     {
       "label": "Style Guide",
       "items": [
-        { "label": "Overview",    "url": "/documentation/styleguide/" },
-        { "label": "Typography",  "url": "/documentation/styleguide/typography/" },
-        { "label": "Colors",      "url": "/documentation/styleguide/colors/" },
-        { "label": "Components",  "url": "/documentation/styleguide/components/" }
+        { "label": "Overview", "url": "/documentation/styleguide/" },
+        {
+          "label": "Typography",
+          "url": "/documentation/styleguide/typography/"
+        },
+        { "label": "Colors", "url": "/documentation/styleguide/colors/" },
+        {
+          "label": "Components",
+          "url": "/documentation/styleguide/components/"
+        }
       ]
     },
     { "label": "← Back to BlastoDB", "url": "/" }

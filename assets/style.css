@@ -191,10 +191,26 @@ img {
 code {
     font-family: "Menlo", "Monaco", monospace;
     font-size: 0.88em;
-    background: var(--accent-pale);
-    color: var(--accent-dark);
+    background: var(--dark-highlight);
+    color: var(--text);
     padding: 0.15em 0.35em;
     border-radius: 3px;
+}
+
+pre {
+    background: var(--dark-highlight);
+    border-radius: var(--radius);
+    padding: 1.1rem 1.25rem;
+    overflow-x: auto;
+    margin: 1.25rem 0;
+}
+
+pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+    border-radius: 0;
+    font-size: 0.88em;
 }
 
 /* ── 5. Layout ─────────────────────────────────────────────── */
@@ -901,7 +917,15 @@ main th {
     background: #fff8ec;
 }
 
-/* ── 16. Blockquote ────────────────────────────────────────── */
+/* ── 16. Mark / highlight ──────────────────────────────────── */
+mark {
+    background: var(--accent-pale);
+    color: var(--accent-dark);
+    border-radius: 2px;
+    padding: 0 0.15em;
+}
+
+/* ── 17. Blockquote ────────────────────────────────────────── */
 main blockquote {
     border-left: 3px solid var(--border);
     margin: 1.25rem 0;

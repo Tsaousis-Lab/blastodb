@@ -20,7 +20,7 @@ Three families cover every context on the site.
 
 ---
 
-## Heading scale
+## Heading scale {#headings}
 
 Heading sizes are fluid — they scale smoothly between the minimum and maximum as the viewport widens.
 

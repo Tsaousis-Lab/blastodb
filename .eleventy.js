@@ -1,7 +1,10 @@
 const markdownIt = require("markdown-it");
 const markdownItSub = require("markdown-it-sub");
 const markdownItSup = require("markdown-it-sup");
-const { full: markdownItEmoji } = require("markdown-it-emoji");
+const markdownItMark = require("markdown-it-mark");
+const markdownItFootnote = require("markdown-it-footnote");
+const markdownItAttrs = require("markdown-it-attrs");
+const markdownItTaskLists = require("markdown-it-task-lists");
 const fs = require("fs");
 const path = require("path");
 const yaml = require("js-yaml");
@@ -501,7 +504,10 @@ module.exports = function (eleventyConfig) {
   });
   md.use(markdownItSub);
   md.use(markdownItSup);
-  md.use(markdownItEmoji);
+  md.use(markdownItMark);
+  md.use(markdownItFootnote);
+  md.use(markdownItAttrs);
+  md.use(markdownItTaskLists);
 
   // HTML escape utility
   function escapeHtml(str) {
@@ -1019,7 +1025,7 @@ module.exports = function (eleventyConfig) {
     },
     pathPrefix: pathPrefix,
     templateFormats: ["md"],
-    markdownTemplateEngine: "njk",
+    markdownTemplateEngine: false,
     htmlTemplateEngine: "njk",
   };
 };
