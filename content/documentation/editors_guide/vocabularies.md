@@ -4,7 +4,11 @@ title: Vocabularies
 description: How to manage the controlled vocabulary lists used across BlastoDB datasets.
 ---
 
-# Vocabularies
+[hero: text-align:center]
+
+<h-hero>Vocabularies</h-hero>
+
+[:hero]
 
 The *Vocabularies* store parameters which are used to describe and filter the subtypes, datasets and lab protocols. These include:
 

@@ -4,7 +4,11 @@ title: GitHub Setup
 description: How to create a GitHub account, get access to the BlastoDB repository, and generate a personal access token.
 ---
 
+[hero: text-align:center]
+
 <h-hero>GitHub Setup<h-hero>
+
+[:hero]
 
 You need the following three things, to edit the content of BlastoDB:
 

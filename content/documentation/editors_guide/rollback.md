@@ -4,7 +4,11 @@ title: Rolling Back a Change
 description: How to undo a recent change on GitHub if something breaks after a data entry.
 ---
 
+[hero: text-align:center]
+
 <h-hero>Rolling Back a Change</h-hero>
+
+[:hero]
 
 If you notice that something looks wrong on the website, ur the build failed after saving a change in the CMS, you can undo it directly on GitHub.
 

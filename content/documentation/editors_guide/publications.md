@@ -4,7 +4,11 @@ title: Publications
 description: How to add and manage publications in the BlastoDB CMS.
 ---
 
+[hero: text-align:center]
+
 <h-hero>Publications</h-hero>
+
+[:hero]
 
 BlastoDB provides an overview of all poblications related to content on this website (<a href="/publicatios/" target="_blank">www.blastodb.com/publications</a>). Here you find a guide on how to edit this information in the admin panel, and get an overview and description of all parameters.
 

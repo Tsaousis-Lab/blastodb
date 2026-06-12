@@ -4,9 +4,15 @@ title: BlastoDB — Editor Guide
 description: A step-by-step guide for adding and editing content on BlastoDB.
 ---
 
+[hero: text-align:center]
+
 <h-hero>Editors Guide for BlastoDB<h-hero>
 
 This guide explains how to add and edit the content on BlastoDB using the built-in content management system (CMS).
+
+[:hero]
+
+
 
 ## Before you start
 

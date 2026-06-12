@@ -4,7 +4,11 @@ title: Navigation
 description: How to edit the header navigation, footer, and site branding in the BlastoDB CMS.
 ---
 
+[hero: text-align:center]
+
 <h-hero>Navigation</h-hero>
+
+[:hero]
 
 Here you find the information on how to edit the header menu, footer, and site branding on the admin panel of BlastoDB ([www.blastodb.com/admin](/admin)).
 

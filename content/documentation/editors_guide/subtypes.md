@@ -4,7 +4,11 @@ title: Subtypes
 description: How to add and edit Blastocystis subtype pages in the BlastoDB CMS.
 ---
 
+[hero: text-align:center]
+
 <h-hero>Subtypes</h-hero>
+
+[:hero]
 
 BlastoDB stores information about its known subtypes (<a href="/subtypes/" target="_blank">www.blastodb.com/subtypes</a>). Here you find a guide on how to edit this information in the admin panel, and get an overview and description of all parameters.
 

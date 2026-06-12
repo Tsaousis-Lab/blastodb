@@ -4,7 +4,11 @@ title: Pages
 description: How to edit the general content pages on BlastoDB, and how the custom markdown syntax works.
 ---
 
+[hero: text-align:center]
+
 <h-hero>Pages</h-hero>
+
+[:hero]
 
 Here you find the information on how to edit the web pages of BlastoDB on the admin panel ([www.blastodb.com/admin](/admin)).
 

@@ -4,7 +4,11 @@ title: Lab Protocols
 description: How to add and edit laboratory protocols in the BlastoDB CMS.
 ---
 
+[hero: text-align:center]
+
 <h-hero>Lab Protocols</h-hero>
+
+[:hero]
 
 BlastoDB stores lab protocols important to other data on this website (<a href="/lab-protocols/" target="_blank">www.blastodb.com/lab-protocols</a>). Here you find a guide on how to edit this information in the admin panel, and get an overview and description of all parameters.
 

@@ -4,7 +4,11 @@ title: Research Labs
 description: How to add and edit research lab profiles in the BlastoDB CMS.
 ---
 
+[hero: text-align:center]
+
 <h-hero>Research Labs</h-hero>
+
+[:hero]
 
 In BlastoDB provides a list of research labs working on Blastocystis (<a href="/labs/" target="_blank">www.blastodb.com/labs</a>). Here you find a guide on how to edit this information in the admin panel, and get an overview and description of all parameters.
 

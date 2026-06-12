@@ -4,7 +4,11 @@ title: Logging into the CMS
 description: How to log into the BlastoDB CMS and navigate the editorial interface.
 ---
 
+[hero: text-align:center]
+
 <h-hero>Logging into the CMS<h-hero>
+
+[:hero]
 
 ## Opening the CMS
 

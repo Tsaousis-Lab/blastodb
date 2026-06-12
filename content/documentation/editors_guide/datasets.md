@@ -4,8 +4,9 @@ title: Datasets
 description: How to edit datasets in the BlastoDB CMS.
 ---
 
+[hero: text-align:center]
 <h-hero>Datasets<h-hero>
-
+[:hero]
 BlastoDB stores links to reputable blastocystis datasets (<a href="/datasets/" target="_blank">www.blastodb.com/datasets</a>). Here you find a guide on how to edit this information in the admin panel, and get an overview and description of all parameters.
 
 If you want to edit the webpage displaying all the datasets, you finde a guide [here](/documentation/editors_guide/pages/).
