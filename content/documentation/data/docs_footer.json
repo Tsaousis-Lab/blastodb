@@ -1,22 +1,33 @@
 {
-  "description": "Editor guide and style reference for the BlastoDB website.",
-  "funding": "",
+  "description": "Documentation for BlastoDB.",
   "columns": [
     {
       "title": "Editor Guide",
       "items": [
-        { "label": "Welcome",          "url": "/documentation/editors_guide/" },
-        { "label": "GitHub Setup",     "url": "/documentation/editors_guide/github-setup/" },
-        { "label": "Logging into CMS", "url": "/documentation/editors_guide/getting-started/" }
+        { "label": "Welcome", "url": "/documentation/editors_guide/" },
+        {
+          "label": "GitHub Setup",
+          "url": "/documentation/editors_guide/github-setup/"
+        },
+        {
+          "label": "Logging into CMS",
+          "url": "/documentation/editors_guide/getting-started/"
+        }
       ]
     },
     {
       "title": "Style Guide",
       "items": [
-        { "label": "Overview",    "url": "/documentation/styleguide/" },
-        { "label": "Typography",  "url": "/documentation/styleguide/typography/" },
-        { "label": "Colors",      "url": "/documentation/styleguide/colors/" },
-        { "label": "Components",  "url": "/documentation/styleguide/components/" }
+        { "label": "Overview", "url": "/documentation/styleguide/" },
+        {
+          "label": "Typography",
+          "url": "/documentation/styleguide/typography/"
+        },
+        { "label": "Colors", "url": "/documentation/styleguide/colors/" },
+        {
+          "label": "Components",
+          "url": "/documentation/styleguide/components/"
+        }
       ]
     }
   ]

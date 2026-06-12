@@ -2,11 +2,26 @@
   <div class="header-inner">
     <a href="{{ '/' | url }}" class="site-logo">
       <img src="{{ (collections.branding.site_logo_upload or collections.branding.site_logo_url) | url }}" alt="BlastoDB logo" class="logo-image">
-      <span>{{ collections.branding.site_title }}</span>
+      <span>{{ collections.branding.site_title }}/Docs</span>
     </a>
     <nav>
       {% for item in collections.docs_header.items %}
-        <a href="{{ item.url | url }}">{{ item.label }}</a>
+        {% if item.items %}
+          {% set uniqueId = 'docs-dropdown-' + loop.index %}
+          <div class="nav-dropdown-container">
+            <button class="nav-dropdown-btn" data-target="{{ uniqueId }}" aria-expanded="false">
+              {{ item.label }}
+              <span class="nav-dropdown-arrow">▼</span>
+            </button>
+            <div class="nav-dropdown-menu" id="{{ uniqueId }}">
+              {% for subItem in item.items %}
+                <a href="{{ subItem.url | url }}" class="nav-dropdown-item">{{ subItem.label }}</a>
+              {% endfor %}
+            </div>
+          </div>
+        {% else %}
+          <a href="{{ item.url | url }}">{{ item.label }}</a>
+        {% endif %}
       {% endfor %}
     </nav>
     <button class="nav-toggle" aria-label="Toggle navigation">☰</button>

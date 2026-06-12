@@ -1,11 +1,11 @@
 <footer>
-  <div class="footer-inner">
+  <div class="footer-inner"{% if not collections.docs_footer.funding %} style="border-bottom: none"{% endif %}>
     <div class="footer-left">
       <div class="footer-branding">
         <div class="footer-branding-header">
           <a href="{{ '/' | url }}" class="footer-logo">
             <img src="{{ (collections.branding.site_logo_upload or collections.branding.site_logo_url) | url }}" alt="BlastoDB logo" class="footer-logo-image">
-            <span>{{ collections.branding.site_title }}</span>
+            <span>{{ collections.branding.site_title }}/Docs</span>
           </a>
         </div>
         <p>{{ collections.docs_footer.description }}</p>
