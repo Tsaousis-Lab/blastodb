@@ -631,6 +631,14 @@ module.exports = function (eleventyConfig) {
     mdInstance.render = function (src, env) {
       let result = src;
 
+      // Protect fenced code blocks from component processing
+      const codeBlocks = [];
+      result = result.replace(/^(`{3,})[^\n]*\n[\s\S]*?\n\1[ \t]*$/gm, (match) => {
+        const idx = codeBlocks.length;
+        codeBlocks.push(match);
+        return `\x00CODEBLOCK${idx}\x00`;
+      });
+
       const blockTypes = [
         "item",
         "box",
@@ -689,6 +697,11 @@ module.exports = function (eleventyConfig) {
         }
       }
 
+      // Restore protected code blocks
+      if (codeBlocks.length > 0) {
+        result = result.replace(/\x00CODEBLOCK(\d+)\x00/g, (_, idx) => codeBlocks[parseInt(idx)]);
+      }
+
       return originalRender.call(mdInstance, result, env);
     };
   });
@@ -699,6 +712,14 @@ module.exports = function (eleventyConfig) {
 
     mdInstance.render = function (src, env) {
       let result = src;
+
+      // Protect fenced code blocks from collector processing
+      const codeBlocks = [];
+      result = result.replace(/^(`{3,})[^\n]*\n[\s\S]*?\n\1[ \t]*$/gm, (match) => {
+        const idx = codeBlocks.length;
+        codeBlocks.push(match);
+        return `\x00CODEBLOCK${idx}\x00`;
+      });
 
       const collectorPattern = /^\[collector\s*->\s*([^;\]]+)(.*?)\]$/gm;
 
@@ -767,6 +788,11 @@ module.exports = function (eleventyConfig) {
 
         return `<div class="collector" data-collection="${escapeHtml(collectionName)}" data-path="${escapeHtml(collectionName)}" data-opts='${JSON.stringify(opts)}'></div>`;
       });
+
+      // Restore protected code blocks
+      if (codeBlocks.length > 0) {
+        result = result.replace(/\x00CODEBLOCK(\d+)\x00/g, (_, idx) => codeBlocks[parseInt(idx)]);
+      }
 
       return originalRender.call(mdInstance, result, env);
     };

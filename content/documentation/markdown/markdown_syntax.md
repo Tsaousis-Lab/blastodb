@@ -20,7 +20,7 @@ Here you find an overview of the most useful elements of the markdown syntax for
 
 If you only want to quickly check the syntax check out the [markdown cheat-sheet](https://www.markdownguide.org/cheat-sheet/).
 
-We also extendet the markdown syntax by costom components, you can learn more about that [here](/documentation/markdown/custom_components).
+We also extendet the markdown syntax by costom components, you can learn more about that [here](/documentation/markdown/custom_components/).
 
 [:box]
 
