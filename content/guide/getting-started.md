@@ -8,28 +8,31 @@ description: How to log into the BlastoDB CMS and navigate the editorial interfa
 
 ## Opening the CMS
 
-Go to [www.blastodb.com/admin](/admin/) in your browser. You will see the Sveltia CMS login screen.
+The content management system (CMS) can be accessed with this link: <a href="/admin" target="_blank">www.blastodb.com/admin</a>
 
-If you have not yet set up your GitHub account or PAT, do that first ([GitHub Setup](/guide/github-setup/)).
+You will need a GitHub Account, access rights to the Resository and a Personal Access Tocen (PAT) to log in. Go to [GitHub Setup](/guide/github-setup/) if you need help with that.
 
 ## Logging in
 
 1. Click **Sing In Using Access Token**
 2. Paste the PAT you generated during setup from your favorite password manager into the text field.
-3. You are now in the CMS dashboard.
+3. You are now in the CMS dashboard!
 
 ## The editorial workflow
 
-The left sidebar in the dashboard lists all the content types you can edit. Here is a description on what to look out for when editing each content type:
+The left sidebar in the dashboard lists all the content you can edit. This includes the content of the database, and the webpage itself.
 
+The content of the database includes:
 - [**Datasets**](/guide/datasets/) — individual sequencing datasets
 - [**Publications**](/guide/publications/) — the publication library
 - [**Research Labs**](/guide/labs/) — lab profiles
 - [**Lab Protocols**](/guide/lab_protocols/) — laboratory protocols
 - [**Subtypes**](/guide/subtypes/) — Blastocystis subtype pages
 - [**Vocabularies**](/guide/vocabularies/) — controlled lists (datatypes, countries, sources, etc.)
+
+The webpage can be edited here:
 - [**Pages**](/guide/pages/) — the web-pages of BlastoDB
 - [**Navigation**](/guide/navigation/) — header and footer of BlastoDB
 
-**Be careful, all changes go life immediately!** As of the time of writing, Sveltia does **not** support an editorial workflow with *draft -> review -> publish*. This means that every time you click "save", the content gets saved into the GitHub repository, and the site gets updated within a few minutes.
-Editing through the CMS is, for the most part, and if not specified otherwise, save. In case you accidentaly break something, you can always [roll back a change](/guide/rollback/).
+**Be careful, all changes go life immediately!** As of the time of writing, Sveltia does not support an editorial workflow with *draft -> review -> publish*. This means that every time you click "save", the content gets saved into the GitHub repository, and the site gets updated within a few minutes. On the left side you find a guide on how to edit the content for each of these enteries. Feel free to read up on them.
+Editing through the CMS is, for the most part, save. However, some actions can lead to a breaking change. In case you accidentaly break something, you can always [roll back a change](/guide/rollback/). (It is a hassle though, try to avoid it.)

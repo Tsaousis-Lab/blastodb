@@ -25,7 +25,7 @@ Go to [github.com](https://github.com), click **Sign up**, and create an account
 
 The BlastoDB repository is part of the organization "Tasousis Lab". You need to be added as a member of this lab before you can make changes to the BlastoDB website.
 
-**Contact Tasos** and send him your username. He will add you to `Tsaousis-Lab` and give you access to the repository. Once you have access, you can log into the CMS. For this, you need a personal access token (PAT).
+[Contact Tasos](mailto:A.Tsaousis@kent.ac.uk) and send him your username. He will add you to `Tsaousis-Lab` and give you access to the repository. Once you have access, you can log into the CMS. For this, you need a personal access token (PAT).
 
 ---
 
@@ -33,22 +33,30 @@ The BlastoDB repository is part of the organization "Tasousis Lab". You need to 
 
 The CMS requires a personal access token to authenticate on your behalf. This is a long password that you generate once and use to log in.
 
-1. Log into [github.com](https://github.com)
-2. Click your **profile picture** in the top-right corner and choose **Settings**
-3. Scroll down in the left sidebar and click **Developer settings**
-4. Click **Personal access tokens** → **Tokens (classic)**
-5. Click **Generate new token** → **Generate new token (classic)**
-6. Give it a descriptive name, e.g. `BlastoDB CMS`
-7. Set the **Expiration** — choose **No expiration** or set a date far in the future
-8. Under **Select scopes**, tick **`repo`** (this grants access to read and write repository content)
-9. Scroll down and click **Generate token**
-10. **Copy the token immediately** — GitHub will only show it once. Paste it into a password manager or a safe document. Never save it as plain text!
+1. Go to <a href="https://github.com/settings/tokens" target="_blank">https://github.com/settings/tokens</a>. This opens the Page where you can create a PAT.
+    - Or navigate there manually:
+      - Click your **profile picture** in the top-right corner and choose **Settings**
+      - Scroll down in the left sidebar and click **Developer settings**
+      - Click **Personal access tokens** → **Tokens (classic)**
+2. Click **Generate new token** → **Generate new token (classic)**
+3. Give it a descriptive name, e.g. `BlastoDB`
+4. Set the **Expiration** — choose **No expiration** or set a date far in the future
+5. Under **Select scopes**, tick **`repo`** (this grants access to read and write repository content)
+6. Scroll down and click **Generate token**
+7. **Copy the token immediately** — GitHub will only show it once.
+8. **Paste it into a password manager**, never store it as plain text!
 
-### Security Consideration
+<div class="guide-warning">
+
+#### Security Consideration
 
 It is **really important** that you keep this password private. Please store it in the password manager of your choice, and never in a unencypted file on your computer.
 
-**If you loose your PAT**, delete it immediately. You can always create a new one by repeating Step 3.
+**If you loose your PAT**, delete it immediately (<a href="https://github.com/settings/tokens" target="_blank">https://github.com/settings/tokens</a>). You can always create a new one.
+
+</div>
+
+
 
 
 ---

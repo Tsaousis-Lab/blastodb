@@ -6,21 +6,25 @@ description: How to add and edit Blastocystis subtype pages in the BlastoDB CMS.
 
 <h-hero>Subtypes</h-hero>
 
-Here you find the information on how to add, edit or remove Blastocystis subtypes on the admin panel of BlastoDB ([www.blastodb.com/admin](/admin)). You also find an overview and description of the input fields. Each subtype has its own page on the site that lists all datasets containing it.
+BlastoDB stores information about its known subtypes (<a href="/subtypes/" target="_blank">www.blastodb.com/subtypes</a>). Here you find a guide on how to edit this information in the admin panel, and get an overview and description of all parameters.
 
-## Add a new Subtype
+If you want to edit the webpage displaying all the subtypes, you finde a guide [here](/guide/pages/).
 
-1. Click **Subtypes** in the left sidebar.
-2. Click **New Subtypes** in the top-right.
-3. Fill in the fields described below.
-4. Click **Save**. → The website will be updated automatically within a few minutes.
+## Editing the Subtypes
 
-## Editing an Existing Subtype
+You can edit the content by opening the **Subtypes** collection on the left side on the admin panel (<a href="/admin/#/collections/subtypes" target="_blank">www.blastodb.com/admin/#/collections/subtypes</a>).
 
-1. Click **Subtypes** in the left sidebar.
-2. Click on the subtype you want to edit.
-3. Change what needs to be changed.
-4. Click **Save**. → The website will be updated automatically within a few minutes.
+#### Add a new Subtype
+
+1. Click **New** in the top-right
+2. Fill in the fields described below
+3. Click **Save** → The website will be updated automatically within a few minutes
+
+#### Editing an Existing Subtype
+
+1. Click on the subtype you want to edit
+2. Change what needs to be changed
+3. Click **Save** → The website will be updated automatically within a few minutes
 
 <div class="guide-warning">
 
@@ -28,7 +32,7 @@ Here you find the information on how to add, edit or remove Blastocystis subtype
 
 </div>
 
-## Deleting a Subtype
+#### Deleting a Subtype
 
 <div class="guide-warning">
 
@@ -36,10 +40,9 @@ Here you find the information on how to add, edit or remove Blastocystis subtype
 
 </div>
 
-1. Click **Subtypes** in the left sidebar.
-2. Click on the subtype you want to delete.
-3. Click the **Delete** button at the top of the editor.
-4. Click **Save**. → The website will be updated automatically within a few minutes.
+1. Click on the subtype you want to delete
+2. Click the **Delete** button at the top right
+3. A prompt will open, click on **Delete** again → The website will be updated automatically within a few minutes
 
 ## Fields
 

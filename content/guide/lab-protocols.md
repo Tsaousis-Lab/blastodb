@@ -6,22 +6,26 @@ description: How to add and edit laboratory protocols in the BlastoDB CMS.
 
 <h-hero>Lab Protocols</h-hero>
 
-Here you find the information on how to add, edit or remove lab protocols on the admin panel of BlastoDB ([www.blastodb.com/admin](/admin)). Lab protocols are step-by-step procedures that can be linked to datasets.
+BlastoDB stores lab protocols important to other data on this website (<a href="/lab-protocols/" target="_blank">www.blastodb.com/lab-protocols</a>). Here you find a guide on how to edit this information in the admin panel, and get an overview and description of all parameters.
 
-## Add a new Lab Protocol
+If you want to edit the webpage displaying the lab protocols, you finde a guide [here](/guide/pages/).
+
+## Editing the Lab Protocols
+
+You can edit the content by opening the **Lab Protocols** collection on the left side on the admin panel (<a href="/admin/#/collections/lab-protocols" target="_blank">www.blastodb.com/admin/#/collections/lab-protocols</a>).
+
+#### Add a new Lab Protocol
 
 1. If there is a related publication, add that first to the database (see [Publications](/guide/publications/))
-2. Click **Lab Protocols** in the left sidebar.
-3. Click **New Lab Protocols** in the top-right.
-4. Fill in the fields described below.
-5. Click **Save**. → The website will be updated automatically within a few minutes.
-
-## Editing an Existing Lab Protocol
-
-1. Click **Lab Protocols** in the left sidebar.
-2. Click on the protocol you want to edit.
-3. Change what needs to be changed.
+2. Click **New** in the top-right.
+3. Fill in the fields described below.
 4. Click **Save**. → The website will be updated automatically within a few minutes.
+
+#### Editing a Lab Protocol
+
+1. Click on the protocol you want to edit.
+2. Change what needs to be changed. you can find a description of the fields below.
+3. Click **Save**. → The website will be updated automatically within a few minutes.
 
 <div class="guide-warning">
 
@@ -29,7 +33,7 @@ Here you find the information on how to add, edit or remove lab protocols on the
 
 </div>
 
-## Deleting a Lab Protocol
+#### Deleting a Lab Protocol
 
 <div class="guide-warning">
 
@@ -37,10 +41,9 @@ Here you find the information on how to add, edit or remove lab protocols on the
 
 </div>
 
-1. Click **Lab Protocols** in the left sidebar.
-2. Click on the protocol you want to delete.
-3. Click the **Delete** button at the top of the editor.
-4. Click **Save**. → The website will be updated automatically within a few minutes.
+1. Click on the protocol you want to delete.
+2. Click the **Delete** button at the top of the editor.
+3. Click **Save**. → The website will be updated automatically within a few minutes.
 
 ## Fields
 
@@ -59,7 +62,7 @@ Here you find the information on how to add, edit or remove lab protocols on the
 
     </div>
 
-    Write your protocol above that line. Useful Markdown formatting:
+    Write your protocol above that line. Useful Markdown ==TODO: link to markdown guide== formatting:
 
     | What you type | What it looks like |
     |---|---|

@@ -6,27 +6,30 @@ description: How to add and manage publications in the BlastoDB CMS.
 
 <h-hero>Publications</h-hero>
 
-Here you find the information on how to add, edit or remove publications on the admin panel of BlastoDB ([www.blastodb.com/admin](/admin)). You also find an overview and description of the input fields.
+BlastoDB provides an overview of all poblications related to content on this website (<a href="/publicatios/" target="_blank">www.blastodb.com/publications</a>). Here you find a guide on how to edit this information in the admin panel, and get an overview and description of all parameters.
+
+If you want to edit the webpage displaying the publications, you finde a guide [here](/guide/pages/).
+
+## Editing the Publications
+
+You can edit the content by opening the **Publications** collection on the left side on the admin panel, and opening the single 'Publications' entery (<a href="/admin/#/collections/publications/entries/publications" target="_blank">www.blastodb.com/admin/#/collections/publications/entries/publications</a>). Here, you can select which ones you want to edit.
+
+#### Add a Publication
+
+1. Scroll to the bottom and click **+ Add Publication** (This is easyer if you click *collapse all* on the top right)
+2. Enter the relevant Data (you can find a description of the fields below)
+3. Click **Save** on the top right -> The Website will be updated automatically within a few minutes
 
 
-## Add a new Publication
+#### Edit a Publication
 
-1. Click **Publications** in the left sidebar
-2. Click the single **Publications** file entry
-3. Scroll to the bottom and click **+ Add Publication**. (This is easyer if you click *collapse all* on the top right)
-4. Enter the relevant Data.
-5. Click **Save** on the top right. -> The Website will be updated automatically within a few minutes.
+1. Find the publication you want to edit (This is easyer if you click *collapse all* on the top right)
+2. Edit the relevant Data (you can find a description of the fields below)
+3. Click **Save** on the top right -> The Website will be updated automatically within a few minutes
 
+You can also **rearrange** the publications by using the arrows, or **add an item above or below** by clicking the three dots beside the **x** in a publication entery.
 
-## Editing an existing Publication
-
-1. Click **Publications** in the left sidebar.
-2. Click the single **Publications** file entry.
-3. Find the publication you want to edit. (This is easyer if you click *collapse all* on the top right).
-4. Edit the relevant Data.
-5. Click **Save** on the top right. -> The Website will be updated automatically within a few minutes.
-
-## Delete a Publication
+#### Delete a Publication
 
 <div class="guide-warning">
 
@@ -34,11 +37,9 @@ Here you find the information on how to add, edit or remove publications on the 
 
 </div>
 
-1. Click **Publications** in the left sidebar
-2. Click the single **Publications** file entry
-3. Find the publication you need(This is easyer if you click *collapse all* on the top right).
-4. Click the "x" at the top right of the publication entery to delete it.
-5. Click **Save** on the top right. -> The Website will be updated automatically within a few minutes.
+1. Find the publication you need(This is easyer if you click *collapse all* on the top right)
+2. Click the "x" at the top right of the publication entery to delete it
+3. Click **Save** on the top right -> The Website will be updated automatically within a few minutes
 
 ## Fields
 

@@ -1,30 +1,31 @@
 ---
 layout: layouts/guide.njk
 title: Datasets
-description: How to add and edit datasets in the BlastoDB CMS.
+description: How to edit datasets in the BlastoDB CMS.
 ---
 
 <h-hero>Datasets<h-hero>
 
-Here you find the information on how to add, edit or remove a dataset on the admin panel of BlastoDB ([www.blastodb.com/admin](/admin)). You also find an overview and description of the input fields.
+BlastoDB stores links to reputable blastocystis datasets (<a href="/datasets/" target="_blank">www.blastodb.com/datasets</a>). Here you find a guide on how to edit this information in the admin panel, and get an overview and description of all parameters.
 
-## Creating a new dataset
+If you want to edit the webpage displaying all the datasets, you finde a guide [here](/guide/pages/).
 
-1. Add the publication this dataset is based upon to BlastoDB ([Publications](/guide/publications/)), if it does not already exist (you will need to link to it).
-2. Click **Datasets** in the left sidebar.
-3. Click **New Datasets** in the top-right.
-4. Fill in the fields described below. 
-5. Click **Save**. -> The Website will be updated automatically within a few minutes.
+## Editing the Datasets
 
-## Editing an Existing Dataset
+You can edit the content by opening the **Datasets** collection on the left side on the admin panel (<a href="/admin/#/collections/datasets" target="_blank">www.blastodb.com/admin/#/collections/datasets</a>).
 
-1. Click **Datasets** in the left sidebar.
-2. Click on the existing dataset.
-3. Change what needs to be changed.
+#### Creating a new dataset
+1. Make shure te publication this dataset is based upon is already in BlastoDB, as you will need to link to it ([-> now to add publications](/guide/publications/)).
+2. Click **New** in the top-right.
+3. Fill out the form. You can find a description of the fields. 
 4. Click **Save**. -> The Website will be updated automatically within a few minutes.
 
-## Deleting a Dataset
+#### Editing an Existing Dataset
+1. Click on the existing dataset.
+2. Change what needs to be changed.
+3. Click **Save**. -> The Website will be updated automatically within a few minutes.
 
+#### Deleting a Dataset
 You can delete datasets by selecting them (checking the box on the left) and then clicking **Delete** on the top right.
 
 It is save to delete datasets, as other enteries are dependent on the datasets.

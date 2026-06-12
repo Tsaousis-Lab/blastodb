@@ -6,7 +6,7 @@ description: How to manage the controlled vocabulary lists used across BlastoDB 
 
 # Vocabularies
 
-Here you find the information on how to add or remove values from the vocabularies. The vocabularies are lists of values which are referenced in the datasets and subtypes:
+The *Vocabularies* store parameters which are used to describe and filter the subtypes, datasets and lab protocols. These include:
 
 - Datatypes - which type of data is stored in a dataset
 - Sources - sources and hosts of blastocystis
@@ -14,37 +14,29 @@ Here you find the information on how to add or remove values from the vocabulari
 - Detection Methods - of Blastocystis, e.G. PCR, Microscopy, ...
 - Countries - A list of countries for where data was sampled
 
-**Each of these should already contain the relevant information**. 
+Here you find a guide on how to add new values. This has to be done with care, as the other data in this dataset links to this information. These links might get broken!
 
 <div class="guide-warning">
 
-**Be careful when renaming or deleting vocabulary values.** Every value in these lists can be selected and stored inside one or more datasets. If you **rename or delete** a value that is already used by existing datasets, those datasets will silently lose that reference — the field will appear empty even though data was there before. **Only add new values; never rename or delete existing ones.** If a value genuinely needs to be renamed, contact Tasos first so all affected datasets can be updated at the same time.
+**Only add new values; do not rename or delete existing ones.** Every value in these lists can be selected and stored inside the datasets, lab protocols and subtypes. These links get broken if you rename or delete a value that is already used by other enteries.
 
 </div>
 
-## Add a new Value
+## Editing the Vocabularies
 
-1. Click **Vocabularies** in the left sidebar.
-2. Click the type of vocabulary you want to edit (e.g. **Datatypes**).
-3. Scroll to the bottom of the list and click **Add <Vocabulary name>**.
-4. Type the new value and click **Save**. → The new value is immediately available in all relevant dataset fields.
+You can edit the content by opening the **Vocabuleries** collection on the left side on the admin panel (<a href="/admin/#/collections/vocabularies" target="_blank">www.blastodb.com/admin/#/collections/vocabularies</a>). Here, you can select which ones you want to edit.
 
-## Editing or Deleting a Value
+All vocabularies are stored in a list, which you can see in a textbox. Each line represents one item.
+To **add an item** simply add a new line with the new value, and llick **Save** on the top right corner. Make shure the new value is spelled correctly, as changing this later when other items link to will lead to breaking changes! Once saved, the new value will now be available to be selected across the BlastoDB.
 
 <div class="guide-warning">
 
 **Editing or Deleting a value is probably not nessecary, and will break links in the data.** These vocabularies are referenced in the datasets and subtypes, if you rename or delete them, these links will break! Please consider carefully if this really is nessecary.
 
-Only edit or delete values where you are shure 
+You can reverse a deleted value by re-adding it (in the exact same spelling) to the database.
 
 </div>
 
-1. Click **Vocabularies** in the left sidebar.
-2. Click the vocabulary you want to edit.
-3. Find the value you want to edit or delete, and edit/delete it in the list.
-4. Click **Save**.
-
-You can reverse a deleted value by re-adding it (in the exact same spelling) to the database.
 
 ## The vocabulary lists
 
@@ -65,8 +57,6 @@ You can reverse a deleted value by re-adding it (in the exact same spelling) to 
     - Used in the datasets
 
 6. **Countries** — A list of countries used to tag dataset sample origins
-    - Each entry has two fields:
-        - **ISO code** — the two-letter country code (always uppercase), e.g. `GB`, `TH`, `DE`
-        - **Name** — the full country name as displayed on the site, e.g. `United Kingdom`
-    - A full list of ISO codes: [ISO 3166-1 alpha-2 on Wikipedia](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+    - Examples: `United Kingdom`, `Germany`, ...
+    - Currently contains all countries of the [ISO 3166-1 country codes list](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
     - Used in both datasets and subtypes

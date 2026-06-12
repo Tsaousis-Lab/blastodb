@@ -132,7 +132,7 @@ collections:
         search_fields: [countries.*.name, countries.*.iso]
         hint: "All countries from the ISO 3166 coutry code.<br>If a desired datatype is missing, you can add it under ''Lab Protocols''."
 
-      - label: Lab protocols
+      - label: Lab Protocols
         name: lab_protocols
         widget: relation
         collection: lab_protocols
@@ -208,7 +208,7 @@ collections:
   # -----------------------------------------------------------------------
   - name: lab_protocols
     icon: database
-    label: Lab protocols
+    label: Lab Protocols
     folder: content/data/lab_protocols
     create: true
     slug: "{{slug}}"

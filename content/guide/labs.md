@@ -6,34 +6,33 @@ description: How to add and edit research lab profiles in the BlastoDB CMS.
 
 <h-hero>Research Labs</h-hero>
 
-Here you find the information on how to add, edit or remove research labs on the admin panel of BlastoDB ([www.blastodb.com/admin](/admin)). You also find an overview and description of the input fields.
+In BlastoDB provides a list of research labs working on Blastocystis (<a href="/labs/" target="_blank">www.blastodb.com/labs</a>). Here you find a guide on how to edit this information in the admin panel, and get an overview and description of all parameters.
 
-## Add a new Research Lab
+## Editing the Research Labs
 
-1. Click **Research Labs** in the left sidebar.
-2. Click the single **Research Labs** file entry.
-3. Scroll down to the bottom and click **+ Add Research Lab**. (This is easyer if you click *collapse all* on the top right).
-4. Input the relevant Data.
-5. Click **Save** on the top right. -> The Website will be updated automatically within a few minutes.
+You can edit the content by opening the **Research Labs** collection on the left side on the admin panel, and opening the single 'Research Labs' entery (<a href="/admin/#/collections/research_labs/entries/research_labs" target="_blank">www.blastodb.com/admin/#/collections/research_labs/entries/research_labs</a>). Here, you can select which ones you want to edit.
+
+#### Add a new Research Lab
+
+1. Scroll down to the bottom and click **+ Add Research Lab** (This is easyer if you click *collapse all* on the top right)
+2. Input the relevant Data (you find a description of the fields below)
+3. Click **Save** on the top right -> The Website will be updated automatically within a few minutes
 
 
-## Add a new Research Lab
+#### Edit an existing Research Lab
 
-1. Click **Research Labs** in the left sidebar.
-2. Click the single **Research Labs** file entry.
-3. Find the publication you want to edit. (This is easyer if you click *collapse all* on the top right).
-4. Input the relevant Data.
-5. Click **Save** on the top right. -> The Website will be updated automatically within a few minutes.
+1. Find the publication you want to edit. (This is easyer if you click *collapse all* on the top right)
+2. Edit the relevant Data (you find a description of the fields below)
+3. Click **Save** on the top right -> The Website will be updated automatically within a few minutes
 
-## Delete a Research Lab
+You can also **rearrange** the order of the research labs (and how they are displayed) by using the arrows, or **add an item above or below** by clicking the three dots beside the **x** in an entery.
 
-1. Click **Research Labs** in the left sidebar
-2. Click the single **Research Labs** file entry
-3. Find the lab you need. (This is easyer if you click *collapse all* on the top right).
-4. Click the "x" at the top right of the publication entery to delete it.
-5. Click **Save** on the top right. -> The Website will be updated automatically within a few minutes.
+#### Delete a Research Lab
 
-It is save to remove research labs, as no other content links to them. Consider to delete uploaded images alongside the enteries to not clutter the repository data.
+1. Find the lab you need. (This is easyer if you click *collapse all* on the top right)
+2. Click the **x** at the top right of the publication entery to delete it
+3. Click **Save** on the top right -> The Website will be updated automatically within a few minutes
+4. Consider to delete uploaded images alongside the enteries to not clutter the repository data.
 
 ## Fields
 
