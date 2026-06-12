@@ -852,7 +852,28 @@ footer a:hover {
     }
 }
 
-/* ── 14. Guide layout ──────────────────────────────────────── */
+/* ── 14. Tables ────────────────────────────────────────────── */
+main table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.25rem 0;
+    font-size: 0.9rem;
+}
+
+main th,
+main td {
+    border: 1px solid var(--border);
+    padding: 0.55rem 0.9rem;
+    text-align: left;
+    vertical-align: top;
+}
+
+main th {
+    font-weight: 600;
+    font-family: var(--font-ui);
+}
+
+/* ── 15. Guide layout ──────────────────────────────────────── */
 .guide-note {
     padding: 0.9rem 1.1rem;
     border-radius: var(--radius);
@@ -878,4 +899,17 @@ footer a:hover {
     margin: 1.25rem 0;
     font-size: 0.95rem;
     background: #fff8ec;
+}
+
+/* ── 16. Blockquote ────────────────────────────────────────── */
+main blockquote {
+    border-left: 3px solid var(--border);
+    margin: 1.25rem 0;
+    padding: 0.6rem 1rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+main blockquote p {
+    margin: 0;
 }

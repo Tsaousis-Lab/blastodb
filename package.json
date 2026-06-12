@@ -22,5 +22,10 @@
     "@sveltia/cms": "^0.162.3",
     "js-yaml": "^4.1.1",
     "markdown-it": "^13.0.0"
+  },
+  "dependencies": {
+    "markdown-it-emoji": "^3.0.0",
+    "markdown-it-sub": "^2.0.0",
+    "markdown-it-sup": "^2.0.0"
   }
 }

@@ -1,4 +1,7 @@
 const markdownIt = require("markdown-it");
+const markdownItSub = require("markdown-it-sub");
+const markdownItSup = require("markdown-it-sup");
+const { full: markdownItEmoji } = require("markdown-it-emoji");
 const fs = require("fs");
 const path = require("path");
 const yaml = require("js-yaml");
@@ -496,6 +499,9 @@ module.exports = function (eleventyConfig) {
     linkify: false,
     typographer: false,
   });
+  md.use(markdownItSub);
+  md.use(markdownItSup);
+  md.use(markdownItEmoji);
 
   // HTML escape utility
   function escapeHtml(str) {
