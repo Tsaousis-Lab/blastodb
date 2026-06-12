@@ -9,7 +9,7 @@ sources:
   - Water
   - Soil
 reference_genome_link: ''
-ssu_rrna_link: ''
+ssu_rrna_link: https://www.test.com
 ---
 
 ## Short Description

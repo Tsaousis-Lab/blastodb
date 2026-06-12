@@ -20,6 +20,12 @@
         { "label": "Contact", "file": "content/contact.md" }
       ]
     },
-    { "label": "Documentation", "file": "content/documentation/editors_guide/index.md" }
+    {
+      "label": "Documentation",
+      "items": [
+        { "label": "Editor Guide", "file": "content/documentation/editors_guide/index.md" },
+        { "label": "Style Guide",  "file": "content/documentation/styleguide/index.md" }
+      ]
+    }
   ]
 }

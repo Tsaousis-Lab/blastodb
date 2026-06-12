@@ -26,6 +26,13 @@
         { "label": "Contribute", "url": "/contribute/" },
         { "label": "Contact", "url": "/contact/" }
       ]
+    },
+    {
+      "title": "Documentation",
+      "items": [
+        { "label": "Editor Guide", "url": "/documentation/editors_guide/" },
+        { "label": "Style Guide",  "url": "/documentation/styleguide/" }
+      ]
     }
   ]
 }

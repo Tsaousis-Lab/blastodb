@@ -8,7 +8,7 @@ sources:
   - Mammal
   - Water
   - Soil
-reference_genome_link: ''
+reference_genome_link: https://www.test.com
 ssu_rrna_link: ''
 ---
 

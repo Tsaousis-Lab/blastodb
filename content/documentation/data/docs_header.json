@@ -1,22 +1,7 @@
 {
   "items": [
-    {
-      "type": "link",
-      "label": "Editor Guide",
-      "file": "content/documentation/editors_guide/index.md",
-      "url": "/documentation/editors_guide/"
-    },
-    {
-      "type": "link",
-      "label": "Style Guide",
-      "file": "content/documentation/styleguide/index.md",
-      "url": "/documentation/styleguide/"
-    },
-    {
-      "type": "link",
-      "label": "← Back to BlastoDB",
-      "file": "content/index.md",
-      "url": "/"
-    }
+    { "label": "← BlastoDB",   "url": "/" },
+    { "label": "Editor Guide", "url": "/documentation/editors_guide/" },
+    { "label": "Style Guide",  "url": "/documentation/styleguide/" }
   ]
 }

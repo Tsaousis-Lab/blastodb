@@ -844,8 +844,8 @@ module.exports = function (eleventyConfig) {
         );
         if (!fileExists) return null;
 
-        const urlPath = item.file.replace("content/", "").replace(".md", "");
-        const url = urlPath === "index" ? "/" : "/" + urlPath + "/";
+        const urlPath = item.file.replace("content/", "").replace(".md", "").replace(/\/index$/, "");
+        const url = urlPath === "" || urlPath === "index" ? "/" : "/" + urlPath + "/";
         return {
           label: item.label,
           file: item.file,
@@ -866,8 +866,9 @@ module.exports = function (eleventyConfig) {
 
             const urlPath = subItem.file
               .replace("content/", "")
-              .replace(".md", "");
-            const url = urlPath === "index" ? "/" : "/" + urlPath + "/";
+              .replace(".md", "")
+              .replace(/\/index$/, "");
+            const url = urlPath === "" || urlPath === "index" ? "/" : "/" + urlPath + "/";
             return {
               label: subItem.label,
               file: subItem.file,
@@ -908,9 +909,6 @@ module.exports = function (eleventyConfig) {
   });
 
   // Documentation Collections
-  eleventyConfig.addCollection("docs_nav", () =>
-    require("./content/documentation/data/docs_nav.json")
-  );
   eleventyConfig.addCollection("docs_header", () =>
     require("./content/documentation/data/docs_header.json")
   );
