@@ -1,0 +1,12 @@
+<header>
+  <div class="header-inner">
+    <a href="{{ '/' | url }}" class="site-logo">
+      <img src="{{ (collections.branding.site_logo_upload or collections.branding.site_logo_url) | url }}" alt="BlastoDB logo" class="logo-image">
+      <span>{{ collections.branding.site_title }}</span>
+    </a>
+    <span class="docs-section-label">/ {{ collections.docs_header.section_title }}</span>
+    <a href="{{ collections.docs_header.back_url | url }}" class="docs-back-link">
+      {{ collections.docs_header.back_label }}
+    </a>
+  </div>
+</header>

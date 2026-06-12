@@ -1,5 +1,5 @@
 ---
-layout: layouts/guide.njk
+layout: layouts/documentation.njk
 title: BlastoDB — Typography
 description: Typefaces, heading scale, body text, and colour tokens for BlastoDB.
 ---
@@ -68,4 +68,4 @@ Inline `code` is set in IBM Plex Mono with a teal pale background. Use it for fi
 
 ---
 
-For the full colour palette and design tokens, see the [Color Guide](/styleguide/colors/).
+For the full colour palette and design tokens, see the [Color Guide](/documentation/styleguide/colors/).

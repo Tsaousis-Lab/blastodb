@@ -1,5 +1,5 @@
 ---
-layout: layouts/guide.njk
+layout: layouts/documentation.njk
 title: BlastoDB — Colors
 description: Design tokens, colour palette, and shadow values for BlastoDB.
 ---

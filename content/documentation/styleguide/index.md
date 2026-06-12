@@ -1,5 +1,5 @@
 ---
-layout: layouts/guide.njk
+layout: layouts/documentation.njk
 title: BlastoDB — Style Guide
 description: Design language and visual guidelines for BlastoDB.
 ---
@@ -17,19 +17,19 @@ BlastoDB lives at the intersection of rigorous science and open accessibility. T
 [card:]
 ### Typography
 Typefaces, heading scale, body text, and inline elements.
-[btn: View Typography -> /styleguide/typography/]
+[btn: View Typography -> /documentation/styleguide/typography/]
 [:card]
 
 [card:]
 ### Colors
 The full colour palette — design tokens, swatches, and shadow values.
-[btn: View Colors -> /styleguide/colors/]
+[btn: View Colors -> /documentation/styleguide/colors/]
 [:card]
 
 [card:]
 ### Components
 Every visual element — button, tag, hero, box, card, columns, grid, and the collector card system.
-[btn: View Components -> /styleguide/components/]
+[btn: View Components -> /documentation/styleguide/components/]
 [:card]
 
 [:grid]

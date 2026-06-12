@@ -1,5 +1,5 @@
 ---
-layout: layouts/guide.njk
+layout: layouts/documentation.njk
 title: GitHub Setup
 description: How to create a GitHub account, get access to the BlastoDB repository, and generate a personal access token.
 ---
@@ -63,4 +63,4 @@ It is **really important** that you keep this password private. Please store it 
 
 ## Step 4: Logging in
 
-Once you have your token, go to [www.blastodb/admin](/admin/) and follow the steps on the [Logging into the CMS](/guide/getting-started/) page.
+Once you have your token, go to [www.blastodb/admin](/admin/) and follow the steps on the [Logging into the CMS](/documentation/editors_guide/getting-started/) page.

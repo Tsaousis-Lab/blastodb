@@ -993,3 +993,8 @@ footer a:hover {
         border-bottom-color: var(--accent);
     }
 }
+
+/* ── 15. Docs portal header/footer ─────────────────────────── */
+.docs-section-label { color: var(--muted); margin-left: 0.5rem; }
+.docs-back-link { margin-left: auto; font-size: 0.85rem; color: var(--muted); }
+.docs-back-link:hover { color: var(--accent-dark); }

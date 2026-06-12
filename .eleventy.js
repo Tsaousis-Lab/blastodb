@@ -907,6 +907,17 @@ module.exports = function (eleventyConfig) {
     return footer;
   });
 
+  // Documentation Collections
+  eleventyConfig.addCollection("docs_nav", () =>
+    require("./content/documentation/data/docs_nav.json")
+  );
+  eleventyConfig.addCollection("docs_header", () =>
+    require("./content/documentation/data/docs_header.json")
+  );
+  eleventyConfig.addCollection("docs_footer", () =>
+    require("./content/documentation/data/docs_footer.json")
+  );
+
   // Publications Collection
   eleventyConfig.addCollection("publications", () => {
     const publications = require("./content/data/publications.json");

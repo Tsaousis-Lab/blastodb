@@ -1,5 +1,5 @@
 ---
-layout: layouts/guide.njk
+layout: layouts/documentation.njk
 title: Datasets
 description: How to edit datasets in the BlastoDB CMS.
 ---
@@ -8,14 +8,14 @@ description: How to edit datasets in the BlastoDB CMS.
 
 BlastoDB stores links to reputable blastocystis datasets (<a href="/datasets/" target="_blank">www.blastodb.com/datasets</a>). Here you find a guide on how to edit this information in the admin panel, and get an overview and description of all parameters.
 
-If you want to edit the webpage displaying all the datasets, you finde a guide [here](/guide/pages/).
+If you want to edit the webpage displaying all the datasets, you finde a guide [here](/documentation/editors_guide/pages/).
 
 ## Editing the Datasets
 
 You can edit the content by opening the **Datasets** collection on the left side on the admin panel (<a href="/admin/#/collections/datasets" target="_blank">www.blastodb.com/admin/#/collections/datasets</a>).
 
 #### Creating a new dataset
-1. Make shure te publication this dataset is based upon is already in BlastoDB, as you will need to link to it ([-> now to add publications](/guide/publications/)).
+1. Make shure te publication this dataset is based upon is already in BlastoDB, as you will need to link to it ([-> now to add publications](/documentation/editors_guide/publications/)).
 2. Click **New** in the top-right.
 3. Fill out the form. You can find a description of the fields. 
 4. Click **Save**. -> The Website will be updated automatically within a few minutes.
@@ -40,32 +40,32 @@ The datasets here have thirteen properties, which are shortly described in the f
     - A URL to the raw data. For example: `https://www.ncbi.nlm.nih.gov/sra/...`
 3. **Related Publications** `required` - The publication(s) this dataset is based upon.
     - Select the publication the dataset is based upon from the list.
-    - Publications must be added to the system before you can link to them, see [Publications guide](/guide/publications/).
+    - Publications must be added to the system before you can link to them, see [Publications guide](/documentation/editors_guide/publications/).
 4. **Publication Date** `required` - The date the dataset was published
     - Enter a year (2024), month and year (06.2024), or full date (11.06.2024)
 5. **Datatypes** `at least one` - The type of data in the dataset.
     - Select at least one or more data types from the list.
-    - If a datatype you need is missing, it can be added under *[Vocabularies](/guide/vocabularies/) → Datatypes*.
+    - If a datatype you need is missing, it can be added under *[Vocabularies](/documentation/editors_guide/vocabularies/) → Datatypes*.
 6. **Subtype(s)** - The subtypes present in the dataset
     - Select the blastocystis subtypes from the list.
-    - Subtypes must already exist to be selectable. You can add new ones under [Subtypes guide](/guide/subtypes/).
+    - Subtypes must already exist to be selectable. You can add new ones under [Subtypes guide](/documentation/editors_guide/subtypes/).
 7. **Strains** - Strains of Blastocystis (if available)
     - Free-text list of strain identifiers. One item per line. Leave blank if not applicable.
 8. **Data Origin(s)** - e.G. In-Vitro, Ex-Vivo...
     - Select the data origin from the list.
-    - If a data origin you need is missing, it can be added under *[Vocabularies](/guide/vocabularies/) → Data Origin*.
+    - If a data origin you need is missing, it can be added under *[Vocabularies](/documentation/editors_guide/vocabularies/) → Data Origin*.
 9. **Detection Method(s)** - e.G. PCR, 
     - Select the detection method(s) from the list.
-    - If a detection method you need is missing, it can be added under *[Vocabularies](/guide/vocabularies/) → Detection Methods*.
+    - If a detection method you need is missing, it can be added under *[Vocabularies](/documentation/editors_guide/vocabularies/) → Detection Methods*.
 10. **Sources** - The source where Blastocystis was sampled from (e.G. Human, Mammel, Soil...)
     - Select the source from the list.
-    - If a required data source you need is missing, it can be added under *[Vocabularies](/guide/vocabularies/) → Sources*.
+    - If a required data source you need is missing, it can be added under *[Vocabularies](/documentation/editors_guide/vocabularies/) → Sources*.
 11. **Countries** - The country(s) where the data was collected
     - Select the countries from which the samples were collected from the list.
-    - This currently includes all countries of the ISO 3166 country code standart. You can edit the available countries in the [Vocabularies](/guide/vocabularies/)
+    - This currently includes all countries of the ISO 3166 country code standart. You can edit the available countries in the [Vocabularies](/documentation/editors_guide/vocabularies/)
 12. **Lab Protocols**
     - Select related lan protocols from the list.
-    - Lab protocols need to be added to the system before you can link to them, see ([Publications guide](/guide/publications/)).
+    - Lab protocols need to be added to the system before you can link to them, see ([Publications guide](/documentation/editors_guide/publications/)).
 13. **Description**
     - A free-text description of the dataset.
     - Leave everything below the `---` divider untouched! The default template includes collector blocks that automatically display linked publications and protocols.Please do not delete or change these, otherwise the related references and lab protocols will not be displayed! (In case you accidentally deleted something, you can copy and paste the section from another dataset).

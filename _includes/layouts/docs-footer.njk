@@ -1,0 +1,32 @@
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div class="footer-branding">
+        <div class="footer-branding-header">
+          <a href="{{ '/' | url }}" class="footer-logo">
+            <img src="{{ (collections.branding.site_logo_upload or collections.branding.site_logo_url) | url }}" alt="BlastoDB logo" class="footer-logo-image">
+            <span>{{ collections.branding.site_title }}</span>
+          </a>
+        </div>
+        <p>{{ collections.docs_footer.description }}</p>
+      </div>
+    </div>
+    <div class="footer-columns">
+      {% for column in collections.docs_footer.columns %}
+        <div class="footer-column">
+          <h3>{{ column.title }}</h3>
+          <ul>
+            {% for item in column.items %}
+              <li><a href="{{ item.url | url }}">{{ item.label }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% if collections.docs_footer.funding %}
+  <div class="footer-bottom">
+    <p>{{ collections.docs_footer.funding }}</p>
+  </div>
+  {% endif %}
+</footer>

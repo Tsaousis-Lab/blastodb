@@ -1,5 +1,5 @@
 ---
-layout: layouts/guide.njk
+layout: layouts/documentation.njk
 title: Vocabularies
 description: How to manage the controlled vocabulary lists used across BlastoDB datasets.
 ---

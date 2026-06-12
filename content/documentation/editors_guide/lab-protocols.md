@@ -1,5 +1,5 @@
 ---
-layout: layouts/guide.njk
+layout: layouts/documentation.njk
 title: Lab Protocols
 description: How to add and edit laboratory protocols in the BlastoDB CMS.
 ---
@@ -8,7 +8,7 @@ description: How to add and edit laboratory protocols in the BlastoDB CMS.
 
 BlastoDB stores lab protocols important to other data on this website (<a href="/lab-protocols/" target="_blank">www.blastodb.com/lab-protocols</a>). Here you find a guide on how to edit this information in the admin panel, and get an overview and description of all parameters.
 
-If you want to edit the webpage displaying the lab protocols, you finde a guide [here](/guide/pages/).
+If you want to edit the webpage displaying the lab protocols, you finde a guide [here](/documentation/editors_guide/pages/).
 
 ## Editing the Lab Protocols
 
@@ -16,7 +16,7 @@ You can edit the content by opening the **Lab Protocols** collection on the left
 
 #### Add a new Lab Protocol
 
-1. If there is a related publication, add that first to the database (see [Publications](/guide/publications/))
+1. If there is a related publication, add that first to the database (see [Publications](/documentation/editors_guide/publications/))
 2. Click **New** in the top-right.
 3. Fill in the fields described below.
 4. Click **Save**. → The website will be updated automatically within a few minutes.
@@ -52,7 +52,7 @@ You can edit the content by opening the **Lab Protocols** collection on the left
 
 2. **Related Publications** — Related publication where the protocol comes from
     - Select from the list.
-    - Publications must already be in the system — see the [Publications guide](/guide/publications/).
+    - Publications must already be in the system — see the [Publications guide](/documentation/editors_guide/publications/).
 
 3. **Protocol** `required` — The full protocol text, written in Markdown.
 

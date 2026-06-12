@@ -1,5 +1,5 @@
 ---
-layout: layouts/guide.njk
+layout: layouts/documentation.njk
 title: BlastoDB — Components
 description: Visual elements and layout components for BlastoDB.
 ---

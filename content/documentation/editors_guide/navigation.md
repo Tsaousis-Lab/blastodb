@@ -1,5 +1,5 @@
 ---
-layout: layouts/guide.njk
+layout: layouts/documentation.njk
 title: Navigation
 description: How to edit the header navigation, footer, and site branding in the BlastoDB CMS.
 ---

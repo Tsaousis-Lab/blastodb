@@ -1,5 +1,5 @@
 ---
-layout: layouts/guide.njk
+layout: layouts/documentation.njk
 title: Research Labs
 description: How to add and edit research lab profiles in the BlastoDB CMS.
 ---

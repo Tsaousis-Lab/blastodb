@@ -1,5 +1,5 @@
 ---
-layout: layouts/guide.njk
+layout: layouts/documentation.njk
 title: Subtypes
 description: How to add and edit Blastocystis subtype pages in the BlastoDB CMS.
 ---
@@ -8,7 +8,7 @@ description: How to add and edit Blastocystis subtype pages in the BlastoDB CMS.
 
 BlastoDB stores information about its known subtypes (<a href="/subtypes/" target="_blank">www.blastodb.com/subtypes</a>). Here you find a guide on how to edit this information in the admin panel, and get an overview and description of all parameters.
 
-If you want to edit the webpage displaying all the subtypes, you finde a guide [here](/guide/pages/).
+If you want to edit the webpage displaying all the subtypes, you finde a guide [here](/documentation/editors_guide/pages/).
 
 ## Editing the Subtypes
 
@@ -56,7 +56,7 @@ You can edit the content by opening the **Subtypes** collection on the left side
 
 3. **Sources / Hosts** — Sources where the subtype has been found (e.g. `Human`, `Mammals`, `Water`, ...).
     - Select from the controlled list.
-    - If a source you need is missing, it can be added under *[Vocabularies](/guide/vocabularies/) → Data Sources*.
+    - If a source you need is missing, it can be added under *[Vocabularies](/documentation/editors_guide/vocabularies/) → Data Sources*.
 
 4. **Download Link to Reference Genomes** — A direct download URL for the reference genome sequence.
     - Leave blank if not available.
@@ -69,6 +69,6 @@ You can edit the content by opening the **Subtypes** collection on the left side
     - Leave everything below the `---` divider untouched.
     <div class="guide-warning">
 
-    **Do not delete the collector block at the bottom of the description.** It is the code starting with `[collector -> datasets;` and is what automatically lists all datasets tagged with this subtype. If you delete it, copy it from another subtype's description field. See the [Pages guide](/guide/pages/) for an explanation of collector blocks.
+    **Do not delete the collector block at the bottom of the description.** It is the code starting with `[collector -> datasets;` and is what automatically lists all datasets tagged with this subtype. If you delete it, copy it from another subtype's description field. See the [Pages guide](/documentation/editors_guide/pages/) for an explanation of collector blocks.
 
     </div>

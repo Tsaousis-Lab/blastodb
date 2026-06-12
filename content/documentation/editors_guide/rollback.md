@@ -1,5 +1,5 @@
 ---
-layout: layouts/guide.njk
+layout: layouts/documentation.njk
 title: Rolling Back a Change
 description: How to undo a recent change on GitHub if something breaks after a data entry.
 ---

@@ -1,5 +1,5 @@
 ---
-layout: layouts/guide.njk
+layout: layouts/documentation.njk
 title: Publications
 description: How to add and manage publications in the BlastoDB CMS.
 ---
@@ -8,7 +8,7 @@ description: How to add and manage publications in the BlastoDB CMS.
 
 BlastoDB provides an overview of all poblications related to content on this website (<a href="/publicatios/" target="_blank">www.blastodb.com/publications</a>). Here you find a guide on how to edit this information in the admin panel, and get an overview and description of all parameters.
 
-If you want to edit the webpage displaying the publications, you finde a guide [here](/guide/pages/).
+If you want to edit the webpage displaying the publications, you finde a guide [here](/documentation/editors_guide/pages/).
 
 ## Editing the Publications
 

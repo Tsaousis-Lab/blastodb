@@ -1,5 +1,5 @@
 ---
-layout: layouts/guide.njk
+layout: layouts/documentation.njk
 title: Pages
 description: How to edit the general content pages on BlastoDB, and how the custom markdown syntax works.
 ---
@@ -8,7 +8,7 @@ description: How to edit the general content pages on BlastoDB, and how the cust
 
 Here you find the information on how to edit the web pages of BlastoDB on the admin panel ([www.blastodb.com/admin](/admin)).
 
-This does not include the pages of the [subtypes](/guide/subtypes/), [datasets](/guide/datasets/), or [lab protocols](/guide/lab-protocols). Look at the respective tutorials to add and change the corrensponding pages.
+This does not include the pages of the [subtypes](/documentation/editors_guide/subtypes/), [datasets](/documentation/editors_guide/datasets/), or [lab protocols](/documentation/editors_guide/lab-protocols). Look at the respective tutorials to add and change the corrensponding pages.
 
 <div class="guide-warning">
 
@@ -16,7 +16,7 @@ This does not include the pages of the [subtypes](/guide/subtypes/), [datasets](
 
 Simpler changes to the website are fine. However, **if you are not sure what a piece of code does, do not change or delete it.** If you want to do larger changes, edit the website locally with a propper preview if you plan to substentially change the layout or interaction with the website and touch a lot of custom components.
 
-Use the guide on how to [revert a change]](/guide/rollback/) if something breaks by accident.
+Use the guide on how to [revert a change]](/documentation/editors_guide/rollback/) if something breaks by accident.
 
 </div>
 
@@ -29,7 +29,7 @@ The content of BlastoDB is written in Markdown, with custom components to load i
 3. Enter the **Title**, **Description**, or **Body** (/content of the website) fields as needed. You find a description of the fields below.
 4. Click **Save**. → The website will be updated automatically within a few minutes.
 5. You can now access this new webpage with the following link: `https://www.blastodb.com/<title_in_lower_case>/`.
-6. To make it easily accessible, you can add it to the header and/or footer [in the navigation panel](/guide/navigation), or add a button to a webpage [as described here](TODO:link).
+6. To make it easily accessible, you can add it to the header and/or footer [in the navigation panel](/documentation/editors_guide/navigation), or add a button to a webpage [as described here](TODO:link).
 
 ## Editing a Page
 
@@ -49,7 +49,7 @@ The content of BlastoDB is written in Markdown, with custom components to load i
 
 **Be careful not to delete any important pages!**
 
-If you delete a page, remove it from the Header and Footer [as described here](/guide/navigation/).
+If you delete a page, remove it from the Header and Footer [as described here](/documentation/editors_guide/navigation/).
 
 </div>
 
@@ -67,7 +67,7 @@ Each webpage consists of the following elements:
 
     <div class="guide-warning">
 
-    **Again: Do not edit or delete the custom shortcode blocks unless you know what you are doing!** Leave the already present on a page (hero banners, collector blocks, buttons, boxes, cards, columns, rows or grids) untouched and edit the plain text around them. If something breaks, see the guide on how to [revert a change](/guide/rollback/).
+    **Again: Do not edit or delete the custom shortcode blocks unless you know what you are doing!** Leave the already present on a page (hero banners, collector blocks, buttons, boxes, cards, columns, rows or grids) untouched and edit the plain text around them. If something breaks, see the guide on how to [revert a change](/documentation/editors_guide/rollback/).
 
     </div>
 
