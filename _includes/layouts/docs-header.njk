@@ -4,9 +4,34 @@
       <img src="{{ (collections.branding.site_logo_upload or collections.branding.site_logo_url) | url }}" alt="BlastoDB logo" class="logo-image">
       <span>{{ collections.branding.site_title }}</span>
     </a>
-    <span class="docs-section-label">/ {{ collections.docs_header.section_title }}</span>
-    <a href="{{ collections.docs_header.back_url | url }}" class="docs-back-link">
-      {{ collections.docs_header.back_label }}
-    </a>
+    <nav>
+      {% set currentFileName = page.filePathStem | replace('/index', '') %}
+      {% set navItems = collections.docs_header.items %}
+      {% for item in navItems %}
+        {% if item.type == 'link' %}
+          {% set itemPath = '/' + item.file.replace('content/', '').replace('.md', '') %}
+          <a href="{{ item.url | url }}" {% if itemPath == currentFileName %}class="active"{% endif %}>
+            {{ item.label }}
+          </a>
+        {% elif item.type == 'dropdown' %}
+          {% set uniqueId = 'docs-nav-dropdown-' + loop.index %}
+          <div class="nav-dropdown-container">
+            <button class="nav-dropdown-btn" data-target="{{ uniqueId }}" aria-expanded="false">
+              {{ item.label }}
+              <span class="nav-dropdown-arrow">▼</span>
+            </button>
+            <div class="nav-dropdown-menu" id="{{ uniqueId }}">
+              {% for subItem in item.items %}
+                {% set subItemPath = '/' + subItem.file.replace('content/', '').replace('.md', '') %}
+                <a href="{{ subItem.url | url }}" class="nav-dropdown-item" {% if subItemPath == currentFileName %}data-active="true"{% endif %}>
+                  {{ subItem.label }}
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
   </div>
 </header>

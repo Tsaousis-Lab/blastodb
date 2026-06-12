@@ -15,25 +15,9 @@
 <body>
   {% include "layouts/docs-header.njk" %}
 
-  <div class="guide-outer">
-    <aside class="guide-sidebar">
-      <nav class="guide-sidebar-nav">
-        {% for item in collections.docs_nav %}
-          {% if item.divider %}
-          <p class="guide-sidebar-title">{{ item.divider }}</p>
-          {% else %}
-          <a href="{{ item.url | url }}" class="guide-sidebar-link{% if page.url == item.url %} is-active{% endif %}">
-            {{ item.label }}
-          </a>
-          {% endif %}
-        {% endfor %}
-      </nav>
-    </aside>
-
-    <main class="guide-content">
-      {{ content | processSpans | safe }}
-    </main>
-  </div>
+  <main>
+    {{ content | processSpans | safe }}
+  </main>
 
   {% include "layouts/docs-footer.njk" %}
 </body>
