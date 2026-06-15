@@ -168,6 +168,8 @@ Here is other content that I wand to be separated.
 
 # Links {#links}
 
+This section explains how to write links in markdown. In-text markdown links can be used both to link to internal and external websites. If you use links outside of text, read the [styleguide on links and buttons](/documentation/styleguide/components/#links--buttons).
+
 ## Links to External Websites {#links-to-external-websites}
 You can create a [link](https://www.blastodb.com), for example to the website uf the University of Kent:
 ```markdown

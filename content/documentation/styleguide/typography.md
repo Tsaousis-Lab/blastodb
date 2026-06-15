@@ -8,7 +8,7 @@ description: Typefaces, heading scale, body text, and colour tokens for BlastoDB
 <h-hero>Typography</h-hero>
 [:hero]
 
-## Typefaces
+# Typefaces
 
 Three families cover every context on the site.
 
@@ -20,7 +20,7 @@ Three families cover every context on the site.
 
 ---
 
-## Heading scale {#headings}
+# Heading scale {#headings}
 
 Heading sizes are fluid — they scale smoothly between the minimum and maximum as the viewport widens.
 
@@ -46,7 +46,7 @@ Heading sizes are fluid — they scale smoothly between the minimum and maximum 
 
 ---
 
-## Body text
+# Body text
 
 Public Sans · 1 rem · 1.7 line-height. The generous line-height is intentional — scientific content benefits from breathing room.
 
@@ -56,15 +56,20 @@ Inline `code` is set in IBM Plex Mono with a teal pale background. Use it for fi
 
 ---
 
-## Links
+# Links {#links}
 
-**Standard link** — accent colour with a persistent underline. Default for links in running prose.
+Links are used either for in-text links, or as links to external websites. Other interactions on BlastoDB should be done with Buttons. See the [style guide for links and buttons](/documentation/styleguide/components/#links--buttons) for when to use which.
 
-**`.link-underline`** — accent colour, underline animates in on hover. Use for links alongside metadata (dataset cards, download links) where a permanent underline would feel heavy.
+## Standard Links / In-Text Links {#links-in-text}
+[Standart links](#links-in-text) are colored in the accent color, and underlined. They are mainly used for links within written text.
 
-<a href="#" class="link-underline">Example link-underline ↗</a>
+## External Links {#external-links}
 
-**Styled spans** — `[s: css]content[:s]` applies arbitrary inline CSS. Use sparingly, only for one-off typographic emphasis that has no existing class. Example: the genus name in the homepage hero uses `color: var(--accent-darker)`.
+**`.external-link`** — accent colour, underline animates in on hover. Use it for links that open external websites, line links to datasets. These links are standalonw, and should be written in title-case. [You write it linke this in markdown](/documentation/markdown/markdown_syntax/#links-to-external-websites):
+
+`<a href="https://external-link.co.uk" class="link-underline">Example External Link ↗</a>`
+<br>
+<a href="#external-links" class="link-underline">Example External-Link ↗</a>
 
 ---
 

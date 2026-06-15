@@ -16,6 +16,32 @@ description: Visual elements and layout components for BlastoDB.
 
 ---
 
+## Links & Buttons {#links--buttons}
+
+Four types are available. Choose based on where the link sits and how many destinations it has.
+
+| Type | Use when | Example |
+|---|---|---|
+| Normal link `[text](url)` | Link is **inside a sentence** — inline prose, cross-references, citations | "See the [Subtypes page](/subtypes/) for details." |
+| Arrow link `.external-link` ↗ | Link is **external** and sits in a **metadata or card context** — not inside prose | Source attribution next to a dataset title |
+| Button `[btn:]` | Link is a **standalone primary action** with **one destination** | "Download Data" or "View Subtypes" at the end of a card |
+| Selector button `[sbtn:]` | Link is a **standalone primary action** with **multiple destinations** (e.g. file formats) | "Download Data" that reveals CSV / XLSX / JSON options |
+
+In-text links/normal links can be used for both internal and external linking. Otherwise, external links should use an arrow link, and internal links a button or selector button.
+
+**Decision tree:**
+```
+Is the link inside a sentence?
+  → Yes → Normal link
+  → No — is it external attribution in a metadata or card context?
+      → Yes → Arrow link (↗)
+      → No (it is a primary action on the website?)
+          → One destination        → [btn:]
+          → Multiple destinations  → [sbtn:]
+```
+
+---
+
 ## Tag
 
 <span class="tag">ST1</span> <span class="tag">Genomics</span> <span class="tag tag-muted">Germany</span>

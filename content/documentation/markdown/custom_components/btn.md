@@ -8,17 +8,15 @@ description: A styled link button for calls to action and navigation.
 
 <h-hero>Button</h-hero>
 
-A styled link that renders as a solid call-to-action button.
+A styled link that renders as a solid call-to-action button. The button 
 
 [:hero]
 
-[btn: ← Custom Components -> /documentation/markdown/custom_components/]
+# What it does
 
-## What it does
+Buttons are used for interactions on the webpage (see the [styleguide](/documentation/styleguide/components/#links--buttons) on when to use buttons and when to use links). The Button component renders a link as a solid teal button.
 
-The Button component renders a link as a solid teal button. Use it for navigating to a section, opening a dataset, or pointing to an external resource. It is an **inline element** — it sits within a paragraph or can stand alone on a line.
-
-## Syntax
+# Syntax
 
 ```markdown
 [btn: Button Label -> /url/]
@@ -26,7 +24,7 @@ The Button component renders a link as a solid teal button. Use it for navigatin
 
 Both the label and the URL are required, separated by ` -> `.
 
-## Example
+# Example
 
 ```markdown
 [btn: View Datasets -> /datasets/]
@@ -36,31 +34,32 @@ Both the label and the URL are required, separated by ` -> `.
 [btn: View Datasets -> /datasets/]
 [btn: External Link -> https://www.example.com]
 
-## Links
+# Links
 
 For a full explanation of how links work see the [Markdown Syntax guide](/documentation/markdown/markdown_syntax/#links).
 
-**External link** — use the full URL including `https://`:
-```markdown
-[btn: Visit Kent University -> https://www.kent.ac.uk/]
-```
-
-**Internal link** — use the page path without the domain:
+## Internal link
+For internal links, use the path without the domain (e.G. ~~`https://www.blastodb.com`~~`/subtypes/`):
 ```markdown
 [btn: View Subtypes -> /subtypes/]
 [btn: Homepage -> /]
 ```
+The path including the domain also works. However, these links would loose its functionality if the primary domain ever changes. For this reason, the path is strongly preferred.
 
-**Link to a heading** — append `#custom-id` to jump to a section. Headings need a `{#custom-id}` attribute first — see the [Markdown Syntax guide](/documentation/markdown/markdown_syntax/#linking-to-a-headline).
+## Link to a heading
+
+Append `#custom-id` to jump to a section. Headings need a `{#custom-id}` attribute first. See the [Markdown Syntax guide](/documentation/markdown/markdown_syntax/#linking-to-a-headline) for more information.
 ```markdown
 [btn: Jump to Lists -> /documentation/markdown/markdown_syntax/#lists]
 ```
 
-## Tips
+## External link
 
-- Prefer internal paths (`/subtypes/`) over full URLs — they stay correct if the domain changes
-- Use one button per card for a clear primary action
-- For multiple related links in one button, use `[sbtn:]` instead — see the [Selector Button](/documentation/markdown/custom_components/sbtn/) page
+Buttons are not supposed to be used with external links (see the [styleguide](/documentation/styleguide/components/#links--buttons) for more information). Consider using an [external link](/documentation/styleguide/typography/#external-links).
+Tecklically, buttons can be used for external links by using the full domain including `https://`:
+```markdown
+[btn: Visit Kent University -> https://www.kent.ac.uk/]
+```
 
 ---
 [box: text-align:center]
