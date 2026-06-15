@@ -716,6 +716,10 @@
     border-collapse: collapse;
     margin-top: 0.75rem;
 }
+.dataset-table tr:first-child th,
+.dataset-table tr:first-child td {
+    border-top: none;
+}
 
 .dataset-table th,
 .dataset-table td {
@@ -723,11 +727,14 @@
     vertical-align: top;
     padding: 0.45rem 0;
     border-top: 1px solid var(--border);
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
 }
 
-.dataset-table tr:first-child th,
-.dataset-table tr:first-child td {
-    border-top: none;
+.dataset-table tr:last-child th,
+.dataset-table tr:last-child td {
+    border-bottom: none;
 }
 
 .dataset-table th {

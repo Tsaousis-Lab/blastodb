@@ -19,71 +19,28 @@
     <div class="hero hero-content-center">
       <h-hero>{{ title }}</h-hero>
 
-      {% if subtypes and subtypes.length %}
-        <div class="collector-item-tags tags-centered">
-          {% for subtype in subtypes %}
-            <span class="tag">{{ subtype }}</span>
-          {% endfor %}
-        </div>
-      {% endif %}
+      {%- macro joinList(val, sep=", ") -%}
+        {%- if val is iterable and val is not string -%}{{ val | join(sep) }}{%- else -%}{{ val }}{%- endif -%}
+      {%- endmacro -%}
+      {%- macro row(label, val) -%}
+        {%- if val and (val is string or val.length) -%}
+        <tr><th>{{ label }}</th><td>{{ joinList(val) }}</td></tr>
+        {%- endif -%}
+      {%- endmacro -%}
 
-    {% if strains and strains.length %}
-        <div class="collector-item-tags tags-centered">
-          {% for strain in strains %}
-            <span class="tag">{{ strain }}</span>
-          {% endfor %}
-        </div>
-    {% endif %}
-
-    {% if datatypes and datatypes.length %}
-        <div class="collector-item-tags tags-centered">
-          {% for datatype in datatypes %}
-            <span class="tag">{{ datatype }}</span>
-          {% endfor %}
-        </div>
-    {% endif %}
-
-    {% if detection_methods and detection_methods.length %}
-        <div class="collector-item-tags tags-centered">
-          {% for detection_method in detection_methods %}
-            <span class="tag">{{ detection_method }}</span>
-          {% endfor %}
-        </div>
-    {% endif %}
-
-    {% if sources and sources.length %}
-        <div class="collector-item-tags tags-centered">
-          {% for source in sources %}
-            <span class="tag">{{ source }}</span>
-          {% endfor %}
-        </div>
-    {% endif %}
-
-    {% if data_origins and data_origins.length %}
-        <div class="collector-item-tags tags-centered">
-          {% for data_origin in data_origins %}
-            <span class="tag">{{ data_origin }}</span>
-          {% endfor %}
-        </div>
-    {% endif %}
-
-    {% if countries and countries.length %}
-        <div class="collector-item-tags tags-centered">
-          {% for countrie in countries %}
-            <span class="tag">{{ countrie }}</span>
-          {% endfor %}
-        </div>
-    {% endif %}
-
-    {% if data_sources and data_sources.length %}
-        <div class="collector-item-tags tags-centered">
-          {% for data_source in data_sources %}
-            <span class="tag">{{ data_source }}</span>
-          {% endfor %}
-        </div>
-    {% endif %}
-
-        <button class="btn" onclick="window.open('{{ link_to_source }}', '_blank')">Open Dataset</button>
+      <div class="hero-inner">
+        <table class="dataset-table">
+          {{ row("Subtype(s)", subtypes) }}
+          {{ row("Strain(s)", strains) }}
+          {{ row("Datatype(s)", datatypes) }}
+          {{ row("Data origin(s)", data_origins) }}
+          {{ row("Data source(s)", data_sources) }}
+          {{ row("Detection method(s)", detection_methods) }}
+          {{ row("Source(s)", sources) }}
+          {{ row("Countries", countries) }}
+        </table>
+      </div>
+        <a href="{{ link_to_source }}" target="_blank" rel="noopener" class="external-link">Go To Dataset &#8599;</a>
     </div>
 
 
