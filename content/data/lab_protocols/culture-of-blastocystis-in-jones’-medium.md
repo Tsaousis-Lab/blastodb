@@ -22,13 +22,3 @@ For xenic (i.e. non-sterile) in-vitro cultivation of _Blastocystis,_ Jones’ Me
 **Examination**
 
 Cultures are examined with or without iodine at x 200 and x400 LM magnification and evaluated for the presence of especially vacuolar (the main stage seen) but also other stages of Blastocystis.
-
-{% if related_publications.length %}
-
----
-
-# References
-
-[collector -> publications; clickable:false; card-template:references.njk; prefilter:[citation_key={{ related_publications | join(" OR citation_key=") }}]]
-
-{% endif %}

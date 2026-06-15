@@ -146,8 +146,8 @@ collections:
         name: body
         widget: text
         required: false
-        default: "Add your description here.\n\nPlease do not change the code below this line.\n\n{% if related_publications.length %}\n\n \n\n---\n\n# References\n\n[collector -> publications; clickable:false; card-template:references.njk; prefilter:[citation_key={{ related_publications | join(' OR citation_key= ') }}]]\n\n{% endif %}\n\n{% if lab_protocols.length %}\n\n \n\n---\n\n# Lab Protocols\n\n[collector -> lab_protocols; clickable:false; card-template:related_lab_protocol.njk; prefilter:[title={{ lab_protocols | join(' OR title=') }}]]\n\n{% endif %}"
-        hint: "Add a description of the sutypes.<br>**Please do not delete the template for loading the related lab protocols and publications!**<br>**Be careful, you can break things here!** This field supports the extendet markdown syntax. Please make shure your syntax is correct, otherwise the website might fail. Please **test it offline** if you use the extendet markdown syntax!"
+        default: "Add your description here."
+        hint: "Add a description of the sutypes.<br>**Be careful, you can break things here!** This field supports the extendet markdown syntax. Please make shure your syntax is correct, otherwise the website might fail. Please **test it offline** if you use the extendet markdown syntax!"
 
   # -----------------------------------------------------------------------
   # PUBLICATIONS
@@ -235,8 +235,8 @@ collections:
       - label: Protocol
         name: body
         widget: markdown
-        hint: "Add the Protocol here."
-        default: "Add your description here.\n\nPlease do not change the code below this line.\n\n{% if related_publications.length %}\n\n \n\n---\n\n# References\n\n[collector -> publications; clickable:false; card-template:references.njk; prefilter:[citation_key={{ related_publications | join(' OR citation_key= ') }}]]\n\n{% endif %}"
+        hint: "Add the Protocol here.<br>**Be careful, you can break things here!** This field supports the extendet markdown syntax. Please make shure your syntax is correct, otherwise the website might fail. Please **test it offline** if you use the extendet markdown syntax!"
+        default: "Add your description here."
 
   # -----------------------------------------------------------------------
   # SUBTYPE

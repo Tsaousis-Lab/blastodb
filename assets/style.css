@@ -394,7 +394,10 @@ nav a.active {
     color: var(--accent);
     text-decoration: none;
     border-bottom: 1px solid var(--accent);
-    transition: border-color 0.15s, border-bottom-width 0.15s, transform 0.15s;
+    transition:
+        border-color 0.15s,
+        border-bottom-width 0.15s,
+        transform 0.15s;
     font-weight: 600;
     font-family: var(--font-ui);
 }
@@ -576,13 +579,6 @@ nav a.active {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-}
-
-.protocol-footer {
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border);
-    text-align: center;
 }
 
 /* Vertically stacked button group — used in hero regions. */

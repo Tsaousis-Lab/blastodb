@@ -24,24 +24,4 @@ countries:
 ---
 
 
-GenBank Access No.:AF408426
-
-{% if related_publications.length %}
-
----
-
-# References
-
-[collector -> publications; clickable:false; card-template:references.njk; prefilter:[citation_key={{ related_publications | join(" OR citation_key=") }}]]
-
-{% endif %}
-
-{% if lab_protocols.length %}
-
----
-
-# Lab Protocols
-
-[collector -> lab_protocols; clickable:false; card-template:references.njk; prefilter:[citation_key={{ related_publications | join(" OR citation_key=") }}]]
-
-{% endif %}
+GenBank Access No.:AF408426.
