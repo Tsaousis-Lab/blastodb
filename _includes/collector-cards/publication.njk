@@ -18,10 +18,10 @@
     {% if url or doi %}
     <div class="collector-card-links">
         {% if url %}
-            <a href="{{ url }}" target="_blank" rel="noopener">Publication Link</a>
+            <a href="{{ url }}" class="external-link" target="_blank" rel="noopener">Publication Link ↗</a>
         {% endif %}
         {% if doi %}
-            <a href="https://doi.org/{{ doi }}" target="_blank" rel="noopener">DOI: {{ doi }}</a>
+            <a href="https://doi.org/{{ doi }}" class="external-link" target="_blank" rel="noopener">DOI: {{ doi }} ↗</a>
         {% endif %}
     </div>
     {% endif %}

@@ -12,7 +12,7 @@ Browse our collection of standardized laboratory protocols.
 
 [:hero]
 
-[collector -> lab_protocols; search:[title,description,shortDescription,tags]; sort:[date,title]; filters:[Tags->[tags]]; arrange:rows; display_items:all]
+[collector -> lab_protocols; search:[title,description,shortDescription,tags]; sort:[date,title]; arrange:rows; display_items:all]
 
 ---
 

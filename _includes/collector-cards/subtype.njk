@@ -1,52 +1,24 @@
-<div class="collector-card">
-  <div class="collector-card-header">
-    <div class="collector-card-title">
-      <h2>{{ name }}</h2>
+<div class="collector-card collector-card-subtype">
+  <div class="subtype-card-row">
+    <div class="subtype-card-main">
+      <h3 class="card-title">{{ name }}</h3>
+      {% if id %}<span class="tag">{{ id }}</span>{% endif %}
       {% if sources and sources.length %}
-        <div class="collector-item-tags">
-          {% for source in sources %}
-            <span class="tag">{{ source }}</span>
-          {% endfor %}
-        </div>
+        {% for source in sources %}
+          <span class="tag tag-muted">{{ source }}</span>
+        {% endfor %}
       {% endif %}
     </div>
 
-    <div class="collector-card-buttons">
-      <button
-        class="btn {% if not reference_genome_link %}btn-disabled{% endif %}"
-        {% if reference_genome_link %}onclick="window.open('{{ reference_genome_link }}', '_blank')"{% else %}disabled{% endif %}
-      >
-        Reference Genome
-      </button>
-
-      <button
-        class="btn {% if not ssu_rrna_link %}btn-disabled{% endif %}"
-        {% if ssu_rrna_link %}onclick="window.open('{{ ssu_rrna_link }}', '_blank')"{% else %}disabled{% endif %}
-      >
-        18s SSU rRNA
-      </button>
-    </div>
+    {% if reference_genome_link or ssu_rrna_link %}
+      <div class="subtype-card-links">
+        {% if reference_genome_link %}
+          <a href="{{ reference_genome_link }}" class="external-link" target="_blank" rel="noopener">Reference Genome ↗</a>
+        {% endif %}
+        {% if ssu_rrna_link %}
+          <a href="{{ ssu_rrna_link }}" class="external-link" target="_blank" rel="noopener">18s SSU rRNA ↗</a>
+        {% endif %}
+      </div>
+    {% endif %}
   </div>
-
-  {% if shortDescription or description %}
-    <p class="collector-item-description">
-      {{ shortDescription or description }}
-    </p>
-  {% endif %}
-
-  {% if formattedDate or (tags and tags.length) %}
-    <div class="collector-item-meta">
-      {% if formattedDate %}
-        <span class="collector-item-date">{{ formattedDate }}</span>
-      {% endif %}
-
-      {% if tags and tags.length %}
-        <div class="collector-item-tags">
-          {% for tag in tags %}
-            <span class="tag">{{ tag }}</span>
-          {% endfor %}
-        </div>
-      {% endif %}
-    </div>
-  {% endif %}
 </div>

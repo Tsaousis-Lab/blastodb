@@ -1,11 +1,9 @@
 <div class="collector-card">
-  <h3>
-    <a href="{{ pageUrl }}">{{ title }}</a>
-  </h3>
+  <h3 class="card-title">{{ title }}</h3>
 
   {% if shortDescription or description %}
     <p class="collector-item-description">
-      {{ shortDescription or description }} And a test text.
+      {{ shortDescription or description }}
     </p>
   {% endif %}
 

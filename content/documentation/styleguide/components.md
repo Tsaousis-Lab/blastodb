@@ -8,7 +8,7 @@ description: Visual elements and layout components for BlastoDB.
 <h-hero>Components</h-hero>
 [:hero]
 
-## Button
+# Button
 
 [btn: Primary Action -> #]
 
@@ -16,7 +16,7 @@ description: Visual elements and layout components for BlastoDB.
 
 ---
 
-## Links & Buttons {#links--buttons}
+# Links & Buttons {#links--buttons}
 
 Four types are available. Choose based on where the link sits and how many destinations it has.
 
@@ -42,7 +42,7 @@ Is the link inside a sentence?
 
 ---
 
-## Tag
+# Tag
 
 <span class="tag">ST1</span> <span class="tag">Genomics</span> <span class="tag tag-muted">Germany</span>
 
@@ -52,7 +52,7 @@ Is the link inside a sentence?
 
 ---
 
-## Hero
+# Hero
 
 **`[hero:]`** — a full-width banner that bleeds to the viewport edge. Use once per page, always as the first element in `<main>`. Carries the page title (`h-hero`) and a brief orientation: tags, download links, or a single call-to-action.
 
@@ -60,13 +60,13 @@ Add `hero-content-center` (via the layout template) to stack content centrally �
 
 ---
 
-## Box
+# Box
 
 **`[box:]`** — a simple flex column with a `0.5 rem` gap. Has no visual chrome of its own; it just stacks its children vertically. Takes an optional inline style (`[box: text-align:center]`) for alignment. Used as the column unit inside `[cols:]` and `[grid:]`.
 
 ---
 
-## Card
+# Card
 
 [grid: cols:3]
 
@@ -94,7 +94,7 @@ A short description. Keep cards focused — one topic, one action per card.
 
 ---
 
-## Columns
+##Columns
 
 [cols:]
 
@@ -114,15 +114,15 @@ Columns align to their tops. Good for narrative content; less suited to items th
 
 ---
 
-## Grid
+# Grid
 
 **`[grid:]`** — a responsive auto-fill grid. Default column minimum is 280 px. Add `cols:2`, `cols:3`, `cols:4`, or `cols:5` for a fixed column count. Use for card groups and icon-link rows. Collapses to one column on narrow screens.
 
 ---
 
-## Collector
+# Collector
 
-**`[collector -> collectionName; opts]`** — a filterable, searchable list of cards drawn from a Sveltia CMS collection. Options:
+**`[collector -> collectionName; opts]`** - a filterable, searchable list of cards drawn from a Sveltia CMS collection. Options:
 
 | Option | Example | Effect |
 |---|---|---|
@@ -140,4 +140,30 @@ Columns align to their tops. Good for narrative content; less suited to items th
 | `research_labs` | Lab card | Name, institution, country |
 | `lab_protocols` | Protocol card | Title, category |
 
-Each card is a compact summary — detailed content lives on the individual page. The collector is the right place for browsing and filtering; individual pages are the right place for depth.
+Each card is a compact summary - detailed content lives on the individual page. The collector is the right place for browsing and filtering; individual pages are the right place for depth.
+
+---
+
+# Collector Card Anatomy {#collector-card-anatomy}
+
+Collector cards are designed to be flexible. This here is a suggested layout for a more consistent styling. Not every slot is required:
+
+| Slot | Required | Element / class | Font, size, colour |
+|---|---|---|---|
+| Eyebrow | no | `<div class="...">` | Public Sans, 0.9rem, `--text` or `--text-muted` |
+| Title row | yes | `<h3 class="card-title">` | Crimson Pro, 1.2rem, weight 500, `--text` |
+| Date (on title row) | no | `<span class="...date">` | IBM Plex Mono, 0.85rem, `--text-muted`, right-aligned |
+| Source line | no | `<div>` / `<span>` | Public Sans, 0.9rem, italic, `--text-muted`, one line |
+| Tags | no | `<span class="tag">` / `<span class="tag tag-muted">` | — |
+| Description | no | `<p class="collector-item-description">` | Public Sans, 0.9rem, `--text-muted`, line-height 1.5 |
+| Actions | no | `<a class="external-link">` / `.btn` | always at the bottom |
+
+**Rules:**
+
+- Title is always `<h3 class="card-title">` / `###`, never `<h2>`, never `<strong>`
+- Dates sit right-aligned on the title row, not below it
+- External links use `.external-link` + ↗, see the [Links & Buttons guide](#links--buttons)
+- Disabled-state downloads (e.g. "Reference Genome — not available") may use `.btn` with `.btn-disabled`
+- One action area per card; keep to 1–2 links
+
+**Exception:** The research-lab card has a unique contact section (avatar, email, institution) that does not map to these slots — its structure is intentional and should be kept as-is.

@@ -427,10 +427,6 @@
     color: var(--text);
 }
 
-.collector-card-publication .card-title {
-    font-size: 1.15rem;
-}
-
 /* Source line: "Journal name, Year" — one line, one size. */
 .collector-card-publication .collector-card-journal,
 .collector-card-publication .collector-card-date {
@@ -451,54 +447,30 @@
     margin-top: 0.2rem;
 }
 
-.collector-card-publication .collector-card-links a {
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    line-height: 1.4;
-    color: var(--accent);
-    text-decoration: underline;
+/* ── Subtype ── */
+.subtype-card-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
-/* ── Subtype ── */
-.collector-card-header {
+.subtype-card-main {
     display: flex;
-    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    flex: 1;
+    min-width: 0;
+}
+
+.subtype-card-links {
+    display: flex;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 0.5rem;
-}
-
-/* Layout wrapper for subtype title + inline tags. */
-.collector-card-title {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    flex: 1;
-}
-
-.collector-card-title h2 {
-    margin: 0;
     flex-shrink: 0;
-}
-
-.collector-card-title .collector-item-tags {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-}
-
-.collector-card-buttons {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    flex-shrink: 0;
-}
-
-.collector-card-buttons .btn {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.9rem;
-    white-space: nowrap;
+    font-size: 0.85rem;
 }
 
 /* ── Research labs ── */
