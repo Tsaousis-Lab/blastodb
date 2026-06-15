@@ -16,4 +16,4 @@ First described from a wild rodent in Mexico. Member of the B. lapemi-related cl
 
 # Explore Datasets Containing {{ name }}
 
-[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset.njk; prefilter:[subtypes={{ name }}]]
+[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset-card.njk; prefilter:[subtypes={{ name }}]]

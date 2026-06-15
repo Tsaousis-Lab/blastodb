@@ -17,4 +17,4 @@ Reported from various mammals, including marsupials and other wildlife. Only rar
 
 # Explore Datasets Containing {{ name }}
 
-[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset.njk; prefilter:[subtypes={{ name }}]]
+[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset-card.njk; prefilter:[subtypes={{ name }}]]

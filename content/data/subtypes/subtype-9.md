@@ -16,4 +16,4 @@ To date reported only in humans, and uncommonly. No confirmed animal reservoir i
 
 # Explore Datasets Containing {{ name }}
 
-[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset.njk; prefilter:[subtypes={{ name }}]]
+[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset-card.njk; prefilter:[subtypes={{ name }}]]

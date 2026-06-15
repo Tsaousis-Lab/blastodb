@@ -20,4 +20,4 @@ The subtype most frequently reported in humans worldwide and largely human-adapt
 
 # Explore Datasets Containing {{ name }}
 
-[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset.njk; prefilter:[subtypes={{ name }}]]
+[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset-card.njk; prefilter:[subtypes={{ name }}]]

@@ -721,11 +721,31 @@ module.exports = function (eleventyConfig) {
         return `\x00CODEBLOCK${idx}\x00`;
       });
 
+      // Resolve simple {{ varName }} references using page data (e.g. in headings).
+      // Uses a plain regex rather than full Nunjucks so {#anchor} syntax in docs is unaffected.
+      if (env && typeof env === "object") {
+        result = result.replace(/\{\{\s*([\w.]+)\s*\}\}/g, (match, path) => {
+          const value = path
+            .split(".")
+            .reduce((obj, key) => (obj != null ? obj[key] : undefined), env);
+          return value != null && typeof value !== "object"
+            ? String(value)
+            : match;
+        });
+      }
+
       const collectorPattern = /^\[collector\s*->\s*([^;\]]+)(.*?)\]$/gm;
 
       result = result.replace(collectorPattern, (match, name, params) => {
         const collectionName = name.trim();
-        const paramStr = params || "";
+        let paramStr = params || "";
+        if (env && typeof env === "object") {
+          try {
+            paramStr = nunjucksEnv.renderString(paramStr, env);
+          } catch (e) {
+            // keep original paramStr if resolution fails
+          }
+        }
 
         const collection = getCollectionByName(collectionName);
         if (!collection) {

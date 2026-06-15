@@ -17,4 +17,4 @@ Reported from camels, ruminants and non-human primates. Not confirmed as a regul
 
 # Explore Datasets Containing {{ name }}
 
-[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset.njk; prefilter:[subtypes={{ name }}]]
+[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset-card.njk; prefilter:[subtypes={{ name }}]]

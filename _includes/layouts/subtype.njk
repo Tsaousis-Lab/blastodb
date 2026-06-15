@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="{{ description or 'BlastoDB - The open hub for Blastocystis research' }}">
-  <title>{{ title }}</title>
+  <title>BlastoDB - {{ name }}</title>
   <link rel="stylesheet" href="{{ '/assets/style.css' | url }}">
   <link rel="stylesheet" href="{{ '/assets/collector.css' | url }}">
   <script>
@@ -38,15 +38,17 @@
         {% endif %}
       </div>
       {% endif %}
-
-      <div>
-        <a href="/subtypes/" class="btn">← Back to all Subtypes</a>
-      </div>
     </div>
 
     {{ content | processSpans | safe }}
     {{ subtype_collector }}
+
+    <hr>
+    <div style="text-align:center">
+        <a href="/subtypes/" class="btn">← Back to all Subtypes</a>
+    </div>
   </main>
+
 
   {% include "layouts/footer.njk" %}
 </body>
