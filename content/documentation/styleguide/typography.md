@@ -65,11 +65,11 @@ Links are used either for in-text links, or as links to external websites. Other
 
 ## External Links {#external-links}
 
-**`.external-link`** — accent colour, underline animates in on hover. Use it for links that open external websites, line links to datasets. These links are standalonw, and should be written in title-case. [You write it linke this in markdown](/documentation/markdown/markdown_syntax/#links-to-external-websites):
+**`.external-link`** — accent colour, always underlined, darkens and lifts slightly (`translateY(-1px)`) on hover. Use for links that open external websites, such as links to datasets. These links are standalone and should be written in title-case with a ↗ suffix. [Write it like this in HTML](/documentation/markdown/markdown_syntax/#links-to-external-websites):
 
-`<a href="https://external-link.co.uk" class="link-underline">Example External Link ↗</a>`
+`<a href="https://external-link.co.uk" class="external-link">Example External Link ↗</a>`
 <br>
-<a href="#external-links" class="link-underline">Example External-Link ↗</a>
+<a href="#external-links" class="external-link">Example External Link ↗</a>
 
 ---
 
