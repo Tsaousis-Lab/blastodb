@@ -389,7 +389,9 @@
 
 /* ── Reference ── */
 .collector-item:has(.collector-card-reference),
-.collector-item:has(.collector-card-reference):hover {
+.collector-item:has(.collector-card-reference):hover,
+.collector-not-clickable .collector-item:has(.collector-card-reference),
+.collector-not-clickable .collector-item:has(.collector-card-reference):hover {
     background: none;
     border: none;
     box-shadow: none;
