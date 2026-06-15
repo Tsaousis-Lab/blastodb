@@ -12,9 +12,3 @@ ssu_rrna_link: ''
 ## Short Description
 
 Reported from camels, ruminants and non-human primates. Not confirmed as a regular human subtype.
-
----
-
-# Explore Datasets Containing {{ name }}
-
-[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset-card.njk; prefilter:[subtypes={{ name }}]]

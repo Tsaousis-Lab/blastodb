@@ -11,9 +11,3 @@ ssu_rrna_link: ''
 ## Short Description
 
 Found in cattle and other ruminants, and also reported in antelope. An animal-associated subtype.
-
----
-
-# Explore Datasets Containing {{ name }}
-
-[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset-card.njk; prefilter:[subtypes={{ name }}]]

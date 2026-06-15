@@ -41,7 +41,10 @@
     </div>
 
     {{ content | processSpans | safe }}
-    {{ subtype_collector }}
+
+    <hr>
+    <h1>Explore the Datasets Containing {{ name }}</h1>
+    <div class="collector" data-collection="datasets" data-path="datasets" data-opts='{"arrange":"rows","display_items":"all","search_fields":["title"],"sort_fields":["date","title"],"filters":[{"label":"Countries","fields":["countries"]}],"prefilter":{"orGroups":[[{"field":"subtypes","value":"{{ name }}"}]]},"card_template":"dataset-card","clickable":true}'></div>
 
     <hr>
     <div style="text-align:center">

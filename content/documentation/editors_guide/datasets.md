@@ -69,7 +69,6 @@ The datasets here have thirteen properties, which are shortly described in the f
     - Lab protocols need to be added to the system before you can link to them, see ([Publications guide](/documentation/editors_guide/publications/)).
 13. **Description**
     - A free-text description of the dataset.
-    - Leave everything below the `---` divider untouched! The default template includes collector blocks that automatically display linked publications and protocols.Please do not delete or change these, otherwise the related references and lab protocols will not be displayed! (In case you accidentally deleted something, you can copy and paste the section from another dataset).
 
     <div class="guide-warning">
     

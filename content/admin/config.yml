@@ -288,8 +288,8 @@ collections:
       - label: Description
         name: body
         widget: markdown
-        default: "# Short Description\n\nAdd your description here.\n\nPlease do not change the code below this line.\n\n---\n\n# Explore Datasets Containing {{ name }}\n\n[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset.njk; prefilter:[subtype={{ name }}]]"
-        hint: "Add a description of the dataset.<br>**Please do not delete the template for loading the related publications!**<br>**Be careful, you can break things here!** This field supports the extendet markdown syntax. Please make shure your syntax is correct, otherwise the website might fail. Please **test it offline** if you use the extendet markdown syntax!"
+        default: "# Short Description\n\nAdd your description here."
+        hint: "Add a description of the dataset.<br>**Be careful, you can break things here!** This field supports the extendet markdown syntax. Please make shure your syntax is correct, otherwise the website might fail. Please **test it offline** if you use the extendet markdown syntax!"
   # -----------------------------------------------------------------------
   # RESEARCH LAB
   # -----------------------------------------------------------------------

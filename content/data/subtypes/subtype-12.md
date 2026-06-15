@@ -12,9 +12,3 @@ ssu_rrna_link: ''
 ## Short Description
 
 Found in a range of mammals, including camelids, marsupials and ruminants. Occasionally, and rarely, reported in humans.
-
----
-
-# Explore Datasets Containing {{ name }}
-
-[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset-card.njk; prefilter:[subtypes={{ name }}]]

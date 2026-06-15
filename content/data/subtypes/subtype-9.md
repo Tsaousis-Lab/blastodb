@@ -11,9 +11,3 @@ ssu_rrna_link: ''
 ## Short Description
 
 To date reported only in humans, and uncommonly. No confirmed animal reservoir is known.
-
----
-
-# Explore Datasets Containing {{ name }}
-
-[collector -> datasets; search:[title]; sort:[date,title]; filters:[Countries->[countries]]; arrange:rows; card-template:dataset-card.njk; prefilter:[subtypes={{ name }}]]
