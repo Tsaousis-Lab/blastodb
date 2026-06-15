@@ -68,7 +68,7 @@ The datasets here have thirteen properties, which are shortly described in the f
     - Select related lan protocols from the list.
     - Lab protocols need to be added to the system before you can link to them, see ([Publications guide](/documentation/editors_guide/publications/)).
 13. **Description**
-    - A free-text description of the dataset.
+    - A free-text description of the dataset in markdown ([see markdown cheat sheet](/documentation/markdown/markdown_cheat_sheet/)).
 
     <div class="guide-warning">
     

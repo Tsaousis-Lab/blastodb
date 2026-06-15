@@ -14,7 +14,7 @@ BlastoDB stores information about its known subtypes (<a href="/subtypes/" targe
 
 If you want to edit the webpage displaying all the subtypes, you finde a guide [here](/documentation/editors_guide/pages/).
 
-## Editing the Subtypes
+# Editing the Subtypes
 
 You can edit the content by opening the **Subtypes** collection on the left side on the admin panel (<a href="/admin/#/collections/subtypes" target="_blank">www.blastodb.com/admin/#/collections/subtypes</a>).
 
@@ -48,7 +48,7 @@ You can edit the content by opening the **Subtypes** collection on the left side
 2. Click the **Delete** button at the top right
 3. A prompt will open, click on **Delete** again → The website will be updated automatically within a few minutes
 
-## Fields
+# Fields
 
 1. **ID** `required` — The short subtype identifier used internally.
     - Format: `ST` followed by the subtype number, e.g. `ST1`, `ST2`, `ST17`.
@@ -69,10 +69,9 @@ You can edit the content by opening the **Subtypes** collection on the left side
     - Leave blank if not available.
 
 6. **Description** `required` — A free-text description written in Markdown.
-    - Write your descriptive text under the `# Short Description` heading at the top.
-    - Leave everything below the `---` divider untouched.
+    - Write your descriptive text in markdown ([see markdown cheat sheet](/documentation/markdown/markdown_cheat_sheet/)).
     <div class="guide-warning">
-
-    **Do not delete the collector block at the bottom of the description.** It is the code starting with `[collector -> datasets;` and is what automatically lists all datasets tagged with this subtype. If you delete it, copy it from another subtype's description field. See the [Pages guide](/documentation/editors_guide/pages/) for an explanation of collector blocks.
+    
+    **Be Careful! You can break things here.** The description supports the extendet markdown syntax, which need to be defined exactly, otherwise the build of the website might fail. Please edit the webpage locally, if you want to use these features.
 
     </div>

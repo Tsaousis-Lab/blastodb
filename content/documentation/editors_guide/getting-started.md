@@ -10,19 +10,19 @@ description: How to log into the BlastoDB CMS and navigate the editorial interfa
 
 [:hero]
 
-## Opening the CMS
+# Opening the CMS
 
 The content management system (CMS) can be accessed with this link: <a href="/admin" target="_blank">www.blastodb.com/admin</a>
 
 You will need a GitHub Account, access rights to the Resository and a Personal Access Tocen (PAT) to log in. Go to [GitHub Setup](/documentation/editors_guide/github-setup/) if you need help with that.
 
-## Logging in
+# Logging in
 
 1. Click **Sing In Using Access Token**
 2. Paste the PAT you generated during setup from your favorite password manager into the text field.
 3. You are now in the CMS dashboard!
 
-## The editorial workflow
+# The editorial workflow
 
 The left sidebar in the dashboard lists all the content you can edit. This includes the content of the database, and the webpage itself.
 

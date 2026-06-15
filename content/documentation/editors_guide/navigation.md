@@ -13,7 +13,7 @@ description: How to edit the header navigation, footer, and site branding in the
 Here you find the information on how to edit the header menu, footer, and site branding on the admin panel of BlastoDB ([www.blastodb.com/admin](/admin)).
 
 
-## Editing the Header
+# Editing the Header
 
 1. Click **Navigation** in the left sidebar.
 2. Click **Header Configuration**.
@@ -27,7 +27,7 @@ Here you find the information on how to edit the header menu, footer, and site b
 </div>
 
 
-## Editing the Footer
+# Editing the Footer
 
 1. Click **Navigation** in the left sidebar.
 2. Click **Footer Configuration**.
@@ -40,14 +40,14 @@ Here you find the information on how to edit the header menu, footer, and site b
 
 </div>
 
-## Editing the Title and Logo
+# Editing the Title and Logo
 
 1. Click **Navigation** in the left sidebar.
 2. Click **Title and Logo**.
 3. Edit the relevant fields. You can find a description of the fields below.
 4. Click **Save**. → The website will be updated automatically within a few minutes.
 
-## Header fields
+# Header fields
 
 Each header item is either a **direct link** or a **dropdown** with sub-links.
 
@@ -61,7 +61,7 @@ Each header item is either a **direct link** or a **dropdown** with sub-links.
     - Each sub-item has its own **Label** and **File**.
     - The **File** must match an existing `.md` file in the `content/` folder.
 
-## Footer fields
+# Footer fields
 
 1. **Description** — A short sentence shown next to the logo, e.g. *"The open hub for Blastocystis research."*
 
@@ -72,7 +72,7 @@ Each header item is either a **direct link** or a **dropdown** with sub-links.
     - **Links** — a list of links, each with a **Link Label** and a **URL**
     - URLs can be internal (e.g. `/datasets/`) or external (e.g. `https://github.com/Tsaousis-Lab/blastodb`)
 
-## Title and Logo fields
+# Title and Logo fields
 
 1. **Site Title** — The name displayed next to the logo, e.g. `BlastoDB`.
 

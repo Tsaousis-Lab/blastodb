@@ -59,22 +59,7 @@ You can edit the content by opening the **Lab Protocols** collection on the left
     - Publications must already be in the system — see the [Publications guide](/documentation/editors_guide/publications/).
 
 3. **Protocol** `required` — The full protocol text, written in Markdown.
-
-    <div class="guide-warning">
-
-    **Do not delete the code at the bottom of the protocol.** The section below the line "Please do not change the code below this line" automatically displays the linked publications as a reference list at the bottom of the protocol page.
-
-    </div>
-
-    Write your protocol above that line. Useful Markdown ==TODO: link to markdown guide== formatting:
-
-    | What you type | What it looks like |
-    |---|---|
-    | `## Materials` | A section heading |
-    | `- item` | A bullet point |
-    | `1. step` | A numbered step |
-    | `**bold**` | **bold text** |
-
+    Write your protocol above that line in markdown in markdown ([see markdown cheat sheet](/documentation/markdown/markdown_cheat_sheet/)).
     A typical structure:
     ```
     ## Materials
@@ -89,3 +74,8 @@ You can edit the content by opening the **Lab Protocols** collection on the left
     ## Notes
     Store reagents at −20 °C.
     ```
+    <div class="guide-warning">
+    
+    **Be Careful! You can break things here.** The description supports the extendet markdown syntax, which need to be defined exactly, otherwise the build of the website might fail. Please edit the webpage locally, if you want to use these features.
+
+    </div>

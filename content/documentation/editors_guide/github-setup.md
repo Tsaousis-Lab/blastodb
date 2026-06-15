@@ -19,13 +19,13 @@ You need the following three things, to edit the content of BlastoDB:
 
 ---
 
-## Step 1: Create a GitHub account
+# Step 1: Create a GitHub account
 
 Go to [github.com](https://github.com), click **Sign up**, and create an account.
 
 ---
 
-## Step 2: Request access to the repository
+# Step 2: Request access to the repository
 
 The BlastoDB repository is part of the organization "Tasousis Lab". You need to be added as a member of this lab before you can make changes to the BlastoDB website.
 
@@ -33,7 +33,7 @@ The BlastoDB repository is part of the organization "Tasousis Lab". You need to 
 
 ---
 
-## Step 3: Generate a personal access token
+# Step 3: Generate a personal access token
 
 The CMS requires a personal access token to authenticate on your behalf. This is a long password that you generate once and use to log in.
 
@@ -65,6 +65,6 @@ It is **really important** that you keep this password private. Please store it 
 
 ---
 
-## Step 4: Logging in
+# Step 4: Logging in
 
 Once you have your token, go to [www.blastodb/admin](/admin/) and follow the steps on the [Logging into the CMS](/documentation/editors_guide/getting-started/) page.

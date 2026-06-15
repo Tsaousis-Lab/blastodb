@@ -12,7 +12,7 @@ description: How to add and edit research lab profiles in the BlastoDB CMS.
 
 In BlastoDB provides a list of research labs working on Blastocystis (<a href="/labs/" target="_blank">www.blastodb.com/labs</a>). Here you find a guide on how to edit this information in the admin panel, and get an overview and description of all parameters.
 
-## Editing the Research Labs
+# Editing the Research Labs
 
 You can edit the content by opening the **Research Labs** collection on the left side on the admin panel, and opening the single 'Research Labs' entery (<a href="/admin/#/collections/research_labs/entries/research_labs" target="_blank">www.blastodb.com/admin/#/collections/research_labs/entries/research_labs</a>). Here, you can select which ones you want to edit.
 
@@ -38,7 +38,7 @@ You can also **rearrange** the order of the research labs (and how they are disp
 3. Click **Save** on the top right -> The Website will be updated automatically within a few minutes
 4. Consider to delete uploaded images alongside the enteries to not clutter the repository data.
 
-## Fields
+# Fields
 
 1. **Lab Name** `required` - Name of the Lab
     - Enter via text input.

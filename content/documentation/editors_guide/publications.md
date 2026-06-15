@@ -14,7 +14,7 @@ BlastoDB provides an overview of all poblications related to content on this web
 
 If you want to edit the webpage displaying the publications, you finde a guide [here](/documentation/editors_guide/pages/).
 
-## Editing the Publications
+# Editing the Publications
 
 You can edit the content by opening the **Publications** collection on the left side on the admin panel, and opening the single 'Publications' entery (<a href="/admin/#/collections/publications/entries/publications" target="_blank">www.blastodb.com/admin/#/collections/publications/entries/publications</a>). Here, you can select which ones you want to edit.
 
@@ -45,7 +45,7 @@ You can also **rearrange** the publications by using the arrows, or **add an ite
 2. Click the "x" at the top right of the publication entery to delete it
 3. Click **Save** on the top right -> The Website will be updated automatically within a few minutes
 
-## Fields
+# Fields
 
 1. **Citation Key** `required` - Short, unique identifier for each publication.
     -  Please format is to **AuthorYear**, e.g.:

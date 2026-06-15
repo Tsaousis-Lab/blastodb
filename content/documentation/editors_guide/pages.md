@@ -26,7 +26,7 @@ Use the guide on how to [revert a change]](/documentation/editors_guide/rollback
 
 The content of BlastoDB is written in Markdown, with custom components to load its data and visual elements. You can find a overview of the [markdown syntax here](TODO:link), and an overview on the [custom components here](TODO:link).
 
-## Add a Page
+# Add a Page
 
 1. Click **Pages** in the left sidebar.
 2. Click on **New** on the top right corner.
@@ -35,14 +35,14 @@ The content of BlastoDB is written in Markdown, with custom components to load i
 5. You can now access this new webpage with the following link: `https://www.blastodb.com/<title_in_lower_case>/`.
 6. To make it easily accessible, you can add it to the header and/or footer [in the navigation panel](/documentation/editors_guide/navigation), or add a button to a webpage [as described here](TODO:link).
 
-## Editing a Page
+# Editing a Page
 
 1. Click **Pages** in the left sidebar.
 2. Click the page you want to edit.
 3. Edit the **Title**, **Description**, or **Body** (/content of the website) fields as needed. You find a description of the fields below.
 4. Click **Save**. → The website will be updated automatically within a few minutes.
 
-## Delete a Page
+# Delete a Page
 
 1. Click **Pages** in the left sidebar.
 2. Select the page you want to delete ()
@@ -57,7 +57,7 @@ If you delete a page, remove it from the Header and Footer [as described here](/
 
 </div>
 
-## Fields
+# Fields
 
 Each webpage consists of the following elements:
 
@@ -75,7 +75,7 @@ Each webpage consists of the following elements:
 
     </div>
 
-## Demo of a Webpage
+# Demo of a Webpage
 
 Here you find a short example of a simple webpage in the markdown syntax:
 

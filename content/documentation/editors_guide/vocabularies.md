@@ -26,7 +26,7 @@ Here you find a guide on how to add new values. This has to be done with care, a
 
 </div>
 
-## Editing the Vocabularies
+# Editing the Vocabularies
 
 You can edit the content by opening the **Vocabuleries** collection on the left side on the admin panel (<a href="/admin/#/collections/vocabularies" target="_blank">www.blastodb.com/admin/#/collections/vocabularies</a>). Here, you can select which ones you want to edit.
 
@@ -42,7 +42,7 @@ You can reverse a deleted value by re-adding it (in the exact same spelling) to 
 </div>
 
 
-## The vocabulary lists
+# The vocabulary lists
 
 1. **Datatypes** — The type of data in a dataset
     - Examples: `Shotgun`, `16s`, `Metabolome`, 
