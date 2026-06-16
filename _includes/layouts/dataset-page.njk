@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ description or 'BlastoDB - The open hub for Blastocystis research' }}">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="{{ '/assets/style.css' | url }}">
+  <link rel="stylesheet" href="{{ '/assets/collector.css' | url }}">
+  <script>
+    // Inject data into global scope for main.js to access
+    window.collectorData = {{ collectorData | dump | safe }};
+  </script>
+  <script src="{{ '/assets/main.js' | url }}" defer></script>
+</head>
+<body>
+  {% include "layouts/header.njk" %}
+  <main>
+    <div class="hero hero-content-center">
+      <h-hero>{{ title }}</h-hero>
+
+      {%- macro joinList(val, sep=", ") -%}
+        {%- if val is iterable and val is not string -%}{{ val | join(sep) }}{%- else -%}{{ val }}{%- endif -%}
+      {%- endmacro -%}
+      {%- macro row(label, val) -%}
+        {%- if val and (val is string or val.length) -%}
+        <tr><th>{{ label }}</th><td>{{ joinList(val) }}</td></tr>
+        {%- endif -%}
+      {%- endmacro -%}
+
+      <div class="hero-inner">
+        <table class="dataset-table">
+          {{ row("Subtype(s)", subtypes_display) }}
+          {{ row("Strain(s)", strains) }}
+          {{ row("Datatype(s)", datatypes) }}
+          {{ row("Data origin(s)", data_origins) }}
+          {{ row("Data source(s)", data_sources) }}
+          {{ row("Detection method(s)", detection_methods) }}
+          {{ row("Source(s)", sources) }}
+          {{ row("Countries", countries) }}
+        </table>
+      </div>
+        <a href="{{ link_to_source }}" target="_blank" rel="noopener" class="external-link">Go To Dataset &#8599;</a>
+    </div>
+
+
+    {{ content | processSpans | safe }}
+
+    {% if related_publications and related_publications.length %}
+    <hr>
+    <h1>References</h1>
+    <div class="collector"
+        data-collection="publications"
+        data-path="publications"
+        data-opts='{"arrange":"rows","display_items":"all","search_fields":[],"prefilter":{"orGroups":[{% for key in related_publications %}[{"field":"key","value":{{ key | dump | safe }}}]{% if not loop.last %},{% endif %}{% endfor %}]},"card_template":"references","clickable":false}'></div>
+    {% endif %}
+
+    {% if lab_protocols and lab_protocols.length %}
+    <hr>
+    <h1>Related Lab Protocols</h1>
+    <div class="collector"
+        data-collection="lab_protocols"
+        data-path="lab_protocols"
+        data-opts='{"arrange":"rows","display_items":"all","search_fields":[],"prefilter":{"orGroups":[{% for key in lab_protocols %}[{"field":"key","value":{{ key | dump | safe }}}]{% if not loop.last %},{% endif %}{% endfor %}]},"card_template":"related_lab_protocol","clickable":false}'></div>
+    {% endif %}
+
+
+    <hr>
+    <div style="text-align:center">
+      <a href="{{ '/datasets/' | url }}" class="btn">← Back to Datasets</a>
+    </div>
+  </main>
+
+  {% include "layouts/footer.njk" %}
+</body>
+</html>

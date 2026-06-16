@@ -1,0 +1,80 @@
+{
+  "publications": [
+    {
+      "key": "arisue2002",
+      "title": "Phylogenetic position of Blastocystis hominis and of stramenopiles inferred from multiple molecular sequence data",
+      "authors": [
+        "Arisue, N.",
+        "Hashimoto, T.",
+        "Yoshikawa, H.",
+        "Nakamura, Y.",
+        "Nakamura, G.",
+        "Nakamura, F.",
+        "Yano, T.A.",
+        "Hasegawa, M."
+      ],
+      "Date": "2005",
+      "publication_name": "Journal of Eukaryotic Microbiology",
+      "doi": "10.1111/j.1550-7408.2002.tb00339.x",
+      "url": "",
+      "date": "2002"
+    },
+    {
+      "key": "arisue2003",
+      "title": "Sequence heterogeneity of the small subunit ribosomal RNA genes among blastocystis isolates",
+      "authors": [
+        "Arisue, N.",
+        "Hashimoto,T.",
+        "Yoshikawa,H."
+      ],
+      "Date": "2005",
+      "publication_name": "Parasitology",
+      "doi": "10.1111/j.1550-7408.2002.tb00339.x",
+      "url": "",
+      "date": "2003"
+    },
+    {
+      "key": "jones1946",
+      "title": "The experimental infection of rats with Entamoeba histolytica; with a method for evaluating the anti-amoebic properties of new compounds",
+      "authors": [
+        "Jones, W. R."
+      ],
+      "Date": "2016",
+      "publication_name": "Annals of Tropical Medicine and Parasitology",
+      "doi": "10.1080/00034983.1946.11685270",
+      "url": "https://doi.org/10.1080/00034983.1946.11685270",
+      "date": "1946"
+    },
+    {
+      "key": "yoshikawa2004",
+      "title": "Polymerase chain reaction-based genotype classification among human Blastocystis hominis populations isolated from different countries",
+      "authors": [
+        "Yoshikawa,H.",
+        "Wu, Z.",
+        "Kimata, I.",
+        "Iseki, M.",
+        "Ali, I. K.",
+        "Hossain, M. B.",
+        "Zaman, V.",
+        "Haque, R.",
+        "Takahashi,Y."
+      ],
+      "Date": "2004",
+      "publication_name": "Parasitology Research",
+      "doi": "10.1007/s00436-003-0995-2",
+      "url": "",
+      "date": "2004"
+    },
+    {
+      "key": "baba95f5-0613-461a-b77b-455e16695249",
+      "title": "This is a test publication",
+      "authors": [
+        "Benecke, Tobias"
+      ],
+      "Date": "2026",
+      "publication_name": "Journal of Test Publications",
+      "doi": "",
+      "url": ""
+    }
+  ]
+}

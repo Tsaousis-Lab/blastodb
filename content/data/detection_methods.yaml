@@ -1,0 +1,6 @@
+detection_methods:
+  - Microscopy
+  - PCR
+  - QPCR
+  - Culturing
+  - Sequencing

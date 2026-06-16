@@ -1,0 +1,865 @@
+/* ==============================================================
+   BlastoDB — collector stylesheet
+   --------------------------------------------------------------
+   1.  Controls (search / filters / sort)
+   2.  Items & arrangements
+   3.  Cards (shared + per-type)
+   4.  Responsive (≤ 720px)
+   ============================================================== */
+
+/* ── 1. Controls ───────────────────────────────────────────── */
+.collector {
+    margin: 2rem 0;
+}
+
+.collector.collector-hide-date .collector-item-date,
+.collector.collector-hide-date .collector-card-date {
+    display: none;
+}
+
+.collector.collector-hide-tags .collector-item-tags,
+.collector.collector-hide-tags .collector-card-tags {
+    display: none;
+}
+
+.collector-controls {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+    min-width: 0;
+}
+
+/* Search */
+.collector-search {
+    flex: 1;
+    min-width: 200px;
+}
+
+.collector-search input {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    font-family: var(--font-ui);
+    font-size: 0.95rem;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition:
+        border-color 0.15s,
+        box-shadow 0.15s;
+}
+
+.collector-search input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(45, 106, 79, 0.1);
+}
+
+/* Filters */
+.collector-filters-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.collector-filters-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* Filter and sort buttons share the same visual style. */
+.collector-filters-btn,
+.collector-sort-btn {
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--surface);
+    background: var(--accent-dark);
+    border: none;
+    padding: 0.55rem 1.2rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition:
+        background 0.15s,
+        transform 0.15s;
+}
+
+.collector-filters-btn:hover,
+.collector-sort-btn:hover {
+    background: var(--accent-darker);
+    transform: translateY(-1px);
+}
+
+.collector-filters-btn {
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.collector-filters-arrow {
+    display: inline-block;
+    transition: transform 0.15s ease;
+}
+
+.collector-filters-dropdown.is-open .collector-filters-arrow {
+    transform: rotate(180deg);
+}
+
+/* Shared dropdown panel — filter and sort menus use the same box. */
+.collector-filters-menu,
+.collector-sort-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1000;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-dropdown);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.collector-filters-menu {
+    min-width: 250px;
+    max-height: 300px;
+    padding: 0.75rem;
+    overflow-y: auto;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+}
+
+.collector-sort-menu {
+    min-width: 150px;
+}
+
+.collector-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding-top: 0.35rem;
+    border-top: 1px solid var(--border);
+}
+
+.collector-filter-group:first-child {
+    border-top: none;
+    padding-top: 0;
+}
+
+.collector-filter-title {
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.collector-filter-empty {
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.collector-filters-menu label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.6rem;
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+    color: var(--text);
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    user-select: none;
+    transition: background 0.15s;
+}
+
+.collector-filters-menu label:hover {
+    background: var(--accent-pale);
+}
+
+.collector-filters-menu input[type="checkbox"] {
+    cursor: pointer;
+    accent-color: var(--accent);
+}
+
+/* Sort dropdown */
+.collector-sort-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.sort-option {
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+    color: var(--text);
+    background: none;
+    border: none;
+    padding: 0.5rem 0.8rem;
+    border-radius: var(--radius-sm);
+    text-align: left;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+}
+
+.sort-option:hover {
+    background: var(--accent-pale);
+}
+
+/* ── 2. Items & arrangements ───────────────────────────────── */
+.collector-items {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.collector-items.arrange-cols {
+    display: flex;
+    gap: 1.25rem;
+    min-width: 100%;
+    padding-bottom: 1rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+}
+
+.collector-items.arrange-cols .collector-item {
+    flex-shrink: 0;
+    min-width: clamp(280px, 100%, 400px);
+    width: clamp(280px, 100%, 400px);
+    scroll-snap-align: start;
+}
+
+.collector-items.arrange-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.collector-items.arrange-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.collector-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.4rem;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition:
+        box-shadow 0.15s,
+        transform 0.15s;
+}
+
+.collector-item:hover {
+    background: var(--card-bg);
+    border: 1px solid var(--accent-dark);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-1px);
+}
+
+.collector-not-clickable .collector-item {
+    cursor: default;
+}
+
+.collector-not-clickable .collector-item:hover {
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    transform: none;
+}
+
+.collector-item h3 {
+    margin: 0.2rem 0 0.3rem;
+    color: var(--text);
+}
+
+.collector-item h3 a {
+    color: var(--text);
+    text-decoration: none;
+}
+
+/* Row arrangement overrides */
+.collector-items.arrange-rows .collector-item {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 1.4rem;
+    gap: 0.5rem;
+}
+
+.collector-items.arrange-rows .collector-item h3 {
+    margin: 0.2rem 0 0.3rem 0;
+    flex-shrink: 0;
+    min-width: auto;
+    width: 100%;
+}
+
+/* .card-title in a title+date flex row must shrink to let the date breathe. */
+.collector-items.arrange-rows .collector-item h3.card-title {
+    flex-shrink: 1;
+    min-width: 0;
+    width: auto;
+}
+
+.collector-items.arrange-rows .collector-item-description {
+    flex-grow: 1;
+    margin: 0 0 0.5rem 0;
+    width: 100%;
+}
+
+.collector-items.arrange-rows .collector-item-meta {
+    margin: 1rem 0 0 0;
+    padding: 0.8rem 0 0 0;
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Shared item meta */
+.collector-item-description {
+    color: var(--text-muted);
+    flex-grow: 1;
+    margin-bottom: 0.5rem;
+}
+
+.collector-item-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--border);
+}
+
+.collector-item-date {
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.collector-item-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+}
+
+.collector-empty {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* ── 3. Cards ──────────────────────────────────────────────── */
+.collector-card {
+    width: 100%;
+}
+
+/* Shared card heading (h3) — dataset, publication, lab, default cards. */
+.card-title {
+    font-family: var(--font-headline);
+    font-weight: 500;
+    font-size: 1.2rem;
+    line-height: 1.2;
+    margin: 0;
+    color: var(--text);
+    overflow-wrap: break-word;
+}
+
+/* ── Reference ── */
+.collector-item:has(.collector-card-reference),
+.collector-item:has(.collector-card-reference):hover,
+.collector-not-clickable .collector-item:has(.collector-card-reference),
+.collector-not-clickable .collector-item:has(.collector-card-reference):hover {
+    background: none;
+    border: none;
+    box-shadow: none;
+    transform: none;
+    padding: 0.6rem 0;
+}
+
+.collector-card-reference {
+    font-family: var(--font-headline);
+}
+
+.collector-card-reference p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--text);
+}
+
+.collector-card-reference a {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+/* ── Publication ── */
+.collector-card-publication {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.collector-card-publication .collector-card-authors {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    line-height: 1.35;
+    color: var(--text);
+}
+
+/* Source line: "Journal name, Year" — one line, one size. */
+.collector-card-publication .collector-card-journal,
+.collector-card-publication .collector-card-date {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: var(--text-muted);
+}
+
+.collector-card-publication .collector-card-journal {
+    font-style: italic;
+}
+
+.collector-card-publication .collector-card-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 0.2rem;
+}
+
+/* ── Subtype ── */
+.subtype-card-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.subtype-card-main {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    flex: 1;
+    min-width: 0;
+}
+
+.subtype-card-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+    font-size: 0.85rem;
+}
+
+/* ── Research labs ── */
+.collector-card-lab {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* Bleed the lab photo to the card edges */
+.lab-card-image {
+    margin: -1.4rem -1.4rem 0;
+}
+
+.lab-card-image img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: var(--radius) var(--radius) 0 0;
+    margin: 0;
+    display: block;
+}
+
+.lab-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 1rem;
+}
+
+.lab-card-name {
+    margin: 0;
+}
+
+.lab-card-description {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Contact row: avatar + name/email stacked */
+.lab-card-contact {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+}
+
+.lab-card-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    margin: 0;
+    border: 2px solid var(--border);
+}
+
+/* Fallback circle when no photo is provided */
+.lab-card-avatar-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-pale);
+    color: var(--accent-dark);
+    font-family: var(--font-ui);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.lab-card-contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+}
+
+.lab-card-contact-name {
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.lab-card-contact-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    color: var(--accent);
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.lab-card-contact-email:hover {
+    color: var(--accent-dark);
+    text-decoration: underline;
+}
+
+.lab-card-contact-email svg {
+    flex-shrink: 0;
+}
+
+.lab-card-institution {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    margin-top: 0.1rem;
+}
+
+.lab-card-institution-logo {
+    width: auto;
+    height: 36px;
+    object-fit: contain;
+    flex-shrink: 0;
+    border-radius: 0;
+    margin: 0.15rem 0 0;
+}
+
+.lab-card-address {
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    white-space: pre-line;
+    margin: 0;
+}
+
+/* Download link group in subtype hero */
+.subtype-download-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin: 0.5rem 0;
+}
+
+/* ── Dataset ── */
+.collector-card-dataset {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.dataset-head {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.dataset-titlerow {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.dataset-date {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.dataset-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    flex-wrap: wrap;
+}
+
+.dataset-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    align-items: center;
+}
+
+.dataset-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    flex-shrink: 0;
+}
+
+.dataset-links a {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+}
+
+/* Expandable details panel */
+.dataset-details {
+    border-top: 1px solid var(--border);
+    padding-top: 0.5rem;
+}
+
+.dataset-summary {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    cursor: pointer;
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    user-select: none;
+    padding: 0.35rem 0.65rem;
+    border-radius: 5px;
+}
+
+.dataset-summary::-webkit-details-marker {
+    display: none;
+}
+
+.dataset-summary::after {
+    content: "\25BE";
+    font-size: 0.8rem;
+    transition: transform 0.2s ease;
+}
+
+.dataset-details[open] .dataset-summary::after {
+    transform: rotate(180deg);
+}
+
+.dataset-summary:hover {
+    color: var(--accent-dark);
+    background-color: var(--accent-pale);
+}
+
+/* Table — mono labels, mono data values */
+.dataset-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.75rem;
+}
+.dataset-table tr:first-child th,
+.dataset-table tr:first-child td {
+    border-top: none;
+}
+
+.dataset-table th,
+.dataset-table td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.45rem 0;
+    border-top: 1px solid var(--border);
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+}
+
+.dataset-table tr:last-child th,
+.dataset-table tr:last-child td {
+    border-bottom: none;
+}
+
+.dataset-table th {
+    width: 34%;
+    padding-right: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.dataset-table td {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text);
+    line-height: 1.45;
+}
+
+.dataset-table td a {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+@media (max-width: 520px) {
+    .dataset-table th,
+    .dataset-table td {
+        display: block;
+        width: 100%;
+    }
+    .dataset-table td {
+        padding-top: 0;
+        padding-bottom: 0.6rem;
+    }
+    .dataset-table th {
+        border-top: 1px solid var(--border);
+        padding-bottom: 0.1rem;
+    }
+    .dataset-table tr:first-child th {
+        border-top: none;
+    }
+}
+
+/* ── 4. Responsive (≤ 720px) ───────────────────────────────── */
+@media (max-width: 720px) {
+    /* Collector controls */
+    .collector-controls {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 0.75rem;
+    }
+
+    .collector-controls .collector-search,
+    .collector-search {
+        width: 100%;
+        flex-basis: 100%;
+        order: -1;
+    }
+
+    .collector-filters-group {
+        width: 100%;
+    }
+
+    .collector-controls .collector-filters-dropdown,
+    .collector-controls .collector-sort-dropdown {
+        flex: 1;
+        min-width: calc(50% - 0.375rem);
+    }
+
+    .collector-filters-dropdown {
+        flex: 1 1 140px;
+    }
+
+    .collector-controls .collector-filters-btn,
+    .collector-controls .collector-sort-btn,
+    .collector-filters-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .collector-filters-menu {
+        left: 0;
+        right: auto;
+        max-width: calc(100vw - 2rem);
+    }
+
+    /* Collector items */
+    .collector-items.arrange-cols {
+        flex-direction: column;
+        min-width: auto;
+        overflow-x: visible;
+    }
+
+    .collector-items.arrange-cols .collector-item {
+        min-width: auto;
+        width: 100%;
+    }
+
+    .collector-items.arrange-rows .collector-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .collector-items.arrange-rows .collector-item h3 {
+        min-width: auto;
+    }
+
+    .collector-items.arrange-rows .collector-item-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .collector-tags {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    /* Labs card */
+    .lab-card-image img {
+        height: 140px;
+    }
+}

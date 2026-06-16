@@ -1,3 +1,30 @@
 <footer>
-  <p>&copy; 2024 BlastoDB. Built with <a href="https://www.11ty.dev/">Eleventy</a>.</p>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div class="footer-branding">
+        <div class="footer-branding-header">
+          <a href="{{ '/' | url }}" class="footer-logo">
+            <img src="{{ (collections.branding.site_logo_upload or collections.branding.site_logo_url) | url }}" alt="Blastie mascot" class="footer-logo-image">
+            <span>{{ collections.branding.site_title }}</span>
+          </a>
+        </div>
+        <p>{{ collections.footer.description }}</p>
+      </div>
+    </div>
+    <div class="footer-columns">
+      {% for column in collections.footer.columns %}
+        <div class="footer-column">
+          <h3>{{ column.title }}</h3>
+          <ul>
+            {% for item in column.items %}
+              <li><a href="{{ item.url | url }}">{{ item.label }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>{{ collections.footer.funding }}</p>
+  </div>
 </footer>

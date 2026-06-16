@@ -1,0 +1,41 @@
+{
+  "description": "The Blastocystis community resource",
+  "funding": "BlastoDB is supported by the EU COST Action \"Blastocystis under one Health\"",
+  "columns": [
+    {
+      "title": "Resources",
+      "items": [
+        { "label": "Datasets", "url": "/datasets/" },
+        { "label": "Subtypes", "url": "/subtypes/" },
+        { "label": "Publications", "url": "/publications/" },
+        { "label": "Lab Protocols", "url": "/lab-protocols/" }
+      ]
+    },
+    {
+      "title": "Community",
+      "items": [{ "label": "Research Labs", "url": "/labs/" }]
+    },
+    {
+      "title": "Biobank",
+      "items": [{ "label": "Biobank", "url": "/biobank/" }]
+    },
+    {
+      "title": "About",
+      "items": [
+        { "label": "Mission", "url": "/mission/" },
+        { "label": "Contribute", "url": "/contribute/" },
+        { "label": "Contact", "url": "/contact/" }
+      ]
+    },
+    {
+      "title": "Documentation",
+      "items": [
+        { "label": "Overview", "url": "/documentation/" },
+        { "label": "Editor Guide", "url": "/documentation/editors_guide/" },
+        { "label": "Markdown Guide", "url": "/documentation/markdown/" },
+        { "label": "Style Guide", "url": "/documentation/styleguide/" },
+        { "label": "Technical Docs", "url": "/documentation/technical/" }
+      ]
+    }
+  ]
+}

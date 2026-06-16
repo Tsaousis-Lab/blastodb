@@ -4,13 +4,15 @@ title: BlastoDB — Lab Protocols
 description: Collection of laboratory protocols for sample preparation, DNA extraction, and analysis techniques.
 ---
 
-[hero:]
-# Laboratory Protocols
+[hero: text-align:center]
 
-Browse our collection of standardized laboratory protocols for various molecular biology techniques. Use the search and filters below to find the protocol you need.
+<h-hero>Laboratory Protocols</h-hero>
+
+Browse our collection of standardized laboratory protocols.
+
 [:hero]
 
-[collector -> lab-protocols; search:[title,description,shortDescription,tags]; sort:[date,title]; filter:[tags]; arrange:rows; display_items:all]
+[collector -> lab_protocols; search:[title,description,shortDescription,tags]; sort:[date,title]; arrange:rows; display_items:all]
 
 ---
 

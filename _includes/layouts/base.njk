@@ -6,6 +6,7 @@
   <meta name="description" content="{{ description or 'BlastoDB - The open hub for Blastocystis research' }}">
   <title>{{ title }}</title>
   <link rel="stylesheet" href="{{ '/assets/style.css' | url }}">
+  <link rel="stylesheet" href="{{ '/assets/collector.css' | url }}">
   <script>
     // Inject data into global scope for main.js to access
     window.collectorData = {{ collectorData | dump | safe }};
