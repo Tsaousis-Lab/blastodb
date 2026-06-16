@@ -322,7 +322,8 @@ function getItemsFromCollection(collection, templateOverride) {
         const body = content.replace(/^---\n[\s\S]*?\n---\n?/, "").trim();
         const slug = file.replace(".md", "");
         const urlBase = requestPath ? `/${requestPath}` : "";
-        const pageUrl = `${urlBase}/${slug}/`;
+        const prefixPath = pathPrefix === "/" ? "" : pathPrefix.replace(/\/$/, "");
+        const pageUrl = `${prefixPath}${urlBase}/${slug}/`;
 
         const title = frontmatter.title || "Untitled";
         const description =
@@ -605,8 +606,9 @@ function discoverJsonCollections() {
   return jsonCollections;
 }
 
+const pathPrefix = process.env.PATH_PREFIX || "/";
+
 module.exports = function (eleventyConfig) {
-  const pathPrefix = process.env.PATH_PREFIX || "/";
 
   // ─── Markdown Setup with Custom Plugins ──────────────────────────────────
   const md = markdownIt({
@@ -933,6 +935,13 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.setLibrary("md", md);
 
   // ─── Filters ────────────────────────────────────────────────────────────
+
+  eleventyConfig.addFilter("subtypeNames", (ids) => {
+    if (!ids) return [];
+    const idx = buildSubtypeIndex();
+    return (Array.isArray(ids) ? ids : [ids]).map((id) => idx[id] || id);
+  });
+
   eleventyConfig.addFilter("depth", (filePath) => {
     const count = (filePath.match(/\//g) || []).length;
     return count > 0 ? count : 0;
@@ -958,7 +967,7 @@ module.exports = function (eleventyConfig) {
   // ─── Collections ────────────────────────────────────────────────────────
   // Lab Protocols Collection
   eleventyConfig.addCollection("labProtocols", (collectionApi) => {
-    const protocolsDir = path.join(__dirname, "content", "lab-protocols");
+    const protocolsDir = path.join(__dirname, "content", "data", "lab_protocols");
     const protocols = [];
 
     if (fs.existsSync(protocolsDir)) {

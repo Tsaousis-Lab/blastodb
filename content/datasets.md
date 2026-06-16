@@ -1,7 +1,7 @@
 ---
 layout: layouts/base.njk
-title: BlastoDB — Lab Protocols
-description: Collection of laboratory protocols for sample preparation, DNA extraction, and analysis techniques.
+title: BlastoDB — Datasets
+description: Curated selection of trustworthy datasets for Blastocystis, searchable by subtype and country.
 ---
 
 [hero: text-align:center]
