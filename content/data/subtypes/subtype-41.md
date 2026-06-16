@@ -1,11 +1,11 @@
 ---
 layout: layouts/subtype.njk
-id: ST41
 name: Subtype 41
 sources:
   - Human
 reference_genome_link: ''
 ssu_rrna_link: ''
+key: subtype-41
 ---
 
 ## Short Description

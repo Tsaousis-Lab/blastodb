@@ -3,6 +3,7 @@ layout: layouts/lab-protocol.njk
 title: The original "Jones’ Solution"
 related_publications:
   - jones1946
+key: the-original-jones’-solution-jones-w.-r.-1946
 ---
 
 **Components**

@@ -17,13 +17,13 @@
     </div>
 
     <div class="dataset-meta">
-      {% if subtypes or countries %}
+      {% if subtypes_display or countries %}
       <div class="dataset-chips">
-        {% if subtypes %}
-          {% if subtypes is iterable and subtypes is not string %}
-            {% for st in subtypes %}<span class="tag">{{ st }}</span>{% endfor %}
+        {% if subtypes_display %}
+          {% if subtypes_display is iterable and subtypes_display is not string %}
+            {% for st in subtypes_display %}<span class="tag">{{ st }}</span>{% endfor %}
           {% else %}
-            <span class="tag">{{ subtypes }}</span>
+            <span class="tag">{{ subtypes_display }}</span>
           {% endif %}
         {% endif %}
         {% if countries %}
@@ -40,7 +40,7 @@
   <details class="dataset-details">
     <summary class="dataset-summary" onclick="event.stopPropagation()">Details</summary>
     <table class="dataset-table">
-      {{ row("Subtype(s)", subtypes) }}
+      {{ row("Subtype(s)", subtypes_display) }}
       {{ row("Strain(s)", strains) }}
       {{ row("Datatype(s)", datatypes) }}
       {{ row("Data origin(s)", data_origins) }}

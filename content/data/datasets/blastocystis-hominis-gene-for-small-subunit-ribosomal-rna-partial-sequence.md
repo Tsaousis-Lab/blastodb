@@ -11,13 +11,13 @@ data_origins: []
 data_sources: []
 detection_methods: []
 subtypes:
-  - Subtype 1
+  - subtype-1
 sources:
   - Mammal
 related_publications:
   - arisue2003
 lab_protocols:
-  - Rigers Agar Slant
+  - rigers-agar-slant
 countries: []
 ---
 

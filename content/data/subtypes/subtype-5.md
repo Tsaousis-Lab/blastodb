@@ -1,12 +1,12 @@
 ---
 layout: layouts/subtype.njk
-id: ST5
 name: Subtype 5
 sources:
   - Human
   - Mammal
 reference_genome_link: ''
 ssu_rrna_link: ''
+key: subtype-5
 ---
 
 ## Short Description

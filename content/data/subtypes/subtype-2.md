@@ -1,6 +1,5 @@
 ---
 layout: layouts/subtype.njk
-id: ST2
 name: Subtype 2
 sources:
   - Human
@@ -10,6 +9,7 @@ sources:
   - Soil
 reference_genome_link: https://www.test.com
 ssu_rrna_link: ''
+key: subtype-2
 ---
 
 # Short Description

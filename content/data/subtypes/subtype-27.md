@@ -1,11 +1,11 @@
 ---
 layout: layouts/subtype.njk
-id: ST27
 name: Subtype 27
 sources:
   - Avian
 reference_genome_link: ''
 ssu_rrna_link: ''
+key: subtype-27
 ---
 
 ## Short Description

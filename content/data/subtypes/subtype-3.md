@@ -1,6 +1,5 @@
 ---
 layout: layouts/subtype.njk
-id: ST3
 name: Subtype 3
 sources:
   - Human
@@ -10,6 +9,7 @@ sources:
   - Soil
 reference_genome_link: ''
 ssu_rrna_link: https://www.test.com
+key: subtype-3
 ---
 
 ## Short Description

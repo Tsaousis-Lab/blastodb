@@ -1,6 +1,5 @@
 ---
 layout: layouts/subtype.njk
-id: ST4
 name: Subtype 4
 sources:
   - Human
@@ -8,6 +7,7 @@ sources:
   - Water
 reference_genome_link: ''
 ssu_rrna_link: ''
+key: subtype-4
 ---
 
 # Short Description

@@ -41,9 +41,22 @@ collections:
         widget: relation
         collection: publications
         file: publications
-        value_field: "publications.*.citation_key"
-        search_fields: ["publications.*.citation_key", "publications.*.title"]
-        display_fields: ["publications.*.citation_key", "publications.*.title"]
+        value_field: "publications.*.key"
+        search_fields:
+          [
+            "publications.*.key",
+            "publications.*.title",
+            "publications.*.date",
+            "publications.*.publication_name",
+            "publications.*.authors",
+          ]
+        display_fields:
+          [
+            "publications.*.title",
+            "publications.*.date",
+            "publications.*.publication_name",
+            "publications.*.authors",
+          ]
         multiple: true
         hint: "Publications must be added before you can link to them here."
 
@@ -104,9 +117,9 @@ collections:
         collection: subtypes
         multiple: true
         required: false
-        value_field: name
+        value_field: key
         display_fields: [name]
-        search_fields: [name, id]
+        search_fields: [name]
 
       - label: Sources
         name: sources
@@ -138,7 +151,8 @@ collections:
         collection: lab_protocols
         multiple: true
         required: false
-        value_field: title
+        value_field: key
+        display_fields: [title]
         search_fields: [title]
         hint: "If a desired datatype is missing, you can add it under ''Lab Protocols''."
 
@@ -168,10 +182,11 @@ collections:
             widget: list
             label_singular: Publication
             fields:
-              - label: Citation Key
-                name: citation_key
-                widget: string
-                hint: "Format: LastnameYear, e.g. Smith2023<br>**Please do not rename this!**"
+              - label: Key
+                name: key
+                widget: hidden
+                default: "{{uuid}}"
+
               - label: Title
                 name: title
                 widget: string
@@ -218,6 +233,11 @@ collections:
         widget: hidden
         default: layouts/lab-protocol.njk
 
+      - label: Key
+        name: key
+        widget: hidden
+        default: "{{uuid}}"
+
       - label: Title
         name: title
         widget: string
@@ -227,9 +247,9 @@ collections:
         widget: relation
         collection: publications
         file: publications
-        value_field: "publications.*.citation_key"
-        search_fields: ["publications.*.citation_key", "publications.*.title"]
-        display_fields: ["publications.*.citation_key", "publications.*.title"]
+        value_field: "publications.*.key"
+        search_fields: ["publications.*.key", "publications.*.title"]
+        display_fields: ["publications.*.key", "publications.*.title"]
         multiple: true
 
       - label: Protocol
@@ -253,15 +273,15 @@ collections:
         widget: hidden
         default: layouts/subtype.njk
 
-      - label: ID
-        name: id
-        widget: string
-        hint: "e.g. ST1, ST2"
+      - label: Key
+        name: key
+        widget: hidden
+        default: "{{uuid}}"
 
       - label: Name
         name: name
         widget: string
-        hint: "e.g. Subtype 1, Subtype 2<br>**Be carefil when renaming!** Datasets link to the subtypes via their name. If you rename them, this link will break."
+        hint: "e.g. Subtype 1, Subtype 2"
 
       - label: Sources / Hosts
         name: sources

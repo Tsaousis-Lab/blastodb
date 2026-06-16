@@ -1,11 +1,11 @@
 ---
 layout: layouts/subtype.njk
-id: ST17
 name: Subtype 17
 sources:
   - Mammal
 reference_genome_link: ''
 ssu_rrna_link: ''
+key: subtype-17
 ---
 
 ## Short Description

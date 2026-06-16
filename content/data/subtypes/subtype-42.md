@@ -1,11 +1,11 @@
 ---
 layout: layouts/subtype.njk
-id: ST42
 name: Subtype 42
 sources:
   - Mammal
 reference_genome_link: ''
 ssu_rrna_link: ''
+key: subtype-42
 ---
 
 ## Short Description

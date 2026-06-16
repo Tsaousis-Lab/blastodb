@@ -1,12 +1,12 @@
 ---
 layout: layouts/subtype.njk
-id: ST15
 name: Subtype 15
 sources:
   - Mammal
   - Non-Human Primate
 reference_genome_link: ''
 ssu_rrna_link: ''
+key: subtype-15
 ---
 
 ## Short Description

@@ -1,12 +1,12 @@
 ---
 layout: layouts/subtype.njk
-id: ST23
 name: Subtype 23
 sources:
   - Human
   - Mammal
 reference_genome_link: ''
 ssu_rrna_link: ''
+key: subtype-23
 ---
 
 ## Short Description

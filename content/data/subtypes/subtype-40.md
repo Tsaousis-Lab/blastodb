@@ -1,11 +1,11 @@
 ---
 layout: layouts/subtype.njk
-id: ST40
 name: Subtype 40
 sources:
   - Mammal
 reference_genome_link: ''
 ssu_rrna_link: ''
+key: subtype-40
 ---
 
 ## Short Description

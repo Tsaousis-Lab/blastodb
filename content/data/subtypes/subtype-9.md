@@ -1,11 +1,11 @@
 ---
 layout: layouts/subtype.njk
-id: ST9
 name: Subtype 9
 sources:
   - Human
 reference_genome_link: ''
 ssu_rrna_link: ''
+key: subtype-9
 ---
 
 ## Short Description

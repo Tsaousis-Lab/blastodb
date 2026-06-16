@@ -1,6 +1,5 @@
 ---
 layout: layouts/subtype.njk
-id: ST8
 name: Subtype 8
 sources:
   - Human
@@ -8,6 +7,7 @@ sources:
   - Avian
 reference_genome_link: ''
 ssu_rrna_link: ''
+key: subtype-8
 ---
 
 ## Short Description

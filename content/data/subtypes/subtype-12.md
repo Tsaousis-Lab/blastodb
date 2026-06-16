@@ -1,12 +1,12 @@
 ---
 layout: layouts/subtype.njk
-id: ST12
 name: Subtype 12
 sources:
   - Human
   - Mammal
 reference_genome_link: ''
 ssu_rrna_link: ''
+key: subtype-12
 ---
 
 ## Short Description

@@ -1,11 +1,11 @@
 ---
 layout: layouts/subtype.njk
-id: ST30
 name: Subtype 30
 sources:
   - Mammal
 reference_genome_link: ''
 ssu_rrna_link: ''
+key: subtype-30
 ---
 
 ## Short Description

@@ -1,7 +1,7 @@
 {
   "publications": [
     {
-      "citation_key": "Arisue2002",
+      "key": "arisue2002",
       "title": "Phylogenetic position of Blastocystis hominis and of stramenopiles inferred from multiple molecular sequence data",
       "authors": [
         "Arisue, N.",
@@ -13,31 +13,40 @@
         "Yano, T.A.",
         "Hasegawa, M."
       ],
-      "date": "2002",
+      "Date": "2005",
       "publication_name": "Journal of Eukaryotic Microbiology",
       "doi": "10.1111/j.1550-7408.2002.tb00339.x",
-      "url": ""
+      "url": "",
+      "date": "2002"
     },
     {
-      "citation_key": "Arisue2003",
+      "key": "arisue2003",
       "title": "Sequence heterogeneity of the small subunit ribosomal RNA genes among blastocystis isolates",
-      "authors": ["Arisue, N.", "Hashimoto,T.", "Yoshikawa,H."],
-      "date": "2003",
+      "authors": [
+        "Arisue, N.",
+        "Hashimoto,T.",
+        "Yoshikawa,H."
+      ],
+      "Date": "2005",
       "publication_name": "Parasitology",
       "doi": "10.1111/j.1550-7408.2002.tb00339.x",
-      "url": ""
+      "url": "",
+      "date": "2003"
     },
     {
-      "citation_key": "Jones1946",
+      "key": "jones1946",
       "title": "The experimental infection of rats with Entamoeba histolytica; with a method for evaluating the anti-amoebic properties of new compounds",
-      "authors": ["Jones, W. R."],
-      "date": "1946",
+      "authors": [
+        "Jones, W. R."
+      ],
+      "Date": "2016",
       "publication_name": "Annals of Tropical Medicine and Parasitology",
       "doi": "10.1080/00034983.1946.11685270",
-      "url": "https://doi.org/10.1080/00034983.1946.11685270"
+      "url": "https://doi.org/10.1080/00034983.1946.11685270",
+      "date": "1946"
     },
     {
-      "citation_key": "Yoshikawa2004",
+      "key": "yoshikawa2004",
       "title": "Polymerase chain reaction-based genotype classification among human Blastocystis hominis populations isolated from different countries",
       "authors": [
         "Yoshikawa,H.",
@@ -50,9 +59,21 @@
         "Haque, R.",
         "Takahashi,Y."
       ],
-      "date": "2004",
+      "Date": "2004",
       "publication_name": "Parasitology Research",
       "doi": "10.1007/s00436-003-0995-2",
+      "url": "",
+      "date": "2004"
+    },
+    {
+      "key": "baba95f5-0613-461a-b77b-455e16695249",
+      "title": "This is a test publication",
+      "authors": [
+        "Benecke, Tobias"
+      ],
+      "Date": "2026",
+      "publication_name": "Journal of Test Publications",
+      "doi": "",
       "url": ""
     }
   ]

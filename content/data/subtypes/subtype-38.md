@@ -1,11 +1,11 @@
 ---
 layout: layouts/subtype.njk
-id: ST38
 name: Subtype 38
 sources:
   - Mammal
 reference_genome_link: ''
 ssu_rrna_link: ''
+key: subtype-38
 ---
 
 ## Short Description

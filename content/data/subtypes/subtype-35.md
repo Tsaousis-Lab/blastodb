@@ -1,11 +1,11 @@
 ---
 layout: layouts/subtype.njk
-id: ST35
 name: Subtype 35
 sources:
   - Human
 reference_genome_link: ''
 ssu_rrna_link: ''
+key: subtype-35
 ---
 
 ## Short Description

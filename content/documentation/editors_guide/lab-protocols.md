@@ -31,12 +31,6 @@ You can edit the content by opening the **Lab Protocols** collection on the left
 2. Change what needs to be changed. you can find a description of the fields below.
 3. Click **Save**. → The website will be updated automatically within a few minutes.
 
-<div class="guide-warning">
-
-**Be careful when renaming lab protocols.** Datasets are linked to the lab protocols by their name. If you rename a lab protocol, this link breaks. You need to remove the lab protocol from each dataset, then rename it, and then add it back to the datasets.
-
-</div>
-
 #### Deleting a Lab Protocol
 
 <div class="guide-warning">

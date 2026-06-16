@@ -1,11 +1,11 @@
 ---
 layout: layouts/subtype.njk
-id: ST36
 name: Subtype 36
 sources:
   - Mammal
 reference_genome_link: ''
 ssu_rrna_link: ''
+key: subtype-36
 ---
 
 ## Short Description

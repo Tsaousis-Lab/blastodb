@@ -30,7 +30,7 @@
 
       <div class="hero-inner">
         <table class="dataset-table">
-          {{ row("Subtype(s)", subtypes) }}
+          {{ row("Subtype(s)", subtypes_display) }}
           {{ row("Strain(s)", strains) }}
           {{ row("Datatype(s)", datatypes) }}
           {{ row("Data origin(s)", data_origins) }}
@@ -52,7 +52,7 @@
     <div class="collector"
         data-collection="publications"
         data-path="publications"
-        data-opts='{"arrange":"rows","display_items":"all","search_fields":[],"prefilter":{"orGroups":[{% for key in related_publications %}[{"field":"citation_key","value":{{ key | dump | safe }}}]{% if not loop.last %},{% endif %}{% endfor %}]},"card_template":"references","clickable":false}'></div>
+        data-opts='{"arrange":"rows","display_items":"all","search_fields":[],"prefilter":{"orGroups":[{% for key in related_publications %}[{"field":"key","value":{{ key | dump | safe }}}]{% if not loop.last %},{% endif %}{% endfor %}]},"card_template":"references","clickable":false}'></div>
     {% endif %}
 
     {% if lab_protocols and lab_protocols.length %}
@@ -61,7 +61,7 @@
     <div class="collector"
         data-collection="lab_protocols"
         data-path="lab_protocols"
-        data-opts='{"arrange":"rows","display_items":"all","search_fields":[],"prefilter":{"orGroups":[{% for title in lab_protocols %}[{"field":"title","value":{{ title | dump | safe }}}]{% if not loop.last %},{% endif %}{% endfor %}]},"card_template":"related_lab_protocol","clickable":false}'></div>
+        data-opts='{"arrange":"rows","display_items":"all","search_fields":[],"prefilter":{"orGroups":[{% for key in lab_protocols %}[{"field":"key","value":{{ key | dump | safe }}}]{% if not loop.last %},{% endif %}{% endfor %}]},"card_template":"related_lab_protocol","clickable":false}'></div>
     {% endif %}
 
 

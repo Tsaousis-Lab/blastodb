@@ -30,12 +30,6 @@ You can edit the content by opening the **Subtypes** collection on the left side
 2. Change what needs to be changed
 3. Click **Save** → The website will be updated automatically within a few minutes
 
-<div class="guide-warning">
-
-**Be careful when renaming subtypes.** The name of a subtype (e.G. `Subtype 7`) is used as a link for the datasets. When renaming a subtype, you must first remove it from all relevant datasets, then rename it, and then add it back in again to the datasets.
-
-</div>
-
 #### Deleting a Subtype
 
 <div class="guide-warning">
@@ -50,25 +44,13 @@ You can edit the content by opening the **Subtypes** collection on the left side
 
 # Fields
 
-1. **ID** `required` — The short subtype identifier used internally.
-    - Format: `ST` followed by the subtype number, e.g. `ST1`, `ST2`, `ST17`.
-    - This value is used for matching — once set it should not be changed.
-
-2. **Name** `required` — The full display name shown on cards and in filter menus.
+1. **Name** `required` — The full name shown on cards and in filter menus.
     - Format: `Subtype 1`, `Subtype 2`, etc.
-    - Must match exactly the name used when tagging datasets — a mismatch will break the link between datasets and this subtype page.
-
-3. **Sources / Hosts** — Sources where the subtype has been found (e.g. `Human`, `Mammals`, `Water`, ...).
-    - Select from the controlled list.
-    - If a source you need is missing, it can be added under *[Vocabularies](/documentation/editors_guide/vocabularies/) → Data Sources*.
-
-4. **Download Link to Reference Genomes** — A direct download URL for the reference genome sequence.
-    - Leave blank if not available.
-
-5. **Download Link to SSU rRNA Sequence** — A direct download URL for the SSU rRNA sequence.
-    - Leave blank if not available.
-
-6. **Description** `required` — A free-text description written in Markdown.
+2. **Sources / Hosts** — Sources where the subtype has been found (e.g. `Human`, `Mammals`, `Water`, ...).
+    - Select from the list. If a source you need is missing, it can be added under *[Vocabularies](/documentation/editors_guide/vocabularies/) → Data Sources*.
+3. **Download Link to Reference Genomes** — A direct download URL for the reference genome sequence.
+4. **Download Link to SSU rRNA Sequence** — A direct download URL for the SSU rRNA sequence.
+5. **Description** `required` — A free-text description written in Markdown.
     - Write your descriptive text in markdown ([see markdown cheat sheet](/documentation/markdown/markdown_cheat_sheet/)).
     <div class="guide-warning">
     

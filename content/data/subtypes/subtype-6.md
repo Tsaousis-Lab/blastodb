@@ -1,6 +1,5 @@
 ---
 layout: layouts/subtype.njk
-id: ST6
 name: Subtype 6
 sources:
   - Human
@@ -8,6 +7,7 @@ sources:
   - Mammal
 reference_genome_link: ''
 ssu_rrna_link: ''
+key: subtype-6
 ---
 
 ## Short Description

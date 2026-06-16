@@ -246,6 +246,20 @@ function normalizeCollectionFolder(folder) {
   };
 }
 
+function buildSubtypeIndex() {
+  const subtypesDir = path.join(__dirname, "content/data/subtypes");
+  const index = {};
+  if (!fs.existsSync(subtypesDir)) return index;
+  for (const file of fs.readdirSync(subtypesDir).filter((f) => f.endsWith(".md"))) {
+    const content = fs.readFileSync(path.join(subtypesDir, file), "utf-8");
+    const m = content.match(/^---\n([\s\S]*?)\n---/);
+    if (!m) continue;
+    const fm = yaml.load(m[1]) || {};
+    if (fm.key && fm.name) index[fm.key] = fm.name;
+  }
+  return index;
+}
+
 function getItemsFromCollection(collection, templateOverride) {
   if (!collection || !collection.folder) return [];
 
@@ -276,6 +290,9 @@ function getItemsFromCollection(collection, templateOverride) {
     collection.collector && Array.isArray(collection.collector.search_fields)
       ? collection.collector.search_fields
       : null;
+
+  const subtypeIndex =
+    collection.name === "datasets" ? buildSubtypeIndex() : null;
 
   files.forEach((file) => {
     const filePath = path.join(fullFolderPath, file);
@@ -310,6 +327,12 @@ function getItemsFromCollection(collection, templateOverride) {
           collection: collection.name,
           body,
         };
+
+        if (subtypeIndex && Array.isArray(frontmatter.subtypes)) {
+          itemData.subtypes_display = frontmatter.subtypes.map(
+            (id) => subtypeIndex[id] || id,
+          );
+        }
 
         const cardHtml = renderCollectorCard(templateName, itemData);
         const searchable = buildSearchableText(itemData, searchFields);

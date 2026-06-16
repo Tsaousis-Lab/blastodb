@@ -1,11 +1,11 @@
 ---
 layout: layouts/subtype.njk
-id: ST24
 name: Subtype 24
 sources:
   - Mammal
 reference_genome_link: ''
 ssu_rrna_link: ''
+key: subtype-24
 ---
 
 ## Short Description

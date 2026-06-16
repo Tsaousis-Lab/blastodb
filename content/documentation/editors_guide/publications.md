@@ -47,24 +47,13 @@ You can also **rearrange** the publications by using the arrows, or **add an ite
 
 # Fields
 
-1. **Citation Key** `required` - Short, unique identifier for each publication.
-    -  Please format is to **AuthorYear**, e.g.:
-        - `Tsaousis2023`
-        - `Gentekaki2017`
-        - `Clark2013`
-    - If two publications share the same key, add a letter
-      - `Smith2021a`
-      - `Smith2021b`.
-2. **Title** `required` - The title of the paper.
-    - Input via text field.
-3. **Authors** `required` - The authors of the paper.
+1. **Title** `required` - The title of the paper.
+2. **Authors** `required` - The authors of the paper.
     - One author per line, in the format `Lastname, Letter of First Name`. For example:<br>Tsaousis A.<br>Gentekaki E.<br>Roger A.<br>...
-4. **Publication Date** `required` - The publication date
+3. **Publication Date** `required` - The publication date
     - Enter a year (2024), month and year (06.2024), or full date (11.06.2024)
-5. **Name of Publication** - The name of the journal or conference
-    - Enter via text field.
-6. **DOI** - The digital object identifier
+4. **Name of Publication** - The name of the journal or conference
+5. **DOI** - The digital object identifier
     - Enter without the prefix of `https://doi.org/` prefix, e.g. `10.1038/s41564-019-0622-3`.
-7. **URL** - Link to the publication
-    - Enter via text field.
+6. **URL** - Link to the publication
     - Only really needed of DOI is not available.

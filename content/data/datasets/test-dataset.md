@@ -1,7 +1,7 @@
 ---
 layout: layouts/dataset-page.njk
 title: TEST DATASET
-publication_date: "2026"
+publication_date: '2026'
 link_to_source: test.com
 strains: []
 datatypes:
@@ -11,9 +11,9 @@ data_origins: []
 data_sources: []
 detection_methods: []
 subtypes:
-  - Subtype 1
-  - Subtype 3
-  - Subtype 6
+  - subtype-1
+  - subtype-3
+  - subtype-6
 hosts:
   - human
 related_publications: []

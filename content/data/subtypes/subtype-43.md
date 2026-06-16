@@ -1,11 +1,11 @@
 ---
 layout: layouts/subtype.njk
-id: ST43
 name: Subtype 43
 sources:
   - Mammal
 reference_genome_link: ''
 ssu_rrna_link: ''
+key: subtype-43
 ---
 
 ## Short Description

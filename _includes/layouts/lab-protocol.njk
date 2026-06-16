@@ -28,7 +28,7 @@
     <div class="collector"
         data-collection="publications"
         data-path="publications"
-        data-opts='{"arrange":"rows","display_items":"all","search_fields":[],"prefilter":{"orGroups":[{% for key in related_publications %}[{"field":"citation_key","value":{{ key | dump | safe }}}]{% if not loop.last %},{% endif %}{% endfor %}]},"card_template":"references","clickable":false}'>
+        data-opts='{"arrange":"rows","display_items":"all","search_fields":[],"prefilter":{"orGroups":[{% for key in related_publications %}[{"field":"key","value":{{ key | dump | safe }}}]{% if not loop.last %},{% endif %}{% endfor %}]},"card_template":"references","clickable":false}'>
     </div>
     {% endif %}
 

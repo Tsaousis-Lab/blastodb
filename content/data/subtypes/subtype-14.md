@@ -1,12 +1,12 @@
 ---
 layout: layouts/subtype.njk
-id: ST14
 name: Subtype 14
 sources:
   - Human
   - Mammal
 reference_genome_link: ''
 ssu_rrna_link: ''
+key: subtype-14
 ---
 
 ## Short Description

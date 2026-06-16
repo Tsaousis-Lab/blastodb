@@ -1,11 +1,11 @@
 ---
 layout: layouts/subtype.njk
-id: ST11
 name: Subtype 11
 sources:
   - Mammal
 reference_genome_link: ''
 ssu_rrna_link: ''
+key: subtype-11
 ---
 
 ## Short Description

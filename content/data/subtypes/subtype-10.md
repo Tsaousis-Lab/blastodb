@@ -1,12 +1,12 @@
 ---
 layout: layouts/subtype.njk
-id: ST10
 name: Subtype 10
 sources:
   - Mammal
   - Human
 reference_genome_link: ''
 ssu_rrna_link: ''
+key: subtype-10
 ---
 
 ## Short Description
