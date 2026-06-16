@@ -18,7 +18,7 @@ We are dedicated to advance global knowledge and collaboration on Blastocystis, 
 
 [box:]
 
-![Blastocystis microscopy animation](https://images.squarespace-cdn.com/content/v1/689c6545c94b4240bd6c83f4/8ee1cef4-9a67-45c7-ac9f-0b455c3446f6/blasto+gif.gif)
+![Blastocystis microscopy animation](https://media.nature.com/lw767/magazine-assets/d41586-025-01916-0/d41586-025-01916-0_51055274.gif?as=webp)
 *Art by <a href="https://www.samfalconer.co.uk" target="_blank" rel="noopener">Sam Falconer</a>*
 [:box]
 
