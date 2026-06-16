@@ -31,4 +31,4 @@ Each dataset is a separate Markdown file in `content/data/datasets/`. Datasets a
 
 Cross-collection fields (`subtypes`, `related_publications`, `lab_protocols`) store the `key` UUID of the target entry. Renaming the target does not break the link.
 
-→ [Editor Guide: Datasets](/documentation/editors_guide/datasets/) &nbsp;|&nbsp; [Data Structure Overview](/documentation/technical/)
+→ [Editor Guide: Datasets](/documentation/editors_guide/datasets/) &nbsp;|&nbsp; [Data Structure Overview](/documentation/technical/datastructure/)

@@ -30,8 +30,11 @@
     {
       "title": "Documentation",
       "items": [
+        { "label": "Overview", "url": "/documentation/" },
         { "label": "Editor Guide", "url": "/documentation/editors_guide/" },
-        { "label": "Style Guide",  "url": "/documentation/styleguide/" }
+        { "label": "Markdown Guide", "url": "/documentation/markdown/" },
+        { "label": "Style Guide", "url": "/documentation/styleguide/" },
+        { "label": "Technical Docs", "url": "/documentation/technical/" }
       ]
     }
   ]

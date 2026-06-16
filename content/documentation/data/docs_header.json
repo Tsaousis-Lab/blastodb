@@ -1,9 +1,13 @@
 {
   "items": [
     {
+      "label": "Home",
+      "url": "/documentation/"
+    },
+    {
       "label": "Editor Guide",
       "items": [
-        { "label": "Welcome", "url": "/documentation/editors_guide/" },
+        { "label": "Overview", "url": "/documentation/editors_guide/" },
         {
           "label": "GitHub Setup",
           "url": "/documentation/editors_guide/github-setup/"
@@ -81,15 +85,27 @@
       ]
     },
     {
-      "label": "Technical",
+      "label": "Technical Docs",
       "items": [
         { "label": "Data Structure", "url": "/documentation/technical/" },
         { "label": "Datasets", "url": "/documentation/technical/datasets/" },
         { "label": "Subtypes", "url": "/documentation/technical/subtypes/" },
-        { "label": "Lab Protocols", "url": "/documentation/technical/lab-protocols/" },
-        { "label": "Publications", "url": "/documentation/technical/publications/" },
-        { "label": "Research Labs", "url": "/documentation/technical/research-labs/" },
-        { "label": "Vocabularies", "url": "/documentation/technical/vocabularies/" }
+        {
+          "label": "Lab Protocols",
+          "url": "/documentation/technical/lab-protocols/"
+        },
+        {
+          "label": "Publications",
+          "url": "/documentation/technical/publications/"
+        },
+        {
+          "label": "Research Labs",
+          "url": "/documentation/technical/research-labs/"
+        },
+        {
+          "label": "Vocabularies",
+          "url": "/documentation/technical/vocabularies/"
+        }
       ]
     },
     { "label": "← Back to BlastoDB", "url": "/" }
