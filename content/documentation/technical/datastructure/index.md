@@ -10,7 +10,8 @@ description: Overview of the BlastoDB data model — collections, fields, and cr
 
 [:hero]
 
-BlastoDB is built around five main collections: **Datasets**, **Subtypes**, **Lab Protocols**, **Publications**, and **Research Labs**. Cross-collection links are stored as stable UUID keys — renaming an entry never breaks a link. In addition, several vocabulary lists (Datatypes, Sources, Data Origins, Detection Methods, Countries) provide controlled terms used in datasets and subtypes.
+
+BlastoDB is built around five main collections: **Datasets**, **Subtypes**, **Lab Protocols**, **Publications**, and **Research Labs**, plus a standalone **Announcements** collection. Cross-collection links are stored as stable UUID keys — renaming an entry never breaks a link. Vocabulary lists (Datatypes, Sources, Data Origins, Detection Methods, Countries) provide controlled terms used in datasets and subtypes.
 
 ## Dependency Graph
 
@@ -58,6 +59,12 @@ erDiagram
         string contact_mail
         string institution_name
     }
+    ANNOUNCEMENT {
+        string title
+        date publication_date
+        date valid_until
+        markdown body
+    }
     DATATYPE {
         string value
     }
@@ -86,6 +93,13 @@ These collections reference each other using stable `key` fields (hidden UUID, a
 | Lab Protocols | UUID (hidden) | Datasets → `lab_protocols[]` |
 | Publications | UUID (hidden) | Datasets → `related_publications[]`, Lab Protocols → `related_publications[]` |
 
+## Standalone Collections
+
+| Collection | Storage | Notes |
+|---|---|---|
+| Research Labs | `content/data/research_labs.json` | Not linked from any other collection |
+| Announcements | `content/data/announcements.yaml` | Date-filtered client-side; shown on homepage |
+
 ## Vocabulary Lists
 
 Vocabulary fields store string values directly — they are not linked by key. Changing a vocabulary term does not automatically update existing entries.
@@ -106,3 +120,4 @@ Vocabulary fields store string values directly — they are not linked by key. C
 - [Publications](/documentation/technical/datastructure/publications/)
 - [Research Labs](/documentation/technical/datastructure/research-labs/)
 - [Vocabularies](/documentation/technical/datastructure/vocabularies/)
+- [Announcements](/documentation/technical/datastructure/announcements/)

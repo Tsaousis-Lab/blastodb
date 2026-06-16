@@ -283,6 +283,16 @@
     transform: none;
 }
 
+.collector-item h2 {
+    margin: 0.2rem 0 0.3rem;
+    color: var(--text);
+}
+
+.collector-item h2 a {
+    color: var(--text);
+    text-decoration: none;
+}
+
 .collector-item h3 {
     margin: 0.2rem 0 0.3rem;
     color: var(--text);
@@ -371,6 +381,10 @@
     font-style: italic;
 }
 
+.announcements-section:has(.collector-empty) {
+    display: none;
+}
+
 /* ── 3. Cards ──────────────────────────────────────────────── */
 .collector-card {
     width: 100%;
@@ -413,6 +427,52 @@
 .collector-card-reference a {
     color: var(--accent);
     text-decoration: underline;
+}
+
+/* ── Announcement ── */
+.collector-item:has(.collector-card-announcement),
+.collector-item:has(.collector-card-announcement):hover,
+.collector-not-clickable .collector-item:has(.collector-card-announcement),
+.collector-not-clickable
+    .collector-item:has(.collector-card-announcement):hover {
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+    box-shadow: none;
+    transform: none;
+    padding: 1rem 0;
+}
+
+.collector-item:last-child:has(.collector-card-announcement),
+.collector-not-clickable
+    .collector-item:last-child:has(.collector-card-announcement) {
+    border-bottom: none;
+}
+
+.announcement-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.4rem;
+}
+
+.collector-card-announcement .card-title {
+    flex-shrink: 1;
+    min-width: 0;
+}
+
+.announcement-body {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.announcement-body p:first-child {
+    margin-top: 0;
+}
+.announcement-body p:last-child {
+    margin-bottom: 0;
 }
 
 /* ── Publication ── */

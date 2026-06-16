@@ -310,6 +310,7 @@ collections:
         widget: markdown
         default: "# Short Description\n\nAdd your description here."
         hint: "Add a description of the dataset.<br>**Be careful, you can break things here!** This field supports the extendet markdown syntax. Please make shure your syntax is correct, otherwise the website might fail. Please **test it offline** if you use the extendet markdown syntax!"
+
   # -----------------------------------------------------------------------
   # RESEARCH LAB
   # -----------------------------------------------------------------------
@@ -430,6 +431,54 @@ collections:
             fields:
               - { label: ISO code, name: iso, widget: string }
               - { label: Name, name: name, widget: string }
+
+  - { divider: true, label: "Website" }
+  # -----------------------------------------------------------------------
+  # ANNOUNCEMENTS
+  # -----------------------------------------------------------------------
+  - name: announcements
+    icon: campaign
+    label: Announcements
+    collector:
+      template: announcement
+      search_fields: [title, body]
+    files:
+      - name: announcements
+        label: Announcements
+        file: content/data/announcements.yaml
+        fields:
+          - label: Announcements
+            name: announcements
+            widget: list
+            label_singular: Announcement
+            fields:
+              - label: Title
+                name: title
+                widget: string
+
+              - label: Publication Date
+                name: publication_date
+                widget: string
+                hint: "Date the announcement becomes visible. Format: dd.mm.yyyy"
+                pattern:
+                  [
+                    '^(0[1-9]|[12]\d|3[01])\.(0[1-9]|1[0-2])\.\d{4}$',
+                    "Use dd.mm.yyyy",
+                  ]
+
+              - label: Valid Until
+                name: valid_until
+                widget: string
+                hint: "Date after which the announcement is hidden from the homepage. Format: dd.mm.yyyy"
+                pattern:
+                  [
+                    '^(0[1-9]|[12]\d|3[01])\.(0[1-9]|1[0-2])\.\d{4}$',
+                    "Use dd.mm.yyyy",
+                  ]
+
+              - label: Body
+                name: body
+                widget: markdown
 
   - { divider: true, label: "Website" }
   # ─── Pages ───────────────────────────────────────────────────────────────────

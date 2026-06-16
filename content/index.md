@@ -25,6 +25,15 @@ BlastoDB is a community resource for Blastocystis research. Here you find digita
 [:cols]
 [:hero]
 
+
+<div class="announcements-section">
+
+# Announcements
+
+[collector -> announcements; arrange:rows; display_items:2; card-template:announcement; prefilter:[publication_date<=today AND valid_until>=today]; clickable:false]
+
+</div>
+
 # Explore BlastoDB
 
 [grid: cols:3]
