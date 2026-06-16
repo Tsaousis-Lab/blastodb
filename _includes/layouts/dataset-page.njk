@@ -30,7 +30,7 @@
 
       <div class="hero-inner">
         <table class="dataset-table">
-          {{ row("Subtype(s)", subtypes_display) }}
+          {{ row("Subtype(s)", subtypes | subtypeNames) }}
           {{ row("Strain(s)", strains) }}
           {{ row("Datatype(s)", datatypes) }}
           {{ row("Data origin(s)", data_origins) }}

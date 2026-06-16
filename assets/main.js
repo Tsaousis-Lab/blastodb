@@ -584,8 +584,23 @@ function matchesPrefilter(item, prefilter) {
     return true;
   }
 
+  const todayMidnight = new Date();
+  todayMidnight.setHours(0, 0, 0, 0);
+
   return prefilter.orGroups.some((andGroup) =>
     andGroup.every((condition) => {
+      if (condition.operator === "date_gte_today" || condition.operator === "date_lte_today") {
+        return getFieldValues(item, condition.field).some((v) => {
+          const ddmmyyyy = String(v).match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
+          const d = ddmmyyyy
+            ? new Date(Number(ddmmyyyy[3]), Number(ddmmyyyy[2]) - 1, Number(ddmmyyyy[1]))
+            : new Date(v);
+          if (isNaN(d.getTime())) return false;
+          return condition.operator === "date_gte_today"
+            ? d >= todayMidnight
+            : d <= todayMidnight;
+        });
+      }
       const fieldValues = getFieldValues(item, condition.field).map((v) =>
         typeof v === "string" ? v.toLowerCase() : String(v).toLowerCase(),
       );

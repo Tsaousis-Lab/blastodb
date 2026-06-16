@@ -1,6 +1,6 @@
 ---
 title: BlastoDB
-description: BlastoDB is the comprehensive open database for Blastocystis subtypes, genomes, culturing techniques, lab protocols, and more.
+description: BlastoDB - The community resource for Blastocystis research.
 short-description: ''
 date: ''
 layout: layouts/base.njk
@@ -12,7 +12,7 @@ layout: layouts/base.njk
 [box: text-align:left]
 <h-hero>The open hub for<br>[s: color:var(--accent-darker)]*Blastocystis*[:s]</h-hero>
 
-We are dedicated to advance global knowledge and collaboration on Blastocystis, one of the most prevalent yet underexplored microorganisms in the human and animal gut. Our mission is to provide a comprehensive, trustworthy and accessible resource for Blastocystis research.
+BlastoDB is a community resource for Blastocystis research. Here you find digital resources, like reputable datasets and information on blastocystis subtypes. You can also browse physical resources offered by different research labs in the community in our Biobank.
 
 [:box]
 
@@ -24,6 +24,15 @@ We are dedicated to advance global knowledge and collaboration on Blastocystis, 
 
 [:cols]
 [:hero]
+
+
+<div class="announcements-section">
+
+# Announcements
+
+[collector -> announcements; arrange:rows; display_items:2; card-template:announcement; prefilter:[publication_date<=today AND valid_until>=today]; clickable:false]
+
+</div>
 
 # Explore BlastoDB
 

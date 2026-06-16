@@ -24,7 +24,8 @@
       "items": [
         { "label": "Mission", "url": "/mission/" },
         { "label": "Contribute", "url": "/contribute/" },
-        { "label": "Contact", "url": "/contact/" }
+        { "label": "Contact", "url": "/contact/" },
+        { "label": "Announcements", "url": "/announcements/" }
       ]
     },
     {

@@ -37,6 +37,10 @@
           "label": "Vocabularies",
           "url": "/documentation/editors_guide/vocabularies/"
         },
+        {
+          "label": "Announcements",
+          "url": "/documentation/editors_guide/announcements/"
+        },
         { "label": "Pages", "url": "/documentation/editors_guide/pages/" },
         {
           "label": "Navigation",
@@ -102,6 +106,10 @@
         {
           "label": "Vocabularies",
           "url": "/documentation/technical/vocabularies/"
+        },
+        {
+          "label": "Announcements",
+          "url": "/documentation/technical/announcements/"
         }
       ]
     }

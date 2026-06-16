@@ -49,8 +49,17 @@ const nunjucksEnv = new nunjucks.Environment(
   ]),
 );
 
+const mdBasic = markdownIt({ html: true });
+nunjucksEnv.addFilter("markdownify", (str) => (str ? mdBasic.render(str) : ""));
+
 function formatDateString(dateValue) {
-  const date = new Date(dateValue || 0);
+  let date;
+  const ddmmyyyy = typeof dateValue === "string" && dateValue.match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
+  if (ddmmyyyy) {
+    date = new Date(Number(ddmmyyyy[3]), Number(ddmmyyyy[2]) - 1, Number(ddmmyyyy[1]));
+  } else {
+    date = new Date(dateValue || 0);
+  }
   if (Number.isNaN(date.getTime())) return "";
   return date.toLocaleDateString("en-US", {
     year: "numeric",
@@ -183,6 +192,14 @@ function parsePrefilterParam(paramStr) {
       return andParts
         .map((part) => {
           part = part.trim();
+          // Support field>=today and field<=today for date comparisons
+          const dateOpMatch = part.match(/^([^>=<\s]+)\s*(>=|<=)\s*today\s*$/i);
+          if (dateOpMatch) {
+            return {
+              field: dateOpMatch[1].trim(),
+              operator: dateOpMatch[2] === ">=" ? "date_gte_today" : "date_lte_today",
+            };
+          }
           // Support field="value with spaces" and field=simplevalue
           const quotedMatch = part.match(/^([^=\s]+)\s*=\s*"([^"]*)"\s*$/);
           if (quotedMatch) {
@@ -305,7 +322,8 @@ function getItemsFromCollection(collection, templateOverride) {
         const body = content.replace(/^---\n[\s\S]*?\n---\n?/, "").trim();
         const slug = file.replace(".md", "");
         const urlBase = requestPath ? `/${requestPath}` : "";
-        const pageUrl = `${urlBase}/${slug}/`;
+        const prefixPath = pathPrefix === "/" ? "" : pathPrefix.replace(/\/$/, "");
+        const pageUrl = `${prefixPath}${urlBase}/${slug}/`;
 
         const title = frontmatter.title || "Untitled";
         const description =
@@ -460,6 +478,70 @@ function getItemsFromJsonFile(
 }
 
 /**
+ * Get items from a YAML file collection
+ */
+function getItemsFromYamlFile(
+  yamlFilePath,
+  collectionName,
+  collectorConfig,
+  templateOverride,
+) {
+  if (!fs.existsSync(yamlFilePath)) {
+    console.warn(`[Collector] YAML file does not exist: ${yamlFilePath}`);
+    return [];
+  }
+
+  try {
+    const fileContent = fs.readFileSync(yamlFilePath, "utf-8");
+    const yamlData = yaml.load(fileContent);
+
+    let dataArray = Array.isArray(yamlData) ? yamlData : yamlData[collectionName];
+    if (!Array.isArray(dataArray)) {
+      const firstArrayKey = Object.keys(yamlData || {}).find((key) =>
+        Array.isArray(yamlData[key]),
+      );
+      dataArray = firstArrayKey ? yamlData[firstArrayKey] : [];
+    }
+
+    if (!Array.isArray(dataArray) || dataArray.length === 0) return [];
+
+    const templateName =
+      templateOverride ||
+      (collectorConfig && collectorConfig.template) ||
+      collectionName ||
+      "default";
+
+    const searchFields =
+      collectorConfig && Array.isArray(collectorConfig.search_fields)
+        ? collectorConfig.search_fields
+        : ["title", "description", "name"];
+
+    const items = dataArray.map((item) => {
+      const title = item.title || item.name || "Untitled";
+      const date = item.publication_date || item.date || null;
+      const formattedDate = date ? formatDateString(date) : "";
+      const itemData = { ...item, title, date, formattedDate, collection: collectionName };
+      const cardHtml = renderCollectorCard(templateName, itemData);
+      const searchable = buildSearchableText(itemData, searchFields);
+      return { title, date, formattedDate, searchable, cardHtml, data: itemData };
+    });
+
+    return items.sort((a, b) => {
+      const dateA = new Date(a.date || 0).getTime();
+      const dateB = new Date(b.date || 0).getTime();
+      if (dateB !== dateA) return dateB - dateA;
+      return (a.title || "").localeCompare(b.title || "");
+    });
+  } catch (e) {
+    console.warn(
+      `[Collector] Failed to parse YAML file ${yamlFilePath}:`,
+      e.message,
+    );
+    return [];
+  }
+}
+
+/**
  * Get items from a file-based collection (CMS config with files property)
  */
 function getItemsFromFileCollection(collection, templateOverride) {
@@ -472,7 +554,15 @@ function getItemsFromFileCollection(collection, templateOverride) {
 
   const filePath = path.join(__dirname, fileEntry.file);
 
-  // Only process JSON files - skip YAML and other formats
+  if (filePath.endsWith(".yaml") || filePath.endsWith(".yml")) {
+    return getItemsFromYamlFile(
+      filePath,
+      collection.name,
+      collection.collector,
+      templateOverride,
+    );
+  }
+
   if (!filePath.endsWith(".json")) {
     return [];
   }
@@ -516,8 +606,9 @@ function discoverJsonCollections() {
   return jsonCollections;
 }
 
+const pathPrefix = process.env.PATH_PREFIX || "/";
+
 module.exports = function (eleventyConfig) {
-  const pathPrefix = process.env.PATH_PREFIX || "/";
 
   // ─── Markdown Setup with Custom Plugins ──────────────────────────────────
   const md = markdownIt({
@@ -844,6 +935,13 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.setLibrary("md", md);
 
   // ─── Filters ────────────────────────────────────────────────────────────
+
+  eleventyConfig.addFilter("subtypeNames", (ids) => {
+    if (!ids) return [];
+    const idx = buildSubtypeIndex();
+    return (Array.isArray(ids) ? ids : [ids]).map((id) => idx[id] || id);
+  });
+
   eleventyConfig.addFilter("depth", (filePath) => {
     const count = (filePath.match(/\//g) || []).length;
     return count > 0 ? count : 0;
@@ -869,7 +967,7 @@ module.exports = function (eleventyConfig) {
   // ─── Collections ────────────────────────────────────────────────────────
   // Lab Protocols Collection
   eleventyConfig.addCollection("labProtocols", (collectionApi) => {
-    const protocolsDir = path.join(__dirname, "content", "lab-protocols");
+    const protocolsDir = path.join(__dirname, "content", "data", "lab_protocols");
     const protocols = [];
 
     if (fs.existsSync(protocolsDir)) {
