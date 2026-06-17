@@ -1,0 +1,50 @@
+publications:
+  - citation_key: Arisue2002
+    title: Phylogenetic position of Blastocystis hominis and of stramenopiles inferred from multiple molecular sequence data
+    authors:
+      - Arisue, N.
+      - Hashimoto, T.
+      - Yoshikawa, H.
+      - Nakamura, Y.
+      - Nakamura, G.
+      - Nakamura, F.
+      - Yano, T.A.
+      - Hasegawa, M.
+    date: '2002'
+    publication_name: Journal of Eukaryotic Microbiology
+    doi: 10.1111/j.1550-7408.2002.tb00339.x
+    url: ''
+  - citation_key: Arisue2003
+    title: Sequence heterogeneity of the small subunit ribosomal RNA genes among blastocystis isolates
+    authors:
+      - Arisue, N.
+      - Hashimoto,T.
+      - Yoshikawa,H.
+    date: '2003'
+    publication_name: Parasitology
+    doi: 10.1111/j.1550-7408.2002.tb00339.x
+    url: ''
+  - citation_key: Jones1946
+    title: The experimental infection of rats with Entamoeba histolytica; with a method for evaluating the anti-amoebic properties of new compounds
+    authors:
+      - Jones, W. R.
+    date: '1946'
+    publication_name: Annals of Tropical Medicine and Parasitology
+    doi: 10.1080/00034983.1946.11685270
+    url: https://doi.org/10.1080/00034983.1946.11685270
+  - citation_key: Yoshikawa2004
+    title: Polymerase chain reaction-based genotype classification among human Blastocystis hominis populations isolated from different countries
+    authors:
+      - Yoshikawa,H.
+      - Wu, Z.
+      - Kimata, I.
+      - Iseki, M.
+      - Ali, I. K.
+      - Hossain, M. B.
+      - Zaman, V.
+      - Haque, R.
+      - Takahashi,Y.
+    date: '2004'
+    publication_name: Parasitology Research
+    doi: 10.1007/s00436-003-0995-2
+    url: ''

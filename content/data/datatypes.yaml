@@ -1,0 +1,10 @@
+datatypes:
+  - 16s
+  - 18s
+  - Shotgun
+  - Transcriptome
+  - Metabolome
+  - Proteome
+  - Lipidome
+  - Epidemiological Data
+  - Isolate genome

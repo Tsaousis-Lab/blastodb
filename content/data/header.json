@@ -1,0 +1,24 @@
+{
+  "items": [
+    { "label": "Home", "file": "content/index.md" },
+    {
+      "label": "Resources",
+      "items": [
+        { "label": "Datasets", "file": "content/datasets.md" },
+        { "label": "Subtypes", "file": "content/subtypes.md" },
+        { "label": "Publications", "file": "content/publications.md" },
+        { "label": "Lab Protocols", "file": "content/lab-protocols.md" }
+      ]
+    },
+    { "label": "Research Labs", "file": "content/labs.md" },
+    { "label": "Biobank", "file": "content/biobank.md" },
+    {
+      "label": "About",
+      "items": [
+        { "label": "Mission", "file": "content/mission.md" },
+        { "label": "Contribute", "file": "content/contribute.md" },
+        { "label": "Contact", "file": "content/contact.md" }
+      ]
+    }
+  ]
+}

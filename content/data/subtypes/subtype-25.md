@@ -1,0 +1,13 @@
+---
+layout: layouts/subtype.njk
+name: Subtype 25
+sources:
+  - Mammal
+reference_genome_link: ''
+ssu_rrna_link: ''
+key: subtype-25
+---
+
+## Short Description
+
+Reported mainly from cattle and other bovids.

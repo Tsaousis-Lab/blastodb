@@ -1,12 +1,12 @@
 <header>
   <div class="header-inner">
     <a href="{{ '/' | url }}" class="site-logo">
-      <img src="{{ collections.nav.siteLogo | url }}" alt="Blastie mascot" class="logo-image">
-      <span>BlastoDB</span>
+      <img src="{{ (collections.branding.site_logo_upload or collections.branding.site_logo_url) | url }}" alt="Blastie mascot" class="logo-image">
+      <span>{{ collections.branding.site_title }}</span>
     </a>
-    <nav>
+<nav>
       {% set currentFileName = page.filePathStem | replace('/index', '') %}
-      {% set navItems = collections.nav.items %}
+      {% set navItems = collections.header.items %}
       {% for item in navItems %}
         {% if item.type == 'link' %}
           {% set itemPath = '/' + item.file.replace('content/', '').replace('.md', '') %}

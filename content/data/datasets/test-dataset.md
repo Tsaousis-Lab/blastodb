@@ -1,0 +1,27 @@
+---
+layout: layouts/dataset-page.njk
+title: TEST DATASET
+publication_date: '2026'
+link_to_source: test.com
+strains: []
+datatypes:
+  - Amplicon
+  - Metabolome
+data_origins: []
+data_sources: []
+detection_methods: []
+subtypes:
+  - subtype-1
+  - subtype-3
+  - subtype-6
+hosts:
+  - human
+related_publications: []
+lab_protocols: []
+countries:
+  - DE
+  - GB
+---
+
+
+GenBank Access No.:AF408426.

@@ -1,6 +1,6 @@
 ---
 title: BlastoDB
-description: BlastoDB is the comprehensive open database for Blastocystis subtypes, genomes, culturing techniques, lab protocols, and more.
+description: BlastoDB - The community resource for Blastocystis research.
 short-description: ''
 date: ''
 layout: layouts/base.njk
@@ -9,46 +9,60 @@ layout: layouts/base.njk
 [hero:]
 [cols:]
 
-[box:]
-<h1 style="text-align: center">The open hub for<br>[s: color:#0d5a53, ]Blastocystis[:s] research</h1>
+[box: text-align:left]
+<h-hero>The open hub for<br>[s: color:var(--accent-darker)]*Blastocystis*[:s]</h-hero>
 
-BlastoDB provides researchers with a comprehensive, community-driven database of _Blastocystis_ subtypes, genomes, transcriptomes, culturing techniques, and more.
-
-[btn: About BlastoDB -> about.html] [btn: Explore subtypes -> subtypes.html]
+BlastoDB is a community resource for Blastocystis research. Here you find digital resources, like reputable datasets and information on blastocystis subtypes. You can also browse physical resources offered by different research labs in the community in our Biobank.
 
 [:box]
 
 [box:]
 
-![Blastocystis microscopy animation](https://images.squarespace-cdn.com/content/v1/689c6545c94b4240bd6c83f4/8ee1cef4-9a67-45c7-ac9f-0b455c3446f6/blasto+gif.gif)
-
-_Art by Sam Falconer_
+![Blastocystis microscopy animation](https://media.nature.com/lw767/magazine-assets/d41586-025-01916-0/d41586-025-01916-0_51055274.gif?as=webp)
+*Art by <a href="https://www.samfalconer.co.uk" target="_blank" rel="noopener">Sam Falconer</a>*
 [:box]
 
 [:cols]
 [:hero]
 
-## Explore the database
 
-Jump directly to a resource area
+<div class="announcements-section">
 
-[grid:]
-[nav-box: About BlastoDB -> about.html]
-[nav-box: Subtypes -> subtypes.html]
-[nav-box: Genomes / Transcriptomes -> genomes.html]
-[nav-box: Lab Protocols -> protocols.html]
-[nav-box: Publications -> publications.html]
-[nav-box: Research Labs -> labs.html]
-[nav-box: Gallery -> gallery.html]
-[nav-box: Contact -> contact.html]
+# Announcements
+
+[collector -> announcements; arrange:rows; display_items:2; card-template:announcement; prefilter:[publication_date<=today AND valid_until>=today]; clickable:false]
+
+</div>
+
+# Explore BlastoDB
+
+[grid: cols:3]
+
+[card: text-align:center]
+### Digital Resources
+
+Our Dataset-Repository contains reviewed datasets, which can be explored and filtered. Explore the whole dataset, or each subtype separately.
+[box: text-align:center]
+[btn: Explore the Datasets -> /datasets/] [btn: Explore the Subtypes -> /subtypes/]
+[:box]
+[:card]
+
+[card: text-align:center]
+### Physical Resources
+
+Explore our Biobank, a community-network of research laboratories offering physical resources for Blastocystis research.
+
+[btn: Explore the Datasets -> /biobank/]
+
+[:card]
+
+[card: text-align:center]
+### Community
+
+Interested to start researching Blastocystis? Explore our network of research labs!
+
+[btn: Explore Research Labs -> /labs/]
+
+[:card]
+
 [:grid]
-
-[sbtn: View Protocols -> [about.html, subtypes, protocols.html]]
-
-***
-
-## 📰 Blastocystis News
-
-Keeping you updated on the latest in _Blastocystis_ research!
-
-[collector -> news; search:[title,description,shortDescription,tags]; sort:[date,title]; filter:[tags]; arrange:cols]

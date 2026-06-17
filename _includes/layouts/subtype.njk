@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ description or 'BlastoDB - The open hub for Blastocystis research' }}">
+  <title>BlastoDB - {{ name }}</title>
+  <link rel="stylesheet" href="{{ '/assets/style.css' | url }}">
+  <link rel="stylesheet" href="{{ '/assets/collector.css' | url }}">
+  <script>
+    // Inject data into global scope for main.js to access
+    window.collectorData = {{ collectorData | dump | safe }};
+  </script>
+  <script src="{{ '/assets/main.js' | url }}" defer></script>
+</head>
+<body>
+  {% include "layouts/header.njk" %}
+
+  <main>
+    <div class="hero hero-content-center">
+      <h-hero>{{ name }}</h-hero>
+
+      {% if sources and sources.length %}
+        <div class="collector-item-tags tags-centered">
+          {% for source in sources %}
+            <span class="tag">{{ source }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if reference_genome_link or ssu_rrna_link %}
+      <div class="subtype-download-links">
+        {% if reference_genome_link %}
+          <a href="{{ reference_genome_link }}" target="_blank" rel="noopener" class="external-link">Download Reference Genome &#8599;</a>
+        {% endif %}
+        {% if ssu_rrna_link %}
+          <a href="{{ ssu_rrna_link }}" target="_blank" rel="noopener" class="external-link">Download 18s SSU rRNA Sequence &#8599;</a>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+
+    {{ content | processSpans | safe }}
+
+    {% if key %}
+    <hr>
+    <h1>Explore the Datasets Containing {{ name }}</h1>
+    <div class="collector" data-collection="datasets" data-path="datasets" data-opts='{"arrange":"rows","display_items":"all","search_fields":["title"],"sort_fields":["date","title"],"filters":[{"label":"Countries","fields":["countries"]}],"prefilter":{"orGroups":[[{"field":"subtypes","value":"{{ key }}"}]]},"card_template":"dataset-card","clickable":true}'></div>
+    {% endif %}
+
+    <hr>
+    <div style="text-align:center">
+        <a href="{{ '/subtypes/' | url }}" class="btn">← Back to all Subtypes</a>
+    </div>
+  </main>
+
+
+  {% include "layouts/footer.njk" %}
+</body>
+</html>

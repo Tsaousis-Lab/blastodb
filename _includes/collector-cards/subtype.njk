@@ -1,0 +1,24 @@
+<div class="collector-card collector-card-subtype">
+  <div class="subtype-card-row">
+    <div class="subtype-card-main">
+      <h3 class="card-title">{{ name }}</h3>
+      {% if id %}<span class="tag">{{ id }}</span>{% endif %}
+      {% if sources and sources.length %}
+        {% for source in sources %}
+          <span class="tag tag-muted">{{ source }}</span>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    {% if reference_genome_link or ssu_rrna_link %}
+      <div class="subtype-card-links">
+        {% if reference_genome_link %}
+          <a href="{{ reference_genome_link }}" class="external-link" target="_blank" rel="noopener">Reference Genome ↗</a>
+        {% endif %}
+        {% if ssu_rrna_link %}
+          <a href="{{ ssu_rrna_link }}" class="external-link" target="_blank" rel="noopener">18s SSU rRNA ↗</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>

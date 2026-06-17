@@ -1,0 +1,28 @@
+<div class="collector-card collector-card-publication">
+    {% if authors %}
+    <div class="collector-card-authors">
+        {% if authors is iterable and authors is not string %}
+            {{ authors | join(" & ") }}
+        {% else %}
+            {{ authors }}
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <h3 class="card-title">
+    {{ title }}
+    </h3>
+
+    <div><span class="collector-card-journal">{{ publication_name }}, </span><span class="collector-card-date">{{ formattedDate }}</span></div>
+
+    {% if url or doi %}
+    <div class="collector-card-links">
+        {% if url %}
+            <a href="{{ url }}" class="external-link" target="_blank" rel="noopener">Publication Link ↗</a>
+        {% endif %}
+        {% if doi %}
+            <a href="https://doi.org/{{ doi }}" class="external-link" target="_blank" rel="noopener">DOI: {{ doi }} ↗</a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>

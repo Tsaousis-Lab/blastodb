@@ -5,18 +5,22 @@ The Grid component creates a responsive multi-column grid layout. It automatical
 ## Syntax
 
 ```
-[grid: CSS_STYLES]
+[grid: cols:N CSS_STYLES]
 ...content here...
 [:grid]
 ```
 
-- **Opening tag**: `[grid: CSS_STYLES]` - optional CSS styles
+- **Opening tag**: `[grid: cols:N CSS_STYLES]` - optional `cols:N` parameter specifies column count, followed by optional additional CSS styles
 - **Content**: Usually contains [box:] or [card:] elements
 - **Closing tag**: `[:grid]`
 
-## Default Styling
+## Parameters
 
-The default grid creates columns that automatically wrap based on available space:
+- `cols:N` - (Optional) Specifies a fixed number of columns (e.g., `cols:3` for 3 columns). Valid values: 2, 3, 4, 5+. On mobile devices (< 720px), the grid always displays as a single column regardless of the `cols` setting.
+
+## Default Styling (Auto-responsive)
+
+Without the `cols:` parameter, the grid creates columns that automatically wrap based on available space:
 
 ```
 [grid:]
@@ -29,7 +33,24 @@ The default grid creates columns that automatically wrap based on available spac
 The default minimum column width is 280px, so it will show:
 - 1 column on small screens
 - 2 columns on medium screens
-- 3+ columns on large screens
+- 3+ columns on large screens (auto-fitting based on space)
+
+## Fixed Column Counts
+
+Use the `cols:` parameter to set a fixed number of columns:
+
+```
+[grid: cols:3]
+[box:] Item 1 [:box]
+[box:] Item 2 [:box]
+[box:] Item 3 [:box]
+[box:] Item 4 [:box]
+[box:] Item 5 [:box]
+[box:] Item 6 [:box]
+[:grid]
+```
+
+This will display exactly 3 columns on desktop screens, and automatically collapse to a single column on mobile.
 
 ## Common Use Cases
 
@@ -55,7 +76,7 @@ Card content here
 ### Navigation Grid
 
 ```
-[grid:]
+[grid: cols:4]
 [nav-box: Home -> /]
 [nav-box: About -> /about]
 [nav-box: Subtypes -> /subtypes]
@@ -66,17 +87,17 @@ Card content here
 ### Grid with Custom Spacing
 
 ```
-[grid: gap: 2rem]
+[grid: cols:3 gap: 2rem]
 [box:] Item 1 [:box]
 [box:] Item 2 [:box]
 [box:] Item 3 [:box]
 [:grid]
 ```
 
-### Feature Grid
+### Feature Grid (Centered)
 
 ```
-[grid: text-align: center]
+[grid: cols:3 text-align: center]
 [box:]
 ### 🔬 Research
 Description of research features
@@ -94,37 +115,42 @@ Description of genome features
 
 ## CSS Style Options
 
-Common CSS properties for grids:
+You can combine the `cols:` parameter with standard CSS properties:
 
+- **Column count**: `cols:3` - fixed number of columns (2-5+)
 - **Gap**: `gap: 1.5rem` - space between items
 - **Text Alignment**: `text-align: center` - center content in each cell
 - **Padding**: `padding: 2rem` - internal padding
-- **Column Configuration**: `grid-template-columns: repeat(4, 1fr)` - custom column count
+- **Other CSS**: Any valid CSS properties can be added after `cols:`
 
 ## Structure
 
 The grid component renders as:
 ```html
-<div class="grid" style="CSS_STYLES">
+<div class="grid grid-cols-3" style="additional-css-here">
   ...content...
 </div>
 ```
 
+When `cols:` is specified, a class like `grid-cols-3` is added to enable the fixed column layout.
+
 ## Responsive Behavior
 
-The grid automatically responds to screen size:
+### With `cols:` parameter
+- **Desktop (> 720px)**: Fixed number of columns as specified
+- **Mobile (≤ 720px)**: Always 1 column
 
-| Screen Size | Columns |
-|-------------|---------|
-| Mobile < 600px | 1 column |
-| Tablet 600-1000px | 2 columns |
-| Desktop > 1000px | 3+ columns |
+### Without `cols:` parameter (default)
+- **Desktop (> 1000px)**: 3+ columns (auto-fitting with 280px minimum)
+- **Tablet (600-1000px)**: 2 columns
+- **Mobile (< 600px)**: 1 column
 
 ## Tips
 
-1. Grids work best with cards or boxes of similar content
-2. Use [box:] or [card:] elements inside grids for consistent sizing
-3. The default gap between items is already set - override with CSS if needed
-4. Grids are responsive by default - content will flow naturally on all devices
-5. Combine with text-align: center for centered content in each cell
-6. You can use custom grid-template-columns for fixed column counts
+1. Use `cols:3` or `cols:4` for consistent, predictable layouts
+2. The default auto-responsive grid (without `cols:`) works great when content size varies
+3. Grids work best with cards or boxes of similar heights
+4. Use [box:] or [card:] elements inside grids for consistent sizing
+5. Combine `cols:` with `text-align: center` for centered grid content
+6. Mobile devices always show 1 column for better readability, regardless of the `cols` setting
+7. The gap between items defaults to 0.75rem - override with custom CSS if needed

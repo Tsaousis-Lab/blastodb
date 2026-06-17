@@ -1,0 +1,53 @@
+
+{%- macro joinList(val, sep=", ") -%}
+  {%- if val is iterable and val is not string -%}{{ val | join(sep) }}{%- else -%}{{ val }}{%- endif -%}
+{%- endmacro -%}
+
+{%- macro row(label, val) -%}
+  {%- if val and (val is string or val.length) -%}
+  <tr><th>{{ label }}</th><td>{{ joinList(val) }}</td></tr>
+  {%- endif -%}
+{%- endmacro -%}
+
+<div class="collector-card collector-card-dataset">
+  <div class="dataset-head">
+    <div class="dataset-titlerow">
+      <h3 class="card-title">{{ title }}</h3>
+      {% if publication_date %}<span class="dataset-date">{{ publication_date }}</span>{% endif %}
+    </div>
+
+    <div class="dataset-meta">
+      {% if subtypes_display or countries %}
+      <div class="dataset-chips">
+        {% if subtypes_display %}
+          {% if subtypes_display is iterable and subtypes_display is not string %}
+            {% for st in subtypes_display %}<span class="tag">{{ st }}</span>{% endfor %}
+          {% else %}
+            <span class="tag">{{ subtypes_display }}</span>
+          {% endif %}
+        {% endif %}
+        {% if countries %}
+          {% for c in countries %}<span class="tag tag-muted">{{ c }}</span>{% endfor %}
+        {% endif %}
+      </div>
+      {% endif %}
+      <div class="dataset-links">
+        <a href="{{ link_to_source }}" target="_blank" rel="noopener" class="external-link">Go To Dataset &#8599;</a>
+      </div>
+    </div>
+  </div>
+
+  <details class="dataset-details">
+    <summary class="dataset-summary" onclick="event.stopPropagation()">Details</summary>
+    <table class="dataset-table">
+      {{ row("Subtype(s)", subtypes_display) }}
+      {{ row("Strain(s)", strains) }}
+      {{ row("Datatype(s)", datatypes) }}
+      {{ row("Data origin(s)", data_origins) }}
+      {{ row("Data source(s)", data_sources) }}
+      {{ row("Detection method(s)", detection_methods) }}
+      {{ row("Source(s)", sources) }}
+      {{ row("Countries", countries) }}
+    </table>
+  </details>
+</div>

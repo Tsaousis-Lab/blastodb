@@ -1,4 +1,4 @@
-publish_mode: editorial_workflow
+publish_mode: simple
 
 backend:
   name: github
@@ -11,243 +11,476 @@ public_folder: /assets/uploads
 pages_folder: content
 
 collections:
-  # ─── Data Types ──────────────────────────────────────────────────────────────
-  - name: taxonomies
-    label: Taxonomies
-    files:
-      - name: data_types
-        label: Data Types
-        file: content/taxonomies/data-types.md
-        fields:
-          - name: items
-            label: Items
-            widget: list
-            hint: "One item per line.<br><p style='color:red'>***DANGER!***</p> Never delete any existing data-types, otherwise you will break relationships within the dataset!"
-
-      - name: sub_types
-        label: Sub Types
-        file: content/taxonomies/sub-types.md
-        fields:
-          - name: items
-            label: Items
-            widget: list
-            hint: "One item per line.<br><p style='color:red'>***DANGER!***</p> Never delete any existing blastocystis sub-types, otherwise you will break relationships within the dataset!"
-
-  # ─── Data Types ──────────────────────────────────────────────────────────────
-
-  # ─── Datasets ──────────────────────────────────────────────────────────────
+  # -----------------------------------------------------------------------
+  # DATASETS
+  # -----------------------------------------------------------------------
   - name: datasets
+    icon: database
     label: Datasets
-    label_singular: Dataset
-    folder: content/datasets
+    folder: content/data/datasets
     create: true
     slug: "{{slug}}"
-    extension: md
-    format: frontmatter
     fields:
-      - { name: title, label: Title, widget: string }
+      - name: layout
+        label: Layout
+        widget: hidden
+        default: layouts/dataset-page.njk
 
-      - name: data_types
-        label: Data Type(s)
+      - label: Title
+        name: title
+        widget: string
+        hint: "The name of the Dataset."
+
+      - label: Link to Source
+        name: link_to_source
+        widget: string
+        hint: "URL to the raw data."
+
+      - label: Related Publication(s)
+        name: related_publications
         widget: relation
-        collection: taxonomies
-        file: data_types
-        search_fields: [items]
-        value_field: "items.*"
-        display_fields: ["items.*"]
+        collection: publications
+        file: publications
+        value_field: "publications.*.key"
+        search_fields:
+          [
+            "publications.*.key",
+            "publications.*.title",
+            "publications.*.date",
+            "publications.*.publication_name",
+            "publications.*.authors",
+          ]
+        display_fields:
+          [
+            "publications.*.title",
+            "publications.*.date",
+            "publications.*.publication_name",
+            "publications.*.authors",
+          ]
+        multiple: true
+        hint: "Publications must be added before you can link to them here."
+
+      - label: Publication Date
+        name: publication_date
+        widget: string
+        hint: "The date the dataset was published.<br>Enter a year (2024), month and year (06.2024), or full date (11.06.2024)"
+        pattern:
+          [
+            '^(((0[1-9]|[12]\d|3[01])\.)?(0[1-9]|1[0-2])\.)?\d{4}$',
+            "Use dd.mm.yyyy, mm.yyyy, or yyyy",
+          ]
+
+      - label: Datatype(s)
+        name: datatypes
+        widget: relation
+        collection: vocabularies
+        file: datatypes
+        multiple: true
+        min: 1
+        value_field: datatypes.*
+        display_fields: [datatypes.*]
+        search_fields: [datatypes.*]
+        hint: "At least one required.<br>If a desired datatype is missing, you can add it under ''Vocabularies'' -> Datatypes."
+
+      - label: Strain(s)
+        name: strains
+        widget: list
+        required: false
+        hint: "Free-text list of strain identifiers. One item per line."
+
+      - label: Data Origin(s)
+        name: data_origins
+        widget: relation
+        collection: vocabularies
+        file: data_origins
         multiple: true
         required: false
+        value_field: data_origins.*
+        display_fields: [data_origins.*]
+        search_fields: [data_origins.*]
+        hint: "If a desired datatype is missing, you can add it under ''Vocabularies'' -> Data Origins."
 
-      - name: sub_types
-        label: Sub Type(s)
+      - label: Detection Method(s)
+        name: detection_methods
         widget: relation
-        collection: taxonomies
-        file: sub_types
-        search_fields: [items]
-        value_field: "items.*"
-        display_fields: ["items.*"]
+        collection: vocabularies
+        file: detection_methods
         multiple: true
         required: false
+        value_field: detection_methods.*
+        display_fields: [detection_methods.*]
+        search_fields: [detection_methods.*]
 
-      - name: strains
-        label: Strain(s)
-        widget: list
-        hint: "e.g. ATCC 50338"
-
-      - name: source_url
-        label: Link to Data Source
-        widget: string
-        hint: "Zenodo, NCBI, etc."
-
-      - name: script_url
-        label: Link to Evaluation Script
-        widget: string
+      - label: Subtypes
+        name: subtypes
+        widget: relation
+        collection: subtypes
+        multiple: true
         required: false
-        hint: "Optional — GitHub link, etc."
+        value_field: key
+        display_fields: [name]
+        search_fields: [name]
 
-      - name: publication_ref
-        label: Publication Reference ID
-        widget: string
-        hint: "Must match the ID of an entry in the Bibliography collection"
-
-      - name: related_entries
-        label: Related Entries
-        widget: list
+      - label: Sources
+        name: sources
+        widget: relation
+        collection: vocabularies
+        file: sources
+        multiple: true
         required: false
-        hint: "IDs of related datasets or protocols"
+        value_field: sources.*
+        display_fields: [sources.*]
+        search_fields: [sources.*]
+        hint: "The source where blastocystis was sampled from.<br>If a desired source is missing, you can add it under ''Vocabularies'' -> Sources."
 
-      - name: country
-        label: Country / Geographical Origin
-        widget: string
+      - label: Countries
+        name: countries
+        widget: relation
+        collection: vocabularies
+        file: countries
+        multiple: true
         required: false
+        value_field: countries.*.name
+        display_fields: [countries.*.name]
+        search_fields: [countries.*.name, countries.*.iso]
+        hint: "All countries from the ISO 3166 coutry code.<br>If a desired datatype is missing, you can add it under ''Lab Protocols''."
 
-      - name: body
-        label: Description
-        widget: markdown
+      - label: Lab Protocols
+        name: lab_protocols
+        widget: relation
+        collection: lab_protocols
+        multiple: true
         required: false
-        hint: "Optional long-form description or protocol. Supports your custom BlastoDB markdown syntax."
+        value_field: key
+        display_fields: [title]
+        search_fields: [title]
+        hint: "If a desired datatype is missing, you can add it under ''Lab Protocols''."
 
-  # ─── News ──────────────────────────────────────────────────────────────
-  - name: news
-    label: News
-    label_singular: News Item
-    folder: content/news
-    create: true
-    slug: "{{slug}}"
-    extension: md
-    format: frontmatter
-    fields:
-      - {
-          name: layout,
-          label: Layout,
-          widget: hidden,
-          default: layouts/news.njk,
-        }
-      - { name: title, label: Title, widget: string }
-      - { name: description, label: Description, widget: text, required: false }
-      - {
-          name: short-description,
-          label: Short Description,
-          widget: text,
-          required: false,
-        }
-      - { name: tags, label: Tags, widget: list, required: false }
-      - name: date
-        label: Date
-        widget: datetime
-        date_format: YYYY-MM-DD
-        time_format: false
-      - { name: body, label: Body, widget: markdown }
+      - label: Description
+        name: body
+        widget: text
+        required: false
+        default: "Add your description here."
+        hint: "Add a description of the sutypes.<br>**Be careful, you can break things here!** This field supports the extendet markdown syntax. Please make shure your syntax is correct, otherwise the website might fail. Please **test it offline** if you use the extendet markdown syntax!"
 
-  # ─── Lab Protocols ─────────────────────────────────────────────────────
-  - name: lab-protocols
-    label: Lab Protocols
-    label_singular: Protocol
-    folder: content/lab-protocols
-    create: true
-    slug: "{{slug}}"
-    extension: md
-    format: frontmatter
-    fields:
-      - {
-          name: layout,
-          label: Layout,
-          widget: hidden,
-          default: layouts/lab-protocol.njk,
-        }
-      - { name: title, label: Title, widget: string }
-      - { name: description, label: Description, widget: text, required: false }
-      - {
-          name: short-description,
-          label: Short Description,
-          widget: text,
-          required: false,
-        }
-      - { name: tags, label: Tags, widget: list, required: false }
-      - name: date
-        label: Date
-        widget: datetime
-        date_format: YYYY-MM-DD
-        time_format: false
-      - { name: body, label: Body, widget: markdown }
-
-  # ─── Research Labs ─────────────────────────────────────────────────────
-  - name: research-labs
-    label: Research Labs
-    label_singular: Research Lab
-    folder: content/research-labs
-    create: true
-    slug: "{{slug}}"
-    extension: md
-    format: frontmatter
-    fields:
-      - {
-          name: layout,
-          label: Layout,
-          widget: hidden,
-          default: layouts/base.njk,
-        }
-      - { name: title, label: Lab Name, widget: string }
-      - {
-          name: description,
-          label: Short Description,
-          widget: text,
-          required: false,
-        }
-      - name: contacts
-        label: Contact Persons
-        widget: list
+  # -----------------------------------------------------------------------
+  # PUBLICATIONS
+  # -----------------------------------------------------------------------
+  - name: publications
+    icon: database
+    label: Publications
+    collector:
+      template: publication.njk
+      search_fields: [title, authors, publication_name, date]
+    files:
+      - name: publications
+        label: Publications
+        file: content/data/publications.json
         fields:
-          - { name: name, label: Name, widget: string }
-          - { name: email, label: Email, widget: string }
-          - { name: image, label: Image, widget: image, required: false }
-      - { name: address, label: University / Address, widget: string }
-      - { name: country, label: Country, widget: string }
-      - { name: image, label: Image, widget: string, required: false }
-      - { name: body, label: Body, widget: markdown, required: false }
+          - label: Publications
+            name: publications
+            widget: list
+            label_singular: Publication
+            fields:
+              - label: Key
+                name: key
+                widget: hidden
+                default: "{{uuid}}"
 
-  # ─── Bibliography ───────────────────────────────────────────────────────────
-  - name: bibliography
-    label: Bibliography
-    label_singular: Publication
-    folder: content/bibliography
+              - label: Title
+                name: title
+                widget: string
+              - label: Authors
+                name: authors
+                widget: list
+                label_singular: Author
+                hint: "One author per entry"
+              - label: Publication Date
+                name: Date
+                widget: string
+                hint: "Enter a year (2024), month and year (06.2024), or full date (11.06.2024)"
+                pattern:
+                  [
+                    '^(((0[1-9]|[12]\d|3[01])\.)?(0[1-9]|1[0-2])\.)?\d{4}$',
+                    "Use dd.mm.yyyy, mm.yyyy, or yyyy",
+                  ]
+              - label: Name of Publication
+                name: publication_name
+                widget: string
+              - label: DOI
+                name: doi
+                widget: string
+                required: false
+                hint: "Enter without the prefix of`https://doi.org/` prefix, e.g. `10.1038/s41564-019-0622-3`."
+              - label: URL
+                name: url
+                widget: string
+                required: false
+                hint: "Only really needed of DOI is not available."
+
+  # -----------------------------------------------------------------------
+  # LAB PROTOCOL
+  # -----------------------------------------------------------------------
+  - name: lab_protocols
+    icon: database
+    label: Lab Protocols
+    folder: content/data/lab_protocols
     create: true
-    slug: "{{fields.ref_id}}"
-    extension: md
-    format: frontmatter
+    slug: "{{slug}}"
     fields:
-      - name: ref_id
-        label: Reference ID / Citation Key
-        widget: string
-        hint: "Short unique ID, e.g. smith2023"
+      - name: layout
+        label: Layout
+        widget: hidden
+        default: layouts/lab-protocol.njk
 
-      - { name: title, label: Paper Title, widget: string }
+      - label: Key
+        name: key
+        widget: hidden
+        default: "{{uuid}}"
 
-      - name: authors
-        label: Authors
-        widget: list
-        hint: "One author per line"
-
-      - name: date
-        label: Publication Date
-        widget: datetime
-        date_format: YYYY-MM-DD
-        time_format: false
-
-      - name: journal
-        label: Journal / Conference Name
+      - label: Title
+        name: title
         widget: string
 
-      - name: doi
-        label: DOI
+      - label: Related Publications
+        name: related_publications
+        widget: relation
+        collection: publications
+        file: publications
+        value_field: "publications.*.key"
+        search_fields: ["publications.*.key", "publications.*.title"]
+        display_fields: ["publications.*.key", "publications.*.title"]
+        multiple: true
+
+      - label: Protocol
+        name: body
+        widget: markdown
+        hint: "Add the Protocol here.<br>**Be careful, you can break things here!** This field supports the extendet markdown syntax. Please make shure your syntax is correct, otherwise the website might fail. Please **test it offline** if you use the extendet markdown syntax!"
+        default: "Add your description here."
+
+  # -----------------------------------------------------------------------
+  # SUBTYPE
+  # -----------------------------------------------------------------------
+  - name: subtypes
+    icon: database
+    label: Subtypes
+    folder: content/data/subtypes
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - name: layout
+        label: Layout
+        widget: hidden
+        default: layouts/subtype.njk
+
+      - label: Key
+        name: key
+        widget: hidden
+        default: "{{uuid}}"
+
+      - label: Name
+        name: name
+        widget: string
+        hint: "e.g. Subtype 1, Subtype 2"
+
+      - label: Sources / Hosts
+        name: sources
+        widget: relation
+        collection: vocabularies
+        file: sources
+        multiple: true
+        required: false
+        value_field: sources.*
+        display_fields: [sources.*]
+        search_fields: [sources.*]
+        hint: "If a desired source / host is missing, you can add it under ''Vocabularies'' -> Sources."
+
+      - label: Download Link to Reference Genomes
+        name: reference_genome_link
         widget: string
         required: false
 
-      - name: url
-        label: Link to Publication
+      - label: Download Link to SSU rRNA Sequence
+        name: ssu_rrna_link
         widget: string
         required: false
 
+      - label: Description
+        name: body
+        widget: markdown
+        default: "# Short Description\n\nAdd your description here."
+        hint: "Add a description of the dataset.<br>**Be careful, you can break things here!** This field supports the extendet markdown syntax. Please make shure your syntax is correct, otherwise the website might fail. Please **test it offline** if you use the extendet markdown syntax!"
+
+  # -----------------------------------------------------------------------
+  # RESEARCH LAB
+  # -----------------------------------------------------------------------
+  - name: research_labs
+    icon: database
+    label: Research labs
+    collector:
+      template: research-labs-card.njk
+    files:
+      - name: research_labs
+        label: Research labs
+        file: content/data/research_labs.json
+        fields:
+          - label: Research labs
+            name: research_labs
+            widget: list
+            label_singular: Research lab
+            fields:
+              - label: Lab Name
+                name: lab_name
+                widget: string
+
+              - label: Institution Logo (upload)
+                name: institution_logo_upload
+                widget: image
+                required: false
+                hint: "Upload the institution logo. Provide either this OR a logo URL below — at least one is expected. SVG, PNG or WebP on a transparent background works best.<br>Alteratively, provide a link to a logo below.<br>Landscape photo, recommended 1200×600 px (2:1 ratio). JPG or WebP. Will be cropped as a banner at the top of the card."
+
+              - label: Institution Logo (URL)
+                name: institution_logo_url
+                widget: string
+                required: false
+                hint: "Link to the institution logo (e.g. from the university website). Used when you have no file to upload. At least one of the two logo fields should be filled in.<br>Landscape photo, recommended 1200×600 px (2:1 ratio). JPG or WebP. Will be cropped as a banner at the top of the card"
+
+              - label: Short description
+                name: short_description
+                widget: text
+                required: false
+                hint: "A few sentences"
+
+              - label: Contact name
+                name: contact_name
+                widget: string
+
+              - label: Contact email
+                name: contact_mail
+                widget: string
+                type: email
+
+              - label: Contact webpage
+                name: contact_url
+                widget: string
+                required: false
+                hint: "URL to the contact person's personal or lab webpage."
+
+              - label: Contact image
+                name: contact_img_path
+                widget: image
+                required: false
+                hint: "Square portrait photo, minimum 200×200 px. JPG or WebP. Displayed as a small circle next to the contact name."
+
+              - label: Name of Institution
+                name: institution_name
+                widget: string
+
+              - label: Address of Institution
+                name: institution_address
+                widget: text
+
+  - divider: true
+
+  # -----------------------------------------------------------------------
+  # VOCABULARIES
+  # -----------------------------------------------------------------------
+  - name: vocabularies
+    label: Vocabularies
+    icon: database
+    files:
+      - label: Datatypes
+        name: datatypes
+        file: content/data/datatypes.yaml
+        fields:
+          - label: Datatypes
+            name: datatypes
+            widget: list
+
+      - label: Sources
+        name: sources
+        file: content/data/sources.yaml
+        fields:
+          - label: Sources
+            name: sources
+            widget: list
+
+      - label: Data origins
+        name: data_origins
+        file: content/data/data_origins.yaml
+        fields:
+          - label: Data origins
+            name: data_origins
+            widget: list
+
+      - label: Detection methods
+        name: detection_methods
+        file: content/data/detection_methods.yaml
+        fields:
+          - label: Detection methods
+            name: detection_methods
+            widget: list
+
+      - label: Countries
+        name: countries
+        file: content/data/countries.yaml
+        fields:
+          - label: Countries
+            name: countries
+            widget: list
+            fields:
+              - { label: ISO code, name: iso, widget: string }
+              - { label: Name, name: name, widget: string }
+
+  - { divider: true, label: "Website" }
+  # -----------------------------------------------------------------------
+  # ANNOUNCEMENTS
+  # -----------------------------------------------------------------------
+  - name: announcements
+    icon: campaign
+    label: Announcements
+    collector:
+      template: announcement
+      search_fields: [title, body]
+    files:
+      - name: announcements
+        label: Announcements
+        file: content/data/announcements.yaml
+        fields:
+          - label: Announcements
+            name: announcements
+            widget: list
+            label_singular: Announcement
+            fields:
+              - label: Title
+                name: title
+                widget: string
+
+              - label: Publication Date
+                name: publication_date
+                widget: string
+                hint: "Date the announcement becomes visible. Format: dd.mm.yyyy"
+                pattern:
+                  [
+                    '^(0[1-9]|[12]\d|3[01])\.(0[1-9]|1[0-2])\.\d{4}$',
+                    "Use dd.mm.yyyy",
+                  ]
+
+              - label: Valid Until
+                name: valid_until
+                widget: string
+                hint: "Date after which the announcement is hidden from the homepage. Format: dd.mm.yyyy"
+                pattern:
+                  [
+                    '^(0[1-9]|[12]\d|3[01])\.(0[1-9]|1[0-2])\.\d{4}$',
+                    "Use dd.mm.yyyy",
+                  ]
+
+              - label: Body
+                name: body
+                widget: markdown
+
+  - { divider: true, label: "Website" }
   # ─── Pages ───────────────────────────────────────────────────────────────────
   - name: pages
     label: Pages
@@ -256,6 +489,7 @@ collections:
     create: true
     extension: md
     format: frontmatter
+    icon: select_window
     fields:
       - { label: "Title", name: "title", widget: "string" }
 
@@ -268,18 +502,17 @@ collections:
 
       - { label: "Body", name: "body", widget: "markdown" }
 
-  # ─── Navigation Bar ───────────────────────────────────────────────────────────
-  - name: "nav"
-    label: "Navigation"
+  # ─── Header and Footer ───────────────────────────────────────────────────────────────────
+  - name: navigation
+    label: Navigation
+    icon: select_window
     files:
-      - label: "Navigation Configuration"
-        name: "nav"
-        file: "nav.json"
+      - label: Header Configuration
+        name: header
+        file: content/data/header.json
         fields:
-          - { label: "Site Title", name: "site_title", widget: "string" }
-          - { label: "Site Logo", name: "site_logo", widget: "string" }
-          - label: "Navigation Items"
-            name: "nav"
+          - label: "Header Items"
+            name: "items"
             widget: "list"
             fields:
               - { label: "Label", name: "label", widget: "string" }
@@ -296,3 +529,48 @@ collections:
                 fields:
                   - { label: "Label", name: "label", widget: "string" }
                   - { label: "File", name: "file", widget: "string" }
+
+      - label: Footer Configuration
+        name: footer
+        file: content/data/footer.json
+        fields:
+          - {
+              label: "Description",
+              name: "description",
+              widget: "string",
+              hint: "Short description displayed next to the logo",
+            }
+          - {
+              label: "Funding",
+              name: "funding",
+              widget: "string",
+              hint: "Funding acknowledgment text",
+            }
+          - label: "Footer Columns"
+            name: "columns"
+            widget: "list"
+            hint: "Configure footer column sections"
+            fields:
+              - { label: "Column Title", name: "title", widget: "string" }
+              - label: "Links"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Link Label", name: "label", widget: "string" }
+                  - { label: "URL", name: "url", widget: "string" }
+
+      - label: Title and Logo
+        name: branding
+        file: content/data/branding.json
+        fields:
+          - { label: "Site Title", name: "site_title", widget: "string" }
+          - label: "Logo (upload)"
+            name: "site_logo_upload"
+            widget: image
+            required: false
+            hint: "Upload the site logo. If both this and a URL are provided, the uploaded file takes priority. SVG, PNG or WebP on a transparent background recommended."
+          - label: "Logo (URL)"
+            name: "site_logo_url"
+            widget: string
+            required: false
+            hint: "Link to the logo image (e.g. from your server or CDN). Used when no file is uploaded."
