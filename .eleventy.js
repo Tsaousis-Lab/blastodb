@@ -472,6 +472,14 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("processSpans", (content) => {
     if (!content) return content;
 
+    if (pathPrefix !== "/") {
+      const prefixPath = pathPrefix.replace(/\/$/, "");
+      content = content.replace(/href="(\/[^"]*?)"/g, (match, path) => {
+        if (path.startsWith(prefixPath)) return match;
+        return `href="${prefixPath}${path}"`;
+      });
+    }
+
     const spanPattern = /\[s:([^\]]*?)\]([\s\S]*?)\[:s\]/g;
 
     return content.replace(spanPattern, (match, cssString, innerContent) => {
