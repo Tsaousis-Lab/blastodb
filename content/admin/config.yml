@@ -500,6 +500,11 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
 
+      - name: layout
+        label: Layout
+        widget: hidden
+        default: layouts/default-page.njk
+
       - label: Description
         name: description
         widget: text
