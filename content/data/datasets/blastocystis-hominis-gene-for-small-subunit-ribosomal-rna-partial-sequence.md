@@ -8,7 +8,6 @@ strains:
 datatypes:
   - 16S rRNA
 data_origins: []
-data_sources: []
 detection_methods: []
 subtypes:
   - subtype-1
