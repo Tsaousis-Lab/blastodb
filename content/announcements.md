@@ -1,13 +1,7 @@
 ---
+title: Blasto db workshop
+description: 18th June 10AM
 layout: layouts/base.njk
-title: Announcements
-description: All announcements from BlastoDB, including past announcements.
 ---
 
-[hero: text-align:center]
-
-<h-hero>Announcements</h-hero>
-
-[:hero]
-
-[collector -> announcements; card-template:announcement; clickable:false]
+Blasto DB wrkshop will be held in Ingram.
