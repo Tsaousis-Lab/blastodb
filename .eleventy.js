@@ -212,6 +212,11 @@ function parsePrefilterParam(paramStr) {
               value: simpleMatch[2].trim(),
             };
           }
+          // A bare field name (no operator) means "field must be set"
+          const existsMatch = part.match(/^([^\s=<>]+)$/);
+          if (existsMatch) {
+            return { field: existsMatch[1].trim(), operator: "exists" };
+          }
           return null;
         })
         .filter(Boolean);
@@ -552,21 +557,19 @@ function getItemsFromYamlFile(
 /**
  * Get items from a file-based collection (CMS config with files property)
  */
-function getItemsFromFileCollection(collection, templateOverride) {
-  if (!collection || !collection.files || !Array.isArray(collection.files)) {
+function getItemsFromFileEntry(fileEntry, collectionCollector, templateOverride) {
+  if (!fileEntry || !fileEntry.file || typeof fileEntry.name !== "string") {
     return [];
   }
 
-  const fileEntry = collection.files[0];
-  if (!fileEntry || !fileEntry.file) return [];
-
   const filePath = path.join(__dirname, fileEntry.file);
+  const collectorConfig = fileEntry.collector || collectionCollector || null;
 
   if (filePath.endsWith(".yaml") || filePath.endsWith(".yml")) {
     return getItemsFromYamlFile(
       filePath,
-      collection.name,
-      collection.collector,
+      fileEntry.name,
+      collectorConfig,
       templateOverride,
     );
   }
@@ -577,8 +580,8 @@ function getItemsFromFileCollection(collection, templateOverride) {
 
   return getItemsFromJsonFile(
     filePath,
-    collection.name,
-    collection.collector,
+    fileEntry.name,
+    collectorConfig,
     templateOverride,
   );
 }
@@ -1169,15 +1172,28 @@ module.exports = function (eleventyConfig) {
       });
     });
 
-    // Process file-based collections (defined in CMS config)
+    // Process file-based collections (defined in CMS config). A collection
+    // may bundle several named files (e.g. a "Community" collection holding
+    // Research Labs, People and Affiliations side by side) — each file gets
+    // its own collectorData entry, keyed by its own name.
     fileCollections.forEach((collection) => {
-      // Default render
-      data[collection.name] = getItemsFromFileCollection(collection);
+      (collection.files || []).forEach((fileEntry) => {
+        if (!fileEntry || typeof fileEntry.name !== "string") return;
 
-      // Pre-render one variant per available template
-      availableTemplates.forEach((templateName) => {
-        data[`${collection.name}::${templateName}`] =
-          getItemsFromFileCollection(collection, templateName);
+        // Default render
+        data[fileEntry.name] = getItemsFromFileEntry(
+          fileEntry,
+          collection.collector,
+        );
+
+        // Pre-render one variant per available template
+        availableTemplates.forEach((templateName) => {
+          data[`${fileEntry.name}::${templateName}`] = getItemsFromFileEntry(
+            fileEntry,
+            collection.collector,
+            templateName,
+          );
+        });
       });
     });
 

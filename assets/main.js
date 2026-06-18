@@ -589,6 +589,11 @@ function matchesPrefilter(item, prefilter) {
 
   return prefilter.orGroups.some((andGroup) =>
     andGroup.every((condition) => {
+      if (condition.operator === "exists") {
+        return getFieldValues(item, condition.field).some(
+          (v) => v !== undefined && v !== null && String(v).trim() !== "",
+        );
+      }
       if (condition.operator === "date_gte_today" || condition.operator === "date_lte_today") {
         return getFieldValues(item, condition.field).some((v) => {
           const ddmmyyyy = String(v).match(/^(\d{2})\.(\d{2})\.(\d{4})$/);

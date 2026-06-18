@@ -29,6 +29,7 @@ Through the CMS you can edit the following content on the website:
 - Add or edit **Publications**/references for the data on this website.
 - Add or edit **Research Labs** working on Blastocystis.
 - Add or edit **Lab Protocols**.
+- Add or edit **People**.
 - Make **small changes to the webpage**, like editing a description text or fixint a typo.
 
 

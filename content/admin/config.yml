@@ -322,17 +322,17 @@ collections:
         hint: "Add a description of the dataset.<br>**Be careful, you can break things here!** This field supports the extendet markdown syntax. Please make shure your syntax is correct, otherwise the website might fail. Please **test it offline** if you use the extendet markdown syntax!"
 
   # -----------------------------------------------------------------------
-  # RESEARCH LAB
+  # COMMUNITY (Research Labs, People)
   # -----------------------------------------------------------------------
-  - name: research_labs
-    icon: database
-    label: Research labs
-    collector:
-      template: research-labs-card.njk
+  - name: community
+    icon: groups
+    label: Community
     files:
       - name: research_labs
         label: Research labs
         file: content/data/research_labs.json
+        collector:
+          template: research-labs-card.njk
         fields:
           - label: Research labs
             name: research_labs
@@ -390,18 +390,11 @@ collections:
                 name: institution_address
                 widget: text
 
-  # -----------------------------------------------------------------------
-  # PEOPLE
-  # -----------------------------------------------------------------------
-  - name: people
-    icon: user
-    label: People
-    collector:
-      template: people-card.njk
-    files:
       - name: people
         label: People
         file: content/data/people.json
+        collector:
+          template: people-card.njk
         fields:
           - label: People
             name: people
