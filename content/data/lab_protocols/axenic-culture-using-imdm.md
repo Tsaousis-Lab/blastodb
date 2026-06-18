@@ -4,6 +4,7 @@ key: 626c52a3-3895-4593-9341-b4f7b8784817
 title: Axenic culture using IMDM
 related_publications:
   - baba95f5-0613-461a-b77b-455e16695249
+  - a2b938a9-4c55-4ba9-afce-e56e130cdcb3
 ---
 
 ### Materials
