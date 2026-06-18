@@ -1,5 +1,5 @@
 ---
-title: BlastoDB-Blog
+title: BlastoDB — Blog
 description: A place for Blastocystis Do's and Dont's
 ---
 
