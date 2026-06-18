@@ -161,6 +161,7 @@ A **tip** highlights a helpful shortcut or best practice.
 | `publications` | Publication card | Title, authors, journal, year |
 | `research_labs` | Lab card | Name, institution, country |
 | `lab_protocols` | Protocol card | Title, category |
+| `people` | Person card | Name, picture, role, affiliation, email, website |
 
 Each card is a compact summary - detailed content lives on the individual page. The collector is the right place for browsing and filtering; individual pages are the right place for depth.
 

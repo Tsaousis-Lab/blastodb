@@ -390,6 +390,57 @@ collections:
                 name: institution_address
                 widget: text
 
+  # -----------------------------------------------------------------------
+  # PEOPLE
+  # -----------------------------------------------------------------------
+  - name: people
+    icon: user
+    label: People
+    collector:
+      template: people-card.njk
+    files:
+      - name: people
+        label: People
+        file: content/data/people.json
+        fields:
+          - label: People
+            name: people
+            widget: list
+            label_singular: Person
+            fields:
+              - label: Name
+                name: name
+                widget: string
+
+              - label: Picture
+                name: picture
+                widget: image
+                required: false
+                hint: "Square portrait photo, minimum 200×200 px. JPG or WebP."
+
+              - label: Email
+                name: mail
+                widget: string
+                type: email
+                required: false
+
+              - label: Affiliation
+                name: affiliation
+                widget: string
+                required: false
+
+              - label: Role
+                name: role
+                widget: string
+                required: false
+                hint: 'A single word describing what they do, e.g. "Developer", "Researcher".'
+
+              - label: Website
+                name: website
+                widget: string
+                required: false
+                hint: "URL to a personal or lab webpage."
+
   - divider: true
 
   # -----------------------------------------------------------------------
