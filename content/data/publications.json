@@ -75,6 +75,18 @@
       "publication_name": "Journal of Test Publications",
       "doi": "",
       "url": ""
+    },
+    {
+      "key": "a2b938a9-4c55-4ba9-afce-e56e130cdcb3",
+      "title": "BlastoDB 2.0",
+      "authors": [
+        "Tasos, A.",
+        "Benecke, T,"
+      ],
+      "Date": "2026",
+      "publication_name": "Journal of Uni Kent",
+      "doi": "",
+      "url": ""
     }
   ]
 }

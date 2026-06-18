@@ -5,6 +5,7 @@ backend:
   repo: Tsaousis-Lab/blastodb
   branch: main # CMS always writes to main
   squash_merges: true
+  auth_methods: [token]
 
 media_folder: assets/uploads
 public_folder: /assets/uploads
@@ -110,6 +111,7 @@ collections:
         value_field: detection_methods.*
         display_fields: [detection_methods.*]
         search_fields: [detection_methods.*]
+        hint: "If a desired detection method is missing, you can add it under ''Vocabularies'' -> Data Origins."
 
       - label: Subtypes
         name: subtypes
@@ -158,7 +160,7 @@ collections:
 
       - label: Description
         name: body
-        widget: text
+        widget: markdown
         required: false
         default: "Add your description here."
         hint: "Add a description of the sutypes.<br>**Be careful, you can break things here!** This field supports the extendet markdown syntax. Please make shure your syntax is correct, otherwise the website might fail. Please **test it offline** if you use the extendet markdown syntax!"
@@ -207,11 +209,14 @@ collections:
               - label: Name of Publication
                 name: publication_name
                 widget: string
+                hint: "Name of the journal or conference where the thing was published."
+
               - label: DOI
                 name: doi
                 widget: string
                 required: false
                 hint: "Enter without the prefix of`https://doi.org/` prefix, e.g. `10.1038/s41564-019-0622-3`."
+
               - label: URL
                 name: url
                 widget: string
@@ -255,7 +260,7 @@ collections:
       - label: Protocol
         name: body
         widget: markdown
-        hint: "Add the Protocol here.<br>**Be careful, you can break things here!** This field supports the extendet markdown syntax. Please make shure your syntax is correct, otherwise the website might fail. Please **test it offline** if you use the extendet markdown syntax!"
+        hint: "Add the Protocol here (in markdown).<br>**Be careful, you can break things here!** This field supports the extendet markdown syntax. Please make shure your syntax is correct, otherwise the website might fail. Please **test it offline** if you use the extendet markdown syntax!"
         default: "Add your description here."
 
   # -----------------------------------------------------------------------
@@ -493,14 +498,16 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
 
-      - {
-          label: "Description",
-          name: "description",
-          widget: "text",
-          required: false,
-        }
+      - label: Description
+        name: description
+        widget: text
+        required: false
+        hint: "Short desctiption for search engines. Will be displayed unter the title in the google search."
 
-      - { label: "Body", name: "body", widget: "markdown" }
+      - label: Body
+        name: body
+        widget: markdown
+        hint: "Content of the Website, written in markdown, and supporting custom components. <br>**Be careful, you can break things here!** This field supports the extendet markdown syntax. Please make shure your syntax is correct, otherwise the website might fail. Please **test it offline** if you use the extendet markdown syntax!"
 
   # ─── Header and Footer ───────────────────────────────────────────────────────────────────
   - name: navigation

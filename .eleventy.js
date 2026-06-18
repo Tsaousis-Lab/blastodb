@@ -231,7 +231,15 @@ function renderCollectorCard(templateName, data) {
     : "default.njk";
 
   try {
-    return nunjucksEnv.render(fileToRender, data);
+    let html = nunjucksEnv.render(fileToRender, data);
+    if (pathPrefix !== "/") {
+      const prefixPath = pathPrefix.replace(/\/$/, "");
+      html = html.replace(/src="(\/[^"]*?)"/g, (match, p) => {
+        if (p.startsWith(prefixPath)) return match;
+        return `src="${prefixPath}${p}"`;
+      });
+    }
+    return html;
   } catch (error) {
     console.warn(
       `[Collector] Failed to render card template "${fileToRender}": ${error.message}`,
@@ -950,6 +958,14 @@ module.exports = function (eleventyConfig) {
   // ─── Post-process filter to handle styled spans
   eleventyConfig.addFilter("processSpans", (content) => {
     if (!content) return content;
+
+    if (pathPrefix !== "/") {
+      const prefixPath = pathPrefix.replace(/\/$/, "");
+      content = content.replace(/href="(\/[^"]*?)"/g, (match, path) => {
+        if (path.startsWith(prefixPath)) return match;
+        return `href="${prefixPath}${path}"`;
+      });
+    }
 
     const spanPattern = /\[s:([^\]]*?)\]([\s\S]*?)\[:s\]/g;
 
