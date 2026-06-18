@@ -31,7 +31,7 @@ related_publications:
 - 100 ml heat-inactivated horse serum
 - 17.67 g IMDM powder
 
-2. _OPTIONAL_: If your manufacturer's IMDM powder does not contain any of the following, add these to the solution:
+2. _OPTIONAL_: If your manufacturer's IMDM powder does not contain any of the following, add these to the solution:
 
 - 3.024 g/L NaHCO3
 - 15.93 mg/L phenol red
@@ -42,7 +42,6 @@ There are also many pre-prepared IMDM powders pre-supplemented with some or all 
 - _OPTIONAL_: Add 1% (v/v) 10,000 U/ml penicillin/10 mg/ml streptomycin.
 
 3. The pH of the final solution may vary depending on the source of horse serum. Adjust pH using NaOH and HCl to achieve a pH of 7.6-7.7.
-
 4. Filter using a 0.22-µm-pore-size filter and store at 4°C until use.
 
 ### Inoculation and culturing
@@ -50,15 +49,12 @@ There are also many pre-prepared IMDM powders pre-supplemented with some or all 
 Before inoculation with _Blastocystis_ spp., the IMDM medium must be pre-reduced (by being placed in anaerobic conditions) and pre-warmed at 37°C.
 
 5. Transfer 8 ml complete IMDM medium to 14-ml round-bottom culture tubes, closing the cap to the vented position.
-
 6. Place the tubes in an anaerobic jar alongside an anaerobic-gas-generating sachet to produce a hypoxic environment.
-
 7. Incubate anaerobically at 37°C for 24 hr.
 
 For anaerobic culturing, we recommend using an anaerobic jar system, such as the Anoxomat III Anaerobic Jar System or the Oxoid AnaeroJar with BD GasPak EZ sachets.
 
 8. Inoculate each tube with the visual sediment from the previous culture of _Blastocystis_ spp. and culture anaerobically at 37°C.
-
 9. Subculture into fresh medium every 4-5 days.
 
 Growth can be variable depending on ST, so frequent observation of the culture should be carried out.
