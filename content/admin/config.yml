@@ -1,4 +1,6 @@
 publish_mode: simple
+logo_url: "/images/blastie.webp"
+app_title: "BlastoDB - CMS"
 
 backend:
   name: github
@@ -571,13 +573,13 @@ collections:
         file: content/data/branding.json
         fields:
           - { label: "Site Title", name: "site_title", widget: "string" }
-          - label: "Logo (upload)"
-            name: "site_logo_upload"
+          - label: "Logo"
+            name: "site_logo"
+            widget: image
+            required: true
+            hint: "Upload the site logo. SVG, PNG or WebP on a transparent background recommended."
+          - label: "Icon for Browser Tab"
+            name: "favicon"
             widget: image
             required: false
-            hint: "Upload the site logo. If both this and a URL are provided, the uploaded file takes priority. SVG, PNG or WebP on a transparent background recommended."
-          - label: "Logo (URL)"
-            name: "site_logo_url"
-            widget: string
-            required: false
-            hint: "Link to the logo image (e.g. from your server or CDN). Used when no file is uploaded."
+            hint: "Upload the image that will be displayed as a logo to the left of the title in the browser. SVG, PNG or WebP on a transparent background recommended. Ideally, the image is square."
