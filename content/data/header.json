@@ -17,7 +17,8 @@
       "items": [
         { "label": "Mission", "file": "content/mission.md" },
         { "label": "Contribute", "file": "content/contribute.md" },
-        { "label": "Contact", "file": "content/contact.md" }
+        { "label": "Contact", "file": "content/contact.md" },
+        { "label": "Acknowledgements", "file": "content/acknowledgements.md" }
       ]
     }
   ]

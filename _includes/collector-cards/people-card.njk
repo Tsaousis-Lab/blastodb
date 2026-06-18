@@ -1,0 +1,33 @@
+<div class="collector-card collector-card-person">
+  {% if picture %}
+  <img class="person-card-avatar" src="{{ picture }}" alt="{{ name }}" loading="lazy" />
+  {% else %}
+  <div class="person-card-avatar person-card-avatar-placeholder">{{ name | truncate(1, true, '') }}</div>
+  {% endif %}
+
+  <div class="person-card-body">
+    <h3 class="card-title person-card-name">{{ name }}</h3>
+    {% if role %}
+    <span class="tag person-card-role">{{ role }}</span>
+    {% endif %}
+    {% if affiliation %}
+    <p class="person-card-affiliation">{{ affiliation }}</p>
+    {% endif %}
+    {% if mail or website %}
+    <div class="person-card-links">
+      {% if mail %}
+      <a class="person-card-link" href="mailto:{{ mail }}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        {{ mail }}
+      </a>
+      {% endif %}
+      {% if website %}
+      <a class="person-card-link" href="{{ website }}" target="_blank" rel="noopener">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        Webpage
+      </a>
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+</div>

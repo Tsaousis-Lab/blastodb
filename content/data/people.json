@@ -1,0 +1,20 @@
+{
+  "people": [
+    {
+      "name": "Dr Anastasios Tsaousis",
+      "picture": "/assets/uploads/pasted-image-1781094468326.png",
+      "mail": "a.tsaousis@kent.ac.uk",
+      "affiliation": "University of Kent",
+      "role": "Head of BlastoDB",
+      "website": "https://www.kent.ac.uk/biosciences/people/653/tsaousis-anastasios"
+    },
+    {
+      "name": "Dr Tobias Benecke",
+      "picture": "",
+      "mail": "mail@tobiasbeneck.de",
+      "affiliation": "",
+      "role": "Developer & Maintainer",
+      "website": ""
+    }
+  ]
+}

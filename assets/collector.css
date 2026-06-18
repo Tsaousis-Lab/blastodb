@@ -667,6 +667,75 @@
     margin: 0;
 }
 
+/* Person card: centered avatar-first layout */
+.collector-card-person {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.4rem;
+}
+
+.person-card-avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 0 0.5rem;
+    border: 2px solid var(--border);
+}
+
+.person-card-avatar-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-pale);
+    color: var(--accent-dark);
+    font-family: var(--font-ui);
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.person-card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.person-card-name {
+    margin: 0;
+}
+
+.person-card-affiliation {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    margin: 0;
+}
+
+.person-card-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.person-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.person-card-link:hover {
+    color: var(--accent-dark);
+    text-decoration: underline;
+}
+
 /* Download link group in subtype hero */
 .subtype-download-links {
     display: flex;

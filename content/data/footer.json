@@ -59,6 +59,10 @@
         {
           "label": "Announcements",
           "url": "/announcements/"
+        },
+        {
+          "label": "Acknowledgements",
+          "url": "/acknowledgements/"
         }
       ]
     },
