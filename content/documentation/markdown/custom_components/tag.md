@@ -1,6 +1,6 @@
 ---
 layout: layouts/documentation.njk
-title: BlastoDB — Tag Component
+title: Tag Component
 description: Inline metadata pill for displaying subtypes, categories, and labels.
 ---
 

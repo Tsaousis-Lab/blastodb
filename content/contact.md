@@ -1,6 +1,6 @@
 ---
 layout: layouts/default-page.njk
-title: BlastoDB - Contact
+title: Contact
 description: Contact the people behind BlastoDB.
 ---
 [hero: text-align:center]

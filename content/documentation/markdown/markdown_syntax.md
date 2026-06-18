@@ -1,6 +1,6 @@
 ---
 layout: layouts/documentation.njk
-title: BlastoDB — Markdown Cheat Sheet
+title: Markdown Cheat Sheet
 description: Introduction to markdown to edit the content on BlastoDB.
 ---
 

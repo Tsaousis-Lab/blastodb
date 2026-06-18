@@ -1,6 +1,6 @@
 ---
 layout: layouts/documentation.njk
-title: BlastoDB — Custom Components
+title: Custom Components
 description: Overview of the custom markdown components available in BlastoDB.
 ---
 

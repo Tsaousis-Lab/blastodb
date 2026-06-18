@@ -1,6 +1,6 @@
 ---
 layout: layouts/documentation.njk
-title: BlastoDB — Columns Component
+title: Columns Component
 description: Two-column side-by-side layout that collapses to one column on mobile.
 ---
 
