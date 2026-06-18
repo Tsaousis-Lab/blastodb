@@ -1,5 +1,5 @@
 ---
-layout: layouts/base.njk
+layout: layouts/default-page.njk
 title: BlastoDB — Lab Protocols
 description: Collection of laboratory protocols for sample preparation, DNA extraction, and analysis techniques.
 ---
