@@ -64,29 +64,6 @@
       "doi": "10.1007/s00436-003-0995-2",
       "url": "",
       "date": "2004"
-    },
-    {
-      "key": "baba95f5-0613-461a-b77b-455e16695249",
-      "title": "This is a test publication",
-      "authors": [
-        "Benecke, Tobias"
-      ],
-      "Date": "2026",
-      "publication_name": "Journal of Test Publications",
-      "doi": "",
-      "url": ""
-    },
-    {
-      "key": "a2b938a9-4c55-4ba9-afce-e56e130cdcb3",
-      "title": "BlastoDB 2.0",
-      "authors": [
-        "Tasos, A.",
-        "Benecke, T,"
-      ],
-      "Date": "2026",
-      "publication_name": "Journal of Uni Kent",
-      "doi": "",
-      "url": ""
     }
   ]
 }
