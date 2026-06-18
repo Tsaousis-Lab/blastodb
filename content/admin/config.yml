@@ -23,6 +23,7 @@ collections:
     folder: content/data/datasets
     create: true
     slug: "{{slug}}"
+    preview_path: "data/datasets/{{slug}}/"
     fields:
       - name: layout
         label: Layout
@@ -198,7 +199,7 @@ collections:
                 name: authors
                 widget: list
                 label_singular: Author
-                hint: "One author per entry"
+                hint: "One author per line."
               - label: Publication Date
                 name: Date
                 widget: string
@@ -234,6 +235,7 @@ collections:
     folder: content/data/lab_protocols
     create: true
     slug: "{{slug}}"
+    preview_path: "data/lab_protocols/{{slug}}/"
     fields:
       - name: layout
         label: Layout
@@ -274,6 +276,7 @@ collections:
     folder: content/data/subtypes
     create: true
     slug: "{{slug}}"
+    preview_path: "data/subtypes/{{slug}}/"
     fields:
       - name: layout
         label: Layout
@@ -497,6 +500,7 @@ collections:
     extension: md
     format: frontmatter
     icon: select_window
+    preview_path: "{{slug}}/"
     fields:
       - { label: "Title", name: "title", widget: "string" }
 
