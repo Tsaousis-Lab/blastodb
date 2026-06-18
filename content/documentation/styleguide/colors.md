@@ -126,6 +126,48 @@ The primary brand colour. Teal signals trustworthiness and scientific precision 
 
 ---
 
+## Status & Alerts
+
+Used for the `.warning` and `.danger` boxes in documentation content (see [Components](/documentation/styleguide/components/)).
+
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1rem;margin:1.5rem 0;">
+
+<div style="border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+<div style="height:64px;background:#e8a020;"></div>
+<div style="padding:0.75rem 1rem;">
+<code style="background:none;color:var(--text);padding:0;font-size:0.8rem;">--warning</code><br>
+<span style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);">#e8a020</span><br>
+<span style="font-size:0.82rem;color:var(--text-muted);">Medium-severity warning border (`.warning`)</span>
+</div></div>
+
+<div style="border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+<div style="height:64px;background:#fff8ec;"></div>
+<div style="padding:0.75rem 1rem;">
+<code style="background:none;color:var(--text);padding:0;font-size:0.8rem;">--warning-bg</code><br>
+<span style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);">#fff8ec</span><br>
+<span style="font-size:0.82rem;color:var(--text-muted);">Medium-severity warning background</span>
+</div></div>
+
+<div style="border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+<div style="height:64px;background:#c0392b;"></div>
+<div style="padding:0.75rem 1rem;">
+<code style="background:none;color:var(--text);padding:0;font-size:0.8rem;">--danger</code><br>
+<span style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);">#c0392b</span><br>
+<span style="font-size:0.82rem;color:var(--text-muted);">Severe-warning border (`.danger`)</span>
+</div></div>
+
+<div style="border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+<div style="height:64px;background:#fdecea;"></div>
+<div style="padding:0.75rem 1rem;">
+<code style="background:none;color:var(--text);padding:0;font-size:0.8rem;">--danger-bg</code><br>
+<span style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);">#fdecea</span><br>
+<span style="font-size:0.82rem;color:var(--text-muted);">Severe-warning background</span>
+</div></div>
+
+</div>
+
+---
+
 ## Borders
 
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1rem;margin:1.5rem 0;">

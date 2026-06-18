@@ -810,11 +810,22 @@ module.exports = function (eleventyConfig) {
             return `<div class="${classes}"${styles}>\n\n${content}\n\n</div>`;
           });
         } else {
-          result = result.replace(pattern, (match, cssString, content) => {
-            const styles = cssString.trim()
-              ? ` style="${escapeHtml(cssString.trim())}"`
-              : "";
-            return `<div class="${blockType}"${styles}>\n\n${content}\n\n</div>`;
+          result = result.replace(pattern, (match, paramString, content) => {
+            let cssString = paramString.trim();
+            let classes = blockType;
+
+            const classMatches = [
+              ...cssString.matchAll(/class:\s*([a-zA-Z0-9_-]+)/g),
+            ];
+            if (classMatches.length) {
+              classes += classMatches.map((m) => ` ${m[1]}`).join("");
+              cssString = cssString
+                .replace(/class:\s*[a-zA-Z0-9_-]+\s*/g, "")
+                .trim();
+            }
+
+            const styles = cssString ? ` style="${escapeHtml(cssString)}"` : "";
+            return `<div class="${classes}"${styles}>\n\n${content}\n\n</div>`;
           });
         }
       }

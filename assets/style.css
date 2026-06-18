@@ -40,6 +40,10 @@
     --tag-text: #0d5a53;
     --dark-highlight: #f0e6d2;
     --card-bg: #f9f8f6;
+    --warning: #e8a020;
+    --warning-bg: #fff8ec;
+    --danger: #c0392b;
+    --danger-bg: #fdecea;
 
     /* Shadows */
     --shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
@@ -888,7 +892,7 @@ main th {
 }
 
 /* ── 15. Guide layout ──────────────────────────────────────── */
-.guide-note {
+.note {
     padding: 0.9rem 1.1rem;
     border-radius: var(--radius);
     border-left: 3px solid #4a90d9;
@@ -897,7 +901,7 @@ main th {
     background: #f0f7ff;
 }
 
-.guide-tip {
+.tip {
     padding: 0.9rem 1.1rem;
     border-radius: var(--radius);
     border-left: 3px solid var(--accent);
@@ -906,13 +910,22 @@ main th {
     background: var(--accent-pale);
 }
 
-.guide-warning {
+.warning {
     padding: 0.9rem 1.1rem;
     border-radius: var(--radius);
-    border-left: 3px solid #e8a020;
+    border-left: 3px solid var(--warning);
     margin: 1.25rem 0;
     font-size: 0.95rem;
-    background: #fff8ec;
+    background: var(--warning-bg);
+}
+
+.danger {
+    padding: 0.9rem 1.1rem;
+    border-radius: var(--radius);
+    border-left: 3px solid var(--danger);
+    margin: 1.25rem 0;
+    font-size: 0.95rem;
+    background: var(--danger-bg);
 }
 
 /* ── 16. Mark / highlight ──────────────────────────────────── */

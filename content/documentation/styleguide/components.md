@@ -120,6 +120,28 @@ Columns align to their tops. Good for narrative content; less suited to items th
 
 ---
 
+# Alert Boxes
+
+[card: class:note]
+A **note** highlights neutral, supplementary information.
+[:card]
+
+[card: class:tip]
+A **tip** highlights a helpful shortcut or best practice.
+[:card]
+
+[card: class:warning]
+⚠️ A **warning** flags a medium-severity issue — something to double-check before proceeding.
+[:card]
+
+[card: class:danger]
+⚠️ A **danger** box flags a severe issue — data loss, broken links, or an action that cannot be undone.
+[:card]
+
+**`.note`** / **`.tip`** / **`.warning`** / **`.danger`** — applied via `[card: class:note]` / `[card: class:tip]` / `[card: class:warning]` / `[card: class:danger]` (see the [`[card:]` syntax above](#card)), or directly as a `<div class="...">` wrapper if you don't want the card chrome. Use `.warning` (orange, `--warning` / `--warning-bg`) for issues worth a second look, and `.danger` (red, `--danger` / `--danger-bg`) for severe, hard-to-reverse problems. See [Colors](/documentation/styleguide/colors/) for the underlying tokens.
+
+---
+
 # Collector
 
 **`[collector -> collectionName; opts]`** - a filterable, searchable list of cards drawn from a Sveltia CMS collection. Options:

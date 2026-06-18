@@ -33,11 +33,11 @@ You can edit the content by opening the **Lab Protocols** collection on the left
 
 #### Deleting a Lab Protocol
 
-<div class="guide-warning">
+[card: class:warning]
 
 **Be careful when deleting lab protocols.** Datasets that are linked to this protocol will lose that connection. Before deleting, check whether any datasets reference this protocol under their **Lab Protocols** field and remove the link there first.
 
-</div>
+[:card]
 
 1. Click on the protocol you want to delete.
 2. Click the **Delete** button at the top of the editor.
@@ -68,8 +68,9 @@ You can edit the content by opening the **Lab Protocols** collection on the left
     ## Notes
     Store reagents at −20 °C.
     ```
-    <div class="guide-warning">
-    
-    **Be Careful! You can break things here.** The description supports the extendet markdown syntax, which need to be defined exactly, otherwise the build of the website might fail. Please edit the webpage locally, if you want to use these features.
 
-    </div>
+[card: class:warning]
+
+**Be Careful! You can break things here.** The description supports the extendet markdown syntax, which need to be defined exactly, otherwise the build of the website might fail. Please edit the webpage locally, if you want to use these features.
+
+[:card]

@@ -70,8 +70,8 @@ The datasets here have thirteen properties, which are shortly described in the f
 13. **Description**
     - A free-text description of the dataset in markdown ([see markdown cheat sheet](/documentation/markdown/markdown_cheat_sheet/)).
 
-    <div class="guide-warning">
-    
-    **Be Careful! You can break things here.** The description supports the extendet markdown syntax, which need to be defined exactly, otherwise the build of the website might fail. Please edit the webpage locally, if you want to use these features.
+[card: class:warning]
 
-    </div>
+**Be Careful! You can break things here.** The description supports the extendet markdown syntax, which need to be defined exactly, otherwise the build of the website might fail. Please edit the webpage locally, if you want to use these features.
+
+[:card]

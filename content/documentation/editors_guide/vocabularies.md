@@ -20,11 +20,11 @@ The *Vocabularies* store parameters which are used to describe and filter the su
 
 Here you find a guide on how to add new values. This has to be done with care, as the other data in this dataset links to this information. These links might get broken!
 
-<div class="guide-warning">
+[card: class:danger]
 
 **Only add new values; do not rename or delete existing ones.** Every value in these lists can be selected and stored inside the datasets, lab protocols and subtypes. These links get broken if you rename or delete a value that is already used by other enteries.
 
-</div>
+[:card]
 
 # Editing the Vocabularies
 
@@ -33,13 +33,13 @@ You can edit the content by opening the **Vocabuleries** collection on the left 
 All vocabularies are stored in a list, which you can see in a textbox. Each line represents one item.
 To **add an item** simply add a new line with the new value, and llick **Save** on the top right corner. Make shure the new value is spelled correctly, as changing this later when other items link to will lead to breaking changes! Once saved, the new value will now be available to be selected across the BlastoDB.
 
-<div class="guide-warning">
+[card: class:danger]
 
 **Editing or Deleting a value is probably not nessecary, and will break links in the data.** These vocabularies are referenced in the datasets and subtypes, if you rename or delete them, these links will break! Please consider carefully if this really is nessecary.
 
 You can reverse a deleted value by re-adding it (in the exact same spelling) to the database.
 
-</div>
+[:card]
 
 
 # The vocabulary lists
