@@ -14,7 +14,7 @@ In BlastoDB provides a list of research labs working on Blastocystis (<a href="/
 
 # Editing the Research Labs
 
-You can edit the content by opening the **Research Labs** collection on the left side on the admin panel, and opening the single 'Research Labs' entery (<a href="/admin/#/collections/research_labs/entries/research_labs" target="_blank">www.blastodb.com/admin/#/collections/research_labs/entries/research_labs</a>). Here, you can select which ones you want to edit.
+You can edit the content by opening the **Community** collection on the left side on the admin panel, and opening the **Research Labs** entery (<a href="/admin/#/collections/community/entries/research_labs" target="_blank">www.blastodb.com/admin/#/collections/community/entries/research_labs</a>). Here, you can select which ones you want to edit.
 
 #### Add a new Research Lab
 

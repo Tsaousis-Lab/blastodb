@@ -10,4 +10,4 @@ description: The people who contributed to BlastoDB.
 
 BlastoDB is made possible by the people who have contributed their time and expertise.
 
-[collector -> people; arrange:grid; clickable:false; card-template:people-card.njk]
+[collector -> people; arrange:grid; clickable:false; card-template:people-card.njk; prefilter:[role]]
