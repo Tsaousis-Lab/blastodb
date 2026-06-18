@@ -35,11 +35,11 @@ You can also **rearrange** the publications by using the arrows, or **add an ite
 
 #### Delete a Publication
 
-<div class="guide-warning">
+[card: class:warning]
 
 **Please be Careful!** Other data on BlastoDB, the Datasets and Lab Protocols, is dependent on the publications stored here. Please remove all links to a publication forst, otherwise links in the datasets or lab protocols might break. **Only remove publications if you know it is save!**
 
-</div>
+[:card]
 
 1. Find the publication you need(This is easyer if you click *collapse all* on the top right)
 2. Click the "x" at the top right of the publication entery to delete it

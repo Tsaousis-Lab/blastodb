@@ -20,12 +20,11 @@ Here you find the information on how to edit the header menu, footer, and site b
 3. Add, edit, or remove items in the **Header Items** list. You can find a description of the fields below.
 4. Click **Save**. → The website will be updated automatically within a few minutes.
 
-<div class="guide-warning">
+[card: class:warning]
 
 **Please make shure the links are correct!** If you do not specify the link correctly, the buttons in the header will go to a wrong or non-existing page.
 
-</div>
-
+[:card]
 
 # Editing the Footer
 
@@ -34,11 +33,11 @@ Here you find the information on how to edit the header menu, footer, and site b
 3. Edit the relevant fields. You can find a description of the fields below.
 4. Click **Save**. → The website will be updated automatically within a few minutes.
 
-<div class="guide-warning">
+[card: class:warning]
 
 **Please make shure the links are correct!** If you do not specify the link correctly, the buttons in the header will go to a wrong or non-existing page.
 
-</div>
+[:card]
 
 # Editing the Title and Logo
 

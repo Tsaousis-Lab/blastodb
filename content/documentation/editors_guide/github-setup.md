@@ -50,7 +50,7 @@ The CMS requires a personal access token to authenticate on your behalf. This is
 7. **Copy the token immediately** — GitHub will only show it once.
 8. **Paste it into a password manager**, never store it as plain text!
 
-<div class="guide-warning">
+[card: class:warning]
 
 #### Security Consideration
 
@@ -58,7 +58,7 @@ It is **really important** that you keep this password private. Please store it 
 
 **If you loose your PAT**, delete it immediately (<a href="https://github.com/settings/tokens" target="_blank">https://github.com/settings/tokens</a>). You can always create a new one.
 
-</div>
+[:card]
 
 
 
