@@ -4,6 +4,7 @@ title: Capybaras are awesome
 link_to_source: https://en.wikipedia.org/wiki/Capybara
 related_publications:
   - baba95f5-0613-461a-b77b-455e16695249
+  - a2b938a9-4c55-4ba9-afce-e56e130cdcb3
 publication_date: '2026'
 datatypes:
   - Epidemiological Data
