@@ -1,6 +1,6 @@
 ---
 layout: layouts/documentation.njk
-title: BlastoDB — Selector Button
+title: Selector Button
 description: A dropdown button that reveals a list of links when clicked.
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: layouts/documentation.njk
-title: BlastoDB — Collector Component
+title: Collector Component
 description: Filterable, searchable card list drawn from a Sveltia CMS collection.
 ---
 

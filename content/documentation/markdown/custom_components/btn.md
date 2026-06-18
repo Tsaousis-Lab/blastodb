@@ -1,6 +1,6 @@
 ---
 layout: layouts/documentation.njk
-title: BlastoDB — Button
+title: Button
 description: A styled link button for calls to action and navigation.
 ---
 

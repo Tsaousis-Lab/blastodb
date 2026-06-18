@@ -1,6 +1,6 @@
 ---
 layout: layouts/default-page.njk
-title: BlastoDB - Biobank
+title: Biobank
 description: Biobank for physical resources around Blastocystis.
 ---
 [hero: text-align:center]

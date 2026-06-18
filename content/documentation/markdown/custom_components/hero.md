@@ -1,6 +1,6 @@
 ---
 layout: layouts/documentation.njk
-title: BlastoDB — Hero Component
+title: Hero Component
 description: Full-width banner section for introducing a page or major section.
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: layouts/documentation.njk
-title: BlastoDB — Grid Component
+title: Grid Component
 description: Responsive multi-column grid for card groups and icon-link rows.
 ---
 

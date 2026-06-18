@@ -1,6 +1,6 @@
 ---
 layout: layouts/documentation.njk
-title: BlastoDB — Editor Guide
+title: Editor Guide
 description: A step-by-step guide for adding and editing content on BlastoDB.
 ---
 

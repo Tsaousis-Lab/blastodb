@@ -1,6 +1,6 @@
 ---
 title: BlastoDB
-description: BlastoDB - The community resource for Blastocystis research.
+description: The community resource for Blastocystis research.
 layout: layouts/default-page.njk
 ---
 

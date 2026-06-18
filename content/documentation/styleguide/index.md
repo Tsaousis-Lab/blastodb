@@ -1,6 +1,6 @@
 ---
 layout: layouts/documentation.njk
-title: BlastoDB — Style Guide
+title: Style Guide
 description: Design language and visual guidelines for BlastoDB.
 ---
 

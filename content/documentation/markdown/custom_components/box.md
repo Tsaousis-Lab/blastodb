@@ -1,6 +1,6 @@
 ---
 layout: layouts/documentation.njk
-title: BlastoDB — Box Component
+title: Box Component
 description: A simple container used as a building block inside Columns and Grid layouts.
 ---
 

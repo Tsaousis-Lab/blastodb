@@ -1,6 +1,6 @@
 ---
 layout: layouts/default-page.njk
-title: BlastoDB — Datasets
+title: Datasets
 description: Curated selection of trustworthy datasets for Blastocystis, searchable by subtype and country.
 ---
 

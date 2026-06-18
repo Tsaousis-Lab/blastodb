@@ -1,6 +1,6 @@
 ---
 layout: layouts/documentation.njk
-title: BlastoDB — Card Component
+title: Card Component
 description: A styled content container with background and border, used inside grids.
 ---
 

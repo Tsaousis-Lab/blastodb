@@ -1,5 +1,5 @@
 ---
-title: BlastoDB - Subtypes
+title: Subtypes
 description: Explore Blastocystis subtypes with reference sequences and related datasets.
 layout: layouts/default-page.njk
 ---

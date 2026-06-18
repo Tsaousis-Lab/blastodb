@@ -1,6 +1,6 @@
 ---
 layout: layouts/documentation.njk
-title: BlastoDB — Typography
+title: Typography
 description: Typefaces, heading scale, body text, and colour tokens for BlastoDB.
 ---
 
