@@ -8,20 +8,14 @@ description: A styled content container with background and border, used inside 
 
 <h-hero>Card</h-hero>
 
-A contained box with a warm background and soft shadow. Use inside a `[grid:]` to present parallel resources, navigation options, or feature highlights.
+A contained box with a warm background and soft shadow. Use to seperate or highlight content. Can be used inside a `[grid:]` to present parallel resources, navigation options, or feature highlights. There are classes for *tips*, *info*, *warnings* and *severe warnings*.
 
 [:hero]
-
-[btn: ← Custom Components -> /documentation/markdown/custom_components/]
-
-# What it does
-
-Cards visually separate content into distinct, self-contained blocks. Unlike `[box:]`, cards have their own visual styling (background, border, shadow). They are not interactive by themselves — place a `[btn:]` inside for a call to action.
 
 # Syntax
 
 ```markdown
-[card: optional CSS here]
+[card: *optional CSS here*]
 Content goes here
 [:card]
 ```
@@ -47,19 +41,19 @@ Any valid CSS property can be passed as an inline style:
 [card:]
 ### Resources
 A short description. Keep cards focused — one topic, one action.
-[btn: Explore -> /documentation/]
+[btn: Explore -> /documentation/markdown/custom_components/card/]
 [:card]
 
 [card:]
 ### Methods
 A short description. Keep cards focused — one topic, one action.
-[btn: Explore -> /documentation/]
+[btn: Explore -> /documentation/markdown/custom_components/card/]
 [:card]
 
 [card:]
 ### Community
 A short description. Keep cards focused — one topic, one action.
-[btn: Explore -> /documentation/]
+[btn: Explore -> /documentation/markdown/custom_components/card/]
 [:card]
 
 [:grid]

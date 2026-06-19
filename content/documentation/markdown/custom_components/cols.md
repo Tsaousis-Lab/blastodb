@@ -12,16 +12,10 @@ A two-column, equal-width layout. Always wrap each side in a `[box:]`. Collapses
 
 [:hero]
 
-[btn: ← Custom Components -> /documentation/markdown/custom_components/]
-
-## What it does
-
-The Columns component splits the page width into two equal columns placed side by side. It is ideal for text + image pairings, feature comparisons, or any two related blocks of content. On screens below 720 px the columns stack vertically.
-
-## Syntax
+# Syntax
 
 ```markdown
-[cols: optional CSS here]
+[cols: *optional CSS here*]
 [box:]
 Left column content
 [:box]
@@ -33,7 +27,7 @@ Right column content
 
 Always wrap each column in a `[box:]` — the columns layout itself has no visual styling; the boxes provide structure.
 
-## Parameters
+# Parameters
 
 Any valid CSS property can be passed as an inline style on the `[cols:]` tag:
 
@@ -43,14 +37,14 @@ Any valid CSS property can be passed as an inline style on the `[cols:]` tag:
 | Vertical alignment | `align-items: center` |
 | Text alignment | `text-align: center` |
 
-## Responsive behaviour
+# Responsive Behaviour
 
 | Screen width | Layout |
 |---|---|
 | > 720 px | Two columns, side by side |
 | ≤ 720 px | Stacked vertically |
 
-## Example
+# Example
 
 ```markdown
 [cols:]
