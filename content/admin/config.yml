@@ -161,6 +161,55 @@ collections:
         search_fields: [title]
         hint: "If a desired datatype is missing, you can add it under ''Lab Protocols''."
 
+      - label: Annotations
+        name: annotations
+        widget: list
+        required: false
+        label_singular: Annotation
+        summary: "{{fields.severity}} — {{fields.title}}"
+        hint: "Optional contextual notes shown below the hero, before the description. Each can link publications."
+        fields:
+          - label: Severity
+            name: severity
+            widget: select
+            default: info
+            options:
+              - { label: "Info", value: info }
+              - { label: "Warning", value: warning }
+              - { label: "Severe warning", value: severe }
+            hint: "Controls the colour and icon of the annotation."
+          - label: Title
+            name: title
+            widget: string
+          - label: Text
+            name: text
+            widget: markdown
+            hint: "Basic markdown supported (bold, italics, links, lists)."
+          - label: Related Publication(s)
+            name: related_publications
+            widget: relation
+            collection: publications
+            file: publications
+            value_field: "publications.*.key"
+            search_fields:
+              [
+                "publications.*.key",
+                "publications.*.title",
+                "publications.*.date",
+                "publications.*.publication_name",
+                "publications.*.authors",
+              ]
+            display_fields:
+              [
+                "publications.*.title",
+                "publications.*.date",
+                "publications.*.publication_name",
+                "publications.*.authors",
+              ]
+            multiple: true
+            required: false
+            hint: "Publications must be added before you can link to them here."
+
       - label: Description
         name: body
         widget: markdown

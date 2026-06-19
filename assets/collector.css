@@ -759,12 +759,60 @@
     gap: 1rem;
 }
 
+.dataset-titlerow-right {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
 .dataset-date {
     font-family: var(--font-mono);
     font-size: 0.85rem;
     color: var(--text-muted);
     white-space: nowrap;
     flex-shrink: 0;
+}
+
+.annotation-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    align-self: center;
+    flex-shrink: 0;
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--radius-pill);
+    background: var(--annotation-pill-bg, #ece9e2);
+    color: var(--annotation-pill-text, var(--text-muted));
+}
+
+.annotation-indicator svg {
+    flex-shrink: 0;
+}
+
+.annotation-indicator-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.annotation-indicator--info {
+    --annotation-pill-bg: #e7f1fb;
+    --annotation-pill-text: #2c6cb0;
+}
+
+.annotation-indicator--warning {
+    --annotation-pill-bg: var(--warning-bg);
+    --annotation-pill-text: #a96d09;
+}
+
+.annotation-indicator--severe {
+    --annotation-pill-bg: var(--danger-bg);
+    --annotation-pill-text: var(--danger);
 }
 
 .dataset-meta {

@@ -1,3 +1,4 @@
+{% import "annotation-macros.njk" as sev %}
 
 {%- macro joinList(val, sep=", ") -%}
   {%- if val is iterable and val is not string -%}{{ val | join(sep) }}{%- else -%}{{ val }}{%- endif -%}
@@ -13,7 +14,15 @@
   <div class="dataset-head">
     <div class="dataset-titlerow">
       <h3 class="card-title">{{ title }}</h3>
-      {% if publication_date %}<span class="dataset-date">{{ publication_date }}</span>{% endif %}
+      <div class="dataset-titlerow-right">
+        {% if annotation_severity %}
+        <span class="annotation-indicator annotation-indicator--{{ annotation_severity }}" title="This dataset has annotations">
+          {{ sev.severityIcon(annotation_severity, 15) }}
+          <span class="annotation-indicator-label">{{ "Info" if annotation_severity == "info" else "Read annotation" }}</span>
+        </span>
+        {% endif %}
+        {% if publication_date %}<span class="dataset-date">{{ publication_date }}</span>{% endif %}
+      </div>
     </div>
 
     <div class="dataset-meta">
