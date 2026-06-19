@@ -12,87 +12,35 @@ BlastoDB extends the standard markdown syntax with custom components for layout,
 
 [:hero]
 
-## Layout Components
-
 [grid: cols:3]
 
 [card:]
-### Hero
-A full-width banner for page introductions. Use it once per page at the top with an `<h-hero>` title.
+### Layouting
 
-[btn: Hero docs -> /documentation/markdown/custom_components/hero/]
+- [Hero](/documentation/markdown/custom_components/hero/)
+- [Box](/documentation/markdown/custom_components/box/)
+- [Card](/documentation/markdown/custom_components/card/)
+- [Columns](/documentation/markdown/custom_components/cols/)
+- [Grid](/documentation/markdown/custom_components/grid/)
+- [Tag](/documentation/markdown/custom_components/tag/)
+
 [:card]
 
-[card:]
-### Box
-A minimal flex container. The primary building block inside columns and grids.
 
-[btn: Box docs -> /documentation/markdown/custom_components/box/]
+[card:]
+### Interaction
+
+- [Button](/documentation/markdown/custom_components/btn/)
+- [Selection Button](/documentation/markdown/custom_components/sbtn/)
+
 [:card]
 
-[card:]
-### Card
-A styled container with background and shadow. Use inside a grid for navigation or feature cards.
-
-[btn: Card docs -> /documentation/markdown/custom_components/card/]
-[:card]
 
 [card:]
-### Columns
-A two-column equal-width layout that collapses to one column on mobile.
+### Content Loading
 
-[btn: Columns docs -> /documentation/markdown/custom_components/cols/]
-[:card]
+- [Collector](/documentation/markdown/custom_components/collector/)
 
-[card:]
-### Grid
-A responsive multi-column grid. Supports fixed column counts with `cols:2`–`cols:5`.
-
-[btn: Grid docs -> /documentation/markdown/custom_components/grid/]
-[:card]
-
-[:grid]
-
----
-
-## Interaction & Display Components
-
-[grid: cols:3]
-
-[card:]
-### Button
-A styled link button for calls to action and navigation.
-
-[btn: Button docs -> /documentation/markdown/custom_components/btn/]
-[:card]
-
-[card:]
-### Selector Button
-A dropdown button that reveals a list of links when clicked.
-
-[btn: Selector Button docs -> /documentation/markdown/custom_components/sbtn/]
-[:card]
-
-[card:]
-### Tag
-An inline metadata pill for subtypes, data types, and other short labels.
-
-[btn: Tag docs -> /documentation/markdown/custom_components/tag/]
-[:card]
-
-[:grid]
-
----
-
-## Content Loading
-
-[grid: cols:3]
-
-[card:]
-### Collector
-Renders all entries from a CMS collection as filterable, searchable cards. Supports search, sort, filters, prefilters, and custom card templates.
-
-[btn: Collector docs -> /documentation/markdown/custom_components/collector/]
 [:card]
 
 [:grid]

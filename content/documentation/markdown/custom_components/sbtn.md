@@ -8,37 +8,30 @@ description: A dropdown button that reveals a list of links when clicked.
 
 <h-hero>Selector Button</h-hero>
 
-An interactive dropdown button that reveals a list of links when clicked.
-
-- Use `[sbtn:]` only when all destinations share the same logical action (e.g. different file formats of the same dataset) — the label should make sense for all options at once
-- For a single destination, use `[btn:]` instead
-- Not sure whether to use a selector button, a normal button, or a link? See the [styleguide on links and buttons](/documentation/styleguide/components/#links--buttons)
+The Selector Button a dropdown menu with multiple links. Use it when you want to link to multiple destination with the same locical action (e.G. different fule formats of the same dataset). Should be used for internal links (see the [styleguide on links and buttons](/documentation/styleguide/components/#links--buttons)).
 
 
 
 [:hero]
 
-[btn: ← Custom Components -> /documentation/markdown/custom_components/]
-
-# What it does
-
-The Selector Button shows a single button that opens a dropdown menu with multiple links. Use it when you want to offer several related navigation options in one compact element — for example different file formats, protocol variants, or related pages.
 
 # Syntax
 
 ```markdown
-[sbtn: Button Label -> [/url-1/, /url-2/, /url-3/]]
+[sbtn: Button Label -> [Title 1 -> /url-1/, Title 2 -> /url-2/, Title 3 -> /url-3/]]
 ```
 
-Provide a comma-separated list of URLs inside square brackets after ` -> `. URLs can be internal paths or full external URLs.
+For a full explanation of how **urls/links** work see the [markdown syntax guide](/documentation/markdown/markdown_syntax/#links).
+
+Provide a comma-separated list of `Title -> url` pairs inside square brackets after ` -> `, using the same `Label -> url` pattern as `[btn:]`. Each option **must** have its own title — a bare URL with no title is not valid and will be skipped at build time. URLs can be internal paths or full external URLs.
 
 # Example
 
 ```markdown
-[sbtn: Browse Data -> [/datasets/, /subtypes/, /lab-protocols/]]
+[sbtn: Browse Data -> [Datasets -> /datasets/, Subtypes -> /subtypes/, Lab Protocols -> /lab-protocols/]]
 ```
 
-[sbtn: Browse Data -> [/datasets/, /subtypes/, /lab-protocols/]]
+[sbtn: Browse Data -> [Datasets -> /datasets/, Subtypes -> /subtypes/, Lab Protocols -> /lab-protocols/]]
 
 The arrow rotates when the menu opens. Clicking anywhere outside the button closes it.
 
