@@ -30,6 +30,11 @@ collections:
         widget: hidden
         default: layouts/dataset-page.njk
 
+      - label: Key
+        name: key
+        widget: hidden
+        default: "{{uuid}}"
+
       - label: Title
         name: title
         widget: string
@@ -216,6 +221,102 @@ collections:
         required: false
         default: "Add your description here."
         hint: "Add a description of the sutypes.<br>**Be careful, you can break things here!** This field supports the extendet markdown syntax. Please make shure your syntax is correct, otherwise the website might fail. Please **test it offline** if you use the extendet markdown syntax!"
+
+  # -----------------------------------------------------------------------
+  # BLOG
+  # -----------------------------------------------------------------------
+  - name: blog
+    icon: article
+    label: Blog
+    folder: content/data/blog
+    create: true
+    slug: "{{slug}}"
+    preview_path: "data/blog/{{slug}}/"
+    fields:
+      - name: layout
+        label: Layout
+        widget: hidden
+        default: layouts/blog-post-page.njk
+
+      - label: Title
+        name: title
+        widget: string
+        hint: "The headline of the blog article."
+
+      - label: Publication Date
+        name: publication_date
+        widget: string
+        hint: "Enter a year (2024), month and year (06.2024), or full date (11.06.2024)"
+        pattern:
+          [
+            '^(((0[1-9]|[12]\d|3[01])\.)?(0[1-9]|1[0-2])\.)?\d{4}$',
+            "Use dd.mm.yyyy, mm.yyyy, or yyyy",
+          ]
+
+      - label: Author
+        name: author
+        widget: relation
+        collection: community
+        file: people
+        value_field: "people.*.name"
+        display_fields: ["people.*.name"]
+        search_fields:
+          ["people.*.name", "people.*.affiliation", "people.*.role"]
+        required: false
+        hint: "Optional. Select the author from the People list."
+
+      - label: Related Publication(s)
+        name: related_publications
+        widget: relation
+        collection: publications
+        file: publications
+        value_field: "publications.*.key"
+        search_fields:
+          [
+            "publications.*.key",
+            "publications.*.title",
+            "publications.*.date",
+            "publications.*.publication_name",
+            "publications.*.authors",
+          ]
+        display_fields:
+          [
+            "publications.*.title",
+            "publications.*.date",
+            "publications.*.publication_name",
+            "publications.*.authors",
+          ]
+        multiple: true
+        required: false
+        hint: "Publications must be added before you can link to them here."
+
+      - label: Related Subtypes
+        name: related_subtypes
+        widget: relation
+        collection: subtypes
+        multiple: true
+        required: false
+        value_field: key
+        display_fields: [name]
+        search_fields: [name]
+        hint: "Subtype pages will list this article under ''Related Blog Articles''."
+
+      - label: Related Datasets
+        name: related_datasets
+        widget: relation
+        collection: datasets
+        multiple: true
+        required: false
+        value_field: key
+        display_fields: [title]
+        search_fields: [title]
+        hint: "Dataset pages will list this article under ''Related Blog Articles''."
+
+      - label: Body
+        name: body
+        widget: markdown
+        default: "Write your article here."
+        hint: "The article text in markdown ([see markdown cheat sheet](/documentation/markdown/markdown_cheat_sheet/))."
 
   # -----------------------------------------------------------------------
   # PUBLICATIONS

@@ -1,5 +1,6 @@
 ---
 layout: layouts/dataset-page.njk
+key: 0c1bfd52-0841-4b78-8090-d380d0a0f94a
 title: Blastocystis hominis strain HJ00-5 small subunit ribosomal RNA gene, complete sequence
 publication_date: '2004'
 link_to_source: https://www.ncbi.nlm.nih.gov/nuccore/AF408426

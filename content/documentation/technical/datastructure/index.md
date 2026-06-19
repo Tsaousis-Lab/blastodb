@@ -11,7 +11,7 @@ description: Overview of the BlastoDB data model — collections, fields, and cr
 [:hero]
 
 
-BlastoDB is built around six main collections: **Datasets**, **Subtypes**, **Lab Protocols**, **Publications**, **Research Labs**, and **People**, plus a standalone **Announcements** collection. Cross-collection links are stored as stable UUID keys — renaming an entry never breaks a link. Vocabulary lists (Datatypes, Sources, Data Origins, Detection Methods, Countries) provide controlled terms used in datasets and subtypes.
+BlastoDB is built around seven main collections: **Datasets**, **Subtypes**, **Lab Protocols**, **Publications**, **Research Labs**, **People**, and **Blog**, plus a standalone **Announcements** collection. Cross-collection links are stored as stable UUID keys — renaming an entry never breaks a link. Vocabulary lists (Datatypes, Sources, Data Origins, Detection Methods, Countries) provide controlled terms used in datasets and subtypes.
 
 ## Dependency Graph
 
@@ -27,12 +27,22 @@ erDiagram
     DATASET }o--o{ DETECTION_METHOD : "detection_methods[ ]"
     DATASET }o--o{ COUNTRY : "countries[ ]"
     SUBTYPE }o--o{ SOURCE : "sources[ ]"
+    BLOG }o--o{ PUBLICATION : "related_publications[ ]"
+    BLOG }o--o{ SUBTYPE : "related_subtypes[ ]"
+    BLOG }o--o{ DATASET : "related_datasets[ ]"
 
     DATASET {
+        uuid key
         string title
         string link_to_source
         string publication_date
         string strains
+    }
+    BLOG {
+        string title
+        string publication_date
+        string author
+        markdown body
     }
     SUBTYPE {
         uuid key
@@ -96,9 +106,12 @@ These collections reference each other using stable `key` fields (hidden UUID, a
 
 | Collection | Key type | Linked from |
 |---|---|---|
-| Subtypes | UUID (hidden) | Datasets → `subtypes[]` |
+| Subtypes | UUID (hidden) | Datasets → `subtypes[]`, Blog → `related_subtypes[]` |
+| Datasets | UUID (hidden) | Blog → `related_datasets[]` |
 | Lab Protocols | UUID (hidden) | Datasets → `lab_protocols[]` |
-| Publications | UUID (hidden) | Datasets → `related_publications[]`, Lab Protocols → `related_publications[]` |
+| Publications | UUID (hidden) | Datasets → `related_publications[]`, Lab Protocols → `related_publications[]`, Blog → `related_publications[]` |
+
+Blog articles link to publications, subtypes and datasets. Dataset and subtype pages "reverse-render" a **Related Blog Articles** section by filtering the blog for articles whose `related_*` array contains their `key`.
 
 ## Standalone Collections
 
@@ -123,6 +136,7 @@ Vocabulary fields store string values directly — they are not linked by key. C
 ## Schema Reference
 
 - [Datasets](/documentation/technical/datastructure/datasets/)
+- [Blog](/documentation/technical/datastructure/blog/)
 - [Subtypes](/documentation/technical/datastructure/subtypes/)
 - [Lab Protocols](/documentation/technical/datastructure/lab-protocols/)
 - [Publications](/documentation/technical/datastructure/publications/)

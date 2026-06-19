@@ -53,6 +53,8 @@ You can edit the content by opening the **Subtypes** collection on the left side
 5. **Description** `required` — A free-text description written in Markdown.
     - Write your descriptive text in markdown ([see markdown cheat sheet](/documentation/markdown/markdown_cheat_sheet/)).
 
+If a [blog article](/documentation/editors_guide/blog/) links to this subtype, it is shown automatically in a **"Related Blog Articles"** section on the subtype page. You link them from the blog article itself.
+
 [card: class:warning]
 
 **Be Careful! You can break things here.** The description supports the extendet markdown syntax, which need to be defined exactly, otherwise the build of the website might fail. Please edit the webpage locally, if you want to use these features.

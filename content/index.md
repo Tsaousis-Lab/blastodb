@@ -26,9 +26,9 @@ BlastoDB is a community resource for Blastocystis research. Here you find digita
 
 <div class="announcements-section">
 
-# Announcements
+# Announcement
 
-[collector -> announcements; arrange:rows; display_items:2; card-template:announcement; prefilter:[publication_date<=today AND valid_until>=today]; clickable:false]
+[collector -> announcements; arrange:rows; display_items:1; card-template:announcement; prefilter:[publication_date<=today AND valid_until>=today]; clickable:false]
 
 </div>
 
@@ -50,7 +50,7 @@ Our Dataset-Repository contains reviewed datasets, which can be explored and fil
 
 Explore our Biobank, a community-network of research laboratories offering physical resources for Blastocystis research.
 
-[btn: Explore the Datasets -> /biobank/]
+[btn: Explore the Biobank -> /biobank/]
 
 [:card]
 
@@ -60,6 +60,7 @@ Explore our Biobank, a community-network of research laboratories offering physi
 Interested to start researching Blastocystis? Explore our network of research labs!
 
 [btn: Explore Research Labs -> /labs/]
+[btn: Explore our Blog -> /blog/]
 
 [:card]
 

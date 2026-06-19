@@ -10,8 +10,15 @@
         { "label": "Lab Protocols", "file": "content/lab-protocols.md" }
       ]
     },
-    { "label": "Research Labs", "file": "content/labs.md" },
     { "label": "Biobank", "file": "content/biobank.md" },
+    {
+      "label": "Community",
+      "items": [
+        { "label": "Research Labs", "file": "content/labs.md" },
+        { "label": "Blog", "file": "content/blog.md" },
+        { "label": "Announcements", "file": "content/announcements.md" }
+      ]
+    },
     {
       "label": "About",
       "items": [

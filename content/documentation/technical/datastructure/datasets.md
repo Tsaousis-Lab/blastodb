@@ -14,6 +14,7 @@ Each dataset is a separate Markdown file in `content/data/datasets/`. Datasets a
 
 | Field | Type | Required | Notes |
 |---|---|---|---|
+| `key` | UUID | auto | Hidden, auto-generated; lets other collections (e.g. Blog) link to the dataset |
 | `title` | string | yes | Display name of the dataset |
 | `link_to_source` | URL | yes | Link to the raw data source |
 | `publication_date` | string | no | Format: `yyyy`, `mm.yyyy`, or `dd.mm.yyyy` |
