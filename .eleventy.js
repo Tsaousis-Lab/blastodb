@@ -695,7 +695,7 @@ module.exports = function (eleventyConfig) {
         return true;
       }
 
-      // [sbtn: Label -> [url1, url2, ...]]
+      // [sbtn: Label -> [Label1 -> url1, Label2 -> url2, ...]]
       const selBtnMatch = state.src
         .slice(pos)
         .match(/^\[sbtn:\s*([^\]]+?)\s*->\s*\[([^\]]+?)\]\]/);
@@ -703,13 +703,24 @@ module.exports = function (eleventyConfig) {
         if (!silent) {
           const token = state.push("sbtn_token", "", 0);
           const urlsStr = selBtnMatch[2].trim();
-          const urls = urlsStr
+          const options = urlsStr
             .split(",")
             .map((u) => u.trim())
-            .filter((u) => u.length > 0);
+            .filter((u) => u.length > 0)
+            .map((u) => {
+              const labeled = u.match(/^(.+?)\s*->\s*(.+)$/);
+              if (!labeled) {
+                console.warn(
+                  `[sbtn] Skipping option without a "Title -> url" label: "${u}"`,
+                );
+                return null;
+              }
+              return { label: labeled[1].trim(), url: labeled[2].trim() };
+            })
+            .filter(Boolean);
           token.meta = {
             label: selBtnMatch[1].trim(),
-            urls: urls,
+            options: options,
           };
         }
         state.pos += selBtnMatch[0].length;
@@ -738,10 +749,10 @@ module.exports = function (eleventyConfig) {
     mdInstance.renderer.rules.sbtn_token = (tokens, idx) => {
       const meta = tokens[idx].meta;
       const uniqueId = `sbtn-${Math.random().toString(36).substr(2, 9)}`;
-      const menuItems = meta.urls
+      const menuItems = meta.options
         .map(
-          (url) =>
-            `<a href="${escapeHtml(url)}" class="sbtn-menu-item">${escapeHtml(url)}</a>`,
+          (opt) =>
+            `<a href="${escapeHtml(opt.url)}" class="sbtn-menu-item">${escapeHtml(opt.label)}</a>`,
         )
         .join("");
       const arrow = '<span class="sbtn-arrow">▷</span>';
