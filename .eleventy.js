@@ -365,6 +365,17 @@ function getItemsFromCollection(collection, templateOverride) {
           );
         }
 
+        // Highest annotation severity, for the collector card indicator.
+        if (Array.isArray(frontmatter.annotations) && frontmatter.annotations.length) {
+          const rank = { info: 1, warning: 2, severe: 3 };
+          let best = "info";
+          frontmatter.annotations.forEach((ann) => {
+            const s = (ann && ann.severity) || "info";
+            if ((rank[s] || 1) > (rank[best] || 1)) best = s;
+          });
+          itemData.annotation_severity = best;
+        }
+
         const cardHtml = renderCollectorCard(templateName, itemData);
         const searchable = buildSearchableText(itemData, searchFields);
 
@@ -974,6 +985,12 @@ module.exports = function (eleventyConfig) {
     const idx = buildSubtypeIndex();
     return (Array.isArray(ids) ? ids : [ids]).map((id) => idx[id] || id);
   });
+
+  // Basic markdown rendering (bold, italics, links, lists) for short fields
+  // like dataset annotations. Uses mdBasic, not the extended-syntax library.
+  eleventyConfig.addFilter("markdownify", (str) =>
+    str ? mdBasic.render(str) : "",
+  );
 
   eleventyConfig.addFilter("depth", (filePath) => {
     const count = (filePath.match(/\//g) || []).length;

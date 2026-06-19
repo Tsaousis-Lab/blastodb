@@ -44,6 +44,26 @@
         <a href="{{ link_to_source }}" target="_blank" rel="noopener" class="external-link">Go To Dataset &#8599;</a>
     </div>
 
+    {% if annotations and annotations.length %}
+    {% import "annotation-macros.njk" as sev %}
+    <section class="dataset-annotations">
+      {% for ann in annotations %}
+      <div class="annotation annotation--{{ ann.severity or 'info' }}">
+        <div class="annotation-head">
+          <span class="annotation-icon">{{ sev.severityIcon(ann.severity, 24) }}</span>
+          <h2 class="annotation-title">{{ ann.title }}</h2>
+        </div>
+        {% if ann.text %}<div class="annotation-text">{{ ann.text | markdownify | safe }}</div>{% endif %}
+        {% if ann.related_publications and ann.related_publications.length %}
+        <div class="collector"
+            data-collection="publications"
+            data-path="publications"
+            data-opts='{"arrange":"rows","display_items":"all","search_fields":[],"prefilter":{"orGroups":[{% for key in ann.related_publications %}[{"field":"key","value":{{ key | dump | safe }}}]{% if not loop.last %},{% endif %}{% endfor %}]},"card_template":"references","clickable":false}'></div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </section>
+    {% endif %}
 
     {{ content | processSpans | safe }}
 
