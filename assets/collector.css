@@ -676,6 +676,11 @@
     gap: 0.4rem;
 }
 
+/* Without a picture, vertically center the remaining info in the card */
+.collector-item:has(> .collector-card-person):not(:has(.person-card-avatar)) {
+    justify-content: center;
+}
+
 .person-card-avatar {
     width: 88px;
     height: 88px;
@@ -683,17 +688,6 @@
     object-fit: cover;
     margin: 0 0 0.5rem;
     border: 2px solid var(--border);
-}
-
-.person-card-avatar-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--accent-pale);
-    color: var(--accent-dark);
-    font-family: var(--font-ui);
-    font-size: 1.8rem;
-    font-weight: 600;
 }
 
 .person-card-body {

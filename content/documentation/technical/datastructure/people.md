@@ -20,5 +20,6 @@ People are stored as a JSON array in `content/data/people.json`. This collection
 | `affiliation` | string | no | Free-text affiliation |
 | `role` | string | no | A single word describing what they do, e.g. "Developer" |
 | `website` | URL | no | Personal or lab webpage |
+| `github` | URL | no | GitHub profile |
 
 → [Editor Guide: People](/documentation/editors_guide/people/) &nbsp;|&nbsp; [Data Structure Overview](/documentation/technical/)
