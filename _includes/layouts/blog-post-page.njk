@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href={{ collections.branding.favicon }} sizes="any">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ description or excerpt or 'BlastoDB - The open hub for Blastocystis research' }}">
+  <title>{{collections.branding.site_title}} - {{ title }}</title>
+  <link rel="stylesheet" href="{{ '/assets/style.css' | url }}">
+  <link rel="stylesheet" href="{{ '/assets/collector.css' | url }}">
+  <script>
+    // Inject data into global scope for main.js to access
+    window.collectorData = {{ collectorData | dump | safe }};
+  </script>
+  <script src="{{ '/assets/main.js' | url }}" defer></script>
+</head>
+<body>
+  {% include "layouts/header.njk" %}
+  <main>
+    <div class="hero hero-content-center">
+      <h-hero>{{ title }}</h-hero>
+      {% if publication_date or author %}
+      <p class="blog-post-meta">
+        {%- if publication_date %}<span class="blog-box-date">{{ publication_date }}</span>{% endif -%}
+        {%- if publication_date and author %} · {% endif -%}
+        {%- if author %}<span class="blog-box-author">By {{ author }}</span>{% endif -%}
+      </p>
+      {% endif %}
+    </div>
+
+    {{ content | processSpans | safe }}
+
+    {% if related_publications and related_publications.length %}
+    <hr>
+    <h1>References</h1>
+    <div class="collector"
+        data-collection="publications"
+        data-path="publications"
+        data-opts='{"arrange":"rows","display_items":"all","search_fields":[],"prefilter":{"orGroups":[{% for key in related_publications %}[{"field":"key","value":{{ key | dump | safe }}}]{% if not loop.last %},{% endif %}{% endfor %}]},"card_template":"references","clickable":false}'></div>
+    {% endif %}
+
+    {% if related_subtypes and related_subtypes.length %}
+    <hr>
+    <h1>Related Subtypes</h1>
+    <div class="collector"
+        data-collection="subtypes"
+        data-path="subtypes"
+        data-opts='{"arrange":"rows","display_items":"all","search_fields":[],"prefilter":{"orGroups":[{% for key in related_subtypes %}[{"field":"key","value":{{ key | dump | safe }}}]{% if not loop.last %},{% endif %}{% endfor %}]},"card_template":"subtype","clickable":true}'></div>
+    {% endif %}
+
+    {% if related_datasets and related_datasets.length %}
+    <hr>
+    <h1>Related Datasets</h1>
+    <div class="collector"
+        data-collection="datasets"
+        data-path="datasets"
+        data-opts='{"arrange":"rows","display_items":"all","search_fields":[],"prefilter":{"orGroups":[{% for key in related_datasets %}[{"field":"key","value":{{ key | dump | safe }}}]{% if not loop.last %},{% endif %}{% endfor %}]},"card_template":"dataset-card","clickable":true}'></div>
+    {% endif %}
+
+    <hr>
+    <div style="text-align:center">
+      <a href="{{ '/blog/' | url }}" class="btn">← Back to Blog</a>
+    </div>
+  </main>
+
+  {% include "layouts/footer.njk" %}
+</body>
+</html>

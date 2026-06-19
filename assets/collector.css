@@ -4,7 +4,8 @@
    1.  Controls (search / filters / sort)
    2.  Items & arrangements
    3.  Cards (shared + per-type)
-   4.  Responsive (≤ 720px)
+   4.  Blog
+   5.  Responsive (≤ 720px)
    ============================================================== */
 
 /* ── 1. Controls ───────────────────────────────────────────── */
@@ -363,7 +364,7 @@
 }
 
 .collector-item-date {
-    font-family: var(--font-ui);
+    font-family: var(--font-mono);
     font-size: 0.8rem;
     color: var(--text-muted);
 }
@@ -454,8 +455,13 @@
     display: flex;
     align-items: baseline;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 0.5rem;
     margin-bottom: 0.4rem;
+}
+
+.announcement-header .collector-card-date {
+    font-family: var(--font-mono);
+    color: var(--text-muted);
 }
 
 .collector-card-announcement .card-title {
@@ -483,7 +489,7 @@
 }
 
 .collector-card-publication .collector-card-authors {
-    font-family: var(--font-body);
+    font-family: var(--font-ui);
     font-size: 0.9rem;
     line-height: 1.35;
     color: var(--text);
@@ -492,7 +498,7 @@
 /* Source line: "Journal name, Year" — one line, one size. */
 .collector-card-publication .collector-card-journal,
 .collector-card-publication .collector-card-date {
-    font-family: var(--font-body);
+    font-family: var(--font-ui);
     font-size: 0.9rem;
     line-height: 1.4;
     color: var(--text-muted);
@@ -952,7 +958,57 @@
     }
 }
 
-/* ── 4. Responsive (≤ 720px) ───────────────────────────────── */
+/* ── 4. Blog ──────────────────────────────────────────────── */
+.blog-list {
+    margin: 1.5rem 0;
+}
+
+.blog-list hr {
+    margin: 1.75rem 0;
+}
+
+.blog-box {
+    display: block;
+}
+
+.blog-box-title {
+    margin: 0 0 0.35rem;
+    font-size: 1.4rem;
+}
+
+.blog-box-title a {
+    text-decoration: none;
+    color: var(--accent-darker);
+}
+
+.blog-box-title a:hover {
+    color: var(--accent);
+}
+
+.blog-box-meta {
+    margin: 0 0 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.blog-box-excerpt {
+    margin: 0 0 0.6rem;
+    color: var(--text);
+}
+
+.blog-box-readmore {
+    font-weight: 600;
+}
+
+/* Single article meta line under the hero title. */
+.blog-post-meta {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* ── 5. Responsive (≤ 720px) ───────────────────────────────── */
 @media (max-width: 720px) {
     /* Collector controls */
     .collector-controls {

@@ -21,6 +21,10 @@
           "url": "/documentation/editors_guide/datasets/"
         },
         {
+          "label": "Blog",
+          "url": "/documentation/editors_guide/blog/"
+        },
+        {
           "label": "Publications",
           "url": "/documentation/editors_guide/publications/"
         },
@@ -99,6 +103,10 @@
         {
           "label": "Datasets",
           "url": "/documentation/technical/datastructure/datasets/"
+        },
+        {
+          "label": "Blog",
+          "url": "/documentation/technical/datastructure/blog/"
         },
         {
           "label": "Subtypes",

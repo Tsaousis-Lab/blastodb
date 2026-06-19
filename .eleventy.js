@@ -68,6 +68,38 @@ function formatDateString(dateValue) {
   });
 }
 
+// Parse the flexible publication_date formats (yyyy, mm.yyyy, dd.mm.yyyy) into a
+// timestamp for sorting. Returns 0 when unparseable.
+function parsePubDate(value) {
+  if (!value || typeof value !== "string") return 0;
+  const dmy = value.match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
+  if (dmy) return new Date(Number(dmy[3]), Number(dmy[2]) - 1, Number(dmy[1])).getTime();
+  const my = value.match(/^(\d{2})\.(\d{4})$/);
+  if (my) return new Date(Number(my[2]), Number(my[1]) - 1, 1).getTime();
+  const y = value.match(/^(\d{4})$/);
+  if (y) return new Date(Number(y[1]), 0, 1).getTime();
+  const t = new Date(value).getTime();
+  return Number.isNaN(t) ? 0 : t;
+}
+
+// Build a short plain-text excerpt from a markdown body for listings/cards.
+function makeExcerpt(body, maxWords = 40) {
+  if (!body || typeof body !== "string") return "";
+  let text = body
+    .replace(/```[\s\S]*?```/g, " ") // code fences
+    .replace(/\[[^\]]*?->[^\]]*?\]/g, " ") // custom collector/component shortcodes
+    .replace(/\[:?[a-z][^\]]*\]/gi, " ") // [hero ...] / [:hero] style tags
+    .replace(/<[^>]+>/g, " ") // html tags
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, " ") // images
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1") // links -> text
+    .replace(/[#>*_`~=|-]+/g, " ") // markdown punctuation
+    .replace(/\s+/g, " ")
+    .trim();
+  const words = text.split(" ").filter(Boolean);
+  if (words.length <= maxWords) return words.join(" ");
+  return words.slice(0, maxWords).join(" ") + "…";
+}
+
 function resolveFieldPath(obj, fieldPath) {
   if (!fieldPath) return undefined;
   return fieldPath.split(".").reduce((acc, key) => {
@@ -357,6 +389,7 @@ function getItemsFromCollection(collection, templateOverride) {
           pageUrl,
           collection: collection.name,
           body,
+          excerpt: makeExcerpt(body),
         };
 
         if (subtypeIndex && Array.isArray(frontmatter.subtypes)) {
@@ -398,8 +431,14 @@ function getItemsFromCollection(collection, templateOverride) {
   });
 
   return items.sort((a, b) => {
-    const dateA = new Date(a.date || 0).getTime();
-    const dateB = new Date(b.date || 0).getTime();
+    // Fall back to the flexible publication_date when there is no `date`, so
+    // collections like blog (which only have publication_date) sort newest-first.
+    const dateA = a.date
+      ? new Date(a.date).getTime()
+      : parsePubDate(a.data && a.data.publication_date);
+    const dateB = b.date
+      ? new Date(b.date).getTime()
+      : parsePubDate(b.data && b.data.publication_date);
     if (dateB !== dateA) return dateB - dateA;
     // Natural (numeric-aware) sort on slug as tiebreaker so subtype-2
     // comes before subtype-10 when dates are identical or absent.

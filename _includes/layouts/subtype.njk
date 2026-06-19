@@ -43,10 +43,21 @@
 
     {{ content | processSpans | safe }}
 
-    {% if key %}
+    {% set datasetMatch %}{% for d in collectorData.datasets %}{% if key in (d.data.related_subtypes or []) %}1{% endif %}{% endfor %}{% endset %}
+    {% if datasetMatch | trim %}
     <hr>
     <h1>Explore the Datasets Containing {{ name }}</h1>
     <div class="collector" data-collection="datasets" data-path="datasets" data-opts='{"arrange":"rows","display_items":"all","search_fields":["title"],"sort_fields":["date","title"],"filters":[{"label":"Countries","fields":["countries"]}],"prefilter":{"orGroups":[[{"field":"subtypes","value":"{{ key }}"}]]},"card_template":"dataset-card","clickable":true}'></div>
+    {% endif %}
+
+    {% set blogMatch %}{% for b in collectorData.blog %}{% if key in (b.data.related_subtypes or []) %}1{% endif %}{% endfor %}{% endset %}
+    {% if blogMatch | trim %}
+    <hr>
+    <h1>Related Blog Articles</h1>
+    <div class="collector"
+        data-collection="blog"
+        data-path="blog"
+        data-opts='{"arrange":"rows","display_items":"all","search_fields":["title","author","publication_date","body"],"sort_fields":["publication_date","title","author"],"prefilter":{"orGroups":[[{"field":"related_subtypes","value":{{ key | dump | safe }}}]]},"card_template":"blog-card","clickable":true}'></div>
     {% endif %}
 
     <hr>

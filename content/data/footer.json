@@ -24,20 +24,28 @@
       ]
     },
     {
-      "title": "Community",
-      "items": [
-        {
-          "label": "Research Labs",
-          "url": "/labs/"
-        }
-      ]
-    },
-    {
       "title": "Biobank",
       "items": [
         {
           "label": "Biobank",
           "url": "/biobank/"
+        }
+      ]
+    },
+    {
+      "title": "Community",
+      "items": [
+        {
+          "label": "Research Labs",
+          "url": "/labs/"
+        },
+        {
+          "label": "Blog",
+          "url": "/blog/"
+        },
+        {
+          "label": "Announcements",
+          "url": "/announcements/"
         }
       ]
     },
@@ -55,10 +63,6 @@
         {
           "label": "Contact",
           "url": "/contact/"
-        },
-        {
-          "label": "Announcements",
-          "url": "/announcements/"
         },
         {
           "label": "Acknowledgements",

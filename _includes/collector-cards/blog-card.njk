@@ -1,0 +1,12 @@
+<article class="blog-box">
+  <h2 class="blog-box-title">{{ title }}</h2>
+  {% if publication_date or author %}
+  <p class="blog-box-meta">
+    {%- if publication_date %}<span class="blog-box-date">{{ publication_date }}</span>{% endif -%}
+    {%- if publication_date and author %} · {% endif -%}
+    {%- if author %}<span class="blog-box-author">By {{ author }}</span>{% endif -%}
+  </p>
+  {% endif %}
+  {% if excerpt %}<p class="blog-box-excerpt">{{ excerpt }}</p>{% endif %}
+  <a class="blog-box-readmore" href="{{ pageUrl }}">Read article →</a>
+</article>
