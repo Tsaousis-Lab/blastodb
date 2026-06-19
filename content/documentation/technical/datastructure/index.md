@@ -59,6 +59,13 @@ erDiagram
         string contact_mail
         string institution_name
     }
+    PERSON {
+        string name
+        string mail
+        string affiliation
+        string role
+        url github
+    }
     ANNOUNCEMENT {
         string title
         date publication_date

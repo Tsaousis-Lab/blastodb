@@ -434,6 +434,12 @@ collections:
                 required: false
                 hint: "URL to a personal or lab webpage."
 
+              - label: GitHub
+                name: github
+                widget: string
+                required: false
+                hint: "URL to their GitHub profile, e.g. https://github.com/username."
+
   - divider: true
 
   # -----------------------------------------------------------------------

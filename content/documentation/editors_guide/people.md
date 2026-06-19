@@ -42,3 +42,4 @@ You can edit the content by opening the **Community** collection on the left sid
 4. **Affiliation** — Free-text affiliation, e.g. `University of Kent`.
 5. **Role** — A single word describing what they do, e.g. `Developer`, `Researcher`.
 6. **Website** — Link to a personal or lab webpage.
+7. **GitHub** — Link to their GitHub profile, e.g. `https://github.com/username`.

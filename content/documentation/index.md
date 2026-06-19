@@ -41,6 +41,7 @@ In the [editors guide](/documentation/editors_guide/) if you want to get informa
   - [Datasets](/documentation/editors_guide/datasets/)
   - [Publications](/documentation/editors_guide/publications/)
   - [Research Labs](/documentation/editors_guide/labs/)
+  - [People](/documentation/editors_guide/people/)
   - [Subtypes](/documentation/editors_guide/subtypes/)
   - [Lab Protocols](/documentation/editors_guide/lab-protocols/)
   - [Vocabularies](/documentation/editors_guide/vocabularies/)
