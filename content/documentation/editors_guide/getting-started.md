@@ -18,7 +18,7 @@ You will need a GitHub Account, access rights to the Resository and a Personal A
 
 # Logging in
 
-1. Click **Sing In Using Access Token**
+1. Click **Sing In Using Access Token** (**[-> You need to generate a PAT](/documentation/editors_guide/github-setup#Step3)** if you don't already have one)
 2. Paste the PAT you generated during setup from your favorite password manager into the text field.
 3. You are now in the CMS dashboard!
 
