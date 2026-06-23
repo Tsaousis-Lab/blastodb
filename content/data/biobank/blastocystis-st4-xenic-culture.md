@@ -2,7 +2,9 @@
 layout: layouts/biobank-page.njk
 key: 2e16a82d-e07c-4a82-a6b4-1adf8742c2ff
 title: Blastocystis ST4 xenic culture
-resource_type: Strain
+tags:
+  - Strain
+  - ST4
 contact_person_name: Dr Eleni Gentekaki
 contact_person_email: eleni.gentekaki@mfu.ac.th
 affiliated_lab: 00c221f6-d793-4b9b-862c-11116715412e

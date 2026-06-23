@@ -336,7 +336,7 @@ collections:
           contact_person_name,
           affiliated_lab,
           country,
-          resource_type,
+          tags,
           body,
         ]
     fields:
@@ -355,18 +355,11 @@ collections:
         widget: string
         hint: "The name of the item offered (e.g. a strain, sample, or reagent)."
 
-      - label: Resource Type
-        name: resource_type
-        widget: select
-        options:
-          - Strain
-          - Sample
-          - DNA / Nucleic acid
-          - Reagent
-          - Culture medium
-          - Other
-        default: Strain
-        hint: "What kind of physical resource this is."
+      - label: Tags
+        name: tags
+        widget: list
+        required: false
+        hint: "Free-text list of tags describing the item (e.g. Strain, ST1). One item per line."
 
       - label: Contact person name
         name: contact_person_name
