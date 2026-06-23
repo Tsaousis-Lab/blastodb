@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="{{ description or 'BlastoDB - The open hub for Blastocystis research' }}">
   <title>{{collections.branding.site_title}} - {{ title }}</title>
+  {% if feed_url %}<link rel="alternate" type="application/rss+xml" title="{{ title }} – {{ collections.branding.site_title }}" href="{{ feed_url | url }}">{% endif %}
   <link rel="stylesheet" href="{{ '/assets/style.css' | url }}">
   <link rel="stylesheet" href="{{ '/assets/collector.css' | url }}">
   <script>

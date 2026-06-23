@@ -1,0 +1,31 @@
+---
+permalink: /blog/feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>{{ collections.branding.site_title }} Blog</title>
+    <link>{{ collections.branding.site_url }}/blog/</link>
+    <description>Blog articles on Blastocystis research from {{ collections.branding.site_title }}.</description>
+    <language>en</language>
+    <atom:link href="{{ collections.branding.site_url }}/blog/feed.xml" rel="self" type="application/rss+xml" />
+    {%- if collectorData.blog.length %}
+    <lastBuildDate>{{ collectorData.blog[0].data.publication_date | dateToRfc822 }}</lastBuildDate>
+    {%- endif %}
+    {%- for item in collectorData.blog %}{% if loop.index <= 50 %}
+    <item>
+      <title>{{ item.data.title }}</title>
+      <link>{{ collections.branding.site_url }}{{ item.pageUrl }}</link>
+      <guid isPermaLink="true">{{ collections.branding.site_url }}{{ item.pageUrl }}</guid>
+      {%- if item.data.author %}
+      <dc:creator>{{ item.data.author }}</dc:creator>
+      {%- endif %}
+      {%- if item.data.publication_date %}
+      <pubDate>{{ item.data.publication_date | dateToRfc822 }}</pubDate>
+      {%- endif %}
+      <description><![CDATA[{{ item.data.body | markdownify | safe }}]]></description>
+    </item>
+    {%- endif %}{% endfor %}
+  </channel>
+</rss>
