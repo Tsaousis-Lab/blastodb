@@ -319,6 +319,92 @@ collections:
         hint: "The article text in markdown ([see markdown cheat sheet](/documentation/markdown/markdown_cheat_sheet/))."
 
   # -----------------------------------------------------------------------
+  # BIOBANK
+  # -----------------------------------------------------------------------
+  - name: biobank
+    icon: package
+    label: Biobank
+    folder: content/data/biobank
+    create: true
+    slug: "{{slug}}"
+    preview_path: "data/biobank/{{slug}}/"
+    collector:
+      template: biobank-card.njk
+      search_fields:
+        [
+          title,
+          contact_person_name,
+          affiliated_lab,
+          country,
+          resource_type,
+          body,
+        ]
+    fields:
+      - name: layout
+        label: Layout
+        widget: hidden
+        default: layouts/biobank-page.njk
+
+      - label: Key
+        name: key
+        widget: hidden
+        default: "{{uuid}}"
+
+      - label: Title
+        name: title
+        widget: string
+        hint: "The name of the item offered (e.g. a strain, sample, or reagent)."
+
+      - label: Resource Type
+        name: resource_type
+        widget: select
+        options:
+          - Strain
+          - Sample
+          - DNA / Nucleic acid
+          - Reagent
+          - Culture medium
+          - Other
+        default: Strain
+        hint: "What kind of physical resource this is."
+
+      - label: Contact person name
+        name: contact_person_name
+        widget: string
+        hint: "The person offering this item. May differ from the lab's main contact."
+
+      - label: Contact person email
+        name: contact_person_email
+        widget: string
+        type: email
+        hint: "Orders for this item are placed by email to this address."
+
+      - label: Affiliated research lab
+        name: affiliated_lab
+        widget: relation
+        collection: community
+        file: research_labs
+        multiple: false
+        value_field: "research_labs.*.lab_name"
+        display_fields: ["research_labs.*.lab_name"]
+        search_fields:
+          ["research_labs.*.lab_name", "research_labs.*.institution_name"]
+        hint: "The lab this item belongs to. The entry's country is taken from this lab."
+
+      - label: Picture
+        name: picture
+        widget: image
+        required: false
+        hint: "Optional photo of the item. JPG or WebP."
+
+      - label: Description
+        name: body
+        widget: markdown
+        required: false
+        default: "Describe the item, quantities, condition, and any handling notes here."
+        hint: "The item description in markdown ([see markdown cheat sheet](/documentation/markdown/markdown_cheat_sheet/))."
+
+  # -----------------------------------------------------------------------
   # PUBLICATIONS
   # -----------------------------------------------------------------------
   - name: publications
@@ -539,6 +625,17 @@ collections:
               - label: Address of Institution
                 name: institution_address
                 widget: text
+
+              - label: Country
+                name: country
+                widget: relation
+                collection: vocabularies
+                file: countries
+                multiple: false
+                value_field: countries.*.name
+                display_fields: [countries.*.name]
+                search_fields: [countries.*.name, countries.*.iso]
+                hint: "Used as the country for any Biobank entries affiliated with this lab."
 
       - name: people
         label: People

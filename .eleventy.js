@@ -322,6 +322,23 @@ function buildSubtypeIndex() {
   return index;
 }
 
+// Map of lab_name -> full research lab object, for resolving a biobank entry's
+// affiliated lab (and its country) at build time.
+function buildLabIndex() {
+  const file = path.join(__dirname, "content/data/research_labs.json");
+  const index = {};
+  if (!fs.existsSync(file)) return index;
+  try {
+    const json = JSON.parse(fs.readFileSync(file, "utf-8"));
+    (json.research_labs || []).forEach((lab) => {
+      if (lab && lab.lab_name) index[lab.lab_name] = lab;
+    });
+  } catch (e) {
+    console.warn("Failed to parse research_labs.json:", e.message);
+  }
+  return index;
+}
+
 function getItemsFromCollection(collection, templateOverride) {
   if (!collection || !collection.folder) return [];
 
@@ -355,6 +372,7 @@ function getItemsFromCollection(collection, templateOverride) {
 
   const subtypeIndex =
     collection.name === "datasets" ? buildSubtypeIndex() : null;
+  const labIndex = collection.name === "biobank" ? buildLabIndex() : null;
 
   files.forEach((file) => {
     const filePath = path.join(fullFolderPath, file);
@@ -396,6 +414,16 @@ function getItemsFromCollection(collection, templateOverride) {
           itemData.subtypes_display = frontmatter.subtypes.map(
             (id) => subtypeIndex[id] || id,
           );
+        }
+
+        // Resolve a biobank entry's affiliated lab so the card (pre-rendered
+        // server-side) and listing filters can use the lab's country.
+        if (labIndex && frontmatter.affiliated_lab) {
+          const lab = labIndex[frontmatter.affiliated_lab];
+          if (lab) {
+            itemData.lab = lab;
+            itemData.country = lab.country || "";
+          }
         }
 
         // Highest annotation severity, for the collector card indicator.
@@ -1023,6 +1051,12 @@ module.exports = function (eleventyConfig) {
     if (!ids) return [];
     const idx = buildSubtypeIndex();
     return (Array.isArray(ids) ? ids : [ids]).map((id) => idx[id] || id);
+  });
+
+  // Resolve a research lab object by its lab_name (used by biobank entry pages).
+  eleventyConfig.addFilter("labByName", (name) => {
+    if (!name) return null;
+    return buildLabIndex()[name] || null;
   });
 
   // Basic markdown rendering (bold, italics, links, lists) for short fields

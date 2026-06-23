@@ -10,7 +10,8 @@
       "contact_url": "https://www.kent.ac.uk/biosciences/people/653/tsaousis-anastasios",
       "contact_img_path": "/assets/uploads/pasted-image-1781094468326.png",
       "institution_name": "University of Kent",
-      "institution_address": "School of Biosciences\nCanterbury, Kent CT2 7NJ\nUnited Kingdom"
+      "institution_address": "School of Biosciences\nCanterbury, Kent CT2 7NJ\nUnited Kingdom",
+      "country": "United Kingdom"
     },
     {
       "lab_name": "Eleni Gentekaki's Lab",
@@ -22,7 +23,8 @@
       "contact_url": "https://www.unic.ac.cy/vet/faculty-staff/eleni-gentekaki/",
       "contact_img_path": "/assets/uploads/pasted-image-1781094520964.png",
       "institution_name": "Mae Fah Luang University",
-      "institution_address": "School of Science\nChiang Rai 57100\nThailand"
+      "institution_address": "School of Science\nChiang Rai 57100\nThailand",
+      "country": "Thailand"
     }
   ]
 }

@@ -1090,3 +1090,35 @@
         height: 140px;
     }
 }
+
+/* ─── Biobank ─────────────────────────────────────────────────────────── */
+.biobank-chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem;
+    margin: 0.5rem 0 1rem;
+}
+
+.biobank-image {
+    display: block;
+    max-width: 420px;
+    width: 100%;
+    height: auto;
+    margin: 1rem auto;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.biobank-request-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    padding: 0.7rem 1.5rem;
+}
+
+.biobank-affiliation {
+    max-width: 640px;
+    margin: 0 auto;
+}
