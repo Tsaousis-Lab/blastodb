@@ -2,7 +2,9 @@
 layout: layouts/biobank-page.njk
 key: 7a5e2ba3-d4dd-4e18-a128-e37774d5633f
 title: Blastocystis ST1 reference strain
-resource_type: Strain
+tags:
+  - Strain
+  - ST1
 contact_person_name: Dr Anastasios (Tasos) Tsaousis
 contact_person_email: a.tsaousis@kent.ac.uk
 affiliated_lab: 36e103c4-0fb6-43b3-bbef-f009e5092d09

@@ -2,7 +2,9 @@
 layout: layouts/biobank-page.njk
 key: 6f859348-1fda-4b10-9d35-5a9f67e28cab
 title: ST7-positive faecal sample
-resource_type: Sample
+tags:
+  - Sample
+  - ST7
 contact_person_name: Dr Eleni Gentekaki
 contact_person_email: eleni.gentekaki@mfu.ac.th
 affiliated_lab: 00c221f6-d793-4b9b-862c-11116715412e

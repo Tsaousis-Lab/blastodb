@@ -77,7 +77,7 @@ erDiagram
     BIOBANK {
         uuid key
         string title
-        string resource_type
+        string tags
         string contact_person_name
         string contact_person_email
         string affiliated_lab

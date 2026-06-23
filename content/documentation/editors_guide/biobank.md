@@ -38,8 +38,8 @@ The Biobank entries have seven properties, which are shortly described in the fo
 
 1. **Title** `required` - The name of the item offered.
     - For example a strain identifier, sample name or reagent name.
-2. **Resource Type** `required` - What kind of physical resource this is.
-    - Select one from the list: *Strain*, *Sample*, *DNA / Nucleic acid*, *Reagent*, *Culture medium* or *Other*.
+2. **Tags** - Free-text labels describing the item (e.g. *Strain*, *ST1*, *Reagent*).
+    - Enter one tag per line. They are shown as labels on the entry and can be used to filter the Biobank overview.
 3. **Contact person name** `required` - The person offering this specific item.
     - This may be a different person than the lab's main contact.
 4. **Contact person email** `required` - The email address requests for this item are sent to.

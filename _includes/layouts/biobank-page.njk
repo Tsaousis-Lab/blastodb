@@ -25,7 +25,7 @@
       <h-hero>{{ title }}</h-hero>
 
       <div class="biobank-chips">
-        {% if resource_type %}<span class="tag">{{ resource_type }}</span>{% endif %}
+        {% if tags %}{% for t in tags %}<span class="tag">{{ t }}</span>{% endfor %}{% endif %}
         {% if entryCountry %}<span class="tag tag-muted">{{ entryCountry }}</span>{% endif %}
       </div>
 

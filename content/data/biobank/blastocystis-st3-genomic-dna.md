@@ -2,7 +2,9 @@
 layout: layouts/biobank-page.njk
 key: 06fd796a-1bf8-4a68-8dab-8ab97315ae62
 title: Blastocystis ST3 genomic DNA
-resource_type: DNA / Nucleic acid
+tags:
+  - DNA
+  - ST3
 contact_person_name: Dr Anastasios (Tasos) Tsaousis
 contact_person_email: a.tsaousis@kent.ac.uk
 affiliated_lab: 36e103c4-0fb6-43b3-bbef-f009e5092d09
