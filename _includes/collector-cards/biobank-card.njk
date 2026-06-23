@@ -9,7 +9,7 @@
   <div class="lab-card-body">
     <h3 class="card-title">{{ title }}</h3>
 
-    {% if resource_type or country or affiliated_lab %}
+    {% if resource_type or country %}
     <div class="dataset-chips">
       {% if resource_type %}<span class="tag">{{ resource_type }}</span>{% endif %}
       {% if country %}<span class="tag tag-muted">{{ country }}</span>{% endif %}

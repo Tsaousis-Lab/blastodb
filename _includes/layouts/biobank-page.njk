@@ -18,7 +18,7 @@
   {% include "layouts/header.njk" %}
   <main>
 
-    {% set lab = affiliated_lab | labByName %}
+    {% set lab = affiliated_lab | labByKey %}
     {% set entryCountry = country or (lab.country if lab) %}
 
     <div class="hero hero-content-center">
@@ -51,7 +51,7 @@
       <table class="dataset-table">
         {% if contact_person_name %}<tr><th>Contact person</th><td>{{ contact_person_name }}</td></tr>{% endif %}
         {% if contact_person_email %}<tr><th>Email</th><td><a href="mailto:{{ contact_person_email }}?subject=Biobank request: {{ title }}">{{ contact_person_email }}</a></td></tr>{% endif %}
-        {% if affiliated_lab %}<tr><th>Research lab</th><td>{{ affiliated_lab }}</td></tr>{% endif %}
+        {% if lab and lab.lab_name %}<tr><th>Research lab</th><td>{{ lab.lab_name }}</td></tr>{% endif %}
         {% if lab and lab.institution_name %}<tr><th>Institution</th><td>{{ lab.institution_name }}</td></tr>{% endif %}
         {% if entryCountry %}<tr><th>Country</th><td>{{ entryCountry }}</td></tr>{% endif %}
         {% if lab and lab.contact_url %}<tr><th>Lab webpage</th><td><a href="{{ lab.contact_url }}" target="_blank" rel="noopener">{{ lab.contact_url }}</a></td></tr>{% endif %}

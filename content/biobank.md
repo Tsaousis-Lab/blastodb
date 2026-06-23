@@ -17,7 +17,7 @@ Request offerings with a mail to the respective contact person, they will contac
 Get in touch with the contact person to find out more about processing times and cost. Delivery times, availability and prices may varie and need to be inquired on a case to case basis. We are research organizations first, the Biobank a platform connecting research labs and institutions offering and needing resources. Please keep in mind we are not professional shops. Thank you for your understanding.
 [:card]
 
-[collector -> biobank; search:[title,contact_person_name,affiliated_lab,country,resource_type,body]; sort:[title]; filters:[Resource Type->[resource_type],Country->[country],Lab->[affiliated_lab]]; arrange:grid; card-template:biobank-card.njk; clickable:true]
+[collector -> biobank; search:[title,contact_person_name,affiliated_lab_name,country,resource_type,body]; sort:[title]; filters:[Resource Type->[resource_type],Country->[country],Lab->[affiliated_lab_name]]; arrange:grid; card-template:biobank-card.njk; clickable:true]
 
 ---
 
