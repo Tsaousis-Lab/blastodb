@@ -5,7 +5,7 @@ title: ST7-positive faecal sample
 resource_type: Sample
 contact_person_name: Dr Eleni Gentekaki
 contact_person_email: eleni.gentekaki@mfu.ac.th
-affiliated_lab: Eleni Gentekaki's Lab
+affiliated_lab: 00c221f6-d793-4b9b-862c-11116715412e
 picture: ''
 ---
 

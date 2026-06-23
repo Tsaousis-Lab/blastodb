@@ -385,7 +385,7 @@ collections:
         collection: community
         file: research_labs
         multiple: false
-        value_field: "research_labs.*.lab_name"
+        value_field: "research_labs.*.key"
         display_fields: ["research_labs.*.lab_name"]
         search_fields:
           ["research_labs.*.lab_name", "research_labs.*.institution_name"]
@@ -575,6 +575,11 @@ collections:
             widget: list
             label_singular: Research lab
             fields:
+              - label: Key
+                name: key
+                widget: hidden
+                default: "{{uuid}}"
+
               - label: Lab Name
                 name: lab_name
                 widget: string

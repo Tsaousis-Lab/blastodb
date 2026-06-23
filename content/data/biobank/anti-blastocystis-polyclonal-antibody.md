@@ -5,7 +5,7 @@ title: Anti-Blastocystis polyclonal antibody
 resource_type: Reagent
 contact_person_name: Dr Anastasios (Tasos) Tsaousis
 contact_person_email: a.tsaousis@kent.ac.uk
-affiliated_lab: Tsaousis Lab
+affiliated_lab: 36e103c4-0fb6-43b3-bbef-f009e5092d09
 picture: /assets/uploads/pasted-image-1781094468326.png
 ---
 

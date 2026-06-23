@@ -26,6 +26,10 @@
           "url": "/documentation/editors_guide/labs/"
         },
         {
+          "label": "Biobank",
+          "url": "/documentation/editors_guide/biobank/"
+        },
+        {
           "label": "People",
           "url": "/documentation/editors_guide/people/"
         },
@@ -112,6 +116,10 @@
         {
           "label": "Research Labs",
           "url": "/documentation/technical/datastructure/research-labs/"
+        },
+        {
+          "label": "Biobank",
+          "url": "/documentation/technical/datastructure/biobank/"
         },
         {
           "label": "People",

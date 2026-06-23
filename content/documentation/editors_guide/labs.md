@@ -64,3 +64,6 @@ You can also **rearrange** the order of the research labs (and how they are disp
 8. **Name of Institution** `required` - Name of the university or company the lab is part of
 9. **Address of Institution** `required` - Address of Institution or the Lab
     - Enter each line of the address on a separate line, e.g.:<br>School of Biosciences<br>Canterbury, Kent CT2 7NJ<br>United Kingdom
+10. **Country** - The country the institution is in
+    - Select the country from the list (ISO 3166 countries, the same list used for datasets).
+    - This is used as the country shown on any [Biobank](/documentation/editors_guide/biobank/) entries affiliated with this lab, so please fill it in if the lab offers Biobank material.

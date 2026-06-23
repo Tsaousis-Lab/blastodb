@@ -322,8 +322,8 @@ function buildSubtypeIndex() {
   return index;
 }
 
-// Map of lab_name -> full research lab object, for resolving a biobank entry's
-// affiliated lab (and its country) at build time.
+// Map of lab key (UUID) -> full research lab object, for resolving a biobank
+// entry's affiliated lab (and its country) at build time.
 function buildLabIndex() {
   const file = path.join(__dirname, "content/data/research_labs.json");
   const index = {};
@@ -331,7 +331,7 @@ function buildLabIndex() {
   try {
     const json = JSON.parse(fs.readFileSync(file, "utf-8"));
     (json.research_labs || []).forEach((lab) => {
-      if (lab && lab.lab_name) index[lab.lab_name] = lab;
+      if (lab && lab.key) index[lab.key] = lab;
     });
   } catch (e) {
     console.warn("Failed to parse research_labs.json:", e.message);
@@ -416,12 +416,14 @@ function getItemsFromCollection(collection, templateOverride) {
           );
         }
 
-        // Resolve a biobank entry's affiliated lab so the card (pre-rendered
-        // server-side) and listing filters can use the lab's country.
+        // Resolve a biobank entry's affiliated lab (referenced by UUID key) so
+        // the card (pre-rendered server-side) and listing filters can use the
+        // lab's name and country.
         if (labIndex && frontmatter.affiliated_lab) {
           const lab = labIndex[frontmatter.affiliated_lab];
           if (lab) {
             itemData.lab = lab;
+            itemData.affiliated_lab_name = lab.lab_name || "";
             itemData.country = lab.country || "";
           }
         }
@@ -1053,10 +1055,10 @@ module.exports = function (eleventyConfig) {
     return (Array.isArray(ids) ? ids : [ids]).map((id) => idx[id] || id);
   });
 
-  // Resolve a research lab object by its lab_name (used by biobank entry pages).
-  eleventyConfig.addFilter("labByName", (name) => {
-    if (!name) return null;
-    return buildLabIndex()[name] || null;
+  // Resolve a research lab object by its key/UUID (used by biobank entry pages).
+  eleventyConfig.addFilter("labByKey", (key) => {
+    if (!key) return null;
+    return buildLabIndex()[key] || null;
   });
 
   // Basic markdown rendering (bold, italics, links, lists) for short fields

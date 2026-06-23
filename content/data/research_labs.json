@@ -1,6 +1,7 @@
 {
   "research_labs": [
     {
+      "key": "36e103c4-0fb6-43b3-bbef-f009e5092d09",
       "lab_name": "Tsaousis Lab",
       "institution_logo_upload": "/assets/uploads/kent-logo-3941592245.jpg",
       "institution_logo_url": "",
@@ -14,6 +15,7 @@
       "country": "United Kingdom"
     },
     {
+      "key": "00c221f6-d793-4b9b-862c-11116715412e",
       "lab_name": "Eleni Gentekaki's Lab",
       "institution_logo_upload": "https://www.unic.ac.cy/brand/wp-content/uploads/sites/27/2019/11/Long-Logo2-500x375.png",
       "institution_logo_url": "https://www.unic.ac.cy/brand/wp-content/uploads/sites/27/2019/11/Long-Logo2-500x375.png",
