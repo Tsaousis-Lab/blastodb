@@ -1,5 +1,6 @@
 {
   "site_title": "BlastoDB",
   "site_logo": "/images/blastie.webp",
-  "favicon": "/images/blastie.webp"
+  "favicon": "/images/blastie.webp",
+  "site_url": "https://www.blastodb.com"
 }

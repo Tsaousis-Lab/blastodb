@@ -1061,6 +1061,22 @@ module.exports = function (eleventyConfig) {
     return buildLabIndex()[key] || null;
   });
 
+  // Convert a flexible publication_date string (dd.mm.yyyy, mm.yyyy, yyyy) to an
+  // RFC-822 date for RSS feeds. Parsed as UTC midnight so the calendar day is
+  // stable regardless of the build machine's timezone.
+  eleventyConfig.addFilter("dateToRfc822", (value) => {
+    if (!value || typeof value !== "string") return "";
+    let m;
+    if ((m = value.match(/^(\d{2})\.(\d{2})\.(\d{4})$/)))
+      return new Date(Date.UTC(+m[3], +m[2] - 1, +m[1])).toUTCString();
+    if ((m = value.match(/^(\d{2})\.(\d{4})$/)))
+      return new Date(Date.UTC(+m[2], +m[1] - 1, 1)).toUTCString();
+    if ((m = value.match(/^(\d{4})$/)))
+      return new Date(Date.UTC(+m[1], 0, 1)).toUTCString();
+    const t = new Date(value).getTime();
+    return Number.isNaN(t) ? "" : new Date(t).toUTCString();
+  });
+
   // Basic markdown rendering (bold, italics, links, lists) for short fields
   // like dataset annotations. Uses mdBasic, not the extended-syntax library.
   eleventyConfig.addFilter("markdownify", (str) =>
@@ -1337,7 +1353,7 @@ module.exports = function (eleventyConfig) {
       includes: "../_includes",
     },
     pathPrefix: pathPrefix,
-    templateFormats: ["md"],
+    templateFormats: ["md", "njk"],
     markdownTemplateEngine: false,
     htmlTemplateEngine: "njk",
   };

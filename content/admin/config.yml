@@ -877,6 +877,11 @@ collections:
         file: content/data/branding.json
         fields:
           - { label: "Site Title", name: "site_title", widget: "string" }
+          - label: "Site URL"
+            name: "site_url"
+            widget: "string"
+            required: false
+            hint: "Canonical origin of the production site (e.g. https://www.blastodb.com), used for absolute links in the RSS feeds."
           - label: "Logo"
             name: "site_logo"
             widget: image

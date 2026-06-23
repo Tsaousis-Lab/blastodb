@@ -441,6 +441,13 @@ nav a.active {
     transform: none;
 }
 
+/* Button with a leading icon (e.g. the RSS subscribe button). */
+.feed-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
 /* ── 8. Tags ───────────────────────────────────────────────── */
 .tag {
     display: inline-block;
