@@ -1,0 +1,99 @@
+# .github/workflows/daily-publish.yml
+#
+# Once per day this:
+#   1. Looks at the `staging` branch (where Sveltia/the editors save their work).
+#   2. Builds the site from `staging`. If the build FAILS (e.g. broken markdown),
+#      the whole run stops here — nothing is published, the live site is untouched,
+#      and the broken content simply waits on `staging` until it's fixed.
+#   3. If the build SUCCEEDS, it opens a pull request from `staging` into `main`
+#      and merges it. Because it's a real merged PR, it gets a one-click "Revert"
+#      button on GitHub if you ever need to undo a day's changes.
+#   4. Triggers your existing "Build and Deploy" workflow to publish `main` to Pages.
+#
+# You can also publish on demand at any time: Actions tab → "Daily publish" →
+# "Run workflow".
+
+name: Daily publish (staging → main)
+
+on:
+  schedule:
+    # Times are in UTC (GitHub does not use your local timezone).
+    # 05:30 UTC ≈ 06:30 UK summer time / 05:30 UK winter time.
+    # The :30 (rather than :00) avoids GitHub's busiest scheduling minute.
+    - cron: "30 5 * * *"
+  workflow_dispatch: {} # adds a manual "Run workflow" button
+
+# Permissions the job needs:
+permissions:
+  contents: write # merge into main
+  pull-requests: write # open + merge the daily PR
+  actions: write # trigger the deploy workflow afterwards
+
+# Never let two publishes run at the same time.
+concurrency:
+  group: daily-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the staging branch (with full history)
+        uses: actions/checkout@v4
+        with:
+          ref: staging
+          fetch-depth: 0
+
+      - name: Stop early if nothing changed since the last publish
+        id: diff
+        run: |
+          git fetch origin main
+          if git diff --quiet origin/main origin/staging; then
+            echo "No content changes since the last publish — nothing to do."
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Set up Node
+        if: steps.diff.outputs.has_changes == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Install dependencies
+        if: steps.diff.outputs.has_changes == 'true'
+        run: npm install
+
+      - name: Build the site from staging (this step FAILS if the markdown is broken)
+        if: steps.diff.outputs.has_changes == 'true'
+        run: PATH_PREFIX=/blastodb npm run build
+
+      - name: Open and merge the daily publish pull request
+        if: steps.diff.outputs.has_changes == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DATE="$(date -u +'%Y-%m-%d')"
+
+          # Reuse an already-open staging→main PR if one exists, else create one.
+          PR="$(gh pr list --base main --head staging --state open --json number --jq '.[0].number')"
+          if [ -z "$PR" ]; then
+            gh pr create \
+              --base main --head staging \
+              --title "Daily publish — $DATE" \
+              --body "Automated daily publish of staging into main. The site build passed before this PR was merged. To undo this day's changes, open this PR and click **Revert**."
+            PR="$(gh pr list --base main --head staging --state open --json number --jq '.[0].number')"
+          fi
+
+          # --merge creates a merge commit, which is what gives you the clean
+          # one-click Revert button on the PR afterwards.
+          gh pr merge "$PR" --merge
+
+      - name: Trigger the GitHub Pages deploy
+        # A merge made by the built-in token does not auto-start the push-triggered
+        # deploy workflow, so we kick it off explicitly here.
+        if: steps.diff.outputs.has_changes == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run deploy.yml --ref main
