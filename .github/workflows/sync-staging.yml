@@ -1,0 +1,52 @@
+# .github/workflows/sync-staging.yml
+#
+# Step 4, in its own file. Merges main back into staging so the content branch
+# never drifts behind. It runs in two situations:
+#
+#   • Dispatched by publish.yml (step 4), right after a daily content publish.
+#   • Automatically on any push to main — which is how a `dev → main` feature
+#     merge gets pulled down into staging. (The daily publish merges main using
+#     the built-in token, and token pushes don't trigger this `push` event — that
+#     case is covered by the dispatch above, so there's no double-run.)
+#
+# It only ever pushes to staging, never to main, so it can't trigger itself.
+
+name: Sync main → staging
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-staging
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out staging (full history)
+        uses: actions/checkout@v4
+        with:
+          ref: staging
+          fetch-depth: 0
+
+      - name: Merge main into staging (only if main is ahead)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          if [ "$(git rev-list --count origin/staging..origin/main)" -gt 0 ]; then
+            if git merge origin/main --no-edit; then
+              git push origin staging
+            else
+              echo "::warning::Sync hit a merge conflict — leaving staging unchanged for manual review."
+              exit 1
+            fi
+          else
+            echo "staging is already in sync with main — nothing to do."
+          fi

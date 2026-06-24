@@ -1,0 +1,46 @@
+# .github/workflows/ci.yml
+#
+# PURPOSE: catch broken markdown / templates EARLY, without publishing anything.
+# It only builds the site to prove it compiles — it never deploys and never merges.
+#
+#   • Runs on every push to `staging` → an editor sees a red ✗ within ~a minute
+#     of saving broken markdown in the CMS (the live site is never touched).
+#   • Runs on every push to `dev` → same fast feedback for feature work.
+#   • Runs on every pull request into `main` → so a dev → main feature merge
+#     can't go in until it builds.
+#
+# TIP: once this is in place, go to Settings → Branches → add a rule for `main`
+# requiring the "build" check to pass before merging. That makes the gate
+# enforcing rather than advisory.
+
+name: Build Check
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [staging, dev]
+
+# If several saves land quickly, only keep the newest check running.
+concurrency:
+  group: build-check-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the site (this FAILS if the content or markdown is broken)
+        run: PATH_PREFIX=/blastodb npm run build

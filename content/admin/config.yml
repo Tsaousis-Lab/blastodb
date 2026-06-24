@@ -5,7 +5,7 @@ app_title: "BlastoDB - CMS"
 backend:
   name: github
   repo: Tsaousis-Lab/blastodb
-  branch: main # CMS always writes to main
+  branch: staging # CMS always writes to staging
   squash_merges: true
   auth_methods: [token]
 
@@ -331,14 +331,7 @@ collections:
     collector:
       template: biobank-card.njk
       search_fields:
-        [
-          title,
-          contact_person_name,
-          affiliated_lab,
-          country,
-          tags,
-          body,
-        ]
+        [title, contact_person_name, affiliated_lab, country, tags, body]
     fields:
       - name: layout
         label: Layout
