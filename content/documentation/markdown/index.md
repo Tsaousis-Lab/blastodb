@@ -1,6 +1,6 @@
 ---
 layout: layouts/documentation.njk
-title: BlastoDB — Markdown
+title: Markdown
 description: Overview of Markdown Syntax for BlastoDB.
 ---
 

@@ -1,6 +1,6 @@
 ---
-layout: layouts/base.njk
-title: BlastoDB — Publications
+layout: layouts/default-page.njk
+title: Publications
 description: Scientific publications around Blastocystis.
 ---
 

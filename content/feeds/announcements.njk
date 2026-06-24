@@ -1,0 +1,28 @@
+---
+permalink: /announcements/feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ collections.branding.site_title }} Announcements</title>
+    <link>{{ collections.branding.site_url }}/announcements/</link>
+    <description>Announcements from {{ collections.branding.site_title }}.</description>
+    <language>en</language>
+    <atom:link href="{{ collections.branding.site_url }}/announcements/feed.xml" rel="self" type="application/rss+xml" />
+    {%- if collectorData.announcements.length %}
+    <lastBuildDate>{{ collectorData.announcements[0].data.publication_date | dateToRfc822 }}</lastBuildDate>
+    {%- endif %}
+    {%- for item in collectorData.announcements %}{% if loop.index <= 50 %}
+    <item>
+      <title>{{ item.data.title }}</title>
+      <link>{{ collections.branding.site_url }}/announcements/</link>
+      <guid isPermaLink="false">{{ collections.branding.site_url }}/announcements/#{{ item.data.publication_date | replace(".", "-") }}-{{ loop.index }}</guid>
+      {%- if item.data.publication_date %}
+      <pubDate>{{ item.data.publication_date | dateToRfc822 }}</pubDate>
+      {%- endif %}
+      <description><![CDATA[{{ item.data.body | markdownify | safe }}]]></description>
+    </item>
+    {%- endif %}{% endfor %}
+  </channel>
+</rss>

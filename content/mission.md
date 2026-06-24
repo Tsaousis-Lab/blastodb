@@ -1,6 +1,6 @@
 ---
-layout: layouts/base.njk
-title: BlastoDB — Mission
+layout: layouts/default-page.njk
+title: Mission
 description: The mission of BlastoDB.
 ---
 

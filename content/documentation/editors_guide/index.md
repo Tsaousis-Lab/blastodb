@@ -1,6 +1,6 @@
 ---
 layout: layouts/documentation.njk
-title: BlastoDB — Editor Guide
+title: Editor Guide
 description: A step-by-step guide for adding and editing content on BlastoDB.
 ---
 
@@ -29,6 +29,8 @@ Through the CMS you can edit the following content on the website:
 - Add or edit **Publications**/references for the data on this website.
 - Add or edit **Research Labs** working on Blastocystis.
 - Add or edit **Lab Protocols**.
+- Add or edit **People**.
+- Write or edit **Blog** articles.
 - Make **small changes to the webpage**, like editing a description text or fixint a typo.
 
 

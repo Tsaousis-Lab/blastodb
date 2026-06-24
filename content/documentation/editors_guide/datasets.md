@@ -33,7 +33,7 @@ It is save to delete datasets, as other enteries are dependent on the datasets.
 
 ## Fields
 
-The datasets here have thirteen properties, which are shortly described in the folowing. Fields marked with `required` need to be filled out, all others are optional, but should be filled out if available.
+The datasets here have fourteen properties, which are shortly described in the folowing. Fields marked with `required` need to be filled out, all others are optional, but should be filled out if available.
 
 1. **Title** `required` - The title of the dataset
     - The name of the Dataset.
@@ -67,11 +67,21 @@ The datasets here have thirteen properties, which are shortly described in the f
 12. **Lab Protocols**
     - Select related lan protocols from the list.
     - Lab protocols need to be added to the system before you can link to them, see ([Publications guide](/documentation/editors_guide/publications/)).
-13. **Description**
+13. **Annotations** - Short contextual notes shown below the hero of the dataset page, before the description.
+    - Use these to set the data into context or hint at something readers should be aware of. A dataset can have several annotations.
+    - Each annotation has:
+        - **Severity** - The importance of the note: *Info* (blue), *Warning* (amber), or *Severe warning* (red). This controls the colour and icon shown on the dataset page, and the indicator pill shown on the dataset card in the collector. Defaults to *Info*.
+        - **Title** - A short heading for the annotation.
+        - **Text** - The note itself. Supports basic markdown (bold, italics, links, lists), no custom components.
+        - **Related Publication(s)** - Optionally link publications relevant to this annotation, the same way as the dataset-level *Related Publications* field above.
+    - Datasets with at least one annotation show a coloured indicator on their card in the [datasets overview](/datasets/), reflecting the most severe annotation.
+14. **Description**
     - A free-text description of the dataset in markdown ([see markdown cheat sheet](/documentation/markdown/markdown_cheat_sheet/)).
 
-    <div class="guide-warning">
-    
-    **Be Careful! You can break things here.** The description supports the extendet markdown syntax, which need to be defined exactly, otherwise the build of the website might fail. Please edit the webpage locally, if you want to use these features.
+If a [blog article](/documentation/editors_guide/blog/) links to this dataset, it is shown automatically in a **"Related Blog Articles"** section on the dataset page. You link them from the blog entery.
 
-    </div>
+[card: class:warning]
+
+**Be Careful! You can break things here.** The description supports the extendet markdown syntax, which need to be defined exactly, otherwise the build of the website might fail. Please edit the webpage locally, if you want to use these features.
+
+[:card]

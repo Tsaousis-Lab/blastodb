@@ -1,0 +1,31 @@
+{
+  "people": [
+    {
+      "name": "Dr Anastasios Tsaousis",
+      "picture": "/assets/uploads/pasted-image-1781094468326.png",
+      "mail": "a.tsaousis@kent.ac.uk",
+      "affiliation": "University of Kent",
+      "role": "Head of BlastoDB",
+      "website": "https://www.kent.ac.uk/biosciences/people/653/tsaousis-anastasios",
+      "github": "https://github.com/ADTsaousis"
+    },
+    {
+      "name": "Dr Eleni Gentekaki",
+      "picture": "/assets/uploads/pasted-image-1781094520964.png",
+      "mail": "eleni.gentekaki@mfu.ac.th",
+      "affiliation": "Mae Fah Luang University",
+      "role": "Admin",
+      "website": "https://www.unic.ac.cy/vet/faculty-staff/eleni-gentekaki/",
+      "github": "https://github.com/elenigent"
+    },
+    {
+      "name": "Dr Tobias Benecke",
+      "picture": "/assets/uploads/Tobi_Lighter_bw_compressed-1.jpg",
+      "mail": "mail@tobiasbeneck.de",
+      "affiliation": "",
+      "role": "Developer & Maintainer",
+      "website": "",
+      "github": "https://github.com/tobeneck"
+    }
+  ]
+}

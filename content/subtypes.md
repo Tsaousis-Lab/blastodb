@@ -1,14 +1,14 @@
 ---
-title: BlastoDB — Subtypes
-description: Explore Blastocystis subtypes ST1–7 with images and downloadable FASTA reference sequences.
-layout: layouts/base.njk
+title: Subtypes
+description: Explore Blastocystis subtypes with reference sequences and related datasets.
+layout: layouts/default-page.njk
 ---
 
 [hero: text-align:center]
 
 <h-hero>Subtypes</h-hero>
 
-Explore information around each subtype.<br>
+Explore information and related datasets for each subtype.<br>
 You also find genome sequences and 18s SSU rRNA sequences for avainalbe subtypes.
 
 [:hero]
@@ -17,6 +17,6 @@ You also find genome sequences and 18s SSU rRNA sequences for avainalbe subtypes
 
 [collector -> subtypes; search:[name,id]; filters:[Sources->[sources]]; arrange:rows; card-template:subtype.njk]
 
----
+***
 
 **Missing anything, or wand to contribute?** [Contact us](/contact/) if have any questions, or want to contribute information to BlastoDB.

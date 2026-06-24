@@ -24,11 +24,28 @@
       ]
     },
     {
+      "title": "Biobank",
+      "items": [
+        {
+          "label": "Biobank",
+          "url": "/biobank/"
+        }
+      ]
+    },
+    {
       "title": "Community",
       "items": [
         {
           "label": "Research Labs",
           "url": "/labs/"
+        },
+        {
+          "label": "Blog",
+          "url": "/blog/"
+        },
+        {
+          "label": "Announcements",
+          "url": "/announcements/"
         }
       ]
     },
@@ -57,8 +74,13 @@
           "url": "/contact/"
         },
         {
+<<<<<<< HEAD
+          "label": "Acknowledgements",
+          "url": "/acknowledgements/"
+=======
           "label": "Announcements",
           "url": "/announcements/"
+>>>>>>> main
         }
       ]
     },

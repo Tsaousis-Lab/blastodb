@@ -68,6 +68,38 @@ function formatDateString(dateValue) {
   });
 }
 
+// Parse the flexible publication_date formats (yyyy, mm.yyyy, dd.mm.yyyy) into a
+// timestamp for sorting. Returns 0 when unparseable.
+function parsePubDate(value) {
+  if (!value || typeof value !== "string") return 0;
+  const dmy = value.match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
+  if (dmy) return new Date(Number(dmy[3]), Number(dmy[2]) - 1, Number(dmy[1])).getTime();
+  const my = value.match(/^(\d{2})\.(\d{4})$/);
+  if (my) return new Date(Number(my[2]), Number(my[1]) - 1, 1).getTime();
+  const y = value.match(/^(\d{4})$/);
+  if (y) return new Date(Number(y[1]), 0, 1).getTime();
+  const t = new Date(value).getTime();
+  return Number.isNaN(t) ? 0 : t;
+}
+
+// Build a short plain-text excerpt from a markdown body for listings/cards.
+function makeExcerpt(body, maxWords = 40) {
+  if (!body || typeof body !== "string") return "";
+  let text = body
+    .replace(/```[\s\S]*?```/g, " ") // code fences
+    .replace(/\[[^\]]*?->[^\]]*?\]/g, " ") // custom collector/component shortcodes
+    .replace(/\[:?[a-z][^\]]*\]/gi, " ") // [hero ...] / [:hero] style tags
+    .replace(/<[^>]+>/g, " ") // html tags
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, " ") // images
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1") // links -> text
+    .replace(/[#>*_`~=|-]+/g, " ") // markdown punctuation
+    .replace(/\s+/g, " ")
+    .trim();
+  const words = text.split(" ").filter(Boolean);
+  if (words.length <= maxWords) return words.join(" ");
+  return words.slice(0, maxWords).join(" ") + "…";
+}
+
 function resolveFieldPath(obj, fieldPath) {
   if (!fieldPath) return undefined;
   return fieldPath.split(".").reduce((acc, key) => {
@@ -212,6 +244,11 @@ function parsePrefilterParam(paramStr) {
               value: simpleMatch[2].trim(),
             };
           }
+          // A bare field name (no operator) means "field must be set"
+          const existsMatch = part.match(/^([^\s=<>]+)$/);
+          if (existsMatch) {
+            return { field: existsMatch[1].trim(), operator: "exists" };
+          }
           return null;
         })
         .filter(Boolean);
@@ -285,6 +322,23 @@ function buildSubtypeIndex() {
   return index;
 }
 
+// Map of lab key (UUID) -> full research lab object, for resolving a biobank
+// entry's affiliated lab (and its country) at build time.
+function buildLabIndex() {
+  const file = path.join(__dirname, "content/data/research_labs.json");
+  const index = {};
+  if (!fs.existsSync(file)) return index;
+  try {
+    const json = JSON.parse(fs.readFileSync(file, "utf-8"));
+    (json.research_labs || []).forEach((lab) => {
+      if (lab && lab.key) index[lab.key] = lab;
+    });
+  } catch (e) {
+    console.warn("Failed to parse research_labs.json:", e.message);
+  }
+  return index;
+}
+
 function getItemsFromCollection(collection, templateOverride) {
   if (!collection || !collection.folder) return [];
 
@@ -318,6 +372,7 @@ function getItemsFromCollection(collection, templateOverride) {
 
   const subtypeIndex =
     collection.name === "datasets" ? buildSubtypeIndex() : null;
+  const labIndex = collection.name === "biobank" ? buildLabIndex() : null;
 
   files.forEach((file) => {
     const filePath = path.join(fullFolderPath, file);
@@ -352,12 +407,36 @@ function getItemsFromCollection(collection, templateOverride) {
           pageUrl,
           collection: collection.name,
           body,
+          excerpt: makeExcerpt(body),
         };
 
         if (subtypeIndex && Array.isArray(frontmatter.subtypes)) {
           itemData.subtypes_display = frontmatter.subtypes.map(
             (id) => subtypeIndex[id] || id,
           );
+        }
+
+        // Resolve a biobank entry's affiliated lab (referenced by UUID key) so
+        // the card (pre-rendered server-side) and listing filters can use the
+        // lab's name and country.
+        if (labIndex && frontmatter.affiliated_lab) {
+          const lab = labIndex[frontmatter.affiliated_lab];
+          if (lab) {
+            itemData.lab = lab;
+            itemData.affiliated_lab_name = lab.lab_name || "";
+            itemData.country = lab.country || "";
+          }
+        }
+
+        // Highest annotation severity, for the collector card indicator.
+        if (Array.isArray(frontmatter.annotations) && frontmatter.annotations.length) {
+          const rank = { info: 1, warning: 2, severe: 3 };
+          let best = "info";
+          frontmatter.annotations.forEach((ann) => {
+            const s = (ann && ann.severity) || "info";
+            if ((rank[s] || 1) > (rank[best] || 1)) best = s;
+          });
+          itemData.annotation_severity = best;
         }
 
         const cardHtml = renderCollectorCard(templateName, itemData);
@@ -382,8 +461,14 @@ function getItemsFromCollection(collection, templateOverride) {
   });
 
   return items.sort((a, b) => {
-    const dateA = new Date(a.date || 0).getTime();
-    const dateB = new Date(b.date || 0).getTime();
+    // Fall back to the flexible publication_date when there is no `date`, so
+    // collections like blog (which only have publication_date) sort newest-first.
+    const dateA = a.date
+      ? new Date(a.date).getTime()
+      : parsePubDate(a.data && a.data.publication_date);
+    const dateB = b.date
+      ? new Date(b.date).getTime()
+      : parsePubDate(b.data && b.data.publication_date);
     if (dateB !== dateA) return dateB - dateA;
     // Natural (numeric-aware) sort on slug as tiebreaker so subtype-2
     // comes before subtype-10 when dates are identical or absent.
@@ -552,21 +637,19 @@ function getItemsFromYamlFile(
 /**
  * Get items from a file-based collection (CMS config with files property)
  */
-function getItemsFromFileCollection(collection, templateOverride) {
-  if (!collection || !collection.files || !Array.isArray(collection.files)) {
+function getItemsFromFileEntry(fileEntry, collectionCollector, templateOverride) {
+  if (!fileEntry || !fileEntry.file || typeof fileEntry.name !== "string") {
     return [];
   }
 
-  const fileEntry = collection.files[0];
-  if (!fileEntry || !fileEntry.file) return [];
-
   const filePath = path.join(__dirname, fileEntry.file);
+  const collectorConfig = fileEntry.collector || collectionCollector || null;
 
   if (filePath.endsWith(".yaml") || filePath.endsWith(".yml")) {
     return getItemsFromYamlFile(
       filePath,
-      collection.name,
-      collection.collector,
+      fileEntry.name,
+      collectorConfig,
       templateOverride,
     );
   }
@@ -577,8 +660,8 @@ function getItemsFromFileCollection(collection, templateOverride) {
 
   return getItemsFromJsonFile(
     filePath,
-    collection.name,
-    collection.collector,
+    fileEntry.name,
+    collectorConfig,
     templateOverride,
   );
 }
@@ -692,7 +775,7 @@ module.exports = function (eleventyConfig) {
         return true;
       }
 
-      // [sbtn: Label -> [url1, url2, ...]]
+      // [sbtn: Label -> [Label1 -> url1, Label2 -> url2, ...]]
       const selBtnMatch = state.src
         .slice(pos)
         .match(/^\[sbtn:\s*([^\]]+?)\s*->\s*\[([^\]]+?)\]\]/);
@@ -700,13 +783,24 @@ module.exports = function (eleventyConfig) {
         if (!silent) {
           const token = state.push("sbtn_token", "", 0);
           const urlsStr = selBtnMatch[2].trim();
-          const urls = urlsStr
+          const options = urlsStr
             .split(",")
             .map((u) => u.trim())
-            .filter((u) => u.length > 0);
+            .filter((u) => u.length > 0)
+            .map((u) => {
+              const labeled = u.match(/^(.+?)\s*->\s*(.+)$/);
+              if (!labeled) {
+                console.warn(
+                  `[sbtn] Skipping option without a "Title -> url" label: "${u}"`,
+                );
+                return null;
+              }
+              return { label: labeled[1].trim(), url: labeled[2].trim() };
+            })
+            .filter(Boolean);
           token.meta = {
             label: selBtnMatch[1].trim(),
-            urls: urls,
+            options: options,
           };
         }
         state.pos += selBtnMatch[0].length;
@@ -735,10 +829,10 @@ module.exports = function (eleventyConfig) {
     mdInstance.renderer.rules.sbtn_token = (tokens, idx) => {
       const meta = tokens[idx].meta;
       const uniqueId = `sbtn-${Math.random().toString(36).substr(2, 9)}`;
-      const menuItems = meta.urls
+      const menuItems = meta.options
         .map(
-          (url) =>
-            `<a href="${escapeHtml(url)}" class="sbtn-menu-item">${escapeHtml(url)}</a>`,
+          (opt) =>
+            `<a href="${escapeHtml(opt.url)}" class="sbtn-menu-item">${escapeHtml(opt.label)}</a>`,
         )
         .join("");
       const arrow = '<span class="sbtn-arrow">▷</span>';
@@ -810,11 +904,22 @@ module.exports = function (eleventyConfig) {
             return `<div class="${classes}"${styles}>\n\n${content}\n\n</div>`;
           });
         } else {
-          result = result.replace(pattern, (match, cssString, content) => {
-            const styles = cssString.trim()
-              ? ` style="${escapeHtml(cssString.trim())}"`
-              : "";
-            return `<div class="${blockType}"${styles}>\n\n${content}\n\n</div>`;
+          result = result.replace(pattern, (match, paramString, content) => {
+            let cssString = paramString.trim();
+            let classes = blockType;
+
+            const classMatches = [
+              ...cssString.matchAll(/class:\s*([a-zA-Z0-9_-]+)/g),
+            ];
+            if (classMatches.length) {
+              classes += classMatches.map((m) => ` ${m[1]}`).join("");
+              cssString = cssString
+                .replace(/class:\s*[a-zA-Z0-9_-]+\s*/g, "")
+                .trim();
+            }
+
+            const styles = cssString ? ` style="${escapeHtml(cssString)}"` : "";
+            return `<div class="${classes}"${styles}>\n\n${content}\n\n</div>`;
           });
         }
       }
@@ -949,6 +1054,34 @@ module.exports = function (eleventyConfig) {
     const idx = buildSubtypeIndex();
     return (Array.isArray(ids) ? ids : [ids]).map((id) => idx[id] || id);
   });
+
+  // Resolve a research lab object by its key/UUID (used by biobank entry pages).
+  eleventyConfig.addFilter("labByKey", (key) => {
+    if (!key) return null;
+    return buildLabIndex()[key] || null;
+  });
+
+  // Convert a flexible publication_date string (dd.mm.yyyy, mm.yyyy, yyyy) to an
+  // RFC-822 date for RSS feeds. Parsed as UTC midnight so the calendar day is
+  // stable regardless of the build machine's timezone.
+  eleventyConfig.addFilter("dateToRfc822", (value) => {
+    if (!value || typeof value !== "string") return "";
+    let m;
+    if ((m = value.match(/^(\d{2})\.(\d{2})\.(\d{4})$/)))
+      return new Date(Date.UTC(+m[3], +m[2] - 1, +m[1])).toUTCString();
+    if ((m = value.match(/^(\d{2})\.(\d{4})$/)))
+      return new Date(Date.UTC(+m[2], +m[1] - 1, 1)).toUTCString();
+    if ((m = value.match(/^(\d{4})$/)))
+      return new Date(Date.UTC(+m[1], 0, 1)).toUTCString();
+    const t = new Date(value).getTime();
+    return Number.isNaN(t) ? "" : new Date(t).toUTCString();
+  });
+
+  // Basic markdown rendering (bold, italics, links, lists) for short fields
+  // like dataset annotations. Uses mdBasic, not the extended-syntax library.
+  eleventyConfig.addFilter("markdownify", (str) =>
+    str ? mdBasic.render(str) : "",
+  );
 
   eleventyConfig.addFilter("depth", (filePath) => {
     const count = (filePath.match(/\//g) || []).length;
@@ -1158,15 +1291,28 @@ module.exports = function (eleventyConfig) {
       });
     });
 
-    // Process file-based collections (defined in CMS config)
+    // Process file-based collections (defined in CMS config). A collection
+    // may bundle several named files (e.g. a "Community" collection holding
+    // Research Labs, People and Affiliations side by side) — each file gets
+    // its own collectorData entry, keyed by its own name.
     fileCollections.forEach((collection) => {
-      // Default render
-      data[collection.name] = getItemsFromFileCollection(collection);
+      (collection.files || []).forEach((fileEntry) => {
+        if (!fileEntry || typeof fileEntry.name !== "string") return;
 
-      // Pre-render one variant per available template
-      availableTemplates.forEach((templateName) => {
-        data[`${collection.name}::${templateName}`] =
-          getItemsFromFileCollection(collection, templateName);
+        // Default render
+        data[fileEntry.name] = getItemsFromFileEntry(
+          fileEntry,
+          collection.collector,
+        );
+
+        // Pre-render one variant per available template
+        availableTemplates.forEach((templateName) => {
+          data[`${fileEntry.name}::${templateName}`] = getItemsFromFileEntry(
+            fileEntry,
+            collection.collector,
+            templateName,
+          );
+        });
       });
     });
 
@@ -1207,7 +1353,7 @@ module.exports = function (eleventyConfig) {
       includes: "../_includes",
     },
     pathPrefix: pathPrefix,
-    templateFormats: ["md"],
+    templateFormats: ["md", "njk"],
     markdownTemplateEngine: false,
     htmlTemplateEngine: "njk",
   };

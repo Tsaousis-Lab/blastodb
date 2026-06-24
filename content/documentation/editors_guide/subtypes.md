@@ -32,11 +32,11 @@ You can edit the content by opening the **Subtypes** collection on the left side
 
 #### Deleting a Subtype
 
-<div class="guide-warning">
+[card: class:warning]
 
 **Be careful when deleting subtypes.** Datasets that are linked to this subtype will lose that connection. Only delete a subtype if no dataset links to it.
 
-</div>
+[:card]
 
 1. Click on the subtype you want to delete
 2. Click the **Delete** button at the top right
@@ -52,8 +52,11 @@ You can edit the content by opening the **Subtypes** collection on the left side
 4. **Download Link to SSU rRNA Sequence** — A direct download URL for the SSU rRNA sequence.
 5. **Description** `required` — A free-text description written in Markdown.
     - Write your descriptive text in markdown ([see markdown cheat sheet](/documentation/markdown/markdown_cheat_sheet/)).
-    <div class="guide-warning">
-    
-    **Be Careful! You can break things here.** The description supports the extendet markdown syntax, which need to be defined exactly, otherwise the build of the website might fail. Please edit the webpage locally, if you want to use these features.
 
-    </div>
+If a [blog article](/documentation/editors_guide/blog/) links to this subtype, it is shown automatically in a **"Related Blog Articles"** section on the subtype page. You link them from the blog article itself.
+
+[card: class:warning]
+
+**Be Careful! You can break things here.** The description supports the extendet markdown syntax, which need to be defined exactly, otherwise the build of the website might fail. Please edit the webpage locally, if you want to use these features.
+
+[:card]

@@ -1,4 +1,6 @@
 publish_mode: simple
+logo_url: "/images/blastie.webp"
+app_title: "BlastoDB - CMS"
 
 backend:
   name: github
@@ -21,11 +23,17 @@ collections:
     folder: content/data/datasets
     create: true
     slug: "{{slug}}"
+    preview_path: "data/datasets/{{slug}}/"
     fields:
       - name: layout
         label: Layout
         widget: hidden
         default: layouts/dataset-page.njk
+
+      - label: Key
+        name: key
+        widget: hidden
+        default: "{{uuid}}"
 
       - label: Title
         name: title
@@ -158,12 +166,236 @@ collections:
         search_fields: [title]
         hint: "If a desired datatype is missing, you can add it under ''Lab Protocols''."
 
+      - label: Annotations
+        name: annotations
+        widget: list
+        required: false
+        label_singular: Annotation
+        summary: "{{fields.severity}} — {{fields.title}}"
+        hint: "Optional contextual notes shown below the hero, before the description. Each can link publications."
+        fields:
+          - label: Severity
+            name: severity
+            widget: select
+            default: info
+            options:
+              - { label: "Info", value: info }
+              - { label: "Warning", value: warning }
+              - { label: "Severe warning", value: severe }
+            hint: "Controls the colour and icon of the annotation."
+          - label: Title
+            name: title
+            widget: string
+          - label: Text
+            name: text
+            widget: markdown
+            hint: "Basic markdown supported (bold, italics, links, lists)."
+          - label: Related Publication(s)
+            name: related_publications
+            widget: relation
+            collection: publications
+            file: publications
+            value_field: "publications.*.key"
+            search_fields:
+              [
+                "publications.*.key",
+                "publications.*.title",
+                "publications.*.date",
+                "publications.*.publication_name",
+                "publications.*.authors",
+              ]
+            display_fields:
+              [
+                "publications.*.title",
+                "publications.*.date",
+                "publications.*.publication_name",
+                "publications.*.authors",
+              ]
+            multiple: true
+            required: false
+            hint: "Publications must be added before you can link to them here."
+
       - label: Description
         name: body
         widget: markdown
         required: false
         default: "Add your description here."
         hint: "Add a description of the sutypes.<br>**Be careful, you can break things here!** This field supports the extendet markdown syntax. Please make shure your syntax is correct, otherwise the website might fail. Please **test it offline** if you use the extendet markdown syntax!"
+
+  # -----------------------------------------------------------------------
+  # BLOG
+  # -----------------------------------------------------------------------
+  - name: blog
+    icon: article
+    label: Blog
+    folder: content/data/blog
+    create: true
+    slug: "{{slug}}"
+    preview_path: "data/blog/{{slug}}/"
+    fields:
+      - name: layout
+        label: Layout
+        widget: hidden
+        default: layouts/blog-post-page.njk
+
+      - label: Title
+        name: title
+        widget: string
+        hint: "The headline of the blog article."
+
+      - label: Publication Date
+        name: publication_date
+        widget: string
+        hint: "Enter a year (2024), month and year (06.2024), or full date (11.06.2024)"
+        pattern:
+          [
+            '^(((0[1-9]|[12]\d|3[01])\.)?(0[1-9]|1[0-2])\.)?\d{4}$',
+            "Use dd.mm.yyyy, mm.yyyy, or yyyy",
+          ]
+
+      - label: Author
+        name: author
+        widget: relation
+        collection: community
+        file: people
+        value_field: "people.*.name"
+        display_fields: ["people.*.name"]
+        search_fields:
+          ["people.*.name", "people.*.affiliation", "people.*.role"]
+        required: false
+        hint: "Optional. Select the author from the People list."
+
+      - label: Related Publication(s)
+        name: related_publications
+        widget: relation
+        collection: publications
+        file: publications
+        value_field: "publications.*.key"
+        search_fields:
+          [
+            "publications.*.key",
+            "publications.*.title",
+            "publications.*.date",
+            "publications.*.publication_name",
+            "publications.*.authors",
+          ]
+        display_fields:
+          [
+            "publications.*.title",
+            "publications.*.date",
+            "publications.*.publication_name",
+            "publications.*.authors",
+          ]
+        multiple: true
+        required: false
+        hint: "Publications must be added before you can link to them here."
+
+      - label: Related Subtypes
+        name: related_subtypes
+        widget: relation
+        collection: subtypes
+        multiple: true
+        required: false
+        value_field: key
+        display_fields: [name]
+        search_fields: [name]
+        hint: "Subtype pages will list this article under ''Related Blog Articles''."
+
+      - label: Related Datasets
+        name: related_datasets
+        widget: relation
+        collection: datasets
+        multiple: true
+        required: false
+        value_field: key
+        display_fields: [title]
+        search_fields: [title]
+        hint: "Dataset pages will list this article under ''Related Blog Articles''."
+
+      - label: Body
+        name: body
+        widget: markdown
+        default: "Write your article here."
+        hint: "The article text in markdown ([see markdown cheat sheet](/documentation/markdown/markdown_cheat_sheet/))."
+
+  # -----------------------------------------------------------------------
+  # BIOBANK
+  # -----------------------------------------------------------------------
+  - name: biobank
+    icon: package
+    label: Biobank
+    folder: content/data/biobank
+    create: true
+    slug: "{{slug}}"
+    preview_path: "data/biobank/{{slug}}/"
+    collector:
+      template: biobank-card.njk
+      search_fields:
+        [
+          title,
+          contact_person_name,
+          affiliated_lab,
+          country,
+          tags,
+          body,
+        ]
+    fields:
+      - name: layout
+        label: Layout
+        widget: hidden
+        default: layouts/biobank-page.njk
+
+      - label: Key
+        name: key
+        widget: hidden
+        default: "{{uuid}}"
+
+      - label: Title
+        name: title
+        widget: string
+        hint: "The name of the item offered (e.g. a strain, sample, or reagent)."
+
+      - label: Tags
+        name: tags
+        widget: list
+        required: false
+        hint: "Free-text list of tags describing the item (e.g. Strain, ST1). One item per line."
+
+      - label: Contact person name
+        name: contact_person_name
+        widget: string
+        hint: "The person offering this item. May differ from the lab's main contact."
+
+      - label: Contact person email
+        name: contact_person_email
+        widget: string
+        type: email
+        hint: "Orders for this item are placed by email to this address."
+
+      - label: Affiliated research lab
+        name: affiliated_lab
+        widget: relation
+        collection: community
+        file: research_labs
+        multiple: false
+        value_field: "research_labs.*.key"
+        display_fields: ["research_labs.*.lab_name"]
+        search_fields:
+          ["research_labs.*.lab_name", "research_labs.*.institution_name"]
+        hint: "The lab this item belongs to. The entry's country is taken from this lab."
+
+      - label: Picture
+        name: picture
+        widget: image
+        required: false
+        hint: "Optional photo of the item. JPG or WebP."
+
+      - label: Description
+        name: body
+        widget: markdown
+        required: false
+        default: "Describe the item, quantities, condition, and any handling notes here."
+        hint: "The item description in markdown ([see markdown cheat sheet](/documentation/markdown/markdown_cheat_sheet/))."
 
   # -----------------------------------------------------------------------
   # PUBLICATIONS
@@ -196,7 +428,7 @@ collections:
                 name: authors
                 widget: list
                 label_singular: Author
-                hint: "One author per entry"
+                hint: "One author per line."
               - label: Publication Date
                 name: Date
                 widget: string
@@ -232,6 +464,7 @@ collections:
     folder: content/data/lab_protocols
     create: true
     slug: "{{slug}}"
+    preview_path: "data/lab_protocols/{{slug}}/"
     fields:
       - name: layout
         label: Layout
@@ -272,6 +505,7 @@ collections:
     folder: content/data/subtypes
     create: true
     slug: "{{slug}}"
+    preview_path: "data/subtypes/{{slug}}/"
     fields:
       - name: layout
         label: Layout
@@ -317,23 +551,28 @@ collections:
         hint: "Add a description of the dataset.<br>**Be careful, you can break things here!** This field supports the extendet markdown syntax. Please make shure your syntax is correct, otherwise the website might fail. Please **test it offline** if you use the extendet markdown syntax!"
 
   # -----------------------------------------------------------------------
-  # RESEARCH LAB
+  # COMMUNITY (Research Labs, People)
   # -----------------------------------------------------------------------
-  - name: research_labs
-    icon: database
-    label: Research labs
-    collector:
-      template: research-labs-card.njk
+  - name: community
+    icon: groups
+    label: Community
     files:
       - name: research_labs
         label: Research labs
         file: content/data/research_labs.json
+        collector:
+          template: research-labs-card.njk
         fields:
           - label: Research labs
             name: research_labs
             widget: list
             label_singular: Research lab
             fields:
+              - label: Key
+                name: key
+                widget: hidden
+                default: "{{uuid}}"
+
               - label: Lab Name
                 name: lab_name
                 widget: string
@@ -384,6 +623,67 @@ collections:
               - label: Address of Institution
                 name: institution_address
                 widget: text
+
+              - label: Country
+                name: country
+                widget: relation
+                collection: vocabularies
+                file: countries
+                multiple: false
+                value_field: countries.*.name
+                display_fields: [countries.*.name]
+                search_fields: [countries.*.name, countries.*.iso]
+                hint: "Used as the country for any Biobank entries affiliated with this lab."
+
+      - name: people
+        label: People
+        file: content/data/people.json
+        collector:
+          template: people-card.njk
+        fields:
+          - label: People
+            name: people
+            widget: list
+            label_singular: Person
+            fields:
+              - label: Name
+                name: name
+                widget: string
+
+              - label: Picture
+                name: picture
+                widget: image
+                required: false
+                hint: "Square portrait photo, minimum 200×200 px. JPG or WebP."
+
+              - label: Email
+                name: mail
+                widget: string
+                type: email
+                required: false
+
+              - label: Affiliation
+                name: affiliation
+                widget: string
+                required: false
+
+              - label: Role
+                name: role
+                widget: string
+                required: false
+                hint: 'A single word describing what they do, e.g. "Developer", "Researcher".'
+
+              - label: Website
+                name: website
+                widget: string
+                required: false
+                hint: "URL to a personal or lab webpage."
+
+              - label: GitHub
+                name: github
+                widget: string
+                required: false
+                hint: "URL to their GitHub profile, e.g. https://github.com/username."
 
   - divider: true
 
@@ -495,8 +795,14 @@ collections:
     extension: md
     format: frontmatter
     icon: select_window
+    preview_path: "{{slug}}/"
     fields:
       - { label: "Title", name: "title", widget: "string" }
+
+      - name: layout
+        label: Layout
+        widget: hidden
+        default: layouts/default-page.njk
 
       - label: Description
         name: description
@@ -571,13 +877,18 @@ collections:
         file: content/data/branding.json
         fields:
           - { label: "Site Title", name: "site_title", widget: "string" }
-          - label: "Logo (upload)"
-            name: "site_logo_upload"
+          - label: "Site URL"
+            name: "site_url"
+            widget: "string"
+            required: false
+            hint: "Canonical origin of the production site (e.g. https://www.blastodb.com), used for absolute links in the RSS feeds."
+          - label: "Logo"
+            name: "site_logo"
+            widget: image
+            required: true
+            hint: "Upload the site logo. SVG, PNG or WebP on a transparent background recommended."
+          - label: "Icon for Browser Tab"
+            name: "favicon"
             widget: image
             required: false
-            hint: "Upload the site logo. If both this and a URL are provided, the uploaded file takes priority. SVG, PNG or WebP on a transparent background recommended."
-          - label: "Logo (URL)"
-            name: "site_logo_url"
-            widget: string
-            required: false
-            hint: "Link to the logo image (e.g. from your server or CDN). Used when no file is uploaded."
+            hint: "Upload the image that will be displayed as a logo to the left of the title in the browser. SVG, PNG or WebP on a transparent background recommended. Ideally, the image is square."

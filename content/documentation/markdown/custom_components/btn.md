@@ -1,6 +1,6 @@
 ---
 layout: layouts/documentation.njk
-title: BlastoDB — Button
+title: Button
 description: A styled link button for calls to action and navigation.
 ---
 
@@ -8,35 +8,32 @@ description: A styled link button for calls to action and navigation.
 
 <h-hero>Button</h-hero>
 
-A styled link that renders as a solid call-to-action button. The button 
+Buttons are used for interactions on the webpage (see the [styleguide](/documentation/styleguide/components/#links--buttons) on when to use buttons and when to use links).
 
 [:hero]
-
-# What it does
-
-Buttons are used for interactions on the webpage (see the [styleguide](/documentation/styleguide/components/#links--buttons) on when to use buttons and when to use links). The Button component renders a link as a solid teal button.
 
 # Syntax
 
 ```markdown
-[btn: Button Label -> /url/]
+[btn: *Button Label* -> */url/*]
 ```
 
 Both the label and the URL are required, separated by ` -> `.
 
-# Example
+For a full explanation of how **links** work see the [Markdown Syntax guide](/documentation/markdown/markdown_syntax/#links).
+
+# Examples
 
 ```markdown
 [btn: View Datasets -> /datasets/]
-[btn: External Link -> https://www.example.com]
+
+[btn: External Link -> https://www.blastodb.com]
 ```
 
 [btn: View Datasets -> /datasets/]
-[btn: External Link -> https://www.example.com]
 
-# Links
-
-For a full explanation of how links work see the [Markdown Syntax guide](/documentation/markdown/markdown_syntax/#links).
+[btn: External Link -> https://www.blastodb.com]
+*Please use a [link](/documentation/markdown/markdown_syntax/#links-to-external-websites) if you want to link to an external website (see [styleguide](/documentation/styleguide/components/#links--buttons)).
 
 ## Internal link
 For internal links, use the path without the domain (e.G. ~~`https://www.blastodb.com`~~`/subtypes/`):

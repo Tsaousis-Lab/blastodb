@@ -11,7 +11,9 @@ description: Overview of the BlastoDB data model — collections, fields, and cr
 [:hero]
 
 
-BlastoDB is built around five main collections: **Datasets**, **Subtypes**, **Lab Protocols**, **Publications**, and **Research Labs**, plus a standalone **Announcements** collection. Cross-collection links are stored as stable UUID keys — renaming an entry never breaks a link. Vocabulary lists (Datatypes, Sources, Data Origins, Detection Methods, Countries) provide controlled terms used in datasets and subtypes.
+BlastoDB is built around seven main collections: **Datasets**, **Subtypes**, **Lab Protocols**, **Publications**, **Research Labs**, **People**, and **Blog**, plus a standalone **Announcements** collection and a **Biobank** collection. Cross-collection links are stored as stable UUID keys — renaming an entry never breaks a link. Vocabulary lists (Datatypes, Sources, Data Origins, Detection Methods, Countries) provide controlled terms used in datasets and subtypes.
+
+The **Biobank** also follows the UUID-key rule: each entry references a research lab by its `key` through `affiliated_lab`, and the entry's lab name and country are derived from that lab at build time.
 
 ## Dependency Graph
 
@@ -27,12 +29,23 @@ erDiagram
     DATASET }o--o{ DETECTION_METHOD : "detection_methods[ ]"
     DATASET }o--o{ COUNTRY : "countries[ ]"
     SUBTYPE }o--o{ SOURCE : "sources[ ]"
+    BLOG }o--o{ PUBLICATION : "related_publications[ ]"
+    BLOG }o--o{ SUBTYPE : "related_subtypes[ ]"
+    BLOG }o--o{ DATASET : "related_datasets[ ]"
+    BIOBANK }o--|| RESEARCH_LAB : "affiliated_lab"
 
     DATASET {
+        uuid key
         string title
         string link_to_source
         string publication_date
         string strains
+    }
+    BLOG {
+        string title
+        string publication_date
+        string author
+        markdown body
     }
     SUBTYPE {
         uuid key
@@ -54,10 +67,27 @@ erDiagram
         string title
     }
     RESEARCH_LAB {
+        uuid key
         string lab_name
         string contact_name
         string contact_mail
         string institution_name
+        string country
+    }
+    BIOBANK {
+        uuid key
+        string title
+        string tags
+        string contact_person_name
+        string contact_person_email
+        string affiliated_lab
+    }
+    PERSON {
+        string name
+        string mail
+        string affiliation
+        string role
+        url github
     }
     ANNOUNCEMENT {
         string title
@@ -89,16 +119,21 @@ These collections reference each other using stable `key` fields (hidden UUID, a
 
 | Collection | Key type | Linked from |
 |---|---|---|
-| Subtypes | UUID (hidden) | Datasets → `subtypes[]` |
+| Subtypes | UUID (hidden) | Datasets → `subtypes[]`, Blog → `related_subtypes[]` |
+| Datasets | UUID (hidden) | Blog → `related_datasets[]` |
 | Lab Protocols | UUID (hidden) | Datasets → `lab_protocols[]` |
-| Publications | UUID (hidden) | Datasets → `related_publications[]`, Lab Protocols → `related_publications[]` |
+| Publications | UUID (hidden) | Datasets → `related_publications[]`, Lab Protocols → `related_publications[]`, Blog → `related_publications[]` |
+
+Blog articles link to publications, subtypes and datasets. Dataset and subtype pages "reverse-render" a **Related Blog Articles** section by filtering the blog for articles whose `related_*` array contains their `key`.
 
 ## Standalone Collections
 
 | Collection | Storage | Notes |
 |---|---|---|
-| Research Labs | `content/data/research_labs.json` | Not linked from any other collection |
+| Research Labs | `content/data/research_labs.json` | Referenced by Biobank via `affiliated_lab` (by `key`); not linked elsewhere |
+| People | `content/data/people.json` | Not linked from any other collection |
 | Announcements | `content/data/announcements.yaml` | Date-filtered client-side; shown on homepage |
+| Biobank | `content/data/biobank/*.md` | One file per entry; references a Research Lab by `key`; lab name + country derived from that lab |
 
 ## Vocabulary Lists
 
@@ -115,9 +150,12 @@ Vocabulary fields store string values directly — they are not linked by key. C
 ## Schema Reference
 
 - [Datasets](/documentation/technical/datastructure/datasets/)
+- [Blog](/documentation/technical/datastructure/blog/)
 - [Subtypes](/documentation/technical/datastructure/subtypes/)
 - [Lab Protocols](/documentation/technical/datastructure/lab-protocols/)
 - [Publications](/documentation/technical/datastructure/publications/)
 - [Research Labs](/documentation/technical/datastructure/research-labs/)
+- [Biobank](/documentation/technical/datastructure/biobank/)
+- [People](/documentation/technical/datastructure/people/)
 - [Vocabularies](/documentation/technical/datastructure/vocabularies/)
 - [Announcements](/documentation/technical/datastructure/announcements/)

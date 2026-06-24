@@ -1,6 +1,6 @@
 ---
-layout: layouts/base.njk
-title: BlastoDB — Research Labs
+layout: layouts/default-page.njk
+title: Research Labs
 description: Research labs working on Blastocystis around the world.
 ---
 

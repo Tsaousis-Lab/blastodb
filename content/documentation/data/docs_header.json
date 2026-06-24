@@ -21,12 +21,24 @@
           "url": "/documentation/editors_guide/datasets/"
         },
         {
+          "label": "Blog",
+          "url": "/documentation/editors_guide/blog/"
+        },
+        {
           "label": "Publications",
           "url": "/documentation/editors_guide/publications/"
         },
         {
           "label": "Research Labs",
           "url": "/documentation/editors_guide/labs/"
+        },
+        {
+          "label": "Biobank",
+          "url": "/documentation/editors_guide/biobank/"
+        },
+        {
+          "label": "People",
+          "url": "/documentation/editors_guide/people/"
         },
         {
           "label": "Subtypes",
@@ -92,27 +104,45 @@
       "label": "Technical Docs",
       "items": [
         { "label": "Data Structure", "url": "/documentation/technical/" },
-        { "label": "Datasets", "url": "/documentation/technical/datasets/" },
-        { "label": "Subtypes", "url": "/documentation/technical/subtypes/" },
+        {
+          "label": "Datasets",
+          "url": "/documentation/technical/datastructure/datasets/"
+        },
+        {
+          "label": "Blog",
+          "url": "/documentation/technical/datastructure/blog/"
+        },
+        {
+          "label": "Subtypes",
+          "url": "/documentation/technical/datastructure/subtypes/"
+        },
         {
           "label": "Lab Protocols",
-          "url": "/documentation/technical/lab-protocols/"
+          "url": "/documentation/technical/datastructure/lab-protocols/"
         },
         {
           "label": "Publications",
-          "url": "/documentation/technical/publications/"
+          "url": "/documentation/technical/datastructure/publications/"
         },
         {
           "label": "Research Labs",
-          "url": "/documentation/technical/research-labs/"
+          "url": "/documentation/technical/datastructure/research-labs/"
+        },
+        {
+          "label": "Biobank",
+          "url": "/documentation/technical/datastructure/biobank/"
+        },
+        {
+          "label": "People",
+          "url": "/documentation/technical/datastructure/people/"
         },
         {
           "label": "Vocabularies",
-          "url": "/documentation/technical/vocabularies/"
+          "url": "/documentation/technical/datastructure/vocabularies/"
         },
         {
           "label": "Announcements",
-          "url": "/documentation/technical/announcements/"
+          "url": "/documentation/technical/datastructure/announcements/"
         }
       ]
     },

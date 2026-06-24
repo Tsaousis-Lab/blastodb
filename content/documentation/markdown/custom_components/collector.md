@@ -1,6 +1,6 @@
 ---
 layout: layouts/documentation.njk
-title: BlastoDB — Collector Component
+title: Collector Component
 description: Filterable, searchable card list drawn from a Sveltia CMS collection.
 ---
 
@@ -8,31 +8,27 @@ description: Filterable, searchable card list drawn from a Sveltia CMS collectio
 
 <h-hero>Collector</h-hero>
 
-Renders all entries from a CMS collection as interactive cards with built-in search, filters, and sorting.
+The Collector reads a collection defined in `content/admin/config.yml` and displays its entries as cards at build time. On the client side, JavaScript handles search, filtering, and sorting without a page reload. Cards are rendered using Nunjucks templates in `_includes/collector-cards/`.
 
 [:hero]
 
-[btn: ← Custom Components -> /documentation/markdown/custom_components/]
 
-## What it does
+# Syntax
 
-The Collector reads a collection defined in `content/admin/config.yml` and displays its entries as cards at build time. On the client side, JavaScript handles search, filtering, and sorting without a page reload. Cards are rendered using Nunjucks templates in `_includes/collector-cards/`.
-
-## Basic syntax
-
+## Basix
 ```markdown
 [collector -> collection-name]
 ```
 
 This renders all entries in `collection-name` using the default card template, with no search, sort, or filters.
 
-## Full syntax
+## Full
 
 ```markdown
 [collector -> collection-name; search:[field1,field2]; sort:[fieldA,fieldB]; filters:[Label->[field]]; prefilter:[field=value]; card-template:template.njk; arrange:cols; display_items:12; clickable:false]
 ```
 
-## Parameters
+# Parameters
 
 | Parameter | Type | Default | Description |
 |---|---|---|---|
@@ -95,39 +91,41 @@ prefilter:[country="United States"]
 
 Matching is **case-insensitive**. For array fields (e.g. `sub_types`), a condition matches if **any** element equals the value. Field names support dot notation for nested frontmatter (e.g. `contacts.country`).
 
-## Real-world examples
+---
 
-### All publications with search and sort
+# Examples
+
+## All Publications with Search and Sort
 ```markdown
 [collector -> bibliography; search:[authors,date,journal,title]; sort:[date,title]; filters:[Journal->[journal]]]
 ```
 
-### Datasets with full controls
+## Datasets with Full Controls
 ```markdown
 [collector -> datasets; search:[title,data_types,sub_types,country,publication_ref]; sort:[date,title]; filters:[Data Types->[data_types],Subtypes->[sub_types],Countries->[country]]]
 ```
 
-### Only ST1 datasets
+## Only Datasets including Subtype 1
 ```markdown
 [collector -> datasets; search:[title,data_types,country]; sort:[date,title]; prefilter:[sub_types=ST1]]
 ```
 
-### Lab protocols as rows
+## Lab protocols as Rows
 ```markdown
 [collector -> lab-protocols; search:[title,description,shortDescription,tags]; sort:[date,title]; filters:[Tags->[tags]]; arrange:rows; display_items:all]
 ```
 
-### Minimal — no controls
+## Minimal witn no Controls
 ```markdown
-[collector -> news; arrange:cols]
+[collector -> lab-protocols; arrange:cols]
 ```
 
-### Non-clickable cards
+## Non-Clickable Cards
 ```markdown
 [collector -> bibliography; search:[authors,title]; sort:[date]; clickable:false]
 ```
 
-## Card templates
+# Card templates
 
 Cards are rendered with Nunjucks templates in `_includes/collector-cards/`. The template is resolved in this order:
 
