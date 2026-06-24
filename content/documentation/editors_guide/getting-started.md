@@ -38,5 +38,17 @@ The webpage can be edited here:
 - [**Pages**](/documentation/editors_guide/pages/) — the web-pages of BlastoDB
 - [**Navigation**](/documentation/editors_guide/navigation/) — header and footer of BlastoDB
 
-**Be careful, all changes go life immediately!** As of the time of writing, Sveltia does not support an editorial workflow with *draft -> review -> publish*. This means that every time you click "save", the content gets saved into the GitHub repository, and the site gets updated within a few minutes. On the left side you find a guide on how to edit the content for each of these enteries. Feel free to read up on them.
-Editing through the CMS is, for the most part, save. However, some actions can lead to a breaking change. In case you accidentaly break something, you can always [roll back a change](/documentation/editors_guide/rollback/). (It is a hassle though, try to avoid it.)
+Your changes will not go live immediately. BlastoDB is build once a day at 5:30 UTC. You can also manually start the bild process as described below.
+
+In case you accidentaly break something, you can always [roll back a change](/documentation/editors_guide/rollback/). (It is a hassle though, try to avoid it.)
+
+# Manually Publishing BlastoDB {#manually-building-blastodb}
+
+BlastoDB is build using GitHub Actions. The build is triggered automatically once per day at 5:30 UTC. If you want to manually override that:
+
+1. Open the GitHub Actions Page of BlastoDB ([https://github.com/Tsaousis-Lab/blastodb/actions](https://github.com/Tsaousis-Lab/blastodb/actions))
+2. Click **Publish** on the menu on the right side.
+3. You will see a new workflow start, which might take one to three minutes.
+  - If the circle is yellow, the workflow is running, wait till it finishes
+  - If the circle is green, the workflow run was successfull. You can now check your changes on the life website.
+  - If the circle is red, the workflow has failed. Check for any errors in the code. If you made a mistake, you need to [roll back the change](/documentation/editors_guide/rollback/).
