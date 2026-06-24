@@ -18,3 +18,11 @@ This Blog is a continuation of Rune Stensvold's [Blastocystis Parasite Blog](htt
 
 
 [collector -> blog; search:[title,author,publication_date]; sort:[title,author,publication_date]; filters:[Authors -> [author]]; card-template:blog-card.njk]
+title: BlastoDB — Blog
+description: A place for Blastocystis Do's and Dont's
+---
+
+RULES
+
+1. stop calling it Blastocystis Hominis
+2. see rule 1
