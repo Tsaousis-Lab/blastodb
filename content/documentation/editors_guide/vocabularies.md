@@ -60,7 +60,6 @@ You can reverse a deleted value by re-adding it (in the exact same spelling) to 
     - Examples: `PCR`, `Microscopy`, `Sequencing`, ...
     - Used in the datasets
 
-6. **Countries** — A list of countries used to tag dataset sample origins
+6. **Countries** — A plain list of country names used to tag dataset sample origins
     - Examples: `United Kingdom`, `Germany`, ...
-    - Currently contains all countries of the [ISO 3166-1 country codes list](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
-    - Used in both datasets and subtypes
+    - Used in datasets and research labs

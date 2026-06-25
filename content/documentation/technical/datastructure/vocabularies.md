@@ -18,11 +18,11 @@ Vocabularies are flat controlled lists managed under the **Vocabularies** sectio
 | Sources / Hosts | `content/data/sources.yaml` | string list | Datasets, Subtypes |
 | Data Origins | `content/data/data_origins.yaml` | string list | Datasets |
 | Detection Methods | `content/data/detection_methods.yaml` | string list | Datasets |
-| Countries | `content/data/countries.yaml` | `{iso, name}` objects | Datasets |
+| Countries | `content/data/countries.yaml` | string list | Datasets, Research Labs |
 
 ## File Format
 
-All vocabulary files except Countries use a simple list:
+Every vocabulary file is a simple string list:
 
 ```yaml
 datatypes:
@@ -31,16 +31,6 @@ datatypes:
   - Transcriptome
 ```
 
-Countries store ISO code alongside the display name:
-
-```yaml
-countries:
-  - iso: DE
-    name: Germany
-  - iso: GB
-    name: United Kingdom
-```
-
-Datasets store the `name` value for countries (not the ISO code).
+Entries store the string value directly (e.g. a dataset's `countries` holds country names).
 
 → [Editor Guide: Vocabularies](/documentation/editors_guide/vocabularies/) &nbsp;|&nbsp; [Data Structure Overview](/documentation/technical/)

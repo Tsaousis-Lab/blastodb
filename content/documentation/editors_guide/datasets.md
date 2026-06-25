@@ -63,7 +63,7 @@ The datasets here have fourteen properties, which are shortly described in the f
     - If a required data source you need is missing, it can be added under *[Vocabularies](/documentation/editors_guide/vocabularies/) → Sources*.
 11. **Countries** - The country(s) where the data was collected
     - Select the countries from which the samples were collected from the list.
-    - This currently includes all countries of the ISO 3166 country code standart. You can edit the available countries in the [Vocabularies](/documentation/editors_guide/vocabularies/)
+    - You can edit the available countries in the [Vocabularies](/documentation/editors_guide/vocabularies/).
 12. **Lab Protocols**
     - Select related lan protocols from the list.
     - Lab protocols need to be added to the system before you can link to them, see ([Publications guide](/documentation/editors_guide/publications/)).

@@ -150,10 +150,10 @@ collections:
         file: countries
         multiple: true
         required: false
-        value_field: countries.*.name
-        display_fields: [countries.*.name]
-        search_fields: [countries.*.name, countries.*.iso]
-        hint: "All countries from the ISO 3166 coutry code.<br>If a desired datatype is missing, you can add it under ''Lab Protocols''."
+        value_field: countries.*
+        display_fields: [countries.*]
+        search_fields: [countries.*]
+        hint: "The country(s) where the data was collected.<br>If a desired country is missing, you can add it under ''Vocabularies'' -> Countries."
 
       - label: Lab Protocols
         name: lab_protocols
@@ -623,9 +623,9 @@ collections:
                 collection: vocabularies
                 file: countries
                 multiple: false
-                value_field: countries.*.name
-                display_fields: [countries.*.name]
-                search_fields: [countries.*.name, countries.*.iso]
+                value_field: countries.*
+                display_fields: [countries.*]
+                search_fields: [countries.*]
                 hint: "Used as the country for any Biobank entries affiliated with this lab."
 
       - name: people
@@ -726,9 +726,6 @@ collections:
           - label: Countries
             name: countries
             widget: list
-            fields:
-              - { label: ISO code, name: iso, widget: string }
-              - { label: Name, name: name, widget: string }
 
   - { divider: true, label: "Website" }
   # -----------------------------------------------------------------------

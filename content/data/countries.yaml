@@ -1,391 +1,196 @@
 countries:
-  - iso: AD
-    name: Andorra
-  - iso: AE
-    name: United Arab Emirates
-  - iso: AF
-    name: Afghanistan
-  - iso: AG
-    name: Antigua and Barbuda
-  - iso: AL
-    name: Albania
-  - iso: AM
-    name: Armenia
-  - iso: AO
-    name: Angola
-  - iso: AQ
-    name: Antarctica
-  - iso: AR
-    name: Argentina
-  - iso: AT
-    name: Austria
-  - iso: AU
-    name: Australia
-  - iso: AZ
-    name: Azerbaijan
-  - iso: BA
-    name: Bosnia and Herzegovina
-  - iso: BB
-    name: Barbados
-  - iso: BD
-    name: Bangladesh
-  - iso: BE
-    name: Belgium
-  - iso: BF
-    name: Burkina Faso
-  - iso: BG
-    name: Bulgaria
-  - iso: BH
-    name: Bahrain
-  - iso: BI
-    name: Burundi
-  - iso: BJ
-    name: Benin
-  - iso: BN
-    name: Brunei
-  - iso: BO
-    name: Bolivia
-  - iso: BR
-    name: Brazil
-  - iso: BS
-    name: Bahamas
-  - iso: BT
-    name: Bhutan
-  - iso: BW
-    name: Botswana
-  - iso: BY
-    name: Belarus
-  - iso: BZ
-    name: Belize
-  - iso: CA
-    name: Canada
-  - iso: CD
-    name: Congo (DRC)
-  - iso: CF
-    name: Central African Republic
-  - iso: CG
-    name: Congo
-  - iso: CH
-    name: Switzerland
-  - iso: CI
-    name: Côte d'Ivoire
-  - iso: CL
-    name: Chile
-  - iso: CM
-    name: Cameroon
-  - iso: CN
-    name: China
-  - iso: CO
-    name: Colombia
-  - iso: CR
-    name: Costa Rica
-  - iso: CU
-    name: Cuba
-  - iso: CV
-    name: Cabo Verde
-  - iso: CY
-    name: Cyprus
-  - iso: CZ
-    name: Czechia
-  - iso: DE
-    name: Germany
-  - iso: DJ
-    name: Djibouti
-  - iso: DK
-    name: Denmark
-  - iso: DM
-    name: Dominica
-  - iso: DO
-    name: Dominican Republic
-  - iso: DZ
-    name: Algeria
-  - iso: EC
-    name: Ecuador
-  - iso: EE
-    name: Estonia
-  - iso: EG
-    name: Egypt
-  - iso: ER
-    name: Eritrea
-  - iso: ES
-    name: Spain
-  - iso: ET
-    name: Ethiopia
-  - iso: FI
-    name: Finland
-  - iso: FJ
-    name: Fiji
-  - iso: FM
-    name: Micronesia
-  - iso: FR
-    name: France
-  - iso: GA
-    name: Gabon
-  - iso: GB
-    name: United Kingdom
-  - iso: GD
-    name: Grenada
-  - iso: GE
-    name: Georgia
-  - iso: GH
-    name: Ghana
-  - iso: GM
-    name: Gambia
-  - iso: GN
-    name: Guinea
-  - iso: GQ
-    name: Equatorial Guinea
-  - iso: GR
-    name: Greece
-  - iso: GT
-    name: Guatemala
-  - iso: GW
-    name: Guinea-Bissau
-  - iso: GY
-    name: Guyana
-  - iso: HN
-    name: Honduras
-  - iso: HR
-    name: Croatia
-  - iso: HT
-    name: Haiti
-  - iso: HU
-    name: Hungary
-  - iso: ID
-    name: Indonesia
-  - iso: IE
-    name: Ireland
-  - iso: IL
-    name: Israel
-  - iso: IN
-    name: India
-  - iso: IQ
-    name: Iraq
-  - iso: IR
-    name: Iran
-  - iso: IS
-    name: Iceland
-  - iso: IT
-    name: Italy
-  - iso: JM
-    name: Jamaica
-  - iso: JO
-    name: Jordan
-  - iso: JP
-    name: Japan
-  - iso: KE
-    name: Kenya
-  - iso: KG
-    name: Kyrgyzstan
-  - iso: KH
-    name: Cambodia
-  - iso: KI
-    name: Kiribati
-  - iso: KM
-    name: Comoros
-  - iso: KN
-    name: Saint Kitts and Nevis
-  - iso: KP
-    name: North Korea
-  - iso: KR
-    name: South Korea
-  - iso: KW
-    name: Kuwait
-  - iso: KZ
-    name: Kazakhstan
-  - iso: LA
-    name: Laos
-  - iso: LB
-    name: Lebanon
-  - iso: LC
-    name: Saint Lucia
-  - iso: LI
-    name: Liechtenstein
-  - iso: LK
-    name: Sri Lanka
-  - iso: LR
-    name: Liberia
-  - iso: LS
-    name: Lesotho
-  - iso: LT
-    name: Lithuania
-  - iso: LU
-    name: Luxembourg
-  - iso: LV
-    name: Latvia
-  - iso: LY
-    name: Libya
-  - iso: MA
-    name: Morocco
-  - iso: MC
-    name: Monaco
-  - iso: MD
-    name: Moldova
-  - iso: ME
-    name: Montenegro
-  - iso: MG
-    name: Madagascar
-  - iso: MH
-    name: Marshall Islands
-  - iso: MK
-    name: North Macedonia
-  - iso: ML
-    name: Mali
-  - iso: MM
-    name: Myanmar
-  - iso: MN
-    name: Mongolia
-  - iso: MR
-    name: Mauritania
-  - iso: MT
-    name: Malta
-  - iso: MU
-    name: Mauritius
-  - iso: MV
-    name: Maldives
-  - iso: MW
-    name: Malawi
-  - iso: MX
-    name: Mexico
-  - iso: MY
-    name: Malaysia
-  - iso: MZ
-    name: Mozambique
-  - iso: NA
-    name: Namibia
-  - iso: NE
-    name: Niger
-  - iso: NG
-    name: Nigeria
-  - iso: NI
-    name: Nicaragua
-  - iso: NL
-    name: Netherlands
-  - iso: NO
-    name: Norway
-  - iso: NP
-    name: Nepal
-  - iso: NR
-    name: Nauru
-  - iso: NZ
-    name: New Zealand
-  - iso: OM
-    name: Oman
-  - iso: PA
-    name: Panama
-  - iso: PE
-    name: Peru
-  - iso: PG
-    name: Papua New Guinea
-  - iso: PH
-    name: Philippines
-  - iso: PK
-    name: Pakistan
-  - iso: PL
-    name: Poland
-  - iso: PT
-    name: Portugal
-  - iso: PW
-    name: Palau
-  - iso: PY
-    name: Paraguay
-  - iso: QA
-    name: Qatar
-  - iso: RO
-    name: Romania
-  - iso: RS
-    name: Serbia
-  - iso: RU
-    name: Russia
-  - iso: RW
-    name: Rwanda
-  - iso: SA
-    name: Saudi Arabia
-  - iso: SB
-    name: Solomon Islands
-  - iso: SC
-    name: Seychelles
-  - iso: SD
-    name: Sudan
-  - iso: SE
-    name: Sweden
-  - iso: SG
-    name: Singapore
-  - iso: SI
-    name: Slovenia
-  - iso: SK
-    name: Slovakia
-  - iso: SL
-    name: Sierra Leone
-  - iso: SM
-    name: San Marino
-  - iso: SN
-    name: Senegal
-  - iso: SO
-    name: Somalia
-  - iso: SR
-    name: Suriname
-  - iso: SS
-    name: South Sudan
-  - iso: ST
-    name: Sao Tome and Principe
-  - iso: SV
-    name: El Salvador
-  - iso: SY
-    name: Syria
-  - iso: SZ
-    name: Eswatini
-  - iso: TD
-    name: Chad
-  - iso: TG
-    name: Togo
-  - iso: TH
-    name: Thailand
-  - iso: TJ
-    name: Tajikistan
-  - iso: TL
-    name: Timor-Leste
-  - iso: TM
-    name: Turkmenistan
-  - iso: TN
-    name: Tunisia
-  - iso: TO
-    name: Tonga
-  - iso: TR
-    name: Turkey
-  - iso: TT
-    name: Trinidad and Tobago
-  - iso: TV
-    name: Tuvalu
-  - iso: TW
-    name: Taiwan
-  - iso: TZ
-    name: Tanzania
-  - iso: UA
-    name: Ukraine
-  - iso: UG
-    name: Uganda
-  - iso: US
-    name: United States
-  - iso: UY
-    name: Uruguay
-  - iso: UZ
-    name: Uzbekistan
-  - iso: VC
-    name: Saint Vincent and the Grenadines
-  - iso: VE
-    name: Venezuela
-  - iso: VN
-    name: Vietnam
-  - iso: VU
-    name: Vanuatu
-  - iso: WS
-    name: Samoa
-  - iso: YE
-    name: Yemen
-  - iso: ZA
-    name: South Africa
-  - iso: ZM
-    name: Zambia
-  - iso: ZW
-    name: Zimbabwe
+  - Andorra
+  - United Arab Emirates
+  - Afghanistan
+  - Antigua and Barbuda
+  - Albania
+  - Armenia
+  - Angola
+  - Antarctica
+  - Argentina
+  - Austria
+  - Australia
+  - Azerbaijan
+  - Bosnia and Herzegovina
+  - Barbados
+  - Bangladesh
+  - Belgium
+  - Burkina Faso
+  - Bulgaria
+  - Bahrain
+  - Burundi
+  - Benin
+  - Brunei
+  - Bolivia
+  - Brazil
+  - Bahamas
+  - Bhutan
+  - Botswana
+  - Belarus
+  - Belize
+  - Canada
+  - Congo (DRC)
+  - Central African Republic
+  - Congo
+  - Switzerland
+  - Côte d'Ivoire
+  - Chile
+  - Cameroon
+  - China
+  - Colombia
+  - Costa Rica
+  - Cuba
+  - Cabo Verde
+  - Cyprus
+  - Czechia
+  - Germany
+  - Djibouti
+  - Denmark
+  - Dominica
+  - Dominican Republic
+  - Algeria
+  - Ecuador
+  - Estonia
+  - Egypt
+  - Eritrea
+  - Spain
+  - Ethiopia
+  - Finland
+  - Fiji
+  - Micronesia
+  - France
+  - Gabon
+  - United Kingdom
+  - Grenada
+  - Georgia
+  - Ghana
+  - Gambia
+  - Guinea
+  - Equatorial Guinea
+  - Greece
+  - Guatemala
+  - Guinea-Bissau
+  - Guyana
+  - Honduras
+  - Croatia
+  - Haiti
+  - Hungary
+  - Indonesia
+  - Ireland
+  - Israel
+  - India
+  - Iraq
+  - Iran
+  - Iceland
+  - Italy
+  - Jamaica
+  - Jordan
+  - Japan
+  - Kenya
+  - Kyrgyzstan
+  - Cambodia
+  - Kiribati
+  - Comoros
+  - Saint Kitts and Nevis
+  - North Korea
+  - South Korea
+  - Kuwait
+  - Kazakhstan
+  - Laos
+  - Lebanon
+  - Saint Lucia
+  - Liechtenstein
+  - Sri Lanka
+  - Liberia
+  - Lesotho
+  - Lithuania
+  - Luxembourg
+  - Latvia
+  - Libya
+  - Morocco
+  - Monaco
+  - Moldova
+  - Montenegro
+  - Madagascar
+  - Marshall Islands
+  - North Macedonia
+  - Mali
+  - Myanmar
+  - Mongolia
+  - Mauritania
+  - Malta
+  - Mauritius
+  - Maldives
+  - Malawi
+  - Mexico
+  - Malaysia
+  - Mozambique
+  - Namibia
+  - Niger
+  - Nigeria
+  - Nicaragua
+  - Netherlands
+  - Norway
+  - Nepal
+  - Nauru
+  - New Zealand
+  - Oman
+  - Panama
+  - Peru
+  - Papua New Guinea
+  - Philippines
+  - Pakistan
+  - Poland
+  - Portugal
+  - Palau
+  - Paraguay
+  - Qatar
+  - Romania
+  - Serbia
+  - Russia
+  - Rwanda
+  - Saudi Arabia
+  - Solomon Islands
+  - Seychelles
+  - Sudan
+  - Sweden
+  - Singapore
+  - Slovenia
+  - Slovakia
+  - Sierra Leone
+  - San Marino
+  - Senegal
+  - Somalia
+  - Suriname
+  - South Sudan
+  - Sao Tome and Principe
+  - El Salvador
+  - Syria
+  - Eswatini
+  - Chad
+  - Togo
+  - Thailand
+  - Tajikistan
+  - Timor-Leste
+  - Turkmenistan
+  - Tunisia
+  - Tonga
+  - Turkey
+  - Trinidad and Tobago
+  - Tuvalu
+  - Taiwan
+  - Tanzania
+  - Ukraine
+  - Uganda
+  - United States
+  - Uruguay
+  - Uzbekistan
+  - Saint Vincent and the Grenadines
+  - Venezuela
+  - Vietnam
+  - Vanuatu
+  - Samoa
+  - Yemen
+  - South Africa
+  - Zambia
+  - Zimbabwe
