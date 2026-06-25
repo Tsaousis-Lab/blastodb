@@ -26,7 +26,7 @@ Markdown is used to write the content of the webpage. If you are unfamiliar with
 Find design information and best-practices for the visual layout of BlastoDB in the [BlastoDB style guide](/documentation/styleguide/). Here you find:
 - [Typography](/documentation/styleguide/typography/)
 - [Color Guide](/documentation/styleguide/colors/)
-- [Component Styling](/documentation/styleguide/custom_components/)
+- [Component Styling](/documentation/styleguide/components/)
 [:card]
 [:box]
 
@@ -48,21 +48,26 @@ In the [editors guide](/documentation/editors_guide/) if you want to get informa
 - **Edit the Webpage**
   - [Webpages](/documentation/editors_guide/pages/)
   - [Navigation](/documentation/editors_guide/navigation/)
-- **I made a Mistake**
+- **Publishing**
+  - [Checking &amp; Publishing](/documentation/editors_guide/deployment-status/)
   - [Rolling Back a Change](/documentation/editors_guide/rollback/)
 [:card]
 
 [card:]
 ### Technical Documentation
-Read up on:
-- Setup Guide (todo)
-- **Datastructure** ([Overview](/documentation/technical/datastructure/))
+Developer docs in the [technical documentation](/documentation/technical/):
+- [Setup](/documentation/technical/setup/)
+- [Tech Stack](/documentation/technical/tech-stack/)
+- [Project Structure](/documentation/technical/project-structure/)
+- [Deployment](/documentation/technical/deployment/)
+- [Sveltia CMS &amp; the Collector](/documentation/technical/sveltia-cms/)
+- **Data Structure** ([Overview](/documentation/technical/datastructure/))
   - [Datasets](/documentation/technical/datastructure/datasets/)
   - [Subtypes](/documentation/technical/datastructure/subtypes/)
   - [Lab Protocols](/documentation/technical/datastructure/lab-protocols/)
-  - [Publications](/documentation/technical/datastructure/publicaitons/)
-  - [Research Labs](/documentation/technical/datastructure/labs/)
-  - [Vocabularies](/documentation/technical/datastructure/Vocabularies/)
+  - [Publications](/documentation/technical/datastructure/publications/)
+  - [Research Labs](/documentation/technical/datastructure/research-labs/)
+  - [Vocabularies](/documentation/technical/datastructure/vocabularies/)
 [:card]
 
 [:grid]

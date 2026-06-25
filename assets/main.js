@@ -33,7 +33,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Initialize Selection Buttons
   initializeSelectionButtons();
+
+  // Initialize the contact form (mailto)
+  initializeContactForm();
 });
+
+/**
+ * Contact form: builds a pre-filled mailto: link from the fields and opens the
+ * visitor's mail client. The site is static, so there is no server to POST to —
+ * the message is sent from the visitor's own email account.
+ */
+function initializeContactForm() {
+  const form = document.getElementById("contact-form");
+  if (!form) return;
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const to = form.dataset.mailto;
+    const subject =
+      (form.elements.subject.value || "").trim() || "BlastoDB contact";
+    const message = (form.elements.message.value || "").trim();
+
+    window.location.href = `mailto:${to}?subject=${encodeURIComponent(
+      subject,
+    )}&body=${encodeURIComponent(message)}`;
+  });
+}
 
 function initializeCollector(container, collectionName, opts) {
   console.log("[Collector] initializeCollector called for:", collectionName);

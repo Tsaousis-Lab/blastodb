@@ -17,7 +17,7 @@ Content is edited from a "staging" branch, which gets merged into the live websi
 
 # Can you fix it in the CMS?
 
-If you spot your mistake and can fix it within the CMS, then great! Just remove the markdown elements that broke the site, and [re-run the build pipeline by hand](todo).
+If you spot your mistake and can fix it within the CMS, then great! Just remove the markdown elements that broke the site, and [re-run the build pipeline by hand](/documentation/editors_guide/deployment-status/#publish-now).
 
 # If you can't fix in in the CMS
 

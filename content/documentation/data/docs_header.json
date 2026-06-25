@@ -62,6 +62,10 @@
           "url": "/documentation/editors_guide/navigation/"
         },
         {
+          "label": "Checking & Publishing",
+          "url": "/documentation/editors_guide/deployment-status/"
+        },
+        {
           "label": "Rolling Back",
           "url": "/documentation/editors_guide/rollback/"
         }
@@ -103,46 +107,27 @@
     {
       "label": "Technical Docs",
       "items": [
-        { "label": "Data Structure", "url": "/documentation/technical/" },
+        { "label": "Overview", "url": "/documentation/technical/" },
+        { "label": "Setup", "url": "/documentation/technical/setup/" },
         {
-          "label": "Datasets",
-          "url": "/documentation/technical/datastructure/datasets/"
+          "label": "Tech Stack",
+          "url": "/documentation/technical/tech-stack/"
         },
         {
-          "label": "Blog",
-          "url": "/documentation/technical/datastructure/blog/"
+          "label": "Project Structure",
+          "url": "/documentation/technical/project-structure/"
         },
         {
-          "label": "Subtypes",
-          "url": "/documentation/technical/datastructure/subtypes/"
+          "label": "Deployment",
+          "url": "/documentation/technical/deployment/"
         },
         {
-          "label": "Lab Protocols",
-          "url": "/documentation/technical/datastructure/lab-protocols/"
+          "label": "Sveltia CMS & Collector",
+          "url": "/documentation/technical/sveltia-cms/"
         },
         {
-          "label": "Publications",
-          "url": "/documentation/technical/datastructure/publications/"
-        },
-        {
-          "label": "Research Labs",
-          "url": "/documentation/technical/datastructure/research-labs/"
-        },
-        {
-          "label": "Biobank",
-          "url": "/documentation/technical/datastructure/biobank/"
-        },
-        {
-          "label": "People",
-          "url": "/documentation/technical/datastructure/people/"
-        },
-        {
-          "label": "Vocabularies",
-          "url": "/documentation/technical/datastructure/vocabularies/"
-        },
-        {
-          "label": "Announcements",
-          "url": "/documentation/technical/datastructure/announcements/"
+          "label": "Data Structure",
+          "url": "/documentation/technical/datastructure/"
         }
       ]
     },

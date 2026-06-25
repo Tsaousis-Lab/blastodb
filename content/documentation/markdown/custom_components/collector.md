@@ -136,7 +136,24 @@ Cards are rendered with Nunjucks templates in `_includes/collector-cards/`. The 
 
 The `.njk` extension in `card-template:` is optional.
 
+# Collection defaults in config.yml
 
+Independent of the per-page shortcode, a collection can set collector defaults in
+`content/admin/config.yml` under a `collector:` block. The build reads two keys:
+
+| Key | Description |
+|---|---|
+| `template` | Default card template (a file in `_includes/collector-cards/`) used to render this collection's entries. A page's `card-template:` parameter overrides it. |
+| `search_fields` | Frontmatter fields compiled into each card's searchable text at build time, so the page's `search:` box can match them. |
+
+```yaml
+collector:
+  template: dataset-card.njk
+  search_fields: [title, sub_types, country]
+```
+
+For how the CMS and the collector share the same `config.yml`, see
+[Sveltia CMS &amp; the Collector](/documentation/technical/sveltia-cms/).
 
 ---
 [box: text-align:center]
