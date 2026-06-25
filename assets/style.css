@@ -419,6 +419,7 @@ nav a.active {
     font-weight: 500;
     color: var(--surface) !important;
     background: var(--accent-dark);
+    border: none;
     padding: 0.55rem 1.2rem;
     border-radius: var(--radius);
     text-decoration: none !important;
@@ -1019,4 +1020,90 @@ main blockquote p {
 
 .annotation-text > :last-child {
     margin-bottom: 0;
+}
+
+/* ─── Contact page ───────────────────────────────────────────────────── */
+.contact-head {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.contact-head-text h3 {
+    margin: 0 0 0.25rem;
+}
+
+.contact-head-text p {
+    margin: 0;
+}
+
+.contact-portrait {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid var(--border);
+}
+
+.contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--accent-dark);
+}
+
+.contact-link:hover {
+    color: var(--accent-darker);
+}
+
+/* ─── Contact form ───────────────────────────────────────────────────── */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    max-width: 560px;
+}
+
+.contact-form label {
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-top: 0.6rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    font-family: var(--font-ui);
+    font-size: 0.95rem;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-sizing: border-box;
+    transition:
+        border-color 0.15s,
+        box-shadow 0.15s;
+}
+
+.contact-form textarea {
+    min-height: 9rem;
+    resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(45, 106, 79, 0.1);
+}
+
+.contact-form .btn {
+    align-self: flex-start;
+    margin-top: 1rem;
+    cursor: pointer;
 }
