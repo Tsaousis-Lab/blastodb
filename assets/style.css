@@ -614,6 +614,7 @@ footer {
     margin: 0 auto;
     padding: 2rem 1.5rem;
     display: flex;
+    flex-wrap: wrap;
     gap: 3rem;
     border-bottom: 1px solid var(--border);
 }
@@ -666,12 +667,14 @@ footer {
 
 .footer-columns {
     display: flex;
+    flex-wrap: wrap;
     gap: 3rem;
     flex: 1;
+    min-width: 0;
 }
 
 .footer-column {
-    flex: 1;
+    flex: 1 1 12ch;
 }
 
 .footer-column h3 {
