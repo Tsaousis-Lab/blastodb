@@ -55,6 +55,10 @@
           "url": "/documentation/editors_guide/navigation/"
         },
         {
+          "label": "Checking & Publishing",
+          "url": "/documentation/editors_guide/deployment-status/"
+        },
+        {
           "label": "Rolling Back",
           "url": "/documentation/editors_guide/rollback/"
         }
@@ -96,7 +100,28 @@
     {
       "title": "Technical Docs",
       "items": [
-        { "label": "Data Structure", "url": "/documentation/technical/" },
+        { "label": "Overview", "url": "/documentation/technical/" },
+        { "label": "Setup", "url": "/documentation/technical/setup/" },
+        {
+          "label": "Tech Stack",
+          "url": "/documentation/technical/tech-stack/"
+        },
+        {
+          "label": "Project Structure",
+          "url": "/documentation/technical/project-structure/"
+        },
+        {
+          "label": "Deployment",
+          "url": "/documentation/technical/deployment/"
+        },
+        {
+          "label": "Sveltia CMS & Collector",
+          "url": "/documentation/technical/sveltia-cms/"
+        },
+        {
+          "label": "Data Structure",
+          "url": "/documentation/technical/datastructure/"
+        },
         {
           "label": "Datasets",
           "url": "/documentation/technical/datastructure/datasets/"
@@ -128,6 +153,10 @@
         {
           "label": "Vocabularies",
           "url": "/documentation/technical/datastructure/vocabularies/"
+        },
+        {
+          "label": "Blog",
+          "url": "/documentation/technical/datastructure/blog/"
         },
         {
           "label": "Announcements",

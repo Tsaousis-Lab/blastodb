@@ -25,7 +25,7 @@ Each dataset is a separate Markdown file in `content/data/datasets/`. Datasets a
 | `detection_methods` | string[ ] | no | Controlled list (see Vocabularies) |
 | `subtypes` | UUID[ ] | no | Keys of linked subtypes |
 | `sources` | string[ ] | no | Controlled list (see Vocabularies) |
-| `countries` | string[ ] | no | Country names (ISO 3166) |
+| `countries` | string[ ] | no | Country names (see Vocabularies) |
 | `lab_protocols` | UUID[ ] | no | Keys of linked lab protocols |
 | `annotations` | object[ ] | no | Contextual notes shown below the hero (see below) |
 | `body` | markdown | no | Free-text description |

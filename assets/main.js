@@ -33,7 +33,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Initialize Selection Buttons
   initializeSelectionButtons();
+
+  // Initialize the contact form (mailto)
+  initializeContactForm();
 });
+
+/**
+ * Contact form: builds a pre-filled mailto: link from the fields and opens the
+ * visitor's mail client. The site is static, so there is no server to POST to —
+ * the message is sent from the visitor's own email account.
+ */
+function initializeContactForm() {
+  const form = document.getElementById("contact-form");
+  if (!form) return;
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const to = form.dataset.mailto;
+    const subject =
+      (form.elements.subject.value || "").trim() || "BlastoDB contact";
+    const message = (form.elements.message.value || "").trim();
+
+    window.location.href = `mailto:${to}?subject=${encodeURIComponent(
+      subject,
+    )}&body=${encodeURIComponent(message)}`;
+  });
+}
 
 function initializeCollector(container, collectionName, opts) {
   console.log("[Collector] initializeCollector called for:", collectionName);
@@ -390,10 +416,56 @@ function normalizeFilterGroups(filters) {
     .map((group) => {
       const label =
         group && typeof group.label === "string" ? group.label : "Filters";
-      const fields = Array.isArray(group && group.fields) ? group.fields : [];
+      const rawFields = Array.isArray(group && group.fields)
+        ? group.fields
+        : [];
+      // A field is either a plain name (back-compat) or { name, ref } where ref
+      // describes how to resolve a referenced entry's display property.
+      const fields = rawFields
+        .map((f) => {
+          if (typeof f === "string") return { name: f, ref: null };
+          if (f && typeof f.name === "string")
+            return { name: f.name, ref: f.ref || null };
+          return null;
+        })
+        .filter(Boolean);
       return { label, fields };
     })
     .filter((group) => group.fields.length > 0);
+}
+
+// Map of stored key -> display label for a reference filter field, built from
+// the target collection already present in window.collectorData. Cached.
+const _refLabelMapCache = {};
+function buildRefLabelMap(ref) {
+  if (!ref || !ref.collection) return null;
+  const cacheKey = `${ref.collection}|${ref.valueField}|${ref.displayField}`;
+  if (_refLabelMapCache[cacheKey]) return _refLabelMapCache[cacheKey];
+  const map = {};
+  const entries =
+    (window.collectorData && window.collectorData[ref.collection]) || [];
+  entries.forEach((entry) => {
+    const data = (entry && entry.data) || entry || {};
+    const key = data[ref.valueField];
+    const label = data[ref.displayField];
+    if (key != null && label != null) {
+      map[String(key).toLowerCase()] = String(label);
+    }
+  });
+  _refLabelMapCache[cacheKey] = map;
+  return map;
+}
+
+// Field values for filtering: raw stored values, translated to the referenced
+// entry's display property when the field carries ref metadata.
+function getFilterValues(item, fieldSpec) {
+  const name = typeof fieldSpec === "string" ? fieldSpec : fieldSpec.name;
+  const values = getFieldValues(item, name);
+  const ref = typeof fieldSpec === "string" ? null : fieldSpec.ref;
+  if (!ref) return values;
+  const map = buildRefLabelMap(ref);
+  if (!map) return values;
+  return values.map((v) => map[String(v).toLowerCase()] || v);
 }
 
 function renderFilterMenus(
@@ -623,8 +695,10 @@ function matchesFilterGroups(item, filterGroups, selections, excludeIndex) {
     const selected = selections[index];
     if (!selected || selected.keys.size === 0) return true;
 
-    return group.fields.some((field) => {
-      const values = getFieldValues(item, field).map((v) => v.toLowerCase());
+    return group.fields.some((fieldSpec) => {
+      const values = getFilterValues(item, fieldSpec).map((v) =>
+        v.toLowerCase(),
+      );
       return values.some((value) => selected.keys.has(value));
     });
   });
@@ -652,8 +726,8 @@ function getAvailableValuesForGroup(
       return matchesFilterGroups(item, filterGroups, selections, index);
     })
     .forEach((item) => {
-      group.fields.forEach((field) => {
-        const values = getFieldValues(item, field);
+      group.fields.forEach((fieldSpec) => {
+        const values = getFilterValues(item, fieldSpec);
         values.forEach((value) => {
           const label = value && value.trim();
           if (!label) return;

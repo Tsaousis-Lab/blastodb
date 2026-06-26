@@ -24,7 +24,7 @@ Use the guide on how to [revert a change]](/documentation/editors_guide/rollback
 
 [:card]
 
-The content of BlastoDB is written in Markdown, with custom components to load its data and visual elements. You can find a overview of the [markdown syntax here](/doumentation/markdown/), and an overview on the [custom components here](/doumentation/markdown/custom_components/).
+The content of BlastoDB is written in Markdown, with custom components to load its data and visual elements. You can find a overview of the [markdown syntax here](/documentation/markdown/), and an overview on the [custom components here](/documentation/markdown/custom_components/).
 
 # Add a Page
 
@@ -33,7 +33,7 @@ The content of BlastoDB is written in Markdown, with custom components to load i
 3. Enter the **Title**, **Description**, or **Body** (/content of the website) fields as needed. You find a description of the fields below.
 4. Click **Save**. → The website will be updated automatically within a few minutes.
 5. You can now access this new webpage with the following link: `https://www.blastodb.com/<title_in_lower_case>/`. Alternatively, you can click on **Preview on Live Site** (avter saving the website). Note that it takes a few minutes before the site is build, if you are too fast the page will still be empty.
-6. To make it easily accessible, you can add it to the header and/or footer [in the navigation panel](/documentation/editors_guide/navigation), or add a button to a webpage [as described here](/doumentation/markdown/custom_components/button/). Make shure you use the relative link: ~~`https://www.blastodb.com`~~`/<title_in_lower_case>/`
+6. To make it easily accessible, you can add it to the header and/or footer [in the navigation panel](/documentation/editors_guide/navigation), or add a button to a webpage [as described here](/documentation/markdown/custom_components/btn/). Make shure you use the relative link: ~~`https://www.blastodb.com`~~`/<title_in_lower_case>/`
 
 # Editing a Page
 
@@ -67,7 +67,7 @@ Each webpage consists of the following elements:
     - Keep it under 160 characters.
 
 3. **Body** `required` — The full page content, written in Markdown.
-    - See the guide on the [markdown syntax](TODO:link) and the [custom markdown components](TODO:link) to edit the content.
+    - See the guide on the [markdown syntax](/documentation/markdown/markdown_syntax/) and the [custom markdown components](/documentation/markdown/custom_components/) to edit the content.
 
 [card: class:warning]
 

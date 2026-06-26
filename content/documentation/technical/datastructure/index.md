@@ -108,8 +108,7 @@ erDiagram
         string value
     }
     COUNTRY {
-        string iso
-        string name
+        string value
     }
 </pre>
 

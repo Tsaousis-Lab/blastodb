@@ -50,15 +50,6 @@
       ]
     },
     {
-      "title": "Biobank",
-      "items": [
-        {
-          "label": "Biobank",
-          "url": "/biobank/"
-        }
-      ]
-    },
-    {
       "title": "About",
       "items": [
         {
@@ -74,13 +65,8 @@
           "url": "/contact/"
         },
         {
-<<<<<<< HEAD
           "label": "Acknowledgements",
           "url": "/acknowledgements/"
-=======
-          "label": "Announcements",
-          "url": "/announcements/"
->>>>>>> main
         }
       ]
     },

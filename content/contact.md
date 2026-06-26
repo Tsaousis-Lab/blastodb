@@ -7,48 +7,43 @@ description: Contact the people behind BlastoDB.
 
 <h-hero>Contact</h-hero>
 
-Please contact us!
+Questions, corrections, or ideas? Get in touch.
 
 [:hero]
 
+[grid: cols:2]
 
-==TODO== Add "team" of people in charge of BlastoDB.
+[box:]
 
-Write us an email:
+### Main contact
 
-**Dr Anastasios Tsaousis**
+<div class="contact-head">
+  <img class="contact-portrait" src="/assets/uploads/pasted-image-1781094468326.png" alt="Dr Anastasios (Tasos) Tsaousis">
+  <div class="contact-head-text">
+    <p><strong>Dr Anastasios (Tasos) Tsaousis</strong><br>Head of BlastoDB</p>
+  </div>
+</div>
 
-Head of BlastoDB
+<a class="contact-link" href="mailto:a.tsaousis@kent.ac.uk"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>a.tsaousis@kent.ac.uk</a><br>
+<a class="contact-link" href="https://www.kent.ac.uk/biosciences/people/653/tsaousis-anastasios" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Website</a>
 
-[a.tsaousis@kent.ac.uk](mailto:a.tsaousis@kent.ac.uk)
+**University of Kent**<br>School of Biosciences<br>Canterbury<br>Kent CT2 7NJ<br>United Kingdom
 
+[:box]
 
+[box:]
+### Send a message
 
-## I want to Contribute a Dataset
+<form class="contact-form" id="contact-form" data-mailto="a.tsaousis@kent.ac.uk">
+  <label for="cf-email">Your email</label>
+  <input type="email" id="cf-email" name="email" placeholder="So we can reply to you">
+  <label for="cf-subject">Subject</label>
+  <input type="text" id="cf-subject" name="subject">
+  <label for="cf-message">Message</label>
+  <textarea id="cf-message" name="message" rows="6" required></textarea>
+  <button type="submit" class="btn">Open email</button>
+</form>
 
-BlastoDB is a resource for, and driven by the scientific community around Blasticystis. If you want to contribute data to BlastoDB, write us an email with the information around the dataset.
+[:box]
 
-### I want to Contirbute a Dataset to Blastocystis
-
-Besides a link to the dataset, we need a few additional information.
-
-==TODO==
-
-### I would like to be featured in the Biobank
-
-Our Biobank is an open network of research labs which offer physical resources for your research. We are happy to add you and the resources you offer. We will need the following Information from you:
-
-==TODO==
-
-### I have a Research Lab that works on Blastocystis
-
-We are happy to extend our research network by new labs which contribute high-quality research on blastocystis. Please send us the following information:
-
-- Your University
-- ==TODO==
-
-### I would like to get involved in BlastoDB
-
-BlastoDB is an open-source project for and from the Blasticystis research community.
-
-==TODO==
+[:grid]

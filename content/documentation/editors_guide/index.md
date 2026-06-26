@@ -18,7 +18,7 @@ This guide explains how to add and edit the content on BlastoDB using the built-
 
 BlastoDB is hosted on [GitHub](https://github.com). You will need a **GitHub account** and access to the BlastoDB repository. If you do not have these yet, start with the [GitHub Setup](/documentation/editors_guide/github-setup/) page.
 
-Editing the content on this website is done with **Sveltia**. Sveltia is a *content management system (CMS)*. This allows you to add new, or edit existing content on the website. For more substential changes to the layout of the website, or adding or editing the web pages themselfs, you need to touch the code of the website and edit it locally on youd computer. A tutorial for this can be found [here](TODO!).
+Editing the content on this website is done with **Sveltia**. Sveltia is a *content management system (CMS)*. This allows you to add new, or edit existing content on the website. For more substential changes to the layout of the website, or adding or editing the web pages themselfs, you need to touch the code of the website and edit it locally on youd computer. A tutorial for this can be found [here](/documentation/technical/setup/).
 
 # What you can manage
 
@@ -40,7 +40,9 @@ BlastoDB uses a system called **Sveltia CMS**. You edit content in a form-based 
 
 The general workflow is:
 
-1. Go to [www.blastoDB/admin](/admin/) and log in with GitHub.
+1. Go to [www.blastoDB/admin](/admin/) and log in with a [personal access token generated on GitHub](/documentation/editors_guide/github-setup#Step3).
 2. Pick the content type you want to edit from the left sidebar.
 3. Make your changes and click **Save**.
-4. Your change is pushed to the [Git Repository](https://github.com/Tsaousis-Lab/blastodb) and will be automatically published within a few minutes.
+4. Your change is pushed to the [Git Repository](https://github.com/Tsaousis-Lab/blastodb)
+
+The edits do not go live immediately. The website is re-build every day at 5:30 UTC. You can manually start the build-process [as described here](/documentation/editors_guide/getting-started#manually-building-blastodb).

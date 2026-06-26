@@ -59,6 +59,30 @@ filters:[Subtypes->[sub_types],Countries->[country]]
 filters:[Filters->[sub_types,country]]
 ```
 
+### Showing names instead of IDs
+
+A filter displays — and matches on — the **stored value** of its field. For fields that store
+keys/IDs (relations like `subtypes`), that value is a slug. Add `->property` to show a property of
+the **referenced entry** instead:
+
+```markdown
+filters:[Subtypes->[subtypes->name]]
+```
+
+This resolves each key (`subtype-1`) to that subtype entry's `name` (`Subtype 1`). The reference's
+target collection and key field come from the field's relation config in `content/admin/config.yml`;
+`property` is any field on the referenced entry. If you omit `->property`, the relation's configured
+`display_fields` is used, so a plain `[subtypes]` shows names too.
+
+| Field | Reference syntax |
+|---|---|
+| `subtypes` (→ subtype entry) | `subtypes->name` |
+| `lab_protocols` (→ protocol entry) | `lab_protocols->title` |
+| `related_publications` (→ publication) | `related_publications->title` |
+
+Vocabulary fields (datatypes, sources, countries, tags) store the name as their value, so filter on
+them directly with no `->property`.
+
 ## Prefilter syntax
 
 A prefilter hides items permanently — users cannot override it with the interactive controls.
@@ -136,7 +160,24 @@ Cards are rendered with Nunjucks templates in `_includes/collector-cards/`. The 
 
 The `.njk` extension in `card-template:` is optional.
 
+# Collection defaults in config.yml
 
+Independent of the per-page shortcode, a collection can set collector defaults in
+`content/admin/config.yml` under a `collector:` block. The build reads two keys:
+
+| Key | Description |
+|---|---|
+| `template` | Default card template (a file in `_includes/collector-cards/`) used to render this collection's entries. A page's `card-template:` parameter overrides it. |
+| `search_fields` | Frontmatter fields compiled into each card's searchable text at build time, so the page's `search:` box can match them. |
+
+```yaml
+collector:
+  template: dataset-card.njk
+  search_fields: [title, sub_types, country]
+```
+
+For how the CMS and the collector share the same `config.yml`, see
+[Sveltia CMS &amp; the Collector](/documentation/technical/sveltia-cms/).
 
 ---
 [box: text-align:center]

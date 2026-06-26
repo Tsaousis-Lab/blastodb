@@ -1,5 +1,6 @@
 ---
 layout: layouts/lab-protocol.njk
+description: "Laboratory protocol for Blastocystis research."
 title: The original "Jones’ Solution"
 related_publications:
   - jones1946

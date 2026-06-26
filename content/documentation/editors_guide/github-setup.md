@@ -12,7 +12,7 @@ description: How to create a GitHub account, get access to the BlastoDB reposito
 
 You need the following three things, to edit the content of BlastoDB:
 
-1. [Create a GitHub account](/git-setup/#Step1)
+1. [Create a GitHub account](#Step1)
 2. [Request access to the BlastoDB repository](#Step2)
 3. [Generate a personal access token](#Step3)
 4. [Log In](#Step4)

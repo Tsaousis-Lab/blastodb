@@ -1,5 +1,6 @@
 ---
 layout: layouts/lab-protocol.njk
+description: "Laboratory protocol for Blastocystis research."
 title: Culture of Blastocystis in Jones’ Medium
 related_publications: []
 key: culture-of-blastocystis-in-jones’-medium

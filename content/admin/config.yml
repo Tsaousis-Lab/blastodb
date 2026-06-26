@@ -5,7 +5,7 @@ app_title: "BlastoDB - CMS"
 backend:
   name: github
   repo: Tsaousis-Lab/blastodb
-  branch: main # CMS always writes to main
+  branch: staging # CMS always writes to staging
   squash_merges: true
   auth_methods: [token]
 
@@ -150,10 +150,10 @@ collections:
         file: countries
         multiple: true
         required: false
-        value_field: countries.*.name
-        display_fields: [countries.*.name]
-        search_fields: [countries.*.name, countries.*.iso]
-        hint: "All countries from the ISO 3166 coutry code.<br>If a desired datatype is missing, you can add it under ''Lab Protocols''."
+        value_field: countries.*
+        display_fields: [countries.*]
+        search_fields: [countries.*]
+        hint: "The country(s) where the data was collected.<br>If a desired country is missing, you can add it under ''Vocabularies'' -> Countries."
 
       - label: Lab Protocols
         name: lab_protocols
@@ -221,6 +221,189 @@ collections:
         required: false
         default: "Add your description here."
         hint: "Add a description of the sutypes.<br>**Be careful, you can break things here!** This field supports the extendet markdown syntax. Please make shure your syntax is correct, otherwise the website might fail. Please **test it offline** if you use the extendet markdown syntax!"
+
+      - label: SEO Description
+        name: description
+        widget: hidden
+        default: "A Blastocystis dataset on BlastoDB, including information about subtype(s) and strain(s) in the data, data origin, detection methods used, host(s) and source(s), countries of origin, and related publications and lab protocols.."
+
+  # -----------------------------------------------------------------------
+  # BLOG
+  # -----------------------------------------------------------------------
+  - name: blog
+    icon: article
+    label: Blog
+    folder: content/data/blog
+    create: true
+    slug: "{{slug}}"
+    preview_path: "data/blog/{{slug}}/"
+    fields:
+      - name: layout
+        label: Layout
+        widget: hidden
+        default: layouts/blog-post-page.njk
+
+      - label: Title
+        name: title
+        widget: string
+        hint: "The headline of the blog article."
+
+      - label: Publication Date
+        name: publication_date
+        widget: string
+        hint: "Enter a year (2024), month and year (06.2024), or full date (11.06.2024)"
+        pattern:
+          [
+            '^(((0[1-9]|[12]\d|3[01])\.)?(0[1-9]|1[0-2])\.)?\d{4}$',
+            "Use dd.mm.yyyy, mm.yyyy, or yyyy",
+          ]
+
+      - label: Author
+        name: author
+        widget: relation
+        collection: community
+        file: people
+        value_field: "people.*.name"
+        display_fields: ["people.*.name"]
+        search_fields:
+          ["people.*.name", "people.*.affiliation", "people.*.role"]
+        required: false
+        hint: "Optional. Select the author from the People list."
+
+      - label: Related Publication(s)
+        name: related_publications
+        widget: relation
+        collection: publications
+        file: publications
+        value_field: "publications.*.key"
+        search_fields:
+          [
+            "publications.*.key",
+            "publications.*.title",
+            "publications.*.date",
+            "publications.*.publication_name",
+            "publications.*.authors",
+          ]
+        display_fields:
+          [
+            "publications.*.title",
+            "publications.*.date",
+            "publications.*.publication_name",
+            "publications.*.authors",
+          ]
+        multiple: true
+        required: false
+        hint: "Publications must be added before you can link to them here."
+
+      - label: Related Subtypes
+        name: related_subtypes
+        widget: relation
+        collection: subtypes
+        multiple: true
+        required: false
+        value_field: key
+        display_fields: [name]
+        search_fields: [name]
+        hint: "Subtype pages will list this article under ''Related Blog Articles''."
+
+      - label: Related Datasets
+        name: related_datasets
+        widget: relation
+        collection: datasets
+        multiple: true
+        required: false
+        value_field: key
+        display_fields: [title]
+        search_fields: [title]
+        hint: "Dataset pages will list this article under ''Related Blog Articles''."
+
+      - label: Body
+        name: body
+        widget: markdown
+        default: "Write your article here."
+        hint: "The article text in markdown ([see markdown cheat sheet](/documentation/markdown/markdown_cheat_sheet/))."
+
+      - label: SEO Description
+        name: description
+        widget: hidden
+        default: "Article from the BlastoDB blog."
+
+  # -----------------------------------------------------------------------
+  # BIOBANK
+  # -----------------------------------------------------------------------
+  - name: biobank
+    icon: package
+    label: Biobank
+    folder: content/data/biobank
+    create: true
+    slug: "{{slug}}"
+    preview_path: "data/biobank/{{slug}}/"
+    collector:
+      template: biobank-card.njk
+      search_fields:
+        [title, contact_person_name, affiliated_lab, country, tags, body]
+    fields:
+      - name: layout
+        label: Layout
+        widget: hidden
+        default: layouts/biobank-page.njk
+
+      - label: Key
+        name: key
+        widget: hidden
+        default: "{{uuid}}"
+
+      - label: Title
+        name: title
+        widget: string
+        hint: "The name of the item offered (e.g. a strain, sample, or reagent)."
+
+      - label: Tags
+        name: tags
+        widget: list
+        required: false
+        hint: "Free-text list of tags describing the item (e.g. Strain, ST1). One item per line."
+
+      - label: Contact person name
+        name: contact_person_name
+        widget: string
+        hint: "The person offering this item. May differ from the lab's main contact."
+
+      - label: Contact person email
+        name: contact_person_email
+        widget: string
+        type: email
+        hint: "Orders for this item are placed by email to this address."
+
+      - label: Affiliated research lab
+        name: affiliated_lab
+        widget: relation
+        collection: community
+        file: research_labs
+        multiple: false
+        value_field: "research_labs.*.key"
+        display_fields: ["research_labs.*.lab_name"]
+        search_fields:
+          ["research_labs.*.lab_name", "research_labs.*.institution_name"]
+        hint: "The lab this item belongs to. The entry's country is taken from this lab."
+
+      - label: Picture
+        name: picture
+        widget: image
+        required: false
+        hint: "Optional photo of the item. JPG or WebP."
+
+      - label: Description
+        name: body
+        widget: markdown
+        required: false
+        default: "Describe the item, quantities, condition, and any handling notes here."
+        hint: "The item description in markdown ([see markdown cheat sheet](/documentation/markdown/markdown_cheat_sheet/))."
+
+      - label: SEO Description
+        name: description
+        widget: hidden
+        default: "BlastoDB Biobank entery."
 
   # -----------------------------------------------------------------------
   # BLOG
@@ -331,14 +514,7 @@ collections:
     collector:
       template: biobank-card.njk
       search_fields:
-        [
-          title,
-          contact_person_name,
-          affiliated_lab,
-          country,
-          tags,
-          body,
-        ]
+        [title, contact_person_name, affiliated_lab, country, tags, body]
     fields:
       - name: layout
         label: Layout
@@ -496,6 +672,11 @@ collections:
         hint: "Add the Protocol here (in markdown).<br>**Be careful, you can break things here!** This field supports the extendet markdown syntax. Please make shure your syntax is correct, otherwise the website might fail. Please **test it offline** if you use the extendet markdown syntax!"
         default: "Add your description here."
 
+      - label: SEO Description
+        name: description
+        widget: hidden
+        default: "Laboratory protocol for Blastocystis research."
+
   # -----------------------------------------------------------------------
   # SUBTYPE
   # -----------------------------------------------------------------------
@@ -549,6 +730,11 @@ collections:
         widget: markdown
         default: "# Short Description\n\nAdd your description here."
         hint: "Add a description of the dataset.<br>**Be careful, you can break things here!** This field supports the extendet markdown syntax. Please make shure your syntax is correct, otherwise the website might fail. Please **test it offline** if you use the extendet markdown syntax!"
+
+      - label: SEO Description
+        name: description
+        widget: hidden
+        default: "Reference information for this Blastocystis subtype, including known hosts, reference sequences and related datasets."
 
   # -----------------------------------------------------------------------
   # COMMUNITY (Research Labs, People)
@@ -630,9 +816,9 @@ collections:
                 collection: vocabularies
                 file: countries
                 multiple: false
-                value_field: countries.*.name
-                display_fields: [countries.*.name]
-                search_fields: [countries.*.name, countries.*.iso]
+                value_field: countries.*
+                display_fields: [countries.*]
+                search_fields: [countries.*]
                 hint: "Used as the country for any Biobank entries affiliated with this lab."
 
       - name: people
@@ -733,9 +919,6 @@ collections:
           - label: Countries
             name: countries
             widget: list
-            fields:
-              - { label: ISO code, name: iso, widget: string }
-              - { label: Name, name: name, widget: string }
 
   - { divider: true, label: "Website" }
   # -----------------------------------------------------------------------

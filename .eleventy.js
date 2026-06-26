@@ -42,6 +42,38 @@ function getCollectionByName(name) {
   return getCmsCollections().find((c) => c.name === name);
 }
 
+// Leaf of a relation field path: "key" -> "key", "publications.*.key" -> "key".
+function relationFieldLeaf(value) {
+  if (!value || typeof value !== "string") return null;
+  const parts = value.split(".");
+  return parts[parts.length - 1] || null;
+}
+
+// For a filter on a reference field, resolve how to display the referenced
+// entry: which collection holds it, the stored key field, and the property to
+// show. Returns null for plain/vocabulary fields (their value is already the
+// display value). `property` (from "field->property") overrides the relation's
+// configured display_fields.
+function resolveFilterFieldRef(collection, fieldName, property) {
+  if (!collection || !Array.isArray(collection.fields)) return null;
+  const field = collection.fields.find((f) => f && f.name === fieldName);
+  if (!field || field.widget !== "relation") return null;
+  if (field.collection === "vocabularies") return null;
+  if (relationFieldLeaf(field.value_field) !== "key") return null;
+
+  const displays = Array.isArray(field.display_fields) ? field.display_fields : [];
+  const displayField = property || relationFieldLeaf(displays[0]);
+  if (!displayField) return null;
+
+  return {
+    // File collections (publications, research_labs) appear in collectorData
+    // under their file name, not the wrapping `collection`.
+    collection: field.file || field.collection,
+    valueField: "key",
+    displayField,
+  };
+}
+
 const nunjucksEnv = new nunjucks.Environment(
   new nunjucks.FileSystemLoader([
     COLLECTOR_TEMPLATES_DIR,
@@ -192,7 +224,20 @@ function parseFiltersParam(paramStr) {
       const fields = groupMatch[2]
         .split(",")
         .map((field) => field.trim())
-        .filter((field) => field.length > 0);
+        .filter((field) => field.length > 0)
+        .map((token) => {
+          // A field may be "field" or "field->property" (display a property of
+          // the referenced entry, e.g. subtypes->name).
+          const arrowIdx = token.indexOf("->");
+          if (arrowIdx !== -1) {
+            return {
+              field: token.slice(0, arrowIdx).trim(),
+              property: token.slice(arrowIdx + 2).trim() || null,
+            };
+          }
+          return { field: token, property: null };
+        })
+        .filter((f) => f.field.length > 0);
       if (!label || fields.length === 0) return null;
       return { label, fields };
     })
@@ -1004,7 +1049,16 @@ module.exports = function (eleventyConfig) {
 
         const filtersGroups = parseFiltersParam(paramStr);
         if (filtersGroups) {
-          opts.filters = filtersGroups;
+          // Enrich each filter field with reference-resolution metadata so the
+          // client can display a property of the referenced entry (e.g. show a
+          // subtype's name instead of its key).
+          opts.filters = filtersGroups.map((group) => ({
+            label: group.label,
+            fields: group.fields.map((f) => {
+              const ref = resolveFilterFieldRef(collection, f.field, f.property);
+              return ref ? { name: f.field, ref } : { name: f.field };
+            }),
+          }));
         }
 
         const prefilter = parsePrefilterParam(paramStr);

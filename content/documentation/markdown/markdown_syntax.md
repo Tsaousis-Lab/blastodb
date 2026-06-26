@@ -214,7 +214,7 @@ Now, you can link to the headline of a page by adding the ID to the link:
 You can render images like this: `![description text if image can't be loaded](image.png)`
 As an input, you can use:
 - A link to an image (for example an image of Tasos): `![Tasos](https://media.www.kent.ac.uk/se/2569/tsaousis_400x400_inline.webp)`
-- Or [upload an image with the CMS](TODO:link). These are always saved in `/assets/uploads/`, so you can link to them with `![Tasos](/assets/uploads//tsaousis_400x400_inline.webp)`
+- Or upload an image with the CMS using the tool provided. Here you can also link to existing images on the website.
 
 ![Tasos](https://media.www.kent.ac.uk/se/2569/tsaousis_400x400_inline.webp)
 

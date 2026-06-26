@@ -6,40 +6,39 @@ description: How to undo a recent change on GitHub if something breaks after a d
 
 [hero: text-align:center]
 
-<h-hero>Rolling Back a Change</h-hero>
+<h-hero>Reverting a Change</h-hero>
 
 [:hero]
 
-If you notice that something looks wrong on the website, ur the build failed after saving a change in the CMS, you can undo it directly on GitHub.
 
-# Step 1 - Open the commit history on GitHub
+You (almost) can't break the live website by accident.
 
-Go to [github.com/Tsaousis-Lab/blastodb/commits/main/](https://github.com/Tsaousis-Lab/blastodb/commits/main/). Make sure you are logged in.
+Content is edited from a "staging" branch, which gets merged into the live website once a day (at 5:30 UTC). In the [commit history](https://github.com/Tsaousis-Lab/blastodb/commits/) you can find these merges for each day.
 
-# Step 2 - Find the change you want to undo
+# Can you fix it in the CMS?
 
-Each line in the list is one saved change. The most recent changes are at the top. Look for the entry that corresponds to what you edited. ==TODO: how are the commits named?==
+If you spot your mistake and can fix it within the CMS, then great! Just remove the markdown elements that broke the site, and [re-run the build pipeline by hand](/documentation/editors_guide/deployment-status/#publish-now).
 
-# Step 3 - Revert the commit
+# If you can't fix in in the CMS
 
-1. Click the **commit message** (the title of "commit", probably something like "Update Page "subtypes") to open that commit's detail page
-2. You will see a list of the exact changes that were made — green lines were added, red lines were removed
-3. If this is the change you want to undo, click the **`...`** menu button in the top-right corner of the page
-4. Select **Revert**
+[card: class:warning]
+⚠️ **Important:** this undoes all changes made in one day from you and anyone else. Amy changes made in or after the pull request you have reverted will be lost, and need to be re-entered through the CMS.
 
-GitHub will prepare a new change that does the exact opposite of the original — effectively undoing it.
+If need to revert a change like this, you and everyome else need to stop editing BlastoDB before the site is updated again.
 
-# Step 4 - Confirm the revert
+[:card]
 
-GitHub opens a form titled **"Revert …"**. Leave everything as it is and click **Propose changes**, then on the next screen click **Create pull request**, and finally **Merge pull request** → **Confirm merge**.
 
-The undo is now saved. The website will rebuild automatically within a few minutes and the problem should be gone.
+1. Open the list of publishes: [https://github.com/Tsaousis-Lab/blastodb/pulls?q=is%3Apr+Daily+content+publish](https://github.com/Tsaousis-Lab/blastodb/pulls?q=is%3Apr+Daily+content+publish)
+2. Click the most recent "Daily content publish — [date]" (the day the problem went live).
+3. Scroll to the bottom of that page and click Revert.
+4. GitHub opens a new "Revert…" pull request. Click Create pull request, then Merge pull request, then Confirm merge.
+5. Within a few minutes the live site returns to how it looked before that day's publish. Check, that it is fine now:
+  - Go back to the Actions page and wait for the latest run to finish (🟡 → 🟢, usually one to three minutes).
+  - Open the live BlastoDB site and do a "hard refresh" — Ctrl+Shift+R (Windows) or Cmd+Shift+R (Mac) — to be sure you're seeing the newest version.
 
----
 
-# If you are not sure what to undo
 
-If several changes were made around the same time and you cannot tell which one caused the problem, **contact Tasos**. He can look at the history and identify the right commit to revert. Do not revert multiple commits at once unless you are certain — reverting the wrong thing can introduce new problems.
 
 ---
 

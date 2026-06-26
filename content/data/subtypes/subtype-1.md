@@ -1,5 +1,6 @@
 ---
 layout: layouts/subtype.njk
+description: "Reference information for this Blastocystis subtype, including known hosts, reference sequences and related datasets."
 name: Subtype 1
 sources:
   - Human
