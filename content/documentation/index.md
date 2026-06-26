@@ -1,7 +1,7 @@
 ---
 layout: layouts/documentation.njk
 title: Documentation
-description: Documentation for BlastoDB.
+description: Documentation for BlastoDB, including a markdown guide, editor and technical guides, and the style guide.
 ---
 
 [hero: text-align:center]

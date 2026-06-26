@@ -1,7 +1,7 @@
 ---
 layout: layouts/default-page.njk
 title: Blog
-description: Our blog for Blastocystis research.
+description: The BlastoDB blog on Blastocystis research, continuing Rune Stensvold's Blastocystis Parasite Blog.
 feed_url: /blog/feed.xml
 ---
 

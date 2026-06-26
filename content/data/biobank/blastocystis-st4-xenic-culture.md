@@ -1,5 +1,6 @@
 ---
 layout: layouts/biobank-page.njk
+description: "BlastoDB Biobank entery."
 key: 2e16a82d-e07c-4a82-a6b4-1adf8742c2ff
 title: Blastocystis ST4 xenic culture
 tags:

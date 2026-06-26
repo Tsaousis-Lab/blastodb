@@ -222,6 +222,11 @@ collections:
         default: "Add your description here."
         hint: "Add a description of the sutypes.<br>**Be careful, you can break things here!** This field supports the extendet markdown syntax. Please make shure your syntax is correct, otherwise the website might fail. Please **test it offline** if you use the extendet markdown syntax!"
 
+      - label: SEO Description
+        name: description
+        widget: hidden
+        default: "A Blastocystis dataset on BlastoDB, including information about subtype(s) and strain(s) in the data, data origin, detection methods used, host(s) and source(s), countries of origin, and related publications and lab protocols.."
+
   # -----------------------------------------------------------------------
   # BLOG
   # -----------------------------------------------------------------------
@@ -318,6 +323,11 @@ collections:
         default: "Write your article here."
         hint: "The article text in markdown ([see markdown cheat sheet](/documentation/markdown/markdown_cheat_sheet/))."
 
+      - label: SEO Description
+        name: description
+        widget: hidden
+        default: "Article from the BlastoDB blog."
+
   # -----------------------------------------------------------------------
   # BIOBANK
   # -----------------------------------------------------------------------
@@ -389,6 +399,11 @@ collections:
         required: false
         default: "Describe the item, quantities, condition, and any handling notes here."
         hint: "The item description in markdown ([see markdown cheat sheet](/documentation/markdown/markdown_cheat_sheet/))."
+
+      - label: SEO Description
+        name: description
+        widget: hidden
+        default: "BlastoDB Biobank entery."
 
   # -----------------------------------------------------------------------
   # PUBLICATIONS
@@ -489,6 +504,11 @@ collections:
         hint: "Add the Protocol here (in markdown).<br>**Be careful, you can break things here!** This field supports the extendet markdown syntax. Please make shure your syntax is correct, otherwise the website might fail. Please **test it offline** if you use the extendet markdown syntax!"
         default: "Add your description here."
 
+      - label: SEO Description
+        name: description
+        widget: hidden
+        default: "Laboratory protocol for Blastocystis research."
+
   # -----------------------------------------------------------------------
   # SUBTYPE
   # -----------------------------------------------------------------------
@@ -542,6 +562,11 @@ collections:
         widget: markdown
         default: "# Short Description\n\nAdd your description here."
         hint: "Add a description of the dataset.<br>**Be careful, you can break things here!** This field supports the extendet markdown syntax. Please make shure your syntax is correct, otherwise the website might fail. Please **test it offline** if you use the extendet markdown syntax!"
+
+      - label: SEO Description
+        name: description
+        widget: hidden
+        default: "Reference information for this Blastocystis subtype, including known hosts, reference sequences and related datasets."
 
   # -----------------------------------------------------------------------
   # COMMUNITY (Research Labs, People)

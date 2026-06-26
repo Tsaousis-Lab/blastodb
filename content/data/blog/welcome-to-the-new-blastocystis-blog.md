@@ -1,5 +1,6 @@
 ---
 layout: layouts/blog-post-page.njk
+description: "Article from the BlastoDB blog."
 title: Welcome to the new Blastocystis Blog!
 publication_date: 19.06.2026
 author: Dr Tobias Benecke

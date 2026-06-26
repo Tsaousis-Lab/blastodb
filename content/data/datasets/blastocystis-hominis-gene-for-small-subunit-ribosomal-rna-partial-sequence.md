@@ -1,5 +1,6 @@
 ---
 layout: layouts/dataset-page.njk
+description: "A Blastocystis dataset on BlastoDB, including information about subtype(s) and strain(s) in the data, data origin, detection methods used, host(s) and source(s), countries of origin, and related publications and lab protocols.."
 key: b3d49f04-67d8-468c-93f5-817fe75c11e6
 title: Blastocystis hominis gene for small subunit ribosomal RNA, partial sequence
 link_to_source: https://www.ncbi.nlm.nih.gov/nuccore/AB070989

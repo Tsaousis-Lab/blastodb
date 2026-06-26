@@ -1,5 +1,6 @@
 ---
 layout: layouts/biobank-page.njk
+description: "BlastoDB Biobank entery."
 key: 6f859348-1fda-4b10-9d35-5a9f67e28cab
 title: ST7-positive faecal sample
 tags:

@@ -1,7 +1,7 @@
 ---
 layout: layouts/default-page.njk
 title: Mission
-description: The mission of BlastoDB.
+description: BlastoDB's mission is a trustworthy, open database that integrates genomic and microbiome data on Blastocystis and supports global research collaboration under One Health.
 ---
 
 [hero: text-align:center]

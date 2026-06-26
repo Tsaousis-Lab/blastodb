@@ -1,5 +1,6 @@
 ---
 layout: layouts/biobank-page.njk
+description: "BlastoDB Biobank entery."
 key: 7a5e2ba3-d4dd-4e18-a128-e37774d5633f
 title: Blastocystis ST1 reference strain
 tags:

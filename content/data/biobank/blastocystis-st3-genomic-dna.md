@@ -1,5 +1,6 @@
 ---
 layout: layouts/biobank-page.njk
+description: "BlastoDB Biobank entery."
 key: 06fd796a-1bf8-4a68-8dab-8ab97315ae62
 title: Blastocystis ST3 genomic DNA
 tags:

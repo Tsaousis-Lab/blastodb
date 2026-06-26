@@ -1,5 +1,6 @@
 ---
 layout: layouts/biobank-page.njk
+description: "BlastoDB Biobank entery."
 key: 5a254883-8f72-47ee-8265-6610accf1eaf
 title: Anti-Blastocystis polyclonal antibody
 tags:
