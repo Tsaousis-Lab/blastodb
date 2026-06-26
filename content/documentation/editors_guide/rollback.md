@@ -13,7 +13,7 @@ description: How to undo a recent change on GitHub if something breaks after a d
 
 You (almost) can't break the live website by accident.
 
-Content is edited from a "staging" branch, which gets merged into the live website once a day (at 5:30 UTC). In the [commit history]([todo](https://github.com/Tsaousis-Lab/blastodb/commits/)) you can find these merges for each day.
+Content is edited from a "staging" branch, which gets merged into the live website once a day (at 5:30 UTC). In the [commit history](https://github.com/Tsaousis-Lab/blastodb/commits/) you can find these merges for each day.
 
 # Can you fix it in the CMS?
 

@@ -24,7 +24,7 @@ You will need a GitHub Account, access rights to the Resository and a Personal A
 
 # First Task: Add Yourself to the Acknowledgements
 
-To get a feeling for how editing works, your first task will be to add yourself to the people that contribute to BlastoDB. You can do that by adding your information by clicking (on the left sidebar) `Community` -> `People`. Then, if you want, you can add your information by scrolling down and clicking `Add Person` (this is easyer if you click `collapse all` first). The information you add will be publically available, consider this before adding a picture or an email. Cou can find more information on the [editors guide for people]((/documentation/editors_guide/people/)).
+To get a feeling for how editing works, your first task will be to add yourself to the people that contribute to BlastoDB. You can do that by adding your information by clicking (on the left sidebar) `Community` -> `People`. Then, if you want, you can add your information by scrolling down and clicking `Add Person` (this is easyer if you click `collapse all` first). The information you add will be publically available, consider this before adding a picture or an email. Cou can find more information on the [editors guide for people](/documentation/editors_guide/people/).
 
 If you have more questions about the editorial workflow, continue reading the following section. It is a good idea to look at the description of each collection so you know which data to add, and where to be careful when editing.
 
@@ -36,7 +36,7 @@ The content of the database includes:
 - [**Datasets**](/documentation/editors_guide/datasets/) — individual sequencing datasets
 - [**Publications**](/documentation/editors_guide/publications/) — the publication library
 - [**Research Labs**](/documentation/editors_guide/labs/) — lab profiles
-- [**Lab Protocols**](/documentation/editors_guide/lab_protocols/) — laboratory protocols
+- [**Lab Protocols**](/documentation/editors_guide/lab-protocols/) — laboratory protocols
 - [**Subtypes**](/documentation/editors_guide/subtypes/) — Blastocystis subtype pages
 - [**Vocabularies**](/documentation/editors_guide/vocabularies/) — controlled lists (datatypes, countries, sources, etc.)
 
