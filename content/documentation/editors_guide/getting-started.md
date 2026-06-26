@@ -22,6 +22,12 @@ You will need a GitHub Account, access rights to the Resository and a Personal A
 2. Paste the PAT you generated during setup from your favorite password manager into the text field.
 3. You are now in the CMS dashboard!
 
+# First Task: Add Yourself to the Acknowledgements
+
+To get a feeling for how editing works, your first task will be to add yourself to the people that contribute to BlastoDB. You can do that by adding your information by clicking (on the left sidebar) `Community` -> `People`. Then, if you want, you can add your information by scrolling down and clicking `Add Person` (this is easyer if you click `collapse all` first). The information you add will be publically available, consider this before adding a picture or an email. Cou can find more information on the [editors guide for people]((/documentation/editors_guide/people/)).
+
+If you have more questions about the editorial workflow, continue reading the following section. It is a good idea to look at the description of each collection so you know which data to add, and where to be careful when editing.
+
 # The editorial workflow
 
 The left sidebar in the dashboard lists all the content you can edit. This includes the content of the database, and the webpage itself.
