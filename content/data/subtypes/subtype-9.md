@@ -2,13 +2,8 @@
 layout: layouts/subtype.njk
 description: "Reference information for this Blastocystis subtype, including known hosts, reference sequences and related datasets."
 name: Subtype 9
-sources:
-  - Human
+sources: []
 reference_genome_link: ''
 ssu_rrna_link: ''
 key: subtype-9
 ---
-
-## Short Description
-
-To date reported only in humans, and uncommonly. No confirmed animal reservoir is known.

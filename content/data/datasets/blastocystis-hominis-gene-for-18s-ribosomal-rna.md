@@ -18,8 +18,7 @@ subtypes:
 sources:
   - Human
 countries: []
-lab_protocols:
-  - rigers-agar-slant
+lab_protocols: []
 data_sources: []
 ---
 
